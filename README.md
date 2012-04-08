@@ -1,2 +1,2 @@
-divSugar - CSS-based Graphics Engine
-====================================
+divSugar - CSS-based 3D Graphics Library
+========================================
