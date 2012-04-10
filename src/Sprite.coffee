@@ -1,6 +1,10 @@
 DivSugar._Sprite =
   _initialize: ->
-    @_ps = @_rs = @_ss = @_ts = ''
+    @style.webkitTransformStyle = 'preserve-3d'
+    @style.webkitTransformOrigin = '0% 0% 0%'
+    @style.position = 'absolute'
+
+    @_ps = @_rs = @_ss = ''
 
     @setSize 100, 100
     @setPosition 0, 0, 0
@@ -12,81 +16,133 @@ DivSugar._Sprite =
     @setImage null
     @setImageClip 0, 0, 1, 1
 
-  getSize: @_size
+  size: (w, h) ->
+    switch arguments.length
+      when 0
+        return @_size
 
-  setSize: (w, h) ->
-    @_size.w = w
-    @_size.h = h
-    #
+      when 1
+        size = w
+        @_size = @style.width = size.x
+        @_size = @style.height = size.y
+
+      else
+        @_size.w = @_style.width = w
+        @_size.h = @_style.height = h
+
     return @
 
-  getPosition: @_position
+  position: (x, y, z) ->
+    switch arguments.length
+      when 0
+        return @_pos
 
-  setPosition: (x, y, z) ->
-    @_position.x = x
-    @_position.y = y
-    @_position.z = z
-    @_ps = "translate(#{x}px, #{y}px, #{z}px) "
-    @_ts = @_ps + @_rs + @_ss
-    #
+      when 1
+        pos = x
+        @_pos.x = pos.x
+        @_pos.y = pos.y
+        @_pos.z = pos.z
+        @_ps = "translate(#{pos.x}px, #{pos.y}px, #{pos.z}px) "
+
+      else
+        @_pos.x = x
+        @_pos.y = y
+        @_pos.z = z
+        @_ps = "translate(#{x}px, #{y}px, #{z}px) "
+
+    @style.webkitTransform = @_ps + @_rs + @_ss
     return @
 
-  getRotation: @_rotation
+  rotation: (x, y, z) ->
+    switch arguments.length
+      when 0
+        return @_rot
 
-  setRotation: (x, y, z) ->
-    @_rotation.x = x
-    @_rotation.y = y
-    @_rotation.z = z
-    @_rs = "rotate(#{x}px, #{y}px, #{z}px) "
-    @_ts = @_ps + @_rs + @_ss
-    #
+      when 1
+        rot = x
+        @_rot.x = rot.x
+        @_rot.y = rot.y
+        @_rot.z = rot.z
+        @_rs = "rotate(#{rot.x}px, #{rot.y}px, #{rot.z}px) "
+
+      else
+        @_rot.x = x
+        @_rot.y = y
+        @_rot.z = z
+        @_rs = "rotate(#{x}px, #{y}px, #{z}px) "
+
+    @style.webkitTransform = @_ps + @_rs + @_ss
     return @
 
-  getScale: @_scale
+  scale: (x, y, z) ->
+    switch arguments.length
+      when 0
+        return @_scl
 
-  setScale: (x, y, z) ->
-    @_scale.x = x
-    @_scale.y = y
-    @_scale.z = z
-    @_ss = "scale(#{x}, #{y}, #{z});"
-    @_ts = @_ps + @_rs + @_ss
-    #
+      when 1
+        scl = x
+        @_scl.x = scl.x
+        @_scl.y = scl.y
+        @_scl.z = scl.z
+        @_ss = "scale(#{scl.x}, #{scl.y}, #{scl.z});"
+
+      else
+        @_scl.x = x
+        @_scl.y = y
+        @_scl.z = z
+        @_ss = "scale(#{x}, #{y}, #{z});"
+
+    @style.webkitTransform = @_ps + @_rs + @_ss
     return @
 
-  getVisible: -> @_visible
+  visible: (visible) ->
+    if arguments.length == 0
+      return @_visible
+    else
+      @_visible = visible
+      @style.visibility = if visible then "visible" else "hidden"
+      return @
 
-  setVisible: (visible) ->
-    @_visible = visible
-    #
-    return @
+  clip: (clip) ->
+    if arguments.length == 0
+      return @_clip
+    else
+      @_clip = clip
+      @style.overflow = if clip then "hidden" else "visible"
+      return @
 
-  getClip: -> @_clip
+  opacity: (opacity) ->
+    if arguments.length == 0
+      return @_opacity
+    else
+      @_opacity = @style.opacity = opacity
+      return @
 
-  setClip: (clip) ->
-    @_clip = clip
-    #
-    return @
+  image: (imageSrc, onload) ->
+    if arguments.length == 0
+      return @_image?.src
+    else
+      @_image = new Image
+      @_image.src = imageSrc
+      @_image.onload = =>
+        @style.backgroundImage = "url(#{@_image.src})"
+        onload()
+      return @
 
-  getOpacity: -> @_opacity
+  imageClip: (u1, v1, u2, v2) ->
+    if arguments.length == 0
+      return @_imageClip
+    else
+      @_imageClip.u1 = u1
+      @_imageClip.v1 = v1
+      @_imageClip.u2 = u2
+      @_imageClip.v2 = k2
 
-  setOpacity: (opacity) ->
-    @_opacity = opacity
-    #
-    return @
+      w = @_size.w / (u2 - u1)
+      h = @_size.h / (v2 - v1)
+      x = -u1 * w
+      y = -v1 * h
+      @style.backgroundPosition = "#{x}px #{y}px"
+      @style.backgroundSize = "#{w}px #{h}px"
 
-  getImage: -> @_image
-
-  setImage: (imageUrl, callback) ->
-    @_image = imageUrl
-    #
-    return @
-
-  getImageClip: -> @_imageClip
-
-  setImageClip: (u1, v1, u2, v2) ->
-    @_imageClip.u1 = u1
-    @_imageClip.v2 = v2
-    @_imageClip.u1 = u1
-    @_imageClip.v2 = v2
-    #
-    return @
+      return @

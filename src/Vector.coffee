@@ -1,0 +1,3 @@
+class DivSugar.Vector
+  constructor: ->
+    #
