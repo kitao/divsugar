@@ -5,6 +5,8 @@ DivSugar._Screen =
     @style.webkitTransformStyle = 'preserve-3d'
     @style.webkitPerspectiveOrigin = '50% 50%'
 
+    @_size = {}
+
     @perspective 500
 
   size: (outerW, outerH, innerW, innerH) ->
@@ -13,16 +15,21 @@ DivSugar._Screen =
     else
       @_size.outerW = outerW
       @_size.outerH = outerH
-      @_size.innerW = @style.width = innerW
-      @_size.innerH = @style.height = innerH
+      @_size.innerW =  innerW
+      @_size.innerH =  innerH
+
+      @style.width = "#{innerW}px"
+      @style.height = "#{innerH}px"
       @style.webkitTransform = "scale(#{outerW / innerW}, #{outerH / innerH})"
+
       return @
 
   perspective: (perspective) ->
     if arguments.length == 0
       return @_perspective
     else
-      @_perspective = @style.webkitPerspective = perspective
+      @_perspective = perspective
+      @style.webkitPerspective = "#{perspective}px"
       return @
 
   # getBackgroundColor/setBackgroundColor?

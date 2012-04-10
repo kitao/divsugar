@@ -4,17 +4,22 @@ DivSugar._Sprite =
     @style.webkitTransformOrigin = '0% 0% 0%'
     @style.position = 'absolute'
 
+    @_size = {}
+    @_pos = {}
+    @_rot = {}
+    @_scl = {}
+    @_imageClip = {}
     @_ps = @_rs = @_ss = ''
 
-    @setSize 100, 100
-    @setPosition 0, 0, 0
-    @setRotation 0, 0, 0
-    @setScale 1, 1, 1
-    @setVisible true
-    @setClip false
-    @setOpacity 1
-    @setImage null
-    @setImageClip 0, 0, 1, 1
+    @size 100, 100
+    @position 0, 0, 0
+    @rotation 0, 0, 0
+    @scale 1, 1, 1
+    @visible true
+    @clip false
+    @opacity 1
+    @image null
+    @imageClip 0, 0, 1, 1
 
   size: (w, h) ->
     switch arguments.length
@@ -23,13 +28,16 @@ DivSugar._Sprite =
 
       when 1
         size = w
-        @_size = @style.width = size.x
-        @_size = @style.height = size.y
+        @_size.w = size.w
+        @_size.h = size.h
 
       else
-        @_size.w = @_style.width = w
-        @_size.h = @_style.height = h
+        @_size.w = w
+        @_size.h = h
 
+    @style.width = "#{@_size.w}px"
+    @style.height = "#{@_size.h}px"
+    # TODO: update imageClip
     return @
 
   position: (x, y, z) ->
@@ -42,14 +50,13 @@ DivSugar._Sprite =
         @_pos.x = pos.x
         @_pos.y = pos.y
         @_pos.z = pos.z
-        @_ps = "translate(#{pos.x}px, #{pos.y}px, #{pos.z}px) "
 
       else
         @_pos.x = x
         @_pos.y = y
         @_pos.z = z
-        @_ps = "translate(#{x}px, #{y}px, #{z}px) "
 
+    @_ps = "translate3d(#{@_pos.x}px, #{@_pos.y}px, #{@_pos.z}px) "
     @style.webkitTransform = @_ps + @_rs + @_ss
     return @
 
@@ -63,14 +70,13 @@ DivSugar._Sprite =
         @_rot.x = rot.x
         @_rot.y = rot.y
         @_rot.z = rot.z
-        @_rs = "rotate(#{rot.x}px, #{rot.y}px, #{rot.z}px) "
 
       else
         @_rot.x = x
         @_rot.y = y
         @_rot.z = z
-        @_rs = "rotate(#{x}px, #{y}px, #{z}px) "
 
+    @_rs = "rotateX(#{@_rot.x}deg) rotateY(#{@_rot.y}deg) rotateZ(#{@_rot.z}deg) "
     @style.webkitTransform = @_ps + @_rs + @_ss
     return @
 
@@ -84,14 +90,13 @@ DivSugar._Sprite =
         @_scl.x = scl.x
         @_scl.y = scl.y
         @_scl.z = scl.z
-        @_ss = "scale(#{scl.x}, #{scl.y}, #{scl.z});"
 
       else
         @_scl.x = x
         @_scl.y = y
         @_scl.z = z
-        @_ss = "scale(#{x}, #{y}, #{z});"
 
+    @_ss = "scale3d(#{@_scl.x}, #{@_scl.y}, #{@_scl.z})"
     @style.webkitTransform = @_ps + @_rs + @_ss
     return @
 
@@ -126,7 +131,7 @@ DivSugar._Sprite =
       @_image.src = imageSrc
       @_image.onload = =>
         @style.backgroundImage = "url(#{@_image.src})"
-        onload()
+        onload?()
       return @
 
   imageClip: (u1, v1, u2, v2) ->
@@ -136,7 +141,7 @@ DivSugar._Sprite =
       @_imageClip.u1 = u1
       @_imageClip.v1 = v1
       @_imageClip.u2 = u2
-      @_imageClip.v2 = k2
+      @_imageClip.v2 = v2
 
       w = @_size.w / (u2 - u1)
       h = @_size.h / (v2 - v1)
