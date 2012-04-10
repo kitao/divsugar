@@ -9,10 +9,11 @@ sourceFiles = [
   'DivSugar.coffee'
   'Screen.coffee'
   'Sprite.coffee'
+  'Vector.coffee'
 ]
 
 target = "#{targetDir}/#{targetFile}"
-sources = "#{sourceDir}/#{s}" for s in sourceFiles
+sources = ("#{sourceDir}/#{s}" for s in sourceFiles)
 
 task 'watch', 'Watch source files and build changes', ->
   coffee = spawn 'coffee', ['-c', '-w', '-j', target].concat sources
