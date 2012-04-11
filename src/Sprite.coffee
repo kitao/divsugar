@@ -1,8 +1,10 @@
 DivSugar._Sprite =
   _initialize: ->
+    @style.margin = '0px'
+    @style.padding = '0px'
+    @style.position = 'absolute'
     @style.webkitTransformStyle = 'preserve-3d'
     @style.webkitTransformOrigin = '0% 0% 0%'
-    @style.position = 'absolute'
 
     @_size = {}
     @_pos = {}
@@ -20,6 +22,8 @@ DivSugar._Sprite =
     @opacity 1
     @image null
     @imageClip 0, 0, 1, 1
+
+    return @
 
   size: (w, h) ->
     switch arguments.length
@@ -123,12 +127,12 @@ DivSugar._Sprite =
       @_opacity = @style.opacity = opacity
       return @
 
-  image: (imageSrc, onload) ->
+  image: (imageUrl, onload) ->
     if arguments.length == 0
       return @_image?.src
     else
       @_image = new Image
-      @_image.src = imageSrc
+      @_image.src = imageUrl
       @_image.onload = =>
         @style.backgroundImage = "url(#{@_image.src})"
         onload?()

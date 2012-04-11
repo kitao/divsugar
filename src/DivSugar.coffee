@@ -7,8 +7,6 @@ DivSugar =
 
     div._initialize()
 
-    return div
-
   createSprite: ->
     div = document.createElement 'div'
 
@@ -16,7 +14,5 @@ DivSugar =
       div[name] = func
 
     div._initialize()
-
-    return div
 
 window.DivSugar = DivSugar
