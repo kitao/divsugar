@@ -10,8 +10,7 @@
         func = _ref[name];
         div[name] = func;
       }
-      div._initialize();
-      return div;
+      return div._initialize();
     },
     createSprite: function() {
       var div, func, name, _ref;
@@ -21,8 +20,7 @@
         func = _ref[name];
         div[name] = func;
       }
-      div._initialize();
-      return div;
+      return div._initialize();
     }
   };
 
@@ -30,12 +28,16 @@
 
   DivSugar._Screen = {
     _initialize: function() {
+      this.style.margin = '0px';
+      this.style.padding = '0px';
       this.style.position = 'relative';
       this.style.overflow = 'hidden';
       this.style.webkitTransformStyle = 'preserve-3d';
-      this.style.webkitPerspectiveOrigin = '50% 50%';
+      this.style.webkitTransformOrigin = '0% 0% 0%';
+      this.style.webkitPerspectiveOrigin = '0% 0% 0%';
       this._size = {};
-      return this.perspective(500);
+      this.perspective(500);
+      return this;
     },
     size: function(outerW, outerH, innerW, innerH) {
       if (arguments.length === 0) {
@@ -64,9 +66,11 @@
 
   DivSugar._Sprite = {
     _initialize: function() {
+      this.style.margin = '0px';
+      this.style.padding = '0px';
+      this.style.position = 'absolute';
       this.style.webkitTransformStyle = 'preserve-3d';
       this.style.webkitTransformOrigin = '0% 0% 0%';
-      this.style.position = 'absolute';
       this._size = {};
       this._pos = {};
       this._rot = {};
@@ -81,7 +85,8 @@
       this.clip(false);
       this.opacity(1);
       this.image(null);
-      return this.imageClip(0, 0, 1, 1);
+      this.imageClip(0, 0, 1, 1);
+      return this;
     },
     size: function(w, h) {
       var size;
@@ -187,14 +192,14 @@
         return this;
       }
     },
-    image: function(imageSrc, onload) {
+    image: function(imageUrl, onload) {
       var _ref,
         _this = this;
       if (arguments.length === 0) {
         return (_ref = this._image) != null ? _ref.src : void 0;
       } else {
         this._image = new Image;
-        this._image.src = imageSrc;
+        this._image.src = imageUrl;
         this._image.onload = function() {
           _this.style.backgroundImage = "url(" + _this._image.src + ")";
           return typeof onload === "function" ? onload() : void 0;
@@ -224,10 +229,228 @@
 
   DivSugar.Vector = (function() {
 
-    function Vector() {}
+    function Vector(x, y, z) {
+      var vec;
+      switch (arguments.length) {
+        case 0:
+          this.x = this.y = this.z = 0;
+          break;
+        case 1:
+          vec = x;
+          this.x = vec.x;
+          this.y = vec.y;
+          this.z = vec.z;
+          break;
+        default:
+          this.x = x;
+          this.y = y;
+          this.z = z;
+      }
+    }
+
+    Vector.prototype.set = function(x, y, z) {
+      var vec;
+      switch (arguments.length) {
+        case 1:
+          vec = x;
+          this.x = vec.x;
+          this.y = vec.y;
+          this.z = vec.z;
+          break;
+        default:
+          this.x = x;
+          this.y = y;
+          this.z = z;
+      }
+      return this;
+    };
+
+    Vector.prototype.negate = function() {
+      this.x = -this.x;
+      this.y = -this.y;
+      this.z = -this.z;
+      return this;
+    };
+
+    Vector.prototype.add = function(vec) {
+      this.x += vec.x;
+      this.y += vec.y;
+      this.z += vec.z;
+      return this;
+    };
+
+    Vector.prototype.subtract = function(vec) {
+      this.x -= vec.x;
+      this.y -= vec.y;
+      this.z -= vec.z;
+      return this;
+    };
+
+    Vector.prototype.multiply = function(s) {
+      this.x *= s;
+      this.y *= s;
+      this.z *= s;
+      return this;
+    };
+
+    Vector.prototype.divide = function(s) {
+      var rs;
+      rs = 1 / s;
+      this.x *= rs;
+      this.y *= rs;
+      this.z *= rs;
+      return this;
+    };
+
+    Vector.prototype.norm = function() {
+      return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+    };
+
+    Vector.prototype.squaredNorm = function() {
+      return this.x * this.x + this.y * this.y + this.z * this.z;
+    };
+
+    Vector.prototype.distance = function(vec) {
+      return this._vec1.set(this).subtract(vec).norm();
+    };
+
+    Vector.prototype.squaredDistance = function(vec) {
+      return this._vec1.set(this).subtract(vec).squaredNorm();
+    };
+
+    Vector.prototype.dot = function(vec) {
+      return this.x * vec.x + this.y * vec.y + this.z * vec.z;
+    };
+
+    Vector.prototype.cross = function(vec) {
+      return this.set(this.y * vec.z - this.z * vec.y, this.z * vec.x - this.x * vec.z, this.x * vec.y - this.y * vec.x);
+    };
+
+    Vector.prototype.normalize = function() {
+      var norm;
+      norm = this.norm;
+      if (norm < 0.001) {
+        return this.set(Vector.X_UNIT);
+      } else {
+        return this.div(norm);
+      }
+    };
+
+    Vector.prototype.rotateX = function(deg) {
+      var cos, sin;
+      sin = Math.sin(deg);
+      cos = Math.cos(deg);
+      return this.set(this.x, this.y * cos - this.z * sin, this.z * cos + this.y * sin);
+    };
+
+    Vector.prototype.rotateY = function(deg) {
+      var cos, sin;
+      sin = Math.sin(deg);
+      cos = Math.cos(deg);
+      return this.set(this.x * cos + this.z * sin, this.y, this.z * cos - this.x * sin);
+    };
+
+    Vector.prototype.rotateZ = function(deg) {
+      var cos, sin;
+      sin = Math.sin(deg);
+      cos = Math.cos(deg);
+      return this.set(this.x * cos - this.y * sin, this.y * cos + this.x * sin, this.z);
+    };
 
     return Vector;
 
   })();
+
+  /*
+    lerp: (to, ratio) ->
+      if ratio > 1 - @_EPSILON
+        @set to
+      else ratio >= @_EPSILON
+        vec = @_vec1
+        @set(to).multiply(ratio)
+        @multiply(1 - ratio).add(vec)
+  
+  #  _vec1:: new Vector
+  */
+
+  /*
+  b9.Vector3D.prototype.toLocal = function(mat) {
+      var vec = b9.Vector3D._vec1;
+  
+      vec.set(this).sub(mat.trans);
+  
+      return this.set(
+              vec.dot(mat.xAxis) / mat.xAxis.sqNorm(),
+              vec.dot(mat.yAxis) / mat.yAxis.sqNorm(),
+              vec.dot(mat.zAxis) / mat.zAxis.sqNorm());
+  };
+  
+  b9.Vector3D.prototype.toGlobal = function(mat) {
+      var vec1 = b9.Vector3D._vec1;
+      var vec2 = b9.Vector3D._vec2;
+      var vec3 = b9.Vector3D._vec3;
+  
+      vec1.set(mat.xAxis).mul(this.x);
+      vec2.set(mat.yAxis).mul(this.y);
+      vec3.set(mat.zAxis).mul(this.z);
+  
+      return this.set(vec1).add(vec2).add(vec3).add(mat.trans);
+  };
+  
+  b9.Vector3D.prototype.toLocal_noTrans = function(mat) {
+      var vec = b9.Vector3D._vec1;
+  
+      vec.set(
+              this.dot(mat.xAxis) / mat.xAxis.sqNorm(),
+              this.dot(mat.yAxis) / mat.yAxis.sqNorm(),
+              this.dot(mat.zAxis) / mat.zAxis.sqNorm());
+  
+      return this.set(vec);
+  };
+  
+  b9.Vector3D.prototype.toGlobal_noTrans = function(mat) {
+      var vec1 = b9.Vector3D._vec1;
+      var vec2 = b9.Vector3D._vec2;
+      var vec3 = b9.Vector3D._vec3;
+  
+      vec1.set(mat.xAxis).mul(this.x);
+      vec2.set(mat.yAxis).mul(this.y);
+      vec3.set(mat.zAxis).mul(this.z);
+  
+      return this.set(vec1).add(vec2).add(vec3);
+  };
+  
+  b9.Vector3D.prototype.equals = function(vec) {
+      return (b9.Math.equals_float(this.x, vec.x) &&
+              b9.Math.equals_float(this.y, vec.y) &&
+              b9.Math.equals_float(this.z, vec.z));
+  };
+  
+  b9.Vector3D.prototype.toString = function() {
+      var str;
+  
+      str = "(";
+      str += this.x;
+      str += ", ";
+      str += this.y;
+      str += ", ";
+      str += this.z;
+      str += ")";
+  
+      return str;
+  };
+  
+  b9.Vector3D.ZERO = new b9.Vector3D(0.0, 0.0, 0.0);
+  
+  b9.Vector3D.X_UNIT = new b9.Vector3D(1.0, 0.0, 0.0);
+  
+  b9.Vector3D.Y_UNIT = new b9.Vector3D(0.0, 1.0, 0.0);
+  
+  b9.Vector3D.Z_UNIT = new b9.Vector3D(0.0, 0.0, 1.0);
+  
+  b9.Vector3D._vec1 = new b9.Vector3D();
+  b9.Vector3D._vec2 = new b9.Vector3D();
+  b9.Vector3D._vec3 = new b9.Vector3D();
+  */
 
 }).call(this);
