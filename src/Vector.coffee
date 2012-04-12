@@ -16,17 +16,15 @@ class DivSugar.Vector
         @z = z
 
   set: (x, y, z) ->
-    switch arguments.length
-      when 1
-        vec = x
-        @x = vec.x
-        @y = vec.y
-        @z = vec.z
-
-      else
-        @x = x
-        @y = y
-        @z = z
+    if arguments.length == 1
+      vec = x
+      @x = vec.x
+      @y = vec.y
+      @z = vec.z
+    else
+      @x = x
+      @y = y
+      @z = z
 
     return @
 
@@ -34,28 +32,24 @@ class DivSugar.Vector
     @x = -@x
     @y = -@y
     @z = -@z
-
     return @
 
   add: (vec) ->
     @x += vec.x
     @y += vec.y
     @z += vec.z
-
     return @
 
   subtract: (vec) ->
     @x -= vec.x
     @y -= vec.y
     @z -= vec.z
-
     return @
 
   multiply: (s) ->
     @x *= s
     @y *= s
     @z *= s
-
     return @
 
   divide: (s) ->
@@ -63,7 +57,6 @@ class DivSugar.Vector
     @x *= rs
     @y *= rs
     @z *= rs
-
     return @
 
   norm: ->
