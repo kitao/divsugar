@@ -3,8 +3,8 @@ DivSugar._Sprite =
     @style.margin = '0px'
     @style.padding = '0px'
     @style.position = 'absolute'
-    @style.webkitTransformStyle = 'preserve-3d'
-    @style.webkitTransformOrigin = '0% 0% 0%'
+    @style[DivSugar._transformStyle] = 'preserve-3d'
+    @style[DivSugar._transformOrigin] = '0% 0% 0%'
 
     @_size = {}
     @_pos = {}
@@ -41,7 +41,6 @@ DivSugar._Sprite =
 
     @style.width = "#{@_size.w}px"
     @style.height = "#{@_size.h}px"
-    # TODO: update imageClip
     return @
 
   position: (x, y, z) ->
@@ -61,7 +60,7 @@ DivSugar._Sprite =
         @_pos.z = z
 
     @_ps = "translate3d(#{@_pos.x}px, #{@_pos.y}px, #{@_pos.z}px) "
-    @style.webkitTransform = @_ps + @_rs + @_ss
+    @style[DivSugar._transform] = @_ps + @_rs + @_ss
     return @
 
   rotation: (x, y, z) ->
@@ -81,7 +80,7 @@ DivSugar._Sprite =
         @_rot.z = z
 
     @_rs = "rotateX(#{@_rot.x}deg) rotateY(#{@_rot.y}deg) rotateZ(#{@_rot.z}deg) "
-    @style.webkitTransform = @_ps + @_rs + @_ss
+    @style[DivSugar._transform] = @_ps + @_rs + @_ss
     return @
 
   scale: (x, y, z) ->
@@ -101,7 +100,7 @@ DivSugar._Sprite =
         @_scl.z = z
 
     @_ss = "scale3d(#{@_scl.x}, #{@_scl.y}, #{@_scl.z})"
-    @style.webkitTransform = @_ps + @_rs + @_ss
+    @style[DivSugar._transform] = @_ps + @_rs + @_ss
     return @
 
   visible: (visible) ->

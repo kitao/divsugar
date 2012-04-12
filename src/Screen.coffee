@@ -4,9 +4,9 @@ DivSugar._Screen =
     @style.padding = '0px'
     @style.position = 'relative'
     @style.overflow = 'hidden'
-    @style.webkitTransformStyle = 'preserve-3d'
-    @style.webkitTransformOrigin = '0% 0% 0%'
-    @style.webkitPerspectiveOrigin = '0% 0% 0%'
+    @style[DivSugar._transformStyle] = 'preserve-3d'
+    @style[DivSugar._transformOrigin] = '0% 0% 0%'
+    @style[DivSugar._perspectiveOrigin] = '0% 0% 0%'
 
     @_size = {}
 
@@ -25,7 +25,7 @@ DivSugar._Screen =
 
       @style.width = "#{innerW}px"
       @style.height = "#{innerH}px"
-      @style.webkitTransform = "scale(#{outerW / innerW}, #{outerH / innerH})"
+      @style[DivSugar._transform] = "scale(#{outerW / innerW}, #{outerH / innerH})"
 
       return @
 
@@ -34,7 +34,7 @@ DivSugar._Screen =
       return @_perspective
     else
       @_perspective = perspective
-      @style.webkitPerspective = "#{perspective}px"
+      @style[DivSugar._perspective] = "#{perspective}px"
       return @
 
   # getBackgroundColor/setBackgroundColor?
