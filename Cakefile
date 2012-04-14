@@ -7,7 +7,7 @@ targetFile = 'divsugar.js'
 sourceDir = 'src'
 sourceFiles = [
   'DivSugar.coffee'
-  'Screen.coffee'
+  'Scene.coffee'
   'Sprite.coffee'
   'Vector.coffee'
 ]

@@ -1,12 +1,12 @@
-DivSugar._Screen =
-  _initialize: ->
+DivSugar._Scene =
+  _initialize: (@id) ->
     @style.margin = '0px'
     @style.padding = '0px'
     @style.position = 'relative'
     @style.overflow = 'hidden'
-    @style[DivSugar._transformStyle] = 'preserve-3d'
-    @style[DivSugar._transformOrigin] = '0% 0% 0%'
-    @style[DivSugar._perspectiveOrigin] = '0% 0% 0%'
+    @style[DivSugar.transformStyle] = 'preserve-3d'
+    @style[DivSugar.transformOrigin] = '0% 0% 0%'
+    @style[DivSugar.perspectiveOrigin] = '0% 0% 0%'
 
     @_size = {}
 
@@ -25,7 +25,7 @@ DivSugar._Screen =
 
       @style.width = "#{innerW}px"
       @style.height = "#{innerH}px"
-      @style[DivSugar._transform] = "scale(#{outerW / innerW}, #{outerH / innerH})"
+      @style[DivSugar.transform] = "scale(#{outerW / innerW}, #{outerH / innerH})"
 
       return @
 
@@ -34,7 +34,7 @@ DivSugar._Screen =
       return @_perspective
     else
       @_perspective = perspective
-      @style[DivSugar._perspective] = "#{perspective}px"
+      @style[DivSugar.perspective] = "#{perspective}px"
       return @
 
   # getBackgroundColor/setBackgroundColor?
