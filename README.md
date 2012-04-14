@@ -1,58 +1,49 @@
 DivSugar - CSS-based 3D Graphics Library
 ========================================
 
-## DivSugar
+![alt text](docs/logo/divsugar_logo_168x116.png "logo")
 
-### EPSILON
+### DivSugar
 
-### DEG_TO_RAD
 
-### RAD_TO_DEG
+```
+DivSugar.EPSILON
+DivSugar.DEG_TO_RAD
+DivSugar.RAD_TO_DEG
+```
 
-### createScene(id = null)
+```
+var scene = DivSugar.createScene('sceneId');
+var sprite = DivSugar.createSprite('spriteId');
+```
 
-### createSprite(id = null)
+### Scene
 
-## Screen
 
-## Sprite
+### Sprite
 
-### size()
+```
+sprite.size();     // returns { w: width, h: height }
+sprite.position(); // returns { x: posX, y: posY, z: posX }
+sprite.rotation(); // returns { x: rotX, y: rotY, z: rotZ }
+sprite.scale();    // returns { x: scaleX, y: scaleY, z: scaleZ }
+sprite.visible();
+sprite.clip();
+sprite.opacity();
+sprite.imageClip();
+sprite.imageClip(); // returns { u1: , v1: , u2: , v2: }
+```
 
-### size(w, h)
+```
+sprite.size(w, h);
+sprite.position(x, y, z);
+sprite.rotation(x, y, z);
+sprite.scale(x, y, z);
+sprite.visible(visible);
+sprite.clip(clip);
+sprite.opacity(opacity);
+sprite.image(imageUrl);
+sprite.image(color);
+```
 
-### position()
-
-### position(x, y, z)
-
-### rotation()
-
-### rotation(x, y, z)
-
-### scale()
-
-### scale(x, y, z)
-
-### visible()
-
-### visible(visible)
-
-### clip()
-
-### clip(clip)
-
-### opacity()
-
-### opacity(opacity)
-
-### image()
-
-### image(imageUrl)
-
-### image(color)
-
-### imageClip()
-
-### imageClip(u1, v1, u2, v2)
-
-## Vector
+### Vector
