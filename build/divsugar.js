@@ -2,39 +2,93 @@
   var DivSugar;
 
   DivSugar = {
-    createScreen: function() {
-      var div, func, name, _ref;
+    _initialize: function() {
+      var div, perspective, perspectiveOrigin, prefix, requestAnimationFrame, transform, transformOrigin, transformStyle, _i, _len, _ref, _results;
+      this.EPSILON = 0.0001;
+      this.DEG_TO_RAD = Math.PI / 180;
+      this.DEG_TO_RAD = 180 / Math.PI;
+      this.transform = 'transform';
+      this.transformStyle = 'transformStyle';
+      this.transformOrigin = 'transformOrigin';
+      this.perspective = 'perspective';
+      this.perspectiveOrigin = 'perspectiveOrigin';
+      this.requestAnimationFrame = window.requestAnimationFrame;
       div = document.createElement('div');
-      _ref = this._Screen;
+      _ref = ['webkit', 'moz', 'ms', 'o'];
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        prefix = _ref[_i];
+        transform = prefix + 'Transform';
+        if (div.style[transform] != null) this.transform = transform;
+        transformStyle = prefix + 'TransformStyle';
+        if (div.style[transformStyle] != null) {
+          this.transformStyle = transformStyle;
+        }
+        transformOrigin = prefix + 'TransformOrigin';
+        if (div.style[transformOrigin] != null) {
+          this.transformOrigin = transformOrigin;
+        }
+        perspective = prefix + 'Perspective';
+        if (div.style[perspective] != null) this.perspective = perspective;
+        perspectiveOrigin = prefix + 'PerspectiveOrigin';
+        if (div.style[perspectiveOrigin] != null) {
+          this.perspectiveOrigin = perspectiveOrigin;
+        }
+        requestAnimationFrame = prefix + 'RequestAnimationFrame';
+        if (window[requestAnimationFrame] != null) {
+          this.requestAnimationFrame = requestAnimationFrame;
+        }
+        if (!(this.requestAnimationFrame != null)) {
+          _results.push(this.requestAnimationFrame = function(callback) {
+            return window.setInterval(callback, 1000 / 60);
+          });
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    },
+    createScene: function(id) {
+      var div, func, name, _ref;
+      if (id == null) id = null;
+      div = document.createElement('div');
+      _ref = this._Scene;
       for (name in _ref) {
         func = _ref[name];
         div[name] = func;
       }
-      return div._initialize();
+      return div._initialize(id);
     },
-    createSprite: function() {
+    createSprite: function(id) {
       var div, func, name, _ref;
+      if (id == null) id = null;
       div = document.createElement('div');
       _ref = this._Sprite;
       for (name in _ref) {
         func = _ref[name];
         div[name] = func;
       }
-      return div._initialize();
+      return div._initialize(id);
+    },
+    addTask: function(callback, tag) {},
+    startTask: function() {
+      var _this = this;
+      return this._requestAnimationFrame(function() {});
     }
   };
 
-  window.DivSugar = DivSugar;
+  (window.DivSugar = DivSugar)._initialize();
 
-  DivSugar._Screen = {
-    _initialize: function() {
+  DivSugar._Scene = {
+    _initialize: function(id) {
+      this.id = id;
       this.style.margin = '0px';
       this.style.padding = '0px';
       this.style.position = 'relative';
       this.style.overflow = 'hidden';
-      this.style.webkitTransformStyle = 'preserve-3d';
-      this.style.webkitTransformOrigin = '0% 0% 0%';
-      this.style.webkitPerspectiveOrigin = '0% 0% 0%';
+      this.style[DivSugar.transformStyle] = 'preserve-3d';
+      this.style[DivSugar.transformOrigin] = '0% 0% 0%';
+      this.style[DivSugar.perspectiveOrigin] = '0% 0% 0%';
       this._size = {};
       this.perspective(500);
       return this;
@@ -49,7 +103,7 @@
         this._size.innerH = innerH;
         this.style.width = "" + innerW + "px";
         this.style.height = "" + innerH + "px";
-        this.style.webkitTransform = "scale(" + (outerW / innerW) + ", " + (outerH / innerH) + ")";
+        this.style[DivSugar.transform] = "scale(" + (outerW / innerW) + ", " + (outerH / innerH) + ")";
         return this;
       }
     },
@@ -58,19 +112,20 @@
         return this._perspective;
       } else {
         this._perspective = perspective;
-        this.style.webkitPerspective = "" + perspective + "px";
+        this.style[DivSugar.perspective] = "" + perspective + "px";
         return this;
       }
     }
   };
 
   DivSugar._Sprite = {
-    _initialize: function() {
+    _initialize: function(id) {
+      this.id = id;
       this.style.margin = '0px';
       this.style.padding = '0px';
       this.style.position = 'absolute';
-      this.style.webkitTransformStyle = 'preserve-3d';
-      this.style.webkitTransformOrigin = '0% 0% 0%';
+      this.style[DivSugar.transformStyle] = 'preserve-3d';
+      this.style[DivSugar.transformOrigin] = '0% 0% 0%';
       this._size = {};
       this._pos = {};
       this._rot = {};
@@ -123,7 +178,7 @@
           this._pos.z = z;
       }
       this._ps = "translate3d(" + this._pos.x + "px, " + this._pos.y + "px, " + this._pos.z + "px) ";
-      this.style.webkitTransform = this._ps + this._rs + this._ss;
+      this.style[DivSugar.transform] = this._ps + this._rs + this._ss;
       return this;
     },
     rotation: function(x, y, z) {
@@ -143,7 +198,7 @@
           this._rot.z = z;
       }
       this._rs = "rotateX(" + this._rot.x + "deg) rotateY(" + this._rot.y + "deg) rotateZ(" + this._rot.z + "deg) ";
-      this.style.webkitTransform = this._ps + this._rs + this._ss;
+      this.style[DivSugar.transform] = this._ps + this._rs + this._ss;
       return this;
     },
     scale: function(x, y, z) {
@@ -163,7 +218,7 @@
           this._scl.z = z;
       }
       this._ss = "scale3d(" + this._scl.x + ", " + this._scl.y + ", " + this._scl.z + ")";
-      this.style.webkitTransform = this._ps + this._rs + this._ss;
+      this.style[DivSugar.transform] = this._ps + this._rs + this._ss;
       return this;
     },
     visible: function(visible) {
@@ -192,18 +247,21 @@
         return this;
       }
     },
-    image: function(imageUrl, onload) {
-      var _ref,
-        _this = this;
+    image: function(imageUrlOrColor) {
       if (arguments.length === 0) {
-        return (_ref = this._image) != null ? _ref.src : void 0;
+        return this._image;
       } else {
-        this._image = new Image;
-        this._image.src = imageUrl;
-        this._image.onload = function() {
-          _this.style.backgroundImage = "url(" + _this._image.src + ")";
-          return typeof onload === "function" ? onload() : void 0;
-        };
+        this._image = imageUrlOrColor;
+        if (!(imageUrlOrColor != null)) {
+          this.style.backgroundColor = null;
+          this.style.backgroundImage = null;
+        } else if (imageUrlOrColor.charAt(0) === '#') {
+          this.style.backgroundColor = imageUrlOrColor;
+          this.style.backgroundImage = null;
+        } else {
+          this.style.backgroundColor = null;
+          this.style.backgroundImage = "url(" + imageUrlOrColor + ")";
+        }
         return this;
       }
     },
@@ -250,17 +308,15 @@
 
     Vector.prototype.set = function(x, y, z) {
       var vec;
-      switch (arguments.length) {
-        case 1:
-          vec = x;
-          this.x = vec.x;
-          this.y = vec.y;
-          this.z = vec.z;
-          break;
-        default:
-          this.x = x;
-          this.y = y;
-          this.z = z;
+      if (arguments.length === 1) {
+        vec = x;
+        this.x = vec.x;
+        this.y = vec.y;
+        this.z = vec.z;
+      } else {
+        this.x = x;
+        this.y = y;
+        this.z = z;
       }
       return this;
     };
@@ -329,7 +385,7 @@
     Vector.prototype.normalize = function() {
       var norm;
       norm = this.norm;
-      if (norm < 0.001) {
+      if (norm < DivSugar.EPSILON) {
         return this.set(Vector.X_UNIT);
       } else {
         return this.div(norm);
@@ -338,119 +394,56 @@
 
     Vector.prototype.rotateX = function(deg) {
       var cos, sin;
-      sin = Math.sin(deg);
-      cos = Math.cos(deg);
+      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
+      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       return this.set(this.x, this.y * cos - this.z * sin, this.z * cos + this.y * sin);
     };
 
     Vector.prototype.rotateY = function(deg) {
       var cos, sin;
-      sin = Math.sin(deg);
-      cos = Math.cos(deg);
+      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
+      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       return this.set(this.x * cos + this.z * sin, this.y, this.z * cos - this.x * sin);
     };
 
     Vector.prototype.rotateZ = function(deg) {
       var cos, sin;
-      sin = Math.sin(deg);
-      cos = Math.cos(deg);
+      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
+      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       return this.set(this.x * cos - this.y * sin, this.y * cos + this.x * sin, this.z);
+    };
+
+    Vector.prototype.lerp = function(to, ratio) {
+      var vec;
+      if (ratio > 1 - DivSugar.EPSILON) {
+        return this.set(to);
+      } else if (ratio >= DivSugar.EPSILON) {
+        vec = this._vec1;
+        vec.set(to).multiply(ratio);
+        return this.multiply(1 - ratio).add(vec);
+      }
+    };
+
+    Vector.prototype.equals = function(vec) {
+      return this.x === vec.x && this.y === vec.y && this.z === vec.z;
+    };
+
+    Vector.prototype.toString = function() {
+      return "(" + this.x + ", " + this.y + ", " + this.z + ")";
     };
 
     return Vector;
 
   })();
 
-  /*
-    lerp: (to, ratio) ->
-      if ratio > 1 - @_EPSILON
-        @set to
-      else ratio >= @_EPSILON
-        vec = @_vec1
-        @set(to).multiply(ratio)
-        @multiply(1 - ratio).add(vec)
-  
-  #  _vec1:: new Vector
-  */
+  DivSugar.Vector.ZERO = new DivSugar.Vector(0, 0, 0);
 
-  /*
-  b9.Vector3D.prototype.toLocal = function(mat) {
-      var vec = b9.Vector3D._vec1;
-  
-      vec.set(this).sub(mat.trans);
-  
-      return this.set(
-              vec.dot(mat.xAxis) / mat.xAxis.sqNorm(),
-              vec.dot(mat.yAxis) / mat.yAxis.sqNorm(),
-              vec.dot(mat.zAxis) / mat.zAxis.sqNorm());
-  };
-  
-  b9.Vector3D.prototype.toGlobal = function(mat) {
-      var vec1 = b9.Vector3D._vec1;
-      var vec2 = b9.Vector3D._vec2;
-      var vec3 = b9.Vector3D._vec3;
-  
-      vec1.set(mat.xAxis).mul(this.x);
-      vec2.set(mat.yAxis).mul(this.y);
-      vec3.set(mat.zAxis).mul(this.z);
-  
-      return this.set(vec1).add(vec2).add(vec3).add(mat.trans);
-  };
-  
-  b9.Vector3D.prototype.toLocal_noTrans = function(mat) {
-      var vec = b9.Vector3D._vec1;
-  
-      vec.set(
-              this.dot(mat.xAxis) / mat.xAxis.sqNorm(),
-              this.dot(mat.yAxis) / mat.yAxis.sqNorm(),
-              this.dot(mat.zAxis) / mat.zAxis.sqNorm());
-  
-      return this.set(vec);
-  };
-  
-  b9.Vector3D.prototype.toGlobal_noTrans = function(mat) {
-      var vec1 = b9.Vector3D._vec1;
-      var vec2 = b9.Vector3D._vec2;
-      var vec3 = b9.Vector3D._vec3;
-  
-      vec1.set(mat.xAxis).mul(this.x);
-      vec2.set(mat.yAxis).mul(this.y);
-      vec3.set(mat.zAxis).mul(this.z);
-  
-      return this.set(vec1).add(vec2).add(vec3);
-  };
-  
-  b9.Vector3D.prototype.equals = function(vec) {
-      return (b9.Math.equals_float(this.x, vec.x) &&
-              b9.Math.equals_float(this.y, vec.y) &&
-              b9.Math.equals_float(this.z, vec.z));
-  };
-  
-  b9.Vector3D.prototype.toString = function() {
-      var str;
-  
-      str = "(";
-      str += this.x;
-      str += ", ";
-      str += this.y;
-      str += ", ";
-      str += this.z;
-      str += ")";
-  
-      return str;
-  };
-  
-  b9.Vector3D.ZERO = new b9.Vector3D(0.0, 0.0, 0.0);
-  
-  b9.Vector3D.X_UNIT = new b9.Vector3D(1.0, 0.0, 0.0);
-  
-  b9.Vector3D.Y_UNIT = new b9.Vector3D(0.0, 1.0, 0.0);
-  
-  b9.Vector3D.Z_UNIT = new b9.Vector3D(0.0, 0.0, 1.0);
-  
-  b9.Vector3D._vec1 = new b9.Vector3D();
-  b9.Vector3D._vec2 = new b9.Vector3D();
-  b9.Vector3D._vec3 = new b9.Vector3D();
-  */
+  DivSugar.Vector.X_UNIT = new DivSugar.Vector(1, 0, 0);
+
+  DivSugar.Vector.Y_UNIT = new DivSugar.Vector(0, 1, 0);
+
+  DivSugar.Vector.Z_UNIT = new DivSugar.Vector(0, 0, 1);
+
+  DivSugar.Vector._vec1 = new DivSugar.Vector;
 
 }).call(this);

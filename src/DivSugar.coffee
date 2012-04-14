@@ -1,51 +1,58 @@
 DivSugar =
   _initialize: ->
-    div = document.createElement 'div'
+    # initialize constants
+    @EPSILON = 0.0001
+    @DEG_TO_RAD = Math.PI / 180
+    @DEG_TO_RAD = 180 / Math.PI
 
-    @_transform = 'transform'
-    @_transformStyle = 'transformStyle'
-    @_transformOrigin = 'transformOrigin'
-    @_perspective = 'perspective'
-    @_perspectiveOrigin = 'perspectiveOrigin'
-    @_requestAnimationFrame = window.requestAnimationFrame
+    # cross-browser support
+    @transform = 'transform'
+    @transformStyle = 'transformStyle'
+    @transformOrigin = 'transformOrigin'
+    @perspective = 'perspective'
+    @perspectiveOrigin = 'perspectiveOrigin'
+    @requestAnimationFrame = window.requestAnimationFrame
+
+    div = document.createElement 'div'
 
     for prefix in ['webkit', 'moz', 'ms', 'o']
       transform = prefix + 'Transform'
-      @_transform = transform if div.style[transform]?
+      @transform = transform if div.style[transform]?
 
       transformStyle = prefix + 'TransformStyle'
-      @_transformStyle = transformStyle if div.style[transformStyle]?
+      @transformStyle = transformStyle if div.style[transformStyle]?
 
       transformOrigin = prefix + 'TransformOrigin'
-      @_transformOrigin = transformOrigin if div.style[transformOrigin]?
+      @transformOrigin = transformOrigin if div.style[transformOrigin]?
 
       perspective = prefix + 'Perspective'
-      @_perspective = perspective if div.style[perspective]?
+      @perspective = perspective if div.style[perspective]?
 
       perspectiveOrigin = prefix + 'PerspectiveOrigin'
-      @_perspectiveOrigin = perspectiveOrigin if div.style[perspectiveOrigin]?
+      @perspectiveOrigin = perspectiveOrigin if div.style[perspectiveOrigin]?
 
       requestAnimationFrame = prefix + 'RequestAnimationFrame'
-      @_requestAnimationFrame = requestAnimationFrame if window[requestAnimationFrame]?
+      @requestAnimationFrame = requestAnimationFrame if window[requestAnimationFrame]?
 
-    if not @_requestAnimationFrame?
-      @_requestAnimationFrame = (callback) -> window.setTimeout callback, 1000 / 60
+      if not @requestAnimationFrame?
+        @requestAnimationFrame = (callback) ->
+          window.setInterval callback, 1000 / 60 # TBD
 
-  createScreen: ->
+  createScene: (id = null) ->
     div = document.createElement 'div'
 
-    for name, func of @_Screen
+    for name, func of @_Scene
       div[name] = func
 
-    div._initialize()
+    div._initialize(id)
 
-  createSprite: ->
+  createSprite: (id = null) ->
     div = document.createElement 'div'
 
     for name, func of @_Sprite
       div[name] = func
 
-    div._initialize()
+    div._initialize(id)
 
   addTask: (callback, tag) ->
     # TODO

@@ -1,10 +1,10 @@
 DivSugar._Sprite =
-  _initialize: ->
+  _initialize: (@id) ->
     @style.margin = '0px'
     @style.padding = '0px'
     @style.position = 'absolute'
-    @style[DivSugar._transformStyle] = 'preserve-3d'
-    @style[DivSugar._transformOrigin] = '0% 0% 0%'
+    @style[DivSugar.transformStyle] = 'preserve-3d'
+    @style[DivSugar.transformOrigin] = '0% 0% 0%'
 
     @_size = {}
     @_pos = {}
@@ -60,7 +60,7 @@ DivSugar._Sprite =
         @_pos.z = z
 
     @_ps = "translate3d(#{@_pos.x}px, #{@_pos.y}px, #{@_pos.z}px) "
-    @style[DivSugar._transform] = @_ps + @_rs + @_ss
+    @style[DivSugar.transform] = @_ps + @_rs + @_ss
     return @
 
   rotation: (x, y, z) ->
@@ -80,7 +80,7 @@ DivSugar._Sprite =
         @_rot.z = z
 
     @_rs = "rotateX(#{@_rot.x}deg) rotateY(#{@_rot.y}deg) rotateZ(#{@_rot.z}deg) "
-    @style[DivSugar._transform] = @_ps + @_rs + @_ss
+    @style[DivSugar.transform] = @_ps + @_rs + @_ss
     return @
 
   scale: (x, y, z) ->
@@ -100,7 +100,7 @@ DivSugar._Sprite =
         @_scl.z = z
 
     @_ss = "scale3d(#{@_scl.x}, #{@_scl.y}, #{@_scl.z})"
-    @style[DivSugar._transform] = @_ps + @_rs + @_ss
+    @style[DivSugar.transform] = @_ps + @_rs + @_ss
     return @
 
   visible: (visible) ->
@@ -126,15 +126,22 @@ DivSugar._Sprite =
       @_opacity = @style.opacity = opacity
       return @
 
-  image: (imageUrl, onload) ->
+  image: (imageUrlOrColor) ->
     if arguments.length == 0
-      return @_image?.src
+      return @_image
     else
-      @_image = new Image
-      @_image.src = imageUrl
-      @_image.onload = =>
-        @style.backgroundImage = "url(#{@_image.src})"
-        onload?()
+      @_image = imageUrlOrColor
+
+      if not imageUrlOrColor?
+        @style.backgroundColor = null
+        @style.backgroundImage = null
+      else if imageUrlOrColor.charAt(0) == '#'
+        @style.backgroundColor = imageUrlOrColor
+        @style.backgroundImage = null
+      else
+        @style.backgroundColor = null
+        @style.backgroundImage = "url(#{imageUrlOrColor})"
+
       return @
 
   imageClip: (u1, v1, u2, v2) ->
