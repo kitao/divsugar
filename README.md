@@ -1,8 +1,7 @@
 DivSugar - CSS-based 3D Graphics Library
 ========================================
 
-![alt text](docs/logo/divsugar_logo_84x58.png "logo")
-
+![alt text](https://github.com/kitao/divsugar/blob/master/docs/logo/divsugar_logo_84x58.png "logo")
 
 ## API Reference
 
