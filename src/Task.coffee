@@ -1,5 +1,5 @@
-class DivSugar.Task
-  constructor: (@name = null) ->
+class DivSugar._Task
+  constructor: (@id) ->
     @active = true
     @onUpdate = null
     @onDestroy = null
@@ -7,12 +7,12 @@ class DivSugar.Task
     @_parent = null
     @_children = []
 
-  _update: (frameCount) =>
+  update: (frameCount) =>
     if @active
       @onUpdate? frameCount
 
       for child in @_children
-        child._update frameCount
+        child.update frameCount
 
   destroy: ->
     @onDestroy?()
@@ -32,7 +32,4 @@ class DivSugar.Task
       @_children.splice i, 1
       task._parent = null
 
-  toString: ->
-    # TBD
-
-DivSugar.rootTask = new DivSugar.Task
+DivSugar.rootTask = DivSugar.createTask('root')
