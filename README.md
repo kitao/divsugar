@@ -1,12 +1,14 @@
-DivSugar - CSS-based 3D Graphics Library
-========================================
+DivSugar
+========
 
-![alt text](https://github.com/kitao/divsugar/raw/master/docs/logo/divsugar_logo_84x58.png "logo")
+A CSS-based 3D Graphics Library.
 
-## API Reference
+API Reference
+-------------
 
 ### DivSugar
 
+Constants
 
 ```
 DivSugar.EPSILON
@@ -14,13 +16,7 @@ DivSugar.DEG_TO_RAD
 DivSugar.RAD_TO_DEG
 ```
 
-#### (Sprite) createScene ( String id = null )
-
-#### (Object) size ()
-
-#### (this) size ( Object size )
-
-#### (this) size ( Number width, Number Height )
+Factory methods
 
 ```
 DivSugar.createScene(id = null)
@@ -28,18 +24,23 @@ DivSugar.createSprite(id = null)
 ```
 
 ### Scene
-#### Getters
+
+Getters
+
 ```
 scene.perspective()
 ```
-#### Setters
+
+Setters
+
 ```
 scene.perspective(perspective)
 ```
 
 ### Sprite
 
-#### Getters
+Getters
+
 ```
 sprite.size()	   // { w: width, h: height }
 sprite.position()  // { x: posX, y: posY, z: posX }
@@ -52,7 +53,8 @@ sprite.image()     // image's url or color
 sprite.imageClip() // { u1: , v1: , u2: , v2: }
 ```
 
-#### Setters
+Setters
+
 All of the setter methods return the current object for method chaining.
  
 ```
@@ -72,15 +74,16 @@ sprite.visible(visible)
 sprite.clip(clip)
 sprite.opacity(opacity)
 
-sprite.image(imageUrl) // like 'http://image.url'
-sprite.image(color)    // like '#ff0000'
+sprite.image(imageUrl) // 'http://image.url'
+sprite.image(color)    // '#ff0000'
 
 sprite.imageClip(u1, v1, u2, v2) // (0, 0, 1, 1) means use full area
 ```
 
 ### Vector
 
-#### Properties
+Properties
+
 ```
 vector.x
 vector.y
