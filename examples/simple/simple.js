@@ -14,7 +14,7 @@ window.onload = function() {
 
   scene.appendChild(sprite);
 
-  var task = new DivSugar.Task('hoge');
+  var task = DivSugar.createTask('hoge');
   DivSugar.rootTask.appendChild(task);
 
   var w = 100;
