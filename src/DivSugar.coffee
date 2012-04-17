@@ -47,7 +47,7 @@ DivSugar =
 
     # start tasks
     updateTasks = =>
-      @rootTask._update(1) # TBD
+      @rootTask.update(1) # TBD
       @_requestAnimationFrame updateTasks
 
     @_requestAnimationFrame updateTasks
@@ -67,5 +67,8 @@ DivSugar =
       div[name] = func
 
     div._initialize id
+
+  createTask: (id = null) ->
+    return new @_Task
 
 (window.DivSugar = DivSugar)._initialize()
