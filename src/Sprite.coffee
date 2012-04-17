@@ -28,7 +28,7 @@ DivSugar._Sprite =
   size: (w, h) ->
     switch arguments.length
       when 0
-        return @_size
+        return {w: @_size.w, h: @_size.h}
 
       when 1
         size = w
@@ -41,13 +41,14 @@ DivSugar._Sprite =
 
     @style.width = "#{@_size.w}px"
     @style.height = "#{@_size.h}px"
+
     @imageClip @_imageClip
     return @
 
   position: (x, y, z) ->
     switch arguments.length
       when 0
-        return @_pos
+        return {x: @_pos.x, y: @_pos.y, z: @_pos.z}
 
       when 1
         pos = x
@@ -67,7 +68,7 @@ DivSugar._Sprite =
   rotation: (x, y, z) ->
     switch arguments.length
       when 0
-        return @_rot
+        return {x: @_rot.x, y: @_rot.y, z: @_rot.z}
 
       when 1
         rot = x
@@ -87,7 +88,7 @@ DivSugar._Sprite =
   scale: (x, y, z) ->
     switch arguments.length
       when 0
-        return @_scl
+        return {x: @_scl.x, y: @_scl.y, z: @_scl.z}
 
       when 1
         scl = x
@@ -104,71 +105,8 @@ DivSugar._Sprite =
     @style[DivSugar._transform] = @_ps + @_rs + @_ss
     return @
 
-  visible: (visible) ->
-    if arguments.length == 0
-      return @_visible
-    else
-      @_visible = visible
-      @style.visibility = if visible then "visible" else "hidden"
-      return @
-
-  clip: (clip) ->
-    if arguments.length == 0
-      return @_clip
-    else
-      @_clip = clip
-      @style.overflow = if clip then "hidden" else "visible"
-      return @
-
-  opacity: (opacity) ->
-    if arguments.length == 0
-      return @_opacity
-    else
-      @_opacity = @style.opacity = opacity
-      return @
-
-  image: (imageUrlOrColor) ->
-    if arguments.length == 0
-      return @_image
-    else
-      @_image = imageUrlOrColor
-
-      if not imageUrlOrColor?
-        @style.backgroundColor = null
-        @style.backgroundImage = null
-      else if imageUrlOrColor.charAt(0) == '#'
-        @style.backgroundColor = imageUrlOrColor
-        @style.backgroundImage = null
-      else
-        @style.backgroundColor = null
-        @style.backgroundImage = "url(#{imageUrlOrColor})"
-
-      return @
-
-  imageClip: (u1, v1, u2, v2) ->
-    switch arguments.length
-      when 0
-        return @_imageClip
-
-      when 1
-        imageClip = u1
-        @_imageClip.u1 = imageClip.u1
-        @_imageClip.v1 = imageClip.v1
-        @_imageClip.u2 = imageClip.u2
-        @_imageClip.v2 = imageClip.v2
-
-      else
-        @_imageClip.u1 = u1
-        @_imageClip.v1 = v1
-        @_imageClip.u2 = u2
-        @_imageClip.v2 = v2
-
-    w = @_size.w / (@_imageClip.u2 - @_imageClip.u1)
-    h = @_size.h / (@_imageClip.v2 - @_imageClip.v1)
-    x = -@_imageClip.u1 * w
-    y = -@_imageClip.v1 * h
-
-    @style.backgroundPosition = "#{x}px #{y}px"
-    @style.backgroundSize = "#{w}px #{h}px"
-
-    return @
+  visible: DivSugar._Scene.visible
+  clip: DivSugar._Scene.clip
+  opacity: DivSugar._Scene.opacity
+  image: DivSugar._Scene.image
+  imageClip: DivSugar._Scene.imageClip
