@@ -87,6 +87,294 @@
 
   (window.DivSugar = DivSugar)._initialize();
 
+  DivSugar._Scene = {
+    _initialize: function(id) {
+      this.id = id;
+      this.style.margin = '0px';
+      this.style.padding = '0px';
+      this.style.position = 'relative';
+      this.style.overflow = 'hidden';
+      this.style[DivSugar._transformStyle] = 'preserve-3d';
+      this.style[DivSugar._transformOrigin] = '0% 0% 0%';
+      this.style[DivSugar._perspectiveOrigin] = '0% 0% 0%';
+      this._size = {};
+      this._pos = {};
+      this._imageClip = {};
+      this.perspective(1000);
+      this.size(100, 100, 100, 100);
+      this.position(0, 0);
+      this.visible(true);
+      this.clip(true);
+      this.opacity(1);
+      this.image('#0000ff');
+      this.imageClip(0, 0, 1, 1);
+      return this;
+    },
+    perspective: function(perspective) {
+      if (arguments.length === 0) {
+        return this._perspective;
+      } else {
+        this._perspective = perspective;
+        this.style[DivSugar._perspective] = "" + perspective + "px";
+        return this;
+      }
+    },
+    size: function(outerW, outerH, innerW, innerH) {
+      var offsetX, offsetY, scaleX, scaleY, size;
+      switch (arguments.length) {
+        case 0:
+          return {
+            outerW: this._size.outerW,
+            outerH: this._size.outerH,
+            innerW: this._size.innerW,
+            innerH: this._size.innerH
+          };
+        case 1:
+          size = outerW;
+          this._size.outerW = size.outerW;
+          this._size.outerH = size.outerH;
+          this._size.innerW = size.innerW;
+          this._size.innerH = size.innerH;
+          break;
+        default:
+          this._size.outerW = outerW;
+          this._size.outerH = outerH;
+          this._size.innerW = innerW;
+          this._size.innerH = innerH;
+      }
+      offsetX = (this._size.outerW - this._size.innerW) / 2 + this._pos.x;
+      offsetY = (this._size.outerH - this._size.innerH) / 2 + this._pos.y;
+      scaleX = this._size.outerW / this._size.innerW;
+      scaleY = this._size.outerH / this._size.innerH;
+      this.style.width = "" + this._size.innerW + "px";
+      this.style.height = "" + this._size.innerH + "px";
+      this.style[DivSugar._transform] = "translate(" + offsetX + "px, " + offsetY + "px) scale(" + scaleX + ", " + scaleY + ")";
+      this.imageClip(this._imageClip);
+      return this;
+    },
+    position: function(x, y) {
+      var pos;
+      switch (arguments.length) {
+        case 0:
+          return {
+            x: this._pos.x,
+            y: this._pos.y
+          };
+        case 1:
+          pos = x;
+          this._pos.x = pos.x;
+          this._pos.y = pos.y;
+          break;
+        default:
+          this._pos.x = x;
+          this._pos.y = y;
+      }
+      this.size(this._size);
+      return this;
+    },
+    visible: function(visible) {
+      if (arguments.length === 0) {
+        return this._visible;
+      } else {
+        this._visible = visible;
+        this.style.visibility = visible ? "visible" : "hidden";
+        return this;
+      }
+    },
+    clip: function(clip) {
+      if (arguments.length === 0) {
+        return this._clip;
+      } else {
+        this._clip = clip;
+        this.style.overflow = clip ? "hidden" : "visible";
+        return this;
+      }
+    },
+    opacity: function(opacity) {
+      if (arguments.length === 0) {
+        return this._opacity;
+      } else {
+        this._opacity = this.style.opacity = opacity;
+        return this;
+      }
+    },
+    image: function(imageUrlOrColor) {
+      if (arguments.length === 0) {
+        return this._image;
+      } else {
+        this._image = imageUrlOrColor;
+        if (!(imageUrlOrColor != null)) {
+          this.style.backgroundColor = null;
+          this.style.backgroundImage = null;
+        } else if (imageUrlOrColor.charAt(0) === '#') {
+          this.style.backgroundColor = imageUrlOrColor;
+          this.style.backgroundImage = null;
+        } else {
+          this.style.backgroundColor = null;
+          this.style.backgroundImage = "url(" + imageUrlOrColor + ")";
+        }
+        return this;
+      }
+    },
+    imageClip: function(u1, v1, u2, v2) {
+      var h, imageClip, w, x, y;
+      switch (arguments.length) {
+        case 0:
+          return {
+            u1: this._imageClip.u1,
+            v1: this._imageClip.v1,
+            u2: this._imageClip.u2,
+            v2: this._imageClip.v2
+          };
+        case 1:
+          imageClip = u1;
+          this._imageClip.u1 = imageClip.u1;
+          this._imageClip.v1 = imageClip.v1;
+          this._imageClip.u2 = imageClip.u2;
+          this._imageClip.v2 = imageClip.v2;
+          break;
+        default:
+          this._imageClip.u1 = u1;
+          this._imageClip.v1 = v1;
+          this._imageClip.u2 = u2;
+          this._imageClip.v2 = v2;
+      }
+      w = this._size.w / (this._imageClip.u2 - this._imageClip.u1);
+      h = this._size.h / (this._imageClip.v2 - this._imageClip.v1);
+      x = -this._imageClip.u1 * w;
+      y = -this._imageClip.v1 * h;
+      this.style.backgroundPosition = "" + x + "px " + y + "px";
+      this.style.backgroundSize = "" + w + "px " + h + "px";
+      return this;
+    }
+  };
+
+  DivSugar._Sprite = {
+    _initialize: function(id) {
+      this.id = id;
+      this.style.margin = '0px';
+      this.style.padding = '0px';
+      this.style.position = 'absolute';
+      this.style[DivSugar._transformStyle] = 'preserve-3d';
+      this.style[DivSugar._transformOrigin] = '0% 0% 0%';
+      this._size = {};
+      this._pos = {};
+      this._rot = {};
+      this._scl = {};
+      this._imageClip = {};
+      this._ps = this._rs = this._ss = '';
+      this.size(100, 100);
+      this.position(0, 0, 0);
+      this.rotation(0, 0, 0);
+      this.scale(1, 1, 1);
+      this.visible(true);
+      this.clip(false);
+      this.opacity(1);
+      this.image(null);
+      this.imageClip(0, 0, 1, 1);
+      return this;
+    },
+    size: function(w, h) {
+      var size;
+      switch (arguments.length) {
+        case 0:
+          return {
+            w: this._size.w,
+            h: this._size.h
+          };
+        case 1:
+          size = w;
+          this._size.w = size.w;
+          this._size.h = size.h;
+          break;
+        default:
+          this._size.w = w;
+          this._size.h = h;
+      }
+      this.style.width = "" + this._size.w + "px";
+      this.style.height = "" + this._size.h + "px";
+      this.imageClip(this._imageClip);
+      return this;
+    },
+    position: function(x, y, z) {
+      var pos;
+      switch (arguments.length) {
+        case 0:
+          return {
+            x: this._pos.x,
+            y: this._pos.y,
+            z: this._pos.z
+          };
+        case 1:
+          pos = x;
+          this._pos.x = pos.x;
+          this._pos.y = pos.y;
+          this._pos.z = pos.z;
+          break;
+        default:
+          this._pos.x = x;
+          this._pos.y = y;
+          this._pos.z = z;
+      }
+      this._ps = "translate3d(" + this._pos.x + "px, " + this._pos.y + "px, " + this._pos.z + "px) ";
+      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
+      return this;
+    },
+    rotation: function(x, y, z) {
+      var rot;
+      switch (arguments.length) {
+        case 0:
+          return {
+            x: this._rot.x,
+            y: this._rot.y,
+            z: this._rot.z
+          };
+        case 1:
+          rot = x;
+          this._rot.x = rot.x;
+          this._rot.y = rot.y;
+          this._rot.z = rot.z;
+          break;
+        default:
+          this._rot.x = x;
+          this._rot.y = y;
+          this._rot.z = z;
+      }
+      this._rs = "rotateX(" + this._rot.x + "deg) rotateY(" + this._rot.y + "deg) rotateZ(" + this._rot.z + "deg) ";
+      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
+      return this;
+    },
+    scale: function(x, y, z) {
+      var scl;
+      switch (arguments.length) {
+        case 0:
+          return {
+            x: this._scl.x,
+            y: this._scl.y,
+            z: this._scl.z
+          };
+        case 1:
+          scl = x;
+          this._scl.x = scl.x;
+          this._scl.y = scl.y;
+          this._scl.z = scl.z;
+          break;
+        default:
+          this._scl.x = x;
+          this._scl.y = y;
+          this._scl.z = z;
+      }
+      this._ss = "scale3d(" + this._scl.x + ", " + this._scl.y + ", " + this._scl.z + ")";
+      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
+      return this;
+    },
+    visible: DivSugar._Scene.visible,
+    clip: DivSugar._Scene.clip,
+    opacity: DivSugar._Scene.opacity,
+    image: DivSugar._Scene.image,
+    imageClip: DivSugar._Scene.imageClip
+  };
+
   DivSugar._Task = (function() {
 
     function _Task(id) {
@@ -146,221 +434,6 @@
   })();
 
   DivSugar.rootTask = DivSugar.createTask('root');
-
-  DivSugar._Scene = {
-    _initialize: function(id) {
-      this.id = id;
-      this.style.margin = '0px';
-      this.style.padding = '0px';
-      this.style.position = 'relative';
-      this.style.overflow = 'hidden';
-      this.style[DivSugar._transformStyle] = 'preserve-3d';
-      this.style[DivSugar._transformOrigin] = '0% 0% 0%';
-      this.style[DivSugar._perspectiveOrigin] = '0% 0% 0%';
-      this._size = {};
-      this.perspective(500);
-      return this;
-    },
-    size: function(outerW, outerH, innerW, innerH) {
-      if (arguments.length === 0) {
-        return this._size;
-      } else {
-        this._size.outerW = outerW;
-        this._size.outerH = outerH;
-        this._size.innerW = innerW;
-        this._size.innerH = innerH;
-        this.style.width = "" + innerW + "px";
-        this.style.height = "" + innerH + "px";
-        this.style[DivSugar._transform] = "scale(" + (outerW / innerW) + ", " + (outerH / innerH) + ")";
-        return this;
-      }
-    },
-    perspective: function(perspective) {
-      if (arguments.length === 0) {
-        return this._perspective;
-      } else {
-        this._perspective = perspective;
-        this.style[DivSugar._perspective] = "" + perspective + "px";
-        return this;
-      }
-    }
-  };
-
-  DivSugar._Sprite = {
-    _initialize: function(id) {
-      this.id = id;
-      this.style.margin = '0px';
-      this.style.padding = '0px';
-      this.style.position = 'absolute';
-      this.style[DivSugar._transformStyle] = 'preserve-3d';
-      this.style[DivSugar._transformOrigin] = '0% 0% 0%';
-      this._size = {};
-      this._pos = {};
-      this._rot = {};
-      this._scl = {};
-      this._imageClip = {};
-      this._ps = this._rs = this._ss = '';
-      this.size(100, 100);
-      this.position(0, 0, 0);
-      this.rotation(0, 0, 0);
-      this.scale(1, 1, 1);
-      this.visible(true);
-      this.clip(false);
-      this.opacity(1);
-      this.image(null);
-      this.imageClip(0, 0, 1, 1);
-      return this;
-    },
-    size: function(w, h) {
-      var size;
-      switch (arguments.length) {
-        case 0:
-          return this._size;
-        case 1:
-          size = w;
-          this._size.w = size.w;
-          this._size.h = size.h;
-          break;
-        default:
-          this._size.w = w;
-          this._size.h = h;
-      }
-      this.style.width = "" + this._size.w + "px";
-      this.style.height = "" + this._size.h + "px";
-      this.imageClip(this._imageClip);
-      return this;
-    },
-    position: function(x, y, z) {
-      var pos;
-      switch (arguments.length) {
-        case 0:
-          return this._pos;
-        case 1:
-          pos = x;
-          this._pos.x = pos.x;
-          this._pos.y = pos.y;
-          this._pos.z = pos.z;
-          break;
-        default:
-          this._pos.x = x;
-          this._pos.y = y;
-          this._pos.z = z;
-      }
-      this._ps = "translate3d(" + this._pos.x + "px, " + this._pos.y + "px, " + this._pos.z + "px) ";
-      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
-      return this;
-    },
-    rotation: function(x, y, z) {
-      var rot;
-      switch (arguments.length) {
-        case 0:
-          return this._rot;
-        case 1:
-          rot = x;
-          this._rot.x = rot.x;
-          this._rot.y = rot.y;
-          this._rot.z = rot.z;
-          break;
-        default:
-          this._rot.x = x;
-          this._rot.y = y;
-          this._rot.z = z;
-      }
-      this._rs = "rotateX(" + this._rot.x + "deg) rotateY(" + this._rot.y + "deg) rotateZ(" + this._rot.z + "deg) ";
-      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
-      return this;
-    },
-    scale: function(x, y, z) {
-      var scl;
-      switch (arguments.length) {
-        case 0:
-          return this._scl;
-        case 1:
-          scl = x;
-          this._scl.x = scl.x;
-          this._scl.y = scl.y;
-          this._scl.z = scl.z;
-          break;
-        default:
-          this._scl.x = x;
-          this._scl.y = y;
-          this._scl.z = z;
-      }
-      this._ss = "scale3d(" + this._scl.x + ", " + this._scl.y + ", " + this._scl.z + ")";
-      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
-      return this;
-    },
-    visible: function(visible) {
-      if (arguments.length === 0) {
-        return this._visible;
-      } else {
-        this._visible = visible;
-        this.style.visibility = visible ? "visible" : "hidden";
-        return this;
-      }
-    },
-    clip: function(clip) {
-      if (arguments.length === 0) {
-        return this._clip;
-      } else {
-        this._clip = clip;
-        this.style.overflow = clip ? "hidden" : "visible";
-        return this;
-      }
-    },
-    opacity: function(opacity) {
-      if (arguments.length === 0) {
-        return this._opacity;
-      } else {
-        this._opacity = this.style.opacity = opacity;
-        return this;
-      }
-    },
-    image: function(imageUrlOrColor) {
-      if (arguments.length === 0) {
-        return this._image;
-      } else {
-        this._image = imageUrlOrColor;
-        if (!(imageUrlOrColor != null)) {
-          this.style.backgroundColor = null;
-          this.style.backgroundImage = null;
-        } else if (imageUrlOrColor.charAt(0) === '#') {
-          this.style.backgroundColor = imageUrlOrColor;
-          this.style.backgroundImage = null;
-        } else {
-          this.style.backgroundColor = null;
-          this.style.backgroundImage = "url(" + imageUrlOrColor + ")";
-        }
-        return this;
-      }
-    },
-    imageClip: function(u1, v1, u2, v2) {
-      var h, imageClip, w, x, y;
-      switch (arguments.length) {
-        case 0:
-          return this._imageClip;
-        case 1:
-          imageClip = u1;
-          this._imageClip.u1 = imageClip.u1;
-          this._imageClip.v1 = imageClip.v1;
-          this._imageClip.u2 = imageClip.u2;
-          this._imageClip.v2 = imageClip.v2;
-          break;
-        default:
-          this._imageClip.u1 = u1;
-          this._imageClip.v1 = v1;
-          this._imageClip.u2 = u2;
-          this._imageClip.v2 = v2;
-      }
-      w = this._size.w / (this._imageClip.u2 - this._imageClip.u1);
-      h = this._size.h / (this._imageClip.v2 - this._imageClip.v1);
-      x = -this._imageClip.u1 * w;
-      y = -this._imageClip.v1 * h;
-      this.style.backgroundPosition = "" + x + "px " + y + "px";
-      this.style.backgroundSize = "" + w + "px " + h + "px";
-      return this;
-    }
-  };
 
   DivSugar.Vector = (function() {
 
