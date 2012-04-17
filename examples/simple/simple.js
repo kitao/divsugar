@@ -4,7 +4,7 @@ window.onload = function() {
   var sceneHolder = document.getElementById('sceneHolder');
 
   var scene = DivSugar.createScene();
-  scene.size(600, 400, 300, 200).image('#0000ff').position(100, 100);
+  scene.size(600, 400).image('#0000ff').position(100, 100);
   sceneHolder.appendChild(scene);
 
   var sprite = DivSugar.createSprite();
