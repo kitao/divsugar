@@ -52,7 +52,7 @@
         };
       }
       updateTasks = function() {
-        _this.rootTask._update(1);
+        _this.rootTask.update(1);
         return _this._requestAnimationFrame(updateTasks);
       };
       return this._requestAnimationFrame(updateTasks);
@@ -78,16 +78,20 @@
         div[name] = func;
       }
       return div._initialize(id);
+    },
+    createTask: function(id) {
+      if (id == null) id = null;
+      return new this._Task;
     }
   };
 
   (window.DivSugar = DivSugar)._initialize();
 
-  DivSugar.Task = (function() {
+  DivSugar._Task = (function() {
 
-    function Task(name) {
-      this.name = name != null ? name : null;
-      this._update = __bind(this._update, this);
+    function _Task(id) {
+      this.id = id;
+      this.update = __bind(this.update, this);
       this.active = true;
       this.onUpdate = null;
       this.onDestroy = null;
@@ -95,7 +99,7 @@
       this._children = [];
     }
 
-    Task.prototype._update = function(frameCount) {
+    _Task.prototype.update = function(frameCount) {
       var child, _i, _len, _ref, _results;
       if (this.active) {
         if (typeof this.onUpdate === "function") this.onUpdate(frameCount);
@@ -103,13 +107,13 @@
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           child = _ref[_i];
-          _results.push(child._update(frameCount));
+          _results.push(child.update(frameCount));
         }
         return _results;
       }
     };
 
-    Task.prototype.destroy = function() {
+    _Task.prototype.destroy = function() {
       var child, _i, _len, _ref, _results;
       if (typeof this.onDestroy === "function") this.onDestroy();
       this._parent.removeChild(this);
@@ -122,13 +126,13 @@
       return _results;
     };
 
-    Task.prototype.appendChild = function(task) {
+    _Task.prototype.appendChild = function(task) {
       this.removeChild(task);
       this._children.push(task);
       return task._parent = this;
     };
 
-    Task.prototype.removeChild = function(task) {
+    _Task.prototype.removeChild = function(task) {
       var i;
       i = this._children.indexOf(task);
       if (i > -1) {
@@ -137,13 +141,11 @@
       }
     };
 
-    Task.prototype.toString = function() {};
-
-    return Task;
+    return _Task;
 
   })();
 
-  DivSugar.rootTask = new DivSugar.Task;
+  DivSugar.rootTask = DivSugar.createTask('root');
 
   DivSugar._Scene = {
     _initialize: function(id) {
