@@ -40,14 +40,14 @@ DivSugar._Scene =
         size = outerW
         @_size.outerW = size.outerW
         @_size.outerH = size.outerH
-        @_size.innerW = size.innerW
-        @_size.innerH = size.innerH
+        @_size.innerW = size.innerW ? size.outerW
+        @_size.innerH = size.innerH ? size.outerH
 
       else
         @_size.outerW = outerW
         @_size.outerH = outerH
-        @_size.innerW = innerW
-        @_size.innerH = innerH
+        @_size.innerW = innerW ? outerW
+        @_size.innerH = innerH ? outerH
 
     offsetX = (@_size.outerW - @_size.innerW) / 2 + @_pos.x
     offsetY = (@_size.outerH - @_size.innerH) / 2 + @_pos.y
@@ -75,7 +75,8 @@ DivSugar._Scene =
         @_pos.x = x
         @_pos.y = y
 
-    @size @_size
+    @style.left = "#{@_pos.x}px"
+    @style.top = "#{@_pos.y}px"
     return @
 
   visible: (visible) ->
