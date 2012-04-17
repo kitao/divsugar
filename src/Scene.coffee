@@ -4,9 +4,9 @@ DivSugar._Scene =
     @style.padding = '0px'
     @style.position = 'relative'
     @style.overflow = 'hidden'
-    @style[DivSugar.transformStyle] = 'preserve-3d'
-    @style[DivSugar.transformOrigin] = '0% 0% 0%'
-    @style[DivSugar.perspectiveOrigin] = '0% 0% 0%'
+    @style[DivSugar._transformStyle] = 'preserve-3d'
+    @style[DivSugar._transformOrigin] = '0% 0% 0%'
+    @style[DivSugar._perspectiveOrigin] = '0% 0% 0%'
 
     @_size = {}
 
@@ -25,7 +25,7 @@ DivSugar._Scene =
 
       @style.width = "#{innerW}px"
       @style.height = "#{innerH}px"
-      @style[DivSugar.transform] = "scale(#{outerW / innerW}, #{outerH / innerH})"
+      @style[DivSugar._transform] = "scale(#{outerW / innerW}, #{outerH / innerH})"
 
       return @
 
@@ -34,7 +34,7 @@ DivSugar._Scene =
       return @_perspective
     else
       @_perspective = perspective
-      @style[DivSugar.perspective] = "#{perspective}px"
+      @style[DivSugar._perspective] = "#{perspective}px"
       return @
 
   # getBackgroundColor/setBackgroundColor?

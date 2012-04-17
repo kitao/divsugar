@@ -66,10 +66,10 @@ class DivSugar.Vector
     @x * @x + @y * @y + @z * @z
 
   distance: (vec) ->
-    @_vec1.set(@).subtract(vec).norm()
+    DivSugar.Vector._tmpVec.set(@).subtract(vec).norm()
 
   squaredDistance: (vec) ->
-    @_vec1.set(@).subtract(vec).squaredNorm()
+    DivSugar.Vector._tmpVec.set(@).subtract(vec).squaredNorm()
 
   dot: (vec) ->
     @x * vec.x + @y * vec.y + @z * vec.z
@@ -80,7 +80,7 @@ class DivSugar.Vector
   normalize: ->
     norm = @norm
     if norm < DivSugar.EPSILON
-      @set Vector.X_UNIT
+      @set DivSugar.Vector.X_UNIT
     else
       @div norm
 
@@ -103,7 +103,7 @@ class DivSugar.Vector
     if ratio > 1 - DivSugar.EPSILON
       @set to
     else if ratio >= DivSugar.EPSILON
-      vec = @_vec1
+      vec = DivSugar.Vector._tmpVec
       vec.set(to).multiply(ratio)
       @multiply(1 - ratio).add(vec)
 
@@ -118,4 +118,4 @@ DivSugar.Vector.X_UNIT = new DivSugar.Vector 1, 0, 0
 DivSugar.Vector.Y_UNIT = new DivSugar.Vector 0, 1, 0
 DivSugar.Vector.Z_UNIT = new DivSugar.Vector 0, 0, 1
 
-DivSugar.Vector._vec1 = new DivSugar.Vector
+DivSugar.Vector._tmpVec = new DivSugar.Vector

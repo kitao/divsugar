@@ -3,8 +3,8 @@ DivSugar._Sprite =
     @style.margin = '0px'
     @style.padding = '0px'
     @style.position = 'absolute'
-    @style[DivSugar.transformStyle] = 'preserve-3d'
-    @style[DivSugar.transformOrigin] = '0% 0% 0%'
+    @style[DivSugar._transformStyle] = 'preserve-3d'
+    @style[DivSugar._transformOrigin] = '0% 0% 0%'
 
     @_size = {}
     @_pos = {}
@@ -41,6 +41,7 @@ DivSugar._Sprite =
 
     @style.width = "#{@_size.w}px"
     @style.height = "#{@_size.h}px"
+    @imageClip @_imageClip
     return @
 
   position: (x, y, z) ->
@@ -60,7 +61,7 @@ DivSugar._Sprite =
         @_pos.z = z
 
     @_ps = "translate3d(#{@_pos.x}px, #{@_pos.y}px, #{@_pos.z}px) "
-    @style[DivSugar.transform] = @_ps + @_rs + @_ss
+    @style[DivSugar._transform] = @_ps + @_rs + @_ss
     return @
 
   rotation: (x, y, z) ->
@@ -80,7 +81,7 @@ DivSugar._Sprite =
         @_rot.z = z
 
     @_rs = "rotateX(#{@_rot.x}deg) rotateY(#{@_rot.y}deg) rotateZ(#{@_rot.z}deg) "
-    @style[DivSugar.transform] = @_ps + @_rs + @_ss
+    @style[DivSugar._transform] = @_ps + @_rs + @_ss
     return @
 
   scale: (x, y, z) ->
@@ -100,7 +101,7 @@ DivSugar._Sprite =
         @_scl.z = z
 
     @_ss = "scale3d(#{@_scl.x}, #{@_scl.y}, #{@_scl.z})"
-    @style[DivSugar.transform] = @_ps + @_rs + @_ss
+    @style[DivSugar._transform] = @_ps + @_rs + @_ss
     return @
 
   visible: (visible) ->
@@ -145,19 +146,29 @@ DivSugar._Sprite =
       return @
 
   imageClip: (u1, v1, u2, v2) ->
-    if arguments.length == 0
-      return @_imageClip
-    else
-      @_imageClip.u1 = u1
-      @_imageClip.v1 = v1
-      @_imageClip.u2 = u2
-      @_imageClip.v2 = v2
+    switch arguments.length
+      when 0
+        return @_imageClip
 
-      w = @_size.w / (u2 - u1)
-      h = @_size.h / (v2 - v1)
-      x = -u1 * w
-      y = -v1 * h
-      @style.backgroundPosition = "#{x}px #{y}px"
-      @style.backgroundSize = "#{w}px #{h}px"
+      when 1
+        imageClip = u1
+        @_imageClip.u1 = imageClip.u1
+        @_imageClip.v1 = imageClip.v1
+        @_imageClip.u2 = imageClip.u2
+        @_imageClip.v2 = imageClip.v2
 
-      return @
+      else
+        @_imageClip.u1 = u1
+        @_imageClip.v1 = v1
+        @_imageClip.u2 = u2
+        @_imageClip.v2 = v2
+
+    w = @_size.w / (@_imageClip.u2 - @_imageClip.u1)
+    h = @_size.h / (@_imageClip.v2 - @_imageClip.v1)
+    x = -@_imageClip.u1 * w
+    y = -@_imageClip.v1 * h
+
+    @style.backgroundPosition = "#{x}px #{y}px"
+    @style.backgroundSize = "#{w}px #{h}px"
+
+    return @
