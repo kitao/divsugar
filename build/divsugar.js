@@ -1,52 +1,61 @@
 (function() {
-  var DivSugar;
+  var DivSugar,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   DivSugar = {
     _initialize: function() {
-      var div, perspective, perspectiveOrigin, prefix, requestAnimationFrame, transform, transformOrigin, transformStyle, _i, _len, _ref, _results;
+      var div, perspective, perspectiveOrigin, prefix, requestAnimationFrame, transform, transformOrigin, transformStyle, updateTasks, _i, _len, _ref,
+        _this = this;
       this.EPSILON = 0.0001;
       this.DEG_TO_RAD = Math.PI / 180;
       this.DEG_TO_RAD = 180 / Math.PI;
-      this.transform = 'transform';
-      this.transformStyle = 'transformStyle';
-      this.transformOrigin = 'transformOrigin';
-      this.perspective = 'perspective';
-      this.perspectiveOrigin = 'perspectiveOrigin';
-      this.requestAnimationFrame = window.requestAnimationFrame;
+      this.rootTask = null;
+      this._transform = 'transform';
+      this._transformStyle = 'transformStyle';
+      this._transformOrigin = 'transformOrigin';
+      this._perspective = 'perspective';
+      this._perspectiveOrigin = 'perspectiveOrigin';
+      this._requestAnimationFrame = 'requestAnimationFrame';
       div = document.createElement('div');
       _ref = ['webkit', 'moz', 'ms', 'o'];
-      _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         prefix = _ref[_i];
         transform = prefix + 'Transform';
-        if (div.style[transform] != null) this.transform = transform;
+        if (div.style[transform] != null) this._transform = transform;
         transformStyle = prefix + 'TransformStyle';
         if (div.style[transformStyle] != null) {
-          this.transformStyle = transformStyle;
+          this._transformStyle = transformStyle;
         }
         transformOrigin = prefix + 'TransformOrigin';
         if (div.style[transformOrigin] != null) {
-          this.transformOrigin = transformOrigin;
+          this._transformOrigin = transformOrigin;
         }
         perspective = prefix + 'Perspective';
-        if (div.style[perspective] != null) this.perspective = perspective;
+        if (div.style[perspective] != null) this._perspective = perspective;
         perspectiveOrigin = prefix + 'PerspectiveOrigin';
         if (div.style[perspectiveOrigin] != null) {
-          this.perspectiveOrigin = perspectiveOrigin;
+          this._perspectiveOrigin = perspectiveOrigin;
         }
         requestAnimationFrame = prefix + 'RequestAnimationFrame';
         if (window[requestAnimationFrame] != null) {
-          this.requestAnimationFrame = requestAnimationFrame;
-        }
-        if (!(this.requestAnimationFrame != null)) {
-          _results.push(this.requestAnimationFrame = function(callback) {
-            return window.setInterval(callback, 1000 / 60);
-          });
-        } else {
-          _results.push(void 0);
+          this._requestAnimationFrame = requestAnimationFrame;
         }
       }
-      return _results;
+      if (window[this._requestAnimationFrame] != null) {
+        requestAnimationFrame = this._requestAnimationFrame;
+        this._requestAnimationFrame = function(callback) {
+          return window[requestAnimationFrame](callback);
+        };
+      } else {
+        this._requestAnimationFrame = function(callback) {
+          return window.setTimeout(callback, 1000 / 60);
+        };
+      }
+      updateTasks = function() {
+        _this.rootTask._update(1);
+        return _this._requestAnimationFrame(updateTasks);
+      };
+      return this._requestAnimationFrame(updateTasks);
     },
     createScene: function(id) {
       var div, func, name, _ref;
@@ -69,15 +78,72 @@
         div[name] = func;
       }
       return div._initialize(id);
-    },
-    addTask: function(callback, tag) {},
-    startTask: function() {
-      var _this = this;
-      return this._requestAnimationFrame(function() {});
     }
   };
 
   (window.DivSugar = DivSugar)._initialize();
+
+  DivSugar.Task = (function() {
+
+    function Task(name) {
+      this.name = name != null ? name : null;
+      this._update = __bind(this._update, this);
+      this.active = true;
+      this.onUpdate = null;
+      this.onDestroy = null;
+      this._parent = null;
+      this._children = [];
+    }
+
+    Task.prototype._update = function(frameCount) {
+      var child, _i, _len, _ref, _results;
+      if (this.active) {
+        if (typeof this.onUpdate === "function") this.onUpdate(frameCount);
+        _ref = this._children;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          child = _ref[_i];
+          _results.push(child._update(frameCount));
+        }
+        return _results;
+      }
+    };
+
+    Task.prototype.destroy = function() {
+      var child, _i, _len, _ref, _results;
+      if (typeof this.onDestroy === "function") this.onDestroy();
+      this._parent.removeChild(this);
+      _ref = this._children;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        child = _ref[_i];
+        _results.push(child.destroy());
+      }
+      return _results;
+    };
+
+    Task.prototype.appendChild = function(task) {
+      this.removeChild(task);
+      this._children.push(task);
+      return task._parent = this;
+    };
+
+    Task.prototype.removeChild = function(task) {
+      var i;
+      i = this._children.indexOf(task);
+      if (i > -1) {
+        this._children.splice(i, 1);
+        return task._parent = null;
+      }
+    };
+
+    Task.prototype.toString = function() {};
+
+    return Task;
+
+  })();
+
+  DivSugar.rootTask = new DivSugar.Task;
 
   DivSugar._Scene = {
     _initialize: function(id) {
@@ -86,9 +152,9 @@
       this.style.padding = '0px';
       this.style.position = 'relative';
       this.style.overflow = 'hidden';
-      this.style[DivSugar.transformStyle] = 'preserve-3d';
-      this.style[DivSugar.transformOrigin] = '0% 0% 0%';
-      this.style[DivSugar.perspectiveOrigin] = '0% 0% 0%';
+      this.style[DivSugar._transformStyle] = 'preserve-3d';
+      this.style[DivSugar._transformOrigin] = '0% 0% 0%';
+      this.style[DivSugar._perspectiveOrigin] = '0% 0% 0%';
       this._size = {};
       this.perspective(500);
       return this;
@@ -103,7 +169,7 @@
         this._size.innerH = innerH;
         this.style.width = "" + innerW + "px";
         this.style.height = "" + innerH + "px";
-        this.style[DivSugar.transform] = "scale(" + (outerW / innerW) + ", " + (outerH / innerH) + ")";
+        this.style[DivSugar._transform] = "scale(" + (outerW / innerW) + ", " + (outerH / innerH) + ")";
         return this;
       }
     },
@@ -112,7 +178,7 @@
         return this._perspective;
       } else {
         this._perspective = perspective;
-        this.style[DivSugar.perspective] = "" + perspective + "px";
+        this.style[DivSugar._perspective] = "" + perspective + "px";
         return this;
       }
     }
@@ -124,8 +190,8 @@
       this.style.margin = '0px';
       this.style.padding = '0px';
       this.style.position = 'absolute';
-      this.style[DivSugar.transformStyle] = 'preserve-3d';
-      this.style[DivSugar.transformOrigin] = '0% 0% 0%';
+      this.style[DivSugar._transformStyle] = 'preserve-3d';
+      this.style[DivSugar._transformOrigin] = '0% 0% 0%';
       this._size = {};
       this._pos = {};
       this._rot = {};
@@ -159,6 +225,7 @@
       }
       this.style.width = "" + this._size.w + "px";
       this.style.height = "" + this._size.h + "px";
+      this.imageClip(this._imageClip);
       return this;
     },
     position: function(x, y, z) {
@@ -178,7 +245,7 @@
           this._pos.z = z;
       }
       this._ps = "translate3d(" + this._pos.x + "px, " + this._pos.y + "px, " + this._pos.z + "px) ";
-      this.style[DivSugar.transform] = this._ps + this._rs + this._ss;
+      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
       return this;
     },
     rotation: function(x, y, z) {
@@ -198,7 +265,7 @@
           this._rot.z = z;
       }
       this._rs = "rotateX(" + this._rot.x + "deg) rotateY(" + this._rot.y + "deg) rotateZ(" + this._rot.z + "deg) ";
-      this.style[DivSugar.transform] = this._ps + this._rs + this._ss;
+      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
       return this;
     },
     scale: function(x, y, z) {
@@ -218,7 +285,7 @@
           this._scl.z = z;
       }
       this._ss = "scale3d(" + this._scl.x + ", " + this._scl.y + ", " + this._scl.z + ")";
-      this.style[DivSugar.transform] = this._ps + this._rs + this._ss;
+      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
       return this;
     },
     visible: function(visible) {
@@ -266,22 +333,30 @@
       }
     },
     imageClip: function(u1, v1, u2, v2) {
-      var h, w, x, y;
-      if (arguments.length === 0) {
-        return this._imageClip;
-      } else {
-        this._imageClip.u1 = u1;
-        this._imageClip.v1 = v1;
-        this._imageClip.u2 = u2;
-        this._imageClip.v2 = v2;
-        w = this._size.w / (u2 - u1);
-        h = this._size.h / (v2 - v1);
-        x = -u1 * w;
-        y = -v1 * h;
-        this.style.backgroundPosition = "" + x + "px " + y + "px";
-        this.style.backgroundSize = "" + w + "px " + h + "px";
-        return this;
+      var h, imageClip, w, x, y;
+      switch (arguments.length) {
+        case 0:
+          return this._imageClip;
+        case 1:
+          imageClip = u1;
+          this._imageClip.u1 = imageClip.u1;
+          this._imageClip.v1 = imageClip.v1;
+          this._imageClip.u2 = imageClip.u2;
+          this._imageClip.v2 = imageClip.v2;
+          break;
+        default:
+          this._imageClip.u1 = u1;
+          this._imageClip.v1 = v1;
+          this._imageClip.u2 = u2;
+          this._imageClip.v2 = v2;
       }
+      w = this._size.w / (this._imageClip.u2 - this._imageClip.u1);
+      h = this._size.h / (this._imageClip.v2 - this._imageClip.v1);
+      x = -this._imageClip.u1 * w;
+      y = -this._imageClip.v1 * h;
+      this.style.backgroundPosition = "" + x + "px " + y + "px";
+      this.style.backgroundSize = "" + w + "px " + h + "px";
+      return this;
     }
   };
 
@@ -367,11 +442,11 @@
     };
 
     Vector.prototype.distance = function(vec) {
-      return this._vec1.set(this).subtract(vec).norm();
+      return DivSugar.Vector._tmpVec.set(this).subtract(vec).norm();
     };
 
     Vector.prototype.squaredDistance = function(vec) {
-      return this._vec1.set(this).subtract(vec).squaredNorm();
+      return DivSugar.Vector._tmpVec.set(this).subtract(vec).squaredNorm();
     };
 
     Vector.prototype.dot = function(vec) {
@@ -386,7 +461,7 @@
       var norm;
       norm = this.norm;
       if (norm < DivSugar.EPSILON) {
-        return this.set(Vector.X_UNIT);
+        return this.set(DivSugar.Vector.X_UNIT);
       } else {
         return this.div(norm);
       }
@@ -418,7 +493,7 @@
       if (ratio > 1 - DivSugar.EPSILON) {
         return this.set(to);
       } else if (ratio >= DivSugar.EPSILON) {
-        vec = this._vec1;
+        vec = DivSugar.Vector._tmpVec;
         vec.set(to).multiply(ratio);
         return this.multiply(1 - ratio).add(vec);
       }
@@ -444,6 +519,6 @@
 
   DivSugar.Vector.Z_UNIT = new DivSugar.Vector(0, 0, 1);
 
-  DivSugar.Vector._vec1 = new DivSugar.Vector;
+  DivSugar.Vector._tmpVec = new DivSugar.Vector;
 
 }).call(this);
