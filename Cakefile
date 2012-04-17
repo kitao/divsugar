@@ -9,6 +9,7 @@ sourceFiles = [
   'DivSugar.coffee'
   'Scene.coffee'
   'Sprite.coffee'
+  'Task.coffee'
   'Vector.coffee'
 ]
 
