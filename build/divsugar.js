@@ -120,7 +120,7 @@
       }
     },
     size: function(outerW, outerH, innerW, innerH) {
-      var offsetX, offsetY, scaleX, scaleY, size;
+      var offsetX, offsetY, scaleX, scaleY, size, _ref, _ref2;
       switch (arguments.length) {
         case 0:
           return {
@@ -133,14 +133,14 @@
           size = outerW;
           this._size.outerW = size.outerW;
           this._size.outerH = size.outerH;
-          this._size.innerW = size.innerW;
-          this._size.innerH = size.innerH;
+          this._size.innerW = (_ref = size.innerW) != null ? _ref : size.outerW;
+          this._size.innerH = (_ref2 = size.innerH) != null ? _ref2 : size.outerH;
           break;
         default:
           this._size.outerW = outerW;
           this._size.outerH = outerH;
-          this._size.innerW = innerW;
-          this._size.innerH = innerH;
+          this._size.innerW = innerW != null ? innerW : outerW;
+          this._size.innerH = innerH != null ? innerH : outerH;
       }
       offsetX = (this._size.outerW - this._size.innerW) / 2 + this._pos.x;
       offsetY = (this._size.outerH - this._size.innerH) / 2 + this._pos.y;
@@ -169,7 +169,8 @@
           this._pos.x = x;
           this._pos.y = y;
       }
-      this.size(this._size);
+      this.style.left = "" + this._pos.x + "px";
+      this.style.top = "" + this._pos.y + "px";
       return this;
     },
     visible: function(visible) {
