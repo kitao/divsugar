@@ -66,7 +66,8 @@
         func = _ref[name];
         div[name] = func;
       }
-      return div._initialize(id);
+      div._initialize(id);
+      return div;
     },
     createSprite: function(id) {
       var div, func, name, _ref;
@@ -77,7 +78,8 @@
         func = _ref[name];
         div[name] = func;
       }
-      return div._initialize(id);
+      div._initialize(id);
+      return div;
     },
     createTask: function(id) {
       if (id == null) id = null;
@@ -97,153 +99,128 @@
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0% 0%';
       this.style[DivSugar._perspectiveOrigin] = '0% 0% 0%';
-      this._size = {};
-      this._pos = {};
-      this._imageClip = {};
-      this.perspective(1000);
-      this.size(100, 100, 100, 100);
-      this.position(0, 0);
-      this.visible(true);
-      this.clip(true);
-      this.opacity(1);
-      this.image('#0000ff');
-      this.imageClip(0, 0, 1, 1);
+      this.setPerspective(1000);
+      this.setSize(100, 100);
+      this.setPosition(0, 0);
+      this.setVisible(true);
+      this.setClip(true);
+      this.setOpacity(1);
+      this.setImage('#0000ff');
+      return this.setImageClip(0, 0, 1, 1);
+    },
+    getPerspective: function() {
+      return this._perspective;
+    },
+    setPerspective: function(perspective) {
+      this._perspective = perspective;
+      this.style[DivSugar._perspective] = "" + perspective + "px";
       return this;
     },
-    perspective: function(perspective) {
-      if (arguments.length === 0) {
-        return this._perspective;
-      } else {
-        this._perspective = perspective;
-        this.style[DivSugar._perspective] = "" + perspective + "px";
-        return this;
-      }
+    getWidth: function() {
+      return this._width;
     },
-    size: function(outerW, outerH, innerW, innerH) {
-      var offsetX, offsetY, scaleX, scaleY, size, _ref, _ref2;
-      switch (arguments.length) {
-        case 0:
-          return {
-            outerW: this._size.outerW,
-            outerH: this._size.outerH,
-            innerW: this._size.innerW,
-            innerH: this._size.innerH
-          };
-        case 1:
-          size = outerW;
-          this._size.outerW = size.outerW;
-          this._size.outerH = size.outerH;
-          this._size.innerW = (_ref = size.innerW) != null ? _ref : size.outerW;
-          this._size.innerH = (_ref2 = size.innerH) != null ? _ref2 : size.outerH;
-          break;
-        default:
-          this._size.outerW = outerW;
-          this._size.outerH = outerH;
-          this._size.innerW = innerW != null ? innerW : outerW;
-          this._size.innerH = innerH != null ? innerH : outerH;
-      }
-      offsetX = (this._size.outerW - this._size.innerW) / 2 + this._pos.x;
-      offsetY = (this._size.outerH - this._size.innerH) / 2 + this._pos.y;
-      scaleX = this._size.outerW / this._size.innerW;
-      scaleY = this._size.outerH / this._size.innerH;
-      this.style.width = "" + this._size.innerW + "px";
-      this.style.height = "" + this._size.innerH + "px";
-      this.style[DivSugar._transform] = "translate(" + offsetX + "px, " + offsetY + "px) scale(" + scaleX + ", " + scaleY + ")";
-      this.imageClip(this._imageClip);
+    getHeight: function() {
+      return this._height;
+    },
+    getViewWidth: function() {
+      return this._viewWidth;
+    },
+    getViewHeight: function() {
+      return this._viewHeight;
+    },
+    setSize: function(width, height, viewWidth, viewHeight) {
+      var sx, sy, x, y;
+      if (viewWidth == null) viewWidth = width;
+      if (viewHeight == null) viewHeight = height;
+      this._width = width;
+      this._height = height;
+      this._viewWidth = viewWidth;
+      this._viewHeight = viewHeight;
+      x = (width - viewWidth) / 2;
+      y = (height - viewHeight) / 2;
+      sx = width / viewWidth;
+      sy = height / viewHeight;
+      this.style.width = "" + viewWidth + "px";
+      this.style.height = "" + viewHeight + "px";
+      this.style[DivSugar._transform] = "translate(" + x + "px, " + y + "px) scale(" + sx + ", " + sy + ")";
+      this.setImageClip(this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2);
       return this;
     },
-    position: function(x, y) {
-      var pos;
-      switch (arguments.length) {
-        case 0:
-          return {
-            x: this._pos.x,
-            y: this._pos.y
-          };
-        case 1:
-          pos = x;
-          this._pos.x = pos.x;
-          this._pos.y = pos.y;
-          break;
-        default:
-          this._pos.x = x;
-          this._pos.y = y;
-      }
-      this.style.left = "" + this._pos.x + "px";
-      this.style.top = "" + this._pos.y + "px";
+    getPositionX: function() {
+      return this._positionX;
+    },
+    getPositionY: function() {
+      return this._positionY;
+    },
+    setPosition: function(x, y) {
+      this._positionX = x;
+      this._positionY = y;
+      this.style.left = "" + x + "px";
+      this.style.top = "" + y + "px";
       return this;
     },
-    visible: function(visible) {
-      if (arguments.length === 0) {
-        return this._visible;
-      } else {
-        this._visible = visible;
-        this.style.visibility = visible ? "visible" : "hidden";
-        return this;
-      }
+    getVisible: function() {
+      return this._visible;
     },
-    clip: function(clip) {
-      if (arguments.length === 0) {
-        return this._clip;
-      } else {
-        this._clip = clip;
-        this.style.overflow = clip ? "hidden" : "visible";
-        return this;
-      }
+    setVisible: function(visible) {
+      this._visible = visible;
+      this.style.visibility = visible ? "visible" : "hidden";
+      return this;
     },
-    opacity: function(opacity) {
-      if (arguments.length === 0) {
-        return this._opacity;
-      } else {
-        this._opacity = this.style.opacity = opacity;
-        return this;
-      }
+    getClip: function() {
+      return this._clip;
     },
-    image: function(imageUrlOrColor) {
-      if (arguments.length === 0) {
-        return this._image;
-      } else {
-        this._image = imageUrlOrColor;
-        if (!(imageUrlOrColor != null)) {
-          this.style.backgroundColor = null;
-          this.style.backgroundImage = null;
-        } else if (imageUrlOrColor.charAt(0) === '#') {
-          this.style.backgroundColor = imageUrlOrColor;
-          this.style.backgroundImage = null;
-        } else {
-          this.style.backgroundColor = null;
-          this.style.backgroundImage = "url(" + imageUrlOrColor + ")";
-        }
-        return this;
-      }
+    setClip: function(clip) {
+      this._clip = clip;
+      this.style.overflow = clip ? "hidden" : "visible";
+      return this;
     },
-    imageClip: function(u1, v1, u2, v2) {
-      var h, imageClip, w, x, y;
-      switch (arguments.length) {
-        case 0:
-          return {
-            u1: this._imageClip.u1,
-            v1: this._imageClip.v1,
-            u2: this._imageClip.u2,
-            v2: this._imageClip.v2
-          };
-        case 1:
-          imageClip = u1;
-          this._imageClip.u1 = imageClip.u1;
-          this._imageClip.v1 = imageClip.v1;
-          this._imageClip.u2 = imageClip.u2;
-          this._imageClip.v2 = imageClip.v2;
-          break;
-        default:
-          this._imageClip.u1 = u1;
-          this._imageClip.v1 = v1;
-          this._imageClip.u2 = u2;
-          this._imageClip.v2 = v2;
+    getOpacity: function() {
+      return this._opacity;
+    },
+    setOpacity: function(opacity) {
+      this._opacity = this.style.opacity = opacity;
+      return this;
+    },
+    getImage: function() {
+      return this._image;
+    },
+    setImage: function(image) {
+      this._image = image;
+      if (!(image != null)) {
+        this.style.backgroundColor = null;
+        this.style.backgroundImage = null;
+      } else if (image.charAt(0) === '#') {
+        this.style.backgroundColor = image;
+        this.style.backgroundImage = null;
+      } else {
+        this.style.backgroundColor = null;
+        this.style.backgroundImage = "url(" + image + ")";
       }
-      w = this._size.w / (this._imageClip.u2 - this._imageClip.u1);
-      h = this._size.h / (this._imageClip.v2 - this._imageClip.v1);
-      x = -this._imageClip.u1 * w;
-      y = -this._imageClip.v1 * h;
+      return this;
+    },
+    getImageClipU1: function() {
+      return this._imageClipU1;
+    },
+    getImageClipV1: function() {
+      return this._imageClipV1;
+    },
+    getImageClipU2: function() {
+      return this._imageClipU2;
+    },
+    getImageClipV2: function() {
+      return this._imageClipV2;
+    },
+    setImageClip: function(u1, v1, u2, v2) {
+      var h, w, x, y;
+      this._imageClipU1 = u1;
+      this._imageClipV1 = v1;
+      this._imageClipU2 = u2;
+      this._imageClipV2 = v2;
+      w = this._viewWidth / (u2 - u1);
+      h = this._viewHeight / (v2 - v1);
+      x = -u1 * w;
+      y = -v1 * h;
       this.style.backgroundPosition = "" + x + "px " + y + "px";
       this.style.backgroundSize = "" + w + "px " + h + "px";
       return this;
@@ -258,122 +235,143 @@
       this.style.position = 'absolute';
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0% 0%';
-      this._size = {};
-      this._pos = {};
-      this._rot = {};
-      this._scl = {};
-      this._imageClip = {};
-      this._ps = this._rs = this._ss = '';
-      this.size(100, 100);
-      this.position(0, 0, 0);
-      this.rotation(0, 0, 0);
-      this.scale(1, 1, 1);
-      this.visible(true);
-      this.clip(false);
-      this.opacity(1);
-      this.image(null);
-      this.imageClip(0, 0, 1, 1);
+      this.setSize(100, 100);
+      this.setPosition(0, 0, 0);
+      this.setRotation(0, 0, 0);
+      this.setScale(1, 1, 1);
+      this.setVisible(true);
+      this.setClip(false);
+      this.setOpacity(1);
+      this.setImage(null);
+      return this.setImageClip(0, 0, 1, 1);
+    },
+    getWidth: function() {
+      return this._width;
+    },
+    getHeight: function() {
+      return this._height;
+    },
+    setSize: function(width, height) {
+      this._width = width;
+      this._height = height;
+      this.style.width = "" + width + "px";
+      this.style.height = "" + height + "px";
+      this.setImageClip(this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2);
       return this;
     },
-    size: function(w, h) {
-      var size;
-      switch (arguments.length) {
-        case 0:
-          return {
-            w: this._size.w,
-            h: this._size.h
-          };
-        case 1:
-          size = w;
-          this._size.w = size.w;
-          this._size.h = size.h;
-          break;
-        default:
-          this._size.w = w;
-          this._size.h = h;
-      }
-      this.style.width = "" + this._size.w + "px";
-      this.style.height = "" + this._size.h + "px";
-      this.imageClip(this._imageClip);
-      return this;
+    getPositionX: function() {
+      return this._positionX;
     },
-    position: function(x, y, z) {
-      var pos;
-      switch (arguments.length) {
-        case 0:
-          return {
-            x: this._pos.x,
-            y: this._pos.y,
-            z: this._pos.z
-          };
-        case 1:
-          pos = x;
-          this._pos.x = pos.x;
-          this._pos.y = pos.y;
-          this._pos.z = pos.z;
-          break;
-        default:
-          this._pos.x = x;
-          this._pos.y = y;
-          this._pos.z = z;
+    getPositionY: function() {
+      return this._positionY;
+    },
+    getPositionZ: function() {
+      return this._positionZ;
+    },
+    getPosicion: function(position) {
+      position.x = this._positionX;
+      position.y = this._positionY;
+      return position.z = this._positionZ;
+    },
+    setPosition: function(x, y, z) {
+      var position;
+      if (arguments.length === 1) {
+        position = x;
+        this._positionX = position.x;
+        this._positionY = position.y;
+        this._positionZ = position.z;
+      } else {
+        this._positionX = x;
+        this._positionY = y;
+        this._positionZ = z;
       }
-      this._ps = "translate3d(" + this._pos.x + "px, " + this._pos.y + "px, " + this._pos.z + "px) ";
+      this._ps = "translate3d(" + this._positionX + "px, " + this._positionY + "px, " + this._positionZ + "px) ";
       this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
       return this;
     },
-    rotation: function(x, y, z) {
-      var rot;
-      switch (arguments.length) {
-        case 0:
-          return {
-            x: this._rot.x,
-            y: this._rot.y,
-            z: this._rot.z
-          };
-        case 1:
-          rot = x;
-          this._rot.x = rot.x;
-          this._rot.y = rot.y;
-          this._rot.z = rot.z;
-          break;
-        default:
-          this._rot.x = x;
-          this._rot.y = y;
-          this._rot.z = z;
+    getRotationX: function() {
+      return this._rotationX;
+    },
+    getRotationY: function() {
+      return this._rotationY;
+    },
+    getRotationZ: function() {
+      return this._rotationZ;
+    },
+    getRotation: function(rotation) {
+      rotation.x = this._rotationX;
+      rotation.y = this._rotationY;
+      return rotation.z = this._rotationZ;
+    },
+    setRotation: function(x, y, z) {
+      var rotation;
+      if (arguments.length === 1) {
+        rotation = x;
+        this._rotationX = rotation.x;
+        this._rotationY = rotation.y;
+        this._rotationZ = rotation.z;
+      } else {
+        this._rotationX = x;
+        this._rotationY = y;
+        this._rotationZ = z;
       }
-      this._rs = "rotateX(" + this._rot.x + "deg) rotateY(" + this._rot.y + "deg) rotateZ(" + this._rot.z + "deg) ";
+      this._rs = "rotateX(" + this._rotationX + "deg) rotateY(" + this._rotationY + "deg) rotateZ(" + this._rotationZ + "deg) ";
       this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
       return this;
     },
-    scale: function(x, y, z) {
-      var scl;
-      switch (arguments.length) {
-        case 0:
-          return {
-            x: this._scl.x,
-            y: this._scl.y,
-            z: this._scl.z
-          };
-        case 1:
-          scl = x;
-          this._scl.x = scl.x;
-          this._scl.y = scl.y;
-          this._scl.z = scl.z;
-          break;
-        default:
-          this._scl.x = x;
-          this._scl.y = y;
-          this._scl.z = z;
+    getScaleX: function() {
+      return this._scaleX;
+    },
+    getScaleY: function() {
+      return this._scaleX;
+    },
+    getScaleZ: function() {
+      return this._scaleX;
+    },
+    getScale: function(scale) {
+      scale.x = this._scaleX;
+      scale.y = this._scaleY;
+      return scale.z = this._scaleZ;
+    },
+    setScale: function(x, y, z) {
+      var scale;
+      if (arguments === 1) {
+        scale = x;
+        this._scaleX = scale.x;
+        this._scaleY = scale.y;
+        this._scaleZ = scale.z;
+      } else {
+        this._scaleX = x;
+        this._scaleY = y;
+        this._scaleZ = z;
       }
-      this._ss = "scale3d(" + this._scl.x + ", " + this._scl.y + ", " + this._scl.z + ")";
+      this._ss = "scale3d(" + this._scaleX + ", " + this._scaleY + ", " + this._scaleZ + ")";
       this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
       return this;
     },
-    visible: DivSugar._Scene.visible,
-    clip: DivSugar._Scene.clip,
-    opacity: DivSugar._Scene.opacity,
-    image: DivSugar._Scene.image,
-    imageClip: DivSugar._Scene.imageClip
+    getVisible: DivSugar._Scene.getVisible,
+    setVisible: DivSugar._Scene.setVisible,
+    getClip: DivSugar._Scene.getClip,
+    setClip: DivSugar._Scene.setClip,
+    getOpacity: DivSugar._Scene.getOpacity,
+    setOpacity: DivSugar._Scene.setOpacity,
+    getImage: DivSugar._Scene.getImage,
+    setImage: DivSugar._Scene.setImage,
+    getImageClip: DivSugar._Scene.getImageClip,
+    setImageClip: function(u1, v1, u2, v2) {
+      var h, w, x, y;
+      this._imageClipU1 = u1;
+      this._imageClipV1 = v1;
+      this._imageClipU2 = u2;
+      this._imageClipV2 = v2;
+      w = this._width / (u2 - u1);
+      h = this._height / (v2 - v1);
+      x = -u1 * w;
+      y = -v1 * h;
+      this.style.backgroundPosition = "" + x + "px " + y + "px";
+      this.style.backgroundSize = "" + w + "px " + h + "px";
+      return this;
+    }
   };
 
   DivSugar._Task = (function() {
