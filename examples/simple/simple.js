@@ -10,7 +10,7 @@ window.onload = function() {
   scene.appendChild(sprite);
 
   var task = DivSugar.createTask('hoge');
-  var vec = new DivSugar.Vector();
+  var vec = DivSugar.createVector();
 
   task.onUpdate = function(frameCount) {
     var width = sprite.getWidth();

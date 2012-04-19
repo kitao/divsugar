@@ -1,5 +1,6 @@
 (function() {
   var DivSugar,
+    __slice = Array.prototype.slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   DivSugar = {
@@ -57,33 +58,47 @@
       };
       return this._requestAnimationFrame(updateTasks);
     },
-    createScene: function(id) {
-      var div, func, name, _ref;
-      if (id == null) id = null;
+    createScene: function() {
+      var args, div, func, name, _ref;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       div = document.createElement('div');
       _ref = this._Scene;
       for (name in _ref) {
         func = _ref[name];
         div[name] = func;
       }
-      div._initialize(id);
+      div._initialize.apply(div, args);
       return div;
     },
-    createSprite: function(id) {
-      var div, func, name, _ref;
-      if (id == null) id = null;
+    createSprite: function() {
+      var args, div, func, name, _ref;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       div = document.createElement('div');
       _ref = this._Sprite;
       for (name in _ref) {
         func = _ref[name];
         div[name] = func;
       }
-      div._initialize(id);
+      div._initialize.apply(div, args);
       return div;
     },
-    createTask: function(id) {
-      if (id == null) id = null;
-      return new this._Task;
+    createTask: function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      return (function(func, args, ctor) {
+        ctor.prototype = func.prototype;
+        var child = new ctor, result = func.apply(child, args);
+        return typeof result === "object" ? result : child;
+      })(this._Task, args, function() {});
+    },
+    createVector: function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      return (function(func, args, ctor) {
+        ctor.prototype = func.prototype;
+        var child = new ctor, result = func.apply(child, args);
+        return typeof result === "object" ? result : child;
+      })(this._Vector, args, function() {});
     }
   };
 
@@ -91,7 +106,7 @@
 
   DivSugar._Scene = {
     _initialize: function(id) {
-      this.id = id;
+      this.id = id != null ? id : null;
       this.style.margin = '0px';
       this.style.padding = '0px';
       this.style.position = 'relative';
@@ -229,7 +244,7 @@
 
   DivSugar._Sprite = {
     _initialize: function(id) {
-      this.id = id;
+      this.id = id != null ? id : null;
       this.style.margin = '0px';
       this.style.padding = '0px';
       this.style.position = 'absolute';
@@ -434,9 +449,9 @@
 
   DivSugar.rootTask = DivSugar.createTask('root');
 
-  DivSugar.Vector = (function() {
+  DivSugar._Vector = (function() {
 
-    function Vector(x, y, z) {
+    function _Vector(x, y, z) {
       var vec;
       switch (arguments.length) {
         case 0:
@@ -455,7 +470,7 @@
       }
     }
 
-    Vector.prototype.set = function(x, y, z) {
+    _Vector.prototype.set = function(x, y, z) {
       var vec;
       if (arguments.length === 1) {
         vec = x;
@@ -470,35 +485,35 @@
       return this;
     };
 
-    Vector.prototype.negate = function() {
+    _Vector.prototype.negate = function() {
       this.x = -this.x;
       this.y = -this.y;
       this.z = -this.z;
       return this;
     };
 
-    Vector.prototype.add = function(vec) {
+    _Vector.prototype.add = function(vec) {
       this.x += vec.x;
       this.y += vec.y;
       this.z += vec.z;
       return this;
     };
 
-    Vector.prototype.subtract = function(vec) {
+    _Vector.prototype.subtract = function(vec) {
       this.x -= vec.x;
       this.y -= vec.y;
       this.z -= vec.z;
       return this;
     };
 
-    Vector.prototype.multiply = function(s) {
+    _Vector.prototype.multiply = function(s) {
       this.x *= s;
       this.y *= s;
       this.z *= s;
       return this;
     };
 
-    Vector.prototype.divide = function(s) {
+    _Vector.prototype.divide = function(s) {
       var rs;
       rs = 1 / s;
       this.x *= rs;
@@ -507,31 +522,31 @@
       return this;
     };
 
-    Vector.prototype.norm = function() {
+    _Vector.prototype.norm = function() {
       return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
     };
 
-    Vector.prototype.squaredNorm = function() {
+    _Vector.prototype.squaredNorm = function() {
       return this.x * this.x + this.y * this.y + this.z * this.z;
     };
 
-    Vector.prototype.distance = function(vec) {
+    _Vector.prototype.distance = function(vec) {
       return DivSugar.Vector._tmpVec.set(this).subtract(vec).norm();
     };
 
-    Vector.prototype.squaredDistance = function(vec) {
+    _Vector.prototype.squaredDistance = function(vec) {
       return DivSugar.Vector._tmpVec.set(this).subtract(vec).squaredNorm();
     };
 
-    Vector.prototype.dot = function(vec) {
+    _Vector.prototype.dot = function(vec) {
       return this.x * vec.x + this.y * vec.y + this.z * vec.z;
     };
 
-    Vector.prototype.cross = function(vec) {
+    _Vector.prototype.cross = function(vec) {
       return this.set(this.y * vec.z - this.z * vec.y, this.z * vec.x - this.x * vec.z, this.x * vec.y - this.y * vec.x);
     };
 
-    Vector.prototype.normalize = function() {
+    _Vector.prototype.normalize = function() {
       var norm;
       norm = this.norm;
       if (norm < DivSugar.EPSILON) {
@@ -541,28 +556,28 @@
       }
     };
 
-    Vector.prototype.rotateX = function(deg) {
+    _Vector.prototype.rotateX = function(deg) {
       var cos, sin;
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       return this.set(this.x, this.y * cos - this.z * sin, this.z * cos + this.y * sin);
     };
 
-    Vector.prototype.rotateY = function(deg) {
+    _Vector.prototype.rotateY = function(deg) {
       var cos, sin;
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       return this.set(this.x * cos + this.z * sin, this.y, this.z * cos - this.x * sin);
     };
 
-    Vector.prototype.rotateZ = function(deg) {
+    _Vector.prototype.rotateZ = function(deg) {
       var cos, sin;
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       return this.set(this.x * cos - this.y * sin, this.y * cos + this.x * sin, this.z);
     };
 
-    Vector.prototype.lerp = function(to, ratio) {
+    _Vector.prototype.lerp = function(to, ratio) {
       var vec;
       if (ratio > 1 - DivSugar.EPSILON) {
         return this.set(to);
@@ -573,26 +588,26 @@
       }
     };
 
-    Vector.prototype.equals = function(vec) {
+    _Vector.prototype.equals = function(vec) {
       return this.x === vec.x && this.y === vec.y && this.z === vec.z;
     };
 
-    Vector.prototype.toString = function() {
+    _Vector.prototype.toString = function() {
       return "(" + this.x + ", " + this.y + ", " + this.z + ")";
     };
 
-    return Vector;
+    return _Vector;
 
   })();
 
-  DivSugar.Vector.ZERO = new DivSugar.Vector(0, 0, 0);
+  DivSugar._Vector.ZERO = DivSugar.createVector(0, 0, 0);
 
-  DivSugar.Vector.X_UNIT = new DivSugar.Vector(1, 0, 0);
+  DivSugar._Vector.X_UNIT = DivSugar.createVector(1, 0, 0);
 
-  DivSugar.Vector.Y_UNIT = new DivSugar.Vector(0, 1, 0);
+  DivSugar._Vector.Y_UNIT = DivSugar.createVector(0, 1, 0);
 
-  DivSugar.Vector.Z_UNIT = new DivSugar.Vector(0, 0, 1);
+  DivSugar._Vector.Z_UNIT = DivSugar.createVector(0, 0, 1);
 
-  DivSugar.Vector._tmpVec = new DivSugar.Vector;
+  DivSugar._Vector._tmpVec = DivSugar.createVector;
 
 }).call(this);

@@ -1,4 +1,4 @@
-class DivSugar.Vector
+class DivSugar._Vector
   constructor: (x, y, z) ->
     switch arguments.length
       when 0
@@ -113,9 +113,9 @@ class DivSugar.Vector
   toString: ->
     "(#{@x}, #{@y}, #{@z})"
 
-DivSugar.Vector.ZERO = new DivSugar.Vector 0, 0, 0
-DivSugar.Vector.X_UNIT = new DivSugar.Vector 1, 0, 0
-DivSugar.Vector.Y_UNIT = new DivSugar.Vector 0, 1, 0
-DivSugar.Vector.Z_UNIT = new DivSugar.Vector 0, 0, 1
+DivSugar._Vector.ZERO = DivSugar.createVector 0, 0, 0
+DivSugar._Vector.X_UNIT = DivSugar.createVector 1, 0, 0
+DivSugar._Vector.Y_UNIT = DivSugar.createVector 0, 1, 0
+DivSugar._Vector.Z_UNIT = DivSugar.createVector 0, 0, 1
 
-DivSugar.Vector._tmpVec = new DivSugar.Vector
+DivSugar._Vector._tmpVec = DivSugar.createVector

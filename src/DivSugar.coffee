@@ -52,26 +52,28 @@ DivSugar =
 
     @_requestAnimationFrame updateTasks
 
-  createScene: (id = null) ->
+  createScene: (args...) ->
     div = document.createElement 'div'
 
     for name, func of @_Scene
       div[name] = func
 
-    div._initialize id
+    div._initialize args...
 
     return div
 
-  createSprite: (id = null) ->
+  createSprite: (args...) ->
     div = document.createElement 'div'
 
     for name, func of @_Sprite
       div[name] = func
 
-    div._initialize id
+    div._initialize args...
 
     return div
 
-  createTask: (id = null) -> new @_Task
+  createTask: (args...) -> new @_Task args...
+
+  createVector: (args...) -> new @_Vector args...
 
 (window.DivSugar = DivSugar)._initialize()

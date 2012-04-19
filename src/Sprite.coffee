@@ -1,5 +1,5 @@
 DivSugar._Sprite =
-  _initialize: (@id) ->
+  _initialize: (@id = null) ->
     @style.margin = '0px'
     @style.padding = '0px'
     @style.position = 'absolute'
