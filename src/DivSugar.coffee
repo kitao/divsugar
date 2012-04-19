@@ -60,6 +60,8 @@ DivSugar =
 
     div._initialize id
 
+    return div
+
   createSprite: (id = null) ->
     div = document.createElement 'div'
 
@@ -68,7 +70,8 @@ DivSugar =
 
     div._initialize id
 
-  createTask: (id = null) ->
-    return new @_Task
+    return div
+
+  createTask: (id = null) -> new @_Task
 
 (window.DivSugar = DivSugar)._initialize()
