@@ -1,25 +1,27 @@
 window.onload = function() {
   "use strict";
 
-  var sceneHolder = document.getElementById('sceneHolder');
-
   var scene = DivSugar.createScene();
-  scene.size(600, 400).image('#0000ff').position(100, 100);
-  sceneHolder.appendChild(scene);
+  scene.setSize(600, 400).setPosition(200, 30).setImage('#0000ff');
+  document.body.appendChild(scene);
 
   var sprite = DivSugar.createSprite();
-  sprite.size(100, 100).image("http://placekitten.com/200/200").position(130, 30, 0).opacity(0.5).rotation(0, 0, 30);
+  sprite.setSize(100, 100).setImage('http://placekitten.com/200/200').setPosition(130, 30, 0).setRotation(0, 0, 30).setOpacity(0.5);
   scene.appendChild(sprite);
 
   var task = DivSugar.createTask('hoge');
+  var vec = new DivSugar.Vector();
 
-  task.onUpdate = function() {
-    var size = sprite.size();
-    var rot = sprite.rotation();
+  task.onUpdate = function(frameCount) {
+    var width = sprite.getWidth();
+    var height = sprite.getHeight();
 
-    sprite.size(size.w + 1, size.h + 1).rotation(rot.x, rot.y + 1, rot.z);
+    sprite.getRotation(vec);
+    vec.y += 1;
 
-    if (size.w > 400) {
+    sprite.setSize(width + 1, height + 1).setRotation(vec);
+
+    if (width > 400) {
       this.destroy();
     }
   };

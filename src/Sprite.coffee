@@ -6,107 +6,127 @@ DivSugar._Sprite =
     @style[DivSugar._transformStyle] = 'preserve-3d'
     @style[DivSugar._transformOrigin] = '0% 0% 0%'
 
-    @_size = {}
-    @_pos = {}
-    @_rot = {}
-    @_scl = {}
-    @_imageClip = {}
-    @_ps = @_rs = @_ss = ''
+    @setSize 100, 100
+    @setPosition 0, 0, 0
+    @setRotation 0, 0, 0
+    @setScale 1, 1, 1
+    @setVisible true
+    @setClip false
+    @setOpacity 1
+    @setImage null
+    @setImageClip 0, 0, 1, 1
 
-    @size 100, 100
-    @position 0, 0, 0
-    @rotation 0, 0, 0
-    @scale 1, 1, 1
-    @visible true
-    @clip false
-    @opacity 1
-    @image null
-    @imageClip 0, 0, 1, 1
+  getWidth: -> @_width
+  getHeight: -> @_height
 
+  setSize: (width, height) ->
+    @_width = width
+    @_height = height
+
+    @style.width = "#{width}px"
+    @style.height = "#{height}px"
+
+    @setImageClip @_imageClipU1, @_imageClipV1, @_imageClipU2, @_imageClipV2
     return @
 
-  size: (w, h) ->
-    switch arguments.length
-      when 0
-        return {w: @_size.w, h: @_size.h}
+  getPositionX: -> @_positionX
+  getPositionY: -> @_positionY
+  getPositionZ: -> @_positionZ
+  getPosicion: (position) ->
+    position.x = @_positionX
+    position.y = @_positionY
+    position.z = @_positionZ
 
-      when 1
-        size = w
-        @_size.w = size.w
-        @_size.h = size.h
+  setPosition: (x, y, z) ->
+    if arguments.length == 1
+      position = x
+      @_positionX = position.x
+      @_positionY = position.y
+      @_positionZ = position.z
+    else
+      @_positionX = x
+      @_positionY = y
+      @_positionZ = z
 
-      else
-        @_size.w = w
-        @_size.h = h
-
-    @style.width = "#{@_size.w}px"
-    @style.height = "#{@_size.h}px"
-
-    @imageClip @_imageClip
-    return @
-
-  position: (x, y, z) ->
-    switch arguments.length
-      when 0
-        return {x: @_pos.x, y: @_pos.y, z: @_pos.z}
-
-      when 1
-        pos = x
-        @_pos.x = pos.x
-        @_pos.y = pos.y
-        @_pos.z = pos.z
-
-      else
-        @_pos.x = x
-        @_pos.y = y
-        @_pos.z = z
-
-    @_ps = "translate3d(#{@_pos.x}px, #{@_pos.y}px, #{@_pos.z}px) "
+    @_ps = "translate3d(#{@_positionX}px, #{@_positionY}px, #{@_positionZ}px) "
     @style[DivSugar._transform] = @_ps + @_rs + @_ss
+
     return @
 
-  rotation: (x, y, z) ->
-    switch arguments.length
-      when 0
-        return {x: @_rot.x, y: @_rot.y, z: @_rot.z}
+  getRotationX: -> @_rotationX
+  getRotationY: -> @_rotationY
+  getRotationZ: -> @_rotationZ
+  getRotation: (rotation) ->
+    rotation.x = @_rotationX
+    rotation.y = @_rotationY
+    rotation.z = @_rotationZ
 
-      when 1
-        rot = x
-        @_rot.x = rot.x
-        @_rot.y = rot.y
-        @_rot.z = rot.z
+  setRotation: (x, y, z) ->
+    if arguments.length == 1
+      rotation = x
+      @_rotationX = rotation.x
+      @_rotationY = rotation.y
+      @_rotationZ = rotation.z
+    else
+      @_rotationX = x
+      @_rotationY = y
+      @_rotationZ = z
 
-      else
-        @_rot.x = x
-        @_rot.y = y
-        @_rot.z = z
-
-    @_rs = "rotateX(#{@_rot.x}deg) rotateY(#{@_rot.y}deg) rotateZ(#{@_rot.z}deg) "
+    @_rs = "rotateX(#{@_rotationX}deg) rotateY(#{@_rotationY}deg) rotateZ(#{@_rotationZ}deg) "
     @style[DivSugar._transform] = @_ps + @_rs + @_ss
+
     return @
 
-  scale: (x, y, z) ->
-    switch arguments.length
-      when 0
-        return {x: @_scl.x, y: @_scl.y, z: @_scl.z}
+  getScaleX: -> @_scaleX
+  getScaleY: -> @_scaleX
+  getScaleZ: -> @_scaleX
+  getScale: (scale) ->
+    scale.x = @_scaleX
+    scale.y = @_scaleY
+    scale.z = @_scaleZ
 
-      when 1
-        scl = x
-        @_scl.x = scl.x
-        @_scl.y = scl.y
-        @_scl.z = scl.z
+  setScale: (x, y, z) ->
+    if arguments == 1
+      scale = x
+      @_scaleX = scale.x
+      @_scaleY = scale.y
+      @_scaleZ = scale.z
+    else
+      @_scaleX = x
+      @_scaleY = y
+      @_scaleZ = z
 
-      else
-        @_scl.x = x
-        @_scl.y = y
-        @_scl.z = z
-
-    @_ss = "scale3d(#{@_scl.x}, #{@_scl.y}, #{@_scl.z})"
+    @_ss = "scale3d(#{@_scaleX}, #{@_scaleY}, #{@_scaleZ})"
     @style[DivSugar._transform] = @_ps + @_rs + @_ss
+
     return @
 
-  visible: DivSugar._Scene.visible
-  clip: DivSugar._Scene.clip
-  opacity: DivSugar._Scene.opacity
-  image: DivSugar._Scene.image
-  imageClip: DivSugar._Scene.imageClip
+  getVisible: DivSugar._Scene.getVisible
+  setVisible: DivSugar._Scene.setVisible
+
+  getClip: DivSugar._Scene.getClip
+  setClip: DivSugar._Scene.setClip
+
+  getOpacity: DivSugar._Scene.getOpacity
+  setOpacity: DivSugar._Scene.setOpacity
+
+  getImage: DivSugar._Scene.getImage
+  setImage: DivSugar._Scene.setImage
+
+  getImageClip: DivSugar._Scene.getImageClip
+
+  setImageClip: (u1, v1, u2, v2) ->
+    @_imageClipU1 = u1
+    @_imageClipV1 = v1
+    @_imageClipU2 = u2
+    @_imageClipV2 = v2
+
+    w = @_width / (u2 - u1)
+    h = @_height / (v2 - v1)
+    x = -u1 * w
+    y = -v1 * h
+
+    @style.backgroundPosition = "#{x}px #{y}px"
+    @style.backgroundSize = "#{w}px #{h}px"
+
+    return @
