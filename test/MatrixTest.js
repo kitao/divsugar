@@ -1,5 +1,9 @@
 module('Matrix');
 
+test('constants', function() {
+  deepEqual(DivSugar.Matrix.UNIT, new DivSugar.Matrix(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, DivSugar.Vector.ZERO));
+});
+
 test('constructor', function() {
   var mat1 = new DivSugar.Matrix();
   nearlyEqual(mat1.xAxis, DivSugar.Vector.ZERO);
