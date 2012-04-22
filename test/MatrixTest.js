@@ -31,13 +31,13 @@ test('set', function() {
 });
 
     /* fromQuaternion */
-    assertEquals_object(DivSugar.Matrix.UNIT, mat1.fromQuaternion(new b9.Quaternion(0.0, 0.0, 0.0, 1.0)));
+    assertEquals_object(DivSugar.Matrix.UNIT, mat1.fromQuaternion(new b9.Quaternion(0, 0, 0, 1)));
 
     /* orthonormalize */
     mat1.set(
             new DivSugar.Vector(0.1, 0.2, 0.3),
-            new DivSugar.Vector(0.0, 3.0, 3.0),
-            new DivSugar.Vector(0.0, 0.0, 0.1),
+            new DivSugar.Vector(0, 3, 3),
+            new DivSugar.Vector(0, 0, 0.1),
             DivSugar.Vector.X_UNIT);
     assertEquals_object(
             new DivSugar.Matrix(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, DivSugar.Vector.X_UNIT),
@@ -45,167 +45,167 @@ test('set', function() {
 
     /* rotateX_float */
     mat1.set(
-            new DivSugar.Vector(0.0, 0.0, -1.0),
-            new DivSugar.Vector(-1.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, 1.0, 0.0),
-            new DivSugar.Vector(100.0, 200.0, 300.0));
+            new DivSugar.Vector(0, 0, -1),
+            new DivSugar.Vector(-1, 0, 0),
+            new DivSugar.Vector(0, 1, 0),
+            new DivSugar.Vector(100, 200, 300));
     assertEquals_object(
             new DivSugar.Matrix(
-                new DivSugar.Vector(0.0, 0.0, -1.0),
-                new DivSugar.Vector(0.0, 1.0, 0.0),
-                new DivSugar.Vector(1.0, 0.0, 0.0),
-                new DivSugar.Vector(100.0, 200.0, 300.0)),
-            mat1.rotateX_float(90.0));
+                new DivSugar.Vector(0, 0, -1),
+                new DivSugar.Vector(0, 1, 0),
+                new DivSugar.Vector(1, 0, 0),
+                new DivSugar.Vector(100, 200, 300)),
+            mat1.rotateX_float(90));
 
     /* rotateY_float */
     mat1.set(
-            new DivSugar.Vector(0.0, 0.0, -1.0),
-            new DivSugar.Vector(-1.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, 1.0, 0.0),
-            new DivSugar.Vector(100.0, 200.0, 300.0));
+            new DivSugar.Vector(0, 0, -1),
+            new DivSugar.Vector(-1, 0, 0),
+            new DivSugar.Vector(0, 1, 0),
+            new DivSugar.Vector(100, 200, 300));
     assertEquals_object(
             new DivSugar.Matrix(
-                new DivSugar.Vector(0.0, -1.0, 0.0),
-                new DivSugar.Vector(-1.0, 0.0, 0.0),
-                new DivSugar.Vector(0.0, 0.0, -1.0),
-                new DivSugar.Vector(100.0, 200.0, 300.0)),
-            mat1.rotateY_float(90.0));
+                new DivSugar.Vector(0, -1, 0),
+                new DivSugar.Vector(-1, 0, 0),
+                new DivSugar.Vector(0, 0, -1),
+                new DivSugar.Vector(100, 200, 300)),
+            mat1.rotateY_float(90));
 
     /* rotateZ_float */
     mat1.set(
-            new DivSugar.Vector(0.0, 0.0, -1.0),
-            new DivSugar.Vector(-1.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, 1.0, 0.0),
-            new DivSugar.Vector(100.0, 200.0, 300.0));
+            new DivSugar.Vector(0, 0, -1),
+            new DivSugar.Vector(-1, 0, 0),
+            new DivSugar.Vector(0, 1, 0),
+            new DivSugar.Vector(100, 200, 300));
     assertEquals_object(
             new DivSugar.Matrix(
-                new DivSugar.Vector(-1.0, 0.0, 0.0),
-                new DivSugar.Vector(0.0, 0.0, 1.0),
-                new DivSugar.Vector(0.0, 1.0, 0.0),
-                new DivSugar.Vector(100.0, 200.0, 300.0)),
-            mat1.rotateZ_float(90.0));
+                new DivSugar.Vector(-1, 0, 0),
+                new DivSugar.Vector(0, 0, 1),
+                new DivSugar.Vector(0, 1, 0),
+                new DivSugar.Vector(100, 200, 300)),
+            mat1.rotateZ_float(90));
 
     /* scale */
     mat1.set(
-            new DivSugar.Vector(0.0, 0.0, -1.0),
-            new DivSugar.Vector(-1.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, 1.0, 0.0),
-            new DivSugar.Vector(100.0, 200.0, 300.0));
+            new DivSugar.Vector(0, 0, -1),
+            new DivSugar.Vector(-1, 0, 0),
+            new DivSugar.Vector(0, 1, 0),
+            new DivSugar.Vector(100, 200, 300));
     assertEquals_object(
             new DivSugar.Matrix(
-                new DivSugar.Vector(0.0, 0.0, -2.0),
-                new DivSugar.Vector(-3.0, 0.0, 0.0),
-                new DivSugar.Vector(0.0, -1.0, 0.0),
-                new DivSugar.Vector(100.0, 200.0, 300.0)),
-            mat1.scale(2.0, 3.0, -1.0));
+                new DivSugar.Vector(0, 0, -2),
+                new DivSugar.Vector(-3, 0, 0),
+                new DivSugar.Vector(0, -1, 0),
+                new DivSugar.Vector(100, 200, 300)),
+            mat1.scale(2, 3, -1));
 
     /* translate */
     mat1.set(
-            new DivSugar.Vector(0.0, 0.0, -1.0),
-            new DivSugar.Vector(-1.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, 1.0, 0.0),
-            new DivSugar.Vector(100.0, 200.0, 300.0));
+            new DivSugar.Vector(0, 0, -1),
+            new DivSugar.Vector(-1, 0, 0),
+            new DivSugar.Vector(0, 1, 0),
+            new DivSugar.Vector(100, 200, 300));
     assertEquals_object(
             new DivSugar.Matrix(
-                new DivSugar.Vector(0.0, 0.0, -1.0),
-                new DivSugar.Vector(-1.0, 0.0, 0.0),
-                new DivSugar.Vector(0.0, 1.0, 0.0),
-                new DivSugar.Vector(120.0, 230.0, 290.0)),
-            mat1.translate(10.0, -20.0, 30.0));
+                new DivSugar.Vector(0, 0, -1),
+                new DivSugar.Vector(-1, 0, 0),
+                new DivSugar.Vector(0, 1, 0),
+                new DivSugar.Vector(120, 230, 290)),
+            mat1.translate(10, -20, 30));
 
     /* slerp */
-    for (ratio = 0.0; ratio <= 1.0; ratio += 0.5) {
+    for (ratio = 0; ratio <= 1; ratio += 0.5) {
         mat1.set(DivSugar.Matrix.UNIT);
-        mat2.set(DivSugar.Matrix.UNIT).translate(2.0, 4.0, 6.0).rotateX_int(90);
-        mat3.set(DivSugar.Matrix.UNIT).translate(2.0 * ratio, 4.0 * ratio, 6.0 * ratio).rotateX_float(90.0 * ratio);
+        mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateX_int(90);
+        mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotateX_float(90 * ratio);
         assertEquals_object(mat3, mat1.slerp(mat2, ratio));
 
         mat1.set(DivSugar.Matrix.UNIT);
-        mat2.set(DivSugar.Matrix.UNIT).translate(2.0, 4.0, 6.0).rotateY_int(90);
-        mat3.set(DivSugar.Matrix.UNIT).translate(2.0 * ratio, 4.0 * ratio, 6.0 * ratio).rotateY_float(90.0 * ratio);
+        mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateY_int(90);
+        mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotateY_float(90 * ratio);
         assertEquals_object(mat3, mat1.slerp(mat2, ratio));
 
         mat1.set(DivSugar.Matrix.UNIT);
-        mat2.set(DivSugar.Matrix.UNIT).translate(2.0, 4.0, 6.0).rotateZ_int(90);
-        mat3.set(DivSugar.Matrix.UNIT).translate(2.0 * ratio, 4.0 * ratio, 6.0 * ratio).rotateZ_float(90.0 * ratio);
+        mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateZ_int(90);
+        mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotateZ_float(90 * ratio);
         assertEquals_object(mat3, mat1.slerp(mat2, ratio));
     }
 
     /* slerp_noTrans */
-    for (ratio = 0.0; ratio <= 1.0; ratio += 0.5) {
-        mat1.set(DivSugar.Matrix.UNIT).translate(1.0, 2.0, 3.0);
-        mat2.set(DivSugar.Matrix.UNIT).translate(2.0, 4.0, 6.0).rotateX_int(90);
-        mat3.set(DivSugar.Matrix.UNIT).rotateX_float(90.0 * ratio);
+    for (ratio = 0; ratio <= 1; ratio += 0.5) {
+        mat1.set(DivSugar.Matrix.UNIT).translate(1, 2, 3);
+        mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateX_int(90);
+        mat3.set(DivSugar.Matrix.UNIT).rotateX_float(90 * ratio);
         assertEquals_object(mat3, mat1.slerp_noTrans(mat2, ratio));
 
-        mat1.set(DivSugar.Matrix.UNIT).translate(1.0, 2.0, 3.0);
-        mat2.set(DivSugar.Matrix.UNIT).translate(2.0, 4.0, 6.0).rotateY_int(90);
-        mat3.set(DivSugar.Matrix.UNIT).rotateY_float(90.0 * ratio);
+        mat1.set(DivSugar.Matrix.UNIT).translate(1, 2, 3);
+        mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateY_int(90);
+        mat3.set(DivSugar.Matrix.UNIT).rotateY_float(90 * ratio);
         assertEquals_object(mat3, mat1.slerp_noTrans(mat2, ratio));
 
-        mat1.set(DivSugar.Matrix.UNIT).translate(1.0, 2.0, 3.0);
-        mat2.set(DivSugar.Matrix.UNIT).translate(2.0, 4.0, 6.0).rotateZ_int(90);
-        mat3.set(DivSugar.Matrix.UNIT).rotateZ_float(90.0 * ratio);
+        mat1.set(DivSugar.Matrix.UNIT).translate(1, 2, 3);
+        mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateZ_int(90);
+        mat3.set(DivSugar.Matrix.UNIT).rotateZ_float(90 * ratio);
         assertEquals_object(mat3, mat1.slerp_noTrans(mat2, ratio));
     }
 
     /* toLocal */
-    mat1.set(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3.0, 4.0, 5.0));
+    mat1.set(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3, 4, 5));
     mat2.set(
-            new DivSugar.Vector(0.0, 0.0, 0.5),
-            new DivSugar.Vector(2.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, -0.5, 0.0),
-            new DivSugar.Vector(1.0, 2.0, 3.0));
+            new DivSugar.Vector(0, 0, 0.5),
+            new DivSugar.Vector(2, 0, 0),
+            new DivSugar.Vector(0, -0.5, 0),
+            new DivSugar.Vector(1, 2, 3));
     assertEquals_object(
             new DivSugar.Matrix(
-                new DivSugar.Vector(0.0, 0.5, 0.0),
-                new DivSugar.Vector(0.0, 0.0, -2.0),
-                new DivSugar.Vector(2.0, 0.0, 0.0),
-                new DivSugar.Vector(4.0, 1.0, -4.0)),
+                new DivSugar.Vector(0, 0.5, 0),
+                new DivSugar.Vector(0, 0, -2),
+                new DivSugar.Vector(2, 0, 0),
+                new DivSugar.Vector(4, 1, -4)),
             mat1.toLocal(mat2));
 
     /* toGlobal */
     mat1.set(
-            new DivSugar.Vector(0.0, 0.5, 0.0),
-            new DivSugar.Vector(0.0, 0.0, -2.0),
-            new DivSugar.Vector(2.0, 0.0, 0.0),
-            new DivSugar.Vector(4.0, 1.0, -4.0));
+            new DivSugar.Vector(0, 0.5, 0),
+            new DivSugar.Vector(0, 0, -2),
+            new DivSugar.Vector(2, 0, 0),
+            new DivSugar.Vector(4, 1, -4));
     mat2.set(
-            new DivSugar.Vector(0.0, 0.0, 0.5),
-            new DivSugar.Vector(2.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, -0.5, 0.0),
-            new DivSugar.Vector(1.0, 2.0, 3.0));
+            new DivSugar.Vector(0, 0, 0.5),
+            new DivSugar.Vector(2, 0, 0),
+            new DivSugar.Vector(0, -0.5, 0),
+            new DivSugar.Vector(1, 2, 3));
     assertEquals_object(
             new DivSugar.Matrix(
-                DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3.0, 4.0, 5.0)),
+                DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3, 4, 5)),
             mat1.toGlobal(mat2));
 
     /* toLocal_noTrans */
-    mat1.set(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3.0, 4.0, 5.0));
+    mat1.set(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3, 4, 5));
     mat2.set(
-            new DivSugar.Vector(0.0, 0.0, 0.5),
-            new DivSugar.Vector(2.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, -0.5, 0.0),
-            new DivSugar.Vector(1.0, 2.0, 3.0));
+            new DivSugar.Vector(0, 0, 0.5),
+            new DivSugar.Vector(2, 0, 0),
+            new DivSugar.Vector(0, -0.5, 0),
+            new DivSugar.Vector(1, 2, 3));
     assertEquals_object(
             new DivSugar.Matrix(
-                new DivSugar.Vector(0.0, 0.5, 0.0),
-                new DivSugar.Vector(0.0, 0.0, -2.0),
-                new DivSugar.Vector(2.0, 0.0, 0.0),
-                new DivSugar.Vector(0.0, 0.0, 0.0)),
+                new DivSugar.Vector(0, 0.5, 0),
+                new DivSugar.Vector(0, 0, -2),
+                new DivSugar.Vector(2, 0, 0),
+                new DivSugar.Vector(0, 0, 0)),
             mat1.toLocal_noTrans(mat2));
 
     /* toGlobal_noTrans */
     mat1.set(
-            new DivSugar.Vector(0.0, 0.5, 0.0),
-            new DivSugar.Vector(0.0, 0.0, -2.0),
-            new DivSugar.Vector(2.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, 0.0, 0.0));
+            new DivSugar.Vector(0, 0.5, 0),
+            new DivSugar.Vector(0, 0, -2),
+            new DivSugar.Vector(2, 0, 0),
+            new DivSugar.Vector(0, 0, 0));
     mat2.set(
-            new DivSugar.Vector(0.0, 0.0, 0.5),
-            new DivSugar.Vector(2.0, 0.0, 0.0),
-            new DivSugar.Vector(0.0, -0.5, 0.0),
-            new DivSugar.Vector(1.0, 2.0, 3.0));
+            new DivSugar.Vector(0, 0, 0.5),
+            new DivSugar.Vector(2, 0, 0),
+            new DivSugar.Vector(0, -0.5, 0),
+            new DivSugar.Vector(1, 2, 3));
     assertEquals_object(
             new DivSugar.Matrix(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, DivSugar.Vector.ZERO),
             mat1.toGlobal_noTrans(mat2));
@@ -213,16 +213,16 @@ test('set', function() {
     /* lookAt */
     assertEquals_object(
             new DivSugar.Matrix(
-                new DivSugar.Vector(0.0, 1.0, 0.0),
-                new DivSugar.Vector(0.0, 0.0, 1.0),
-                new DivSugar.Vector(1.0, 0.0, 0.0),
-                new DivSugar.Vector(5.0, 2.0, -3.0)),
+                new DivSugar.Vector(0, 1, 0),
+                new DivSugar.Vector(0, 0, 1),
+                new DivSugar.Vector(1, 0, 0),
+                new DivSugar.Vector(5, 2, -3)),
             mat1.lookAt(
-                new DivSugar.Vector(5.0, 2.0, -3.0), new DivSugar.Vector(-5.0, 2.0, -3.0), new DivSugar.Vector(1.0, 0.0, 10.0)));
+                new DivSugar.Vector(5, 2, -3), new DivSugar.Vector(-5, 2, -3), new DivSugar.Vector(1, 0, 10)));
 
     /* toArray */
     array1 = [];
-    array2 = [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0];
+    array2 = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1];
 
     mat1 = new DivSugar.Matrix(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, DivSugar.Vector.X_UNIT);
     mat1.toArray(array1);
@@ -232,18 +232,18 @@ test('set', function() {
     }
 
     /* mulArray */
-    array1 = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0];
-    array2 = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 1.0];
+    array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+    array2 = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1];
     array3 = [];
 
     DivSugar.Matrix.mulArray(array1, array2, array3);
     DivSugar.Matrix.mulArray(array1, array1, array1);
 
-    array4 = [118.0, 132.0, 146.0, 160.0, 230.0, 260.0, 290.0, 320.0,
-           342.0, 388.0, 434.0, 480.0, 246.0, 292.0, 338.0, 384.0];
+    array4 = [118, 132, 146, 160, 230, 260, 290, 320,
+           342, 388, 434, 480, 246, 292, 338, 384];
 
-    array5 = [90.0, 100.0, 110.0, 120.0, 202.0, 228.0, 254.0, 280.0,
-           314.0, 356.0, 398.0, 440.0, 426.0, 484.0, 542.0, 600.0];
+    array5 = [90, 100, 110, 120, 202, 228, 254, 280,
+           314, 356, 398, 440, 426, 484, 542, 600];
 
     for (i = 0; i < 16; i++) {
         assertEquals_float(array4[i], array3[i]);

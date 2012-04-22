@@ -47,14 +47,14 @@ class DivSugar.Quaternion
 
       if k is 0
         root = Math.sqrt matXAxis.x - (matYAxis.y + matZAxis.z) + 1
-        scale = if root isnt 0.0 then 0.5 / root else root
+        scale = if root isnt 0 then 0.5 / root else root
         @set root * 0.5, (matXAxis.y + matYAxis.x) * scale, (matZAxis.x + matXAxis.z) * scale, (matYAxis.z - matZAxis.y) * scale
       else if k is 1
         root = Math.sqrt matYAxis.y - (matZAxis.z + matXAxis.x) + 1
         scale = if root isnt 0 then 0.5 / root else root
         @set (matXAxis.y + matYAxis.x) * scale, root * 0.5, (matYAxis.z + matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale
       else # k is 2
-        root = Math.sqrt matZAxis.z - (matXAxis.x + matYAxis.y) + 1.0
+        root = Math.sqrt matZAxis.z - (matXAxis.x + matYAxis.y) + 1
         scale = if root isnt 0 then 0.5 / root else root
         @set (matZAxis.x + matXAxis.z) * scale, (matYAxis.z + matZAxis.y) * scale, root * 0.5, (matXAxis.y - matYAxis.x) * scale
 
@@ -78,7 +78,7 @@ class DivSugar.Quaternion
       else
         omega = Math.acos if cosOmega > 1 else 1 : cosOmega
         sinOmega = Math.sin omega
-        scale0 = Math.sin(omega * (1.0 - ratio)) / sinOmega
+        scale0 = Math.sin(omega * (1 - ratio)) / sinOmega
         scale1 = Math.sin(omega * ratio) / sinOmega
 
         @set @x * scale0 + quat.x * scale1, @y * scale0 + quat.y * scale1, @z * scale0 + quat.z * scale1, @w * scale0 + quat.w * scale1
