@@ -33,7 +33,7 @@ test('set', function() {
   vec2.set(vec1);
   deepEqual(vec2, new DivSugar.Vector(1, 2, 3));
 
-  ok(vec1.set(vec2).set(vec2));
+  ok(vec1.set(0, 0, 0).set(vec2).set(1, 1, 1));
 });
 
 test('neg', function() {
@@ -176,7 +176,7 @@ test('toLocal', function() {
     new DivSugar.Vector(-1, 0, 0),
     new DivSugar.Vector(0, 1, 0),
     new DivSugar.Vector(100, 200, 300));
-  var vec1 = new DivSugar.Vector(1.0, 2.0, 3.0);
+  var vec1 = new DivSugar.Vector(1, 2, 3);
   vec1.toLocal(mat1);
   deepEqual(vec1, new DivSugar.Vector(297, 99, -198));
 
