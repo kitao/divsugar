@@ -116,10 +116,7 @@ class DivSugar.Vector
 
     @set(vec1).add(vec2).add(vec3).add(mat.trans)
 
-  toLocal_noTrans: (mat) ->
-    vec = DivSugar.Vector._tmpVec1
-    vec.set @dot(mat.xAxis) / mat.xAxis.sqNorm(), @dot(mat.yAxis) / mat.yAxis.sqNorm(), @dot(mat.zAxis) / mat.zAxis.sqNorm()
-    @set vec
+  toLocal_noTrans: (mat) -> @set @dot(mat.xAxis) / mat.xAxis.sqNorm(), @dot(mat.yAxis) / mat.yAxis.sqNorm(), @dot(mat.zAxis) / mat.zAxis.sqNorm()
 
   toGlobal_noTrans: (mat) ->
     vec1 = DivSugar.Vector._tmpVec1
