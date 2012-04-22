@@ -216,7 +216,7 @@ class DivSugar.Matrix
 
   #toCSSTransform:
 
-  equals: (mat) -> @xAxis.equals(mat.xAxis) and @yAxis.equals(mat.yAxis) and @zAxis.equals(mat.zAxis) and @trans.equals(mat.trans)
+  equal: (mat) -> @xAxis.equals(mat.xAxis) and @yAxis.equals(mat.yAxis) and @zAxis.equals(mat.zAxis) and @trans.equals(mat.trans)
 
   toString: -> "(#{@xAxis.toString()}, #{@yAxis.toString()}, #{@zAxis.toString()}, #{@trans.toString()})"
 

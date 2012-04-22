@@ -85,7 +85,7 @@ class DivSugar.Quaternion
 
     return @
 
-  equals: (quat) -> @x is quat.x and @y is quat.y and @z is quat.z and @w is quat.w
+  equal: (quat) -> @x is quat.x and @y is quat.y and @z is quat.z and @w is quat.w
 
   toString: -> "(#{@x}, #{@y}, #{@z}, #{@w})"
 

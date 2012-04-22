@@ -98,6 +98,8 @@ class DivSugar.Vector
       vec.set(to).mul(ratio)
       @mul(1 - ratio).add(vec)
 
+    return @
+
   toLocal: (mat) ->
     vec = DivSugar.Vector._tmpVec1
     vec.set @.sub mat.trans
@@ -130,7 +132,7 @@ class DivSugar.Vector
 
     @set(vec1).add(vec2).add(vec3)
 
-  equals: (vec) -> @x is vec.x and @y is vec.y and @z is vec.z
+  equal: (vec) -> @x is vec.x and @y is vec.y and @z is vec.z
 
   toString: -> "(#{@x}, #{@y}, #{@z})"
 
