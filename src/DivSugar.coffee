@@ -1,9 +1,10 @@
 DivSugar =
   _initialize: ->
     # initialize constants
+    @VERSION = '0.10'
     @EPSILON = 0.0001
     @DEG_TO_RAD = Math.PI / 180
-    @DEG_TO_RAD = 180 / Math.PI
+    @RAD_TO_DEG = 180 / Math.PI
 
     # initialize the root task
     @rootTask = null
@@ -73,7 +74,5 @@ DivSugar =
     return div
 
   createTask: (args...) -> new @_Task args...
-
-  createVector: (args...) -> new @_Vector args...
 
 (window.DivSugar = DivSugar)._initialize()
