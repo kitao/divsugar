@@ -32,17 +32,17 @@ DivSugar._Sprite =
   getPositionX: -> @_positionX
   getPositionY: -> @_positionY
   getPositionZ: -> @_positionZ
-  getPosicion: (position) ->
-    position.x = @_positionX
-    position.y = @_positionY
-    position.z = @_positionZ
+  getPosicion: (vec) ->
+    vec.x = @_positionX
+    vec.y = @_positionY
+    vec.z = @_positionZ
 
   setPosition: (x, y, z) ->
-    if arguments.length == 1
-      position = x
-      @_positionX = position.x
-      @_positionY = position.y
-      @_positionZ = position.z
+    if arguments.length is 1
+      vec = x
+      @_positionX = vec.x
+      @_positionY = vec.y
+      @_positionZ = vec.z
     else
       @_positionX = x
       @_positionY = y
@@ -62,7 +62,7 @@ DivSugar._Sprite =
     rotation.z = @_rotationZ
 
   setRotation: (x, y, z) ->
-    if arguments.length == 1
+    if arguments.length is 1
       rotation = x
       @_rotationX = rotation.x
       @_rotationY = rotation.y
@@ -86,7 +86,7 @@ DivSugar._Sprite =
     scale.z = @_scaleZ
 
   setScale: (x, y, z) ->
-    if arguments == 1
+    if arguments is 1
       scale = x
       @_scaleX = scale.x
       @_scaleY = scale.y

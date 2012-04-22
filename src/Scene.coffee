@@ -85,7 +85,7 @@ DivSugar._Scene =
     if not image?
       @style.backgroundColor = null
       @style.backgroundImage = null
-    else if image.charAt(0) == '#'
+    else if image.charAt(0) is '#'
       @style.backgroundColor = image
       @style.backgroundImage = null
     else
