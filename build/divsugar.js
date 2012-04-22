@@ -227,12 +227,13 @@
     Vector.prototype.lerp = function(to, ratio) {
       var vec;
       if (ratio > 1 - DivSugar.EPSILON) {
-        return this.set(to);
+        this.set(to);
       } else if (ratio >= DivSugar.EPSILON) {
         vec = DivSugar.Vector._tmpVec1;
         vec.set(to).mul(ratio);
-        return this.mul(1 - ratio).add(vec);
+        this.mul(1 - ratio).add(vec);
       }
+      return this;
     };
 
     Vector.prototype.toLocal = function(mat) {
@@ -271,7 +272,7 @@
       return this.set(vec1).add(vec2).add(vec3);
     };
 
-    Vector.prototype.equals = function(vec) {
+    Vector.prototype.equal = function(vec) {
       return this.x === vec.x && this.y === vec.y && this.z === vec.z;
     };
 
@@ -520,7 +521,7 @@
       return this;
     };
 
-    Matrix.prototype.equals = function(mat) {
+    Matrix.prototype.equal = function(mat) {
       return this.xAxis.equals(mat.xAxis) && this.yAxis.equals(mat.yAxis) && this.zAxis.equals(mat.zAxis) && this.trans.equals(mat.trans);
     };
 
@@ -639,7 +640,7 @@
       return this;
     };
 
-    Quaternion.prototype.equals = function(quat) {
+    Quaternion.prototype.equal = function(quat) {
       return this.x === quat.x && this.y === quat.y && this.z === quat.z && this.w === quat.w;
     };
 
