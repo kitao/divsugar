@@ -255,10 +255,7 @@
     };
 
     Vector.prototype.toLocal_noTrans = function(mat) {
-      var vec;
-      vec = DivSugar.Vector._tmpVec1;
-      vec.set(this.dot(mat.xAxis) / mat.xAxis.sqNorm(), this.dot(mat.yAxis) / mat.yAxis.sqNorm(), this.dot(mat.zAxis) / mat.zAxis.sqNorm());
-      return this.set(vec);
+      return this.set(this.dot(mat.xAxis) / mat.xAxis.sqNorm(), this.dot(mat.yAxis) / mat.yAxis.sqNorm(), this.dot(mat.zAxis) / mat.zAxis.sqNorm());
     };
 
     Vector.prototype.toGlobal_noTrans = function(mat) {
@@ -597,14 +594,14 @@
         k = matYAxis.y > matXAxis.x ? (matZAxis.z > matYAxis.y ? 2 : 1) : (matZAxis.z > matXAxis.x ? 2 : 0);
         if (k === 0) {
           root = Math.sqrt(matXAxis.x - (matYAxis.y + matZAxis.z) + 1);
-          scale = root !== 0.0 ? 0.5 / root : root;
+          scale = root !== 0 ? 0.5 / root : root;
           this.set(root * 0.5, (matXAxis.y + matYAxis.x) * scale, (matZAxis.x + matXAxis.z) * scale, (matYAxis.z - matZAxis.y) * scale);
         } else if (k === 1) {
           root = Math.sqrt(matYAxis.y - (matZAxis.z + matXAxis.x) + 1);
           scale = root !== 0 ? 0.5 / root : root;
           this.set((matXAxis.y + matYAxis.x) * scale, root * 0.5, (matYAxis.z + matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale);
         } else {
-          root = Math.sqrt(matZAxis.z - (matXAxis.x + matYAxis.y) + 1.0);
+          root = Math.sqrt(matZAxis.z - (matXAxis.x + matYAxis.y) + 1);
           scale = root !== 0 ? 0.5 / root : root;
           this.set((matZAxis.x + matXAxis.z) * scale, (matYAxis.z + matZAxis.y) * scale, root * 0.5, (matXAxis.y - matYAxis.x) * scale);
         }
@@ -632,7 +629,7 @@
             1: cosOmega
           });
           sinOmega = Math.sin(omega);
-          scale0 = Math.sin(omega * (1.0 - ratio)) / sinOmega;
+          scale0 = Math.sin(omega * (1 - ratio)) / sinOmega;
           scale1 = Math.sin(omega * ratio) / sinOmega;
           this.set(this.x * scale0 + quat.x * scale1, this.y * scale0 + quat.y * scale1, this.z * scale0 + quat.z * scale1, this.w * scale0 + quat.w * scale1);
         }
