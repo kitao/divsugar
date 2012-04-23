@@ -155,76 +155,55 @@ test('slerp_noTrans', function() {
   ok(mat1.slerp_noTrans(mat2, 0).slerp_noTrans(mat2, 0.5).slerp_noTrans(mat2, 1).slerp_noTrans(mat2, 0));
 });
 
-    /* toLocal */
-    mat1.set(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3, 4, 5));
-    mat2.set(
-            new DivSugar.Vector(0, 0, 0.5),
-            new DivSugar.Vector(2, 0, 0),
-            new DivSugar.Vector(0, -0.5, 0),
-            new DivSugar.Vector(1, 2, 3));
-    assertEquals_object(
-            new DivSugar.Matrix(
-                new DivSugar.Vector(0, 0.5, 0),
-                new DivSugar.Vector(0, 0, -2),
-                new DivSugar.Vector(2, 0, 0),
-                new DivSugar.Vector(4, 1, -4)),
-            mat1.toLocal(mat2));
+test('toLocal', function() {
+  var mat1 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 5);
+  var mat2 = new DivSugar.Matrix(0, 0, 0.5, 2, 0, 0, 0, -0.5, 0, 1, 2, 3);
+  var mat3 = new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 4, 1, -4);
+  mat1.toLocal(mat2);
+  deepEqual(mat1, mat3);
 
-    /* toGlobal */
-    mat1.set(
-            new DivSugar.Vector(0, 0.5, 0),
-            new DivSugar.Vector(0, 0, -2),
-            new DivSugar.Vector(2, 0, 0),
-            new DivSugar.Vector(4, 1, -4));
-    mat2.set(
-            new DivSugar.Vector(0, 0, 0.5),
-            new DivSugar.Vector(2, 0, 0),
-            new DivSugar.Vector(0, -0.5, 0),
-            new DivSugar.Vector(1, 2, 3));
-    assertEquals_object(
-            new DivSugar.Matrix(
-                DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3, 4, 5)),
-            mat1.toGlobal(mat2));
+  ok(mat1.toLocal(mat2).toLocal(mat2));
+});
 
-    /* toLocal_noTrans */
-    mat1.set(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, new DivSugar.Vector(3, 4, 5));
-    mat2.set(
-            new DivSugar.Vector(0, 0, 0.5),
-            new DivSugar.Vector(2, 0, 0),
-            new DivSugar.Vector(0, -0.5, 0),
-            new DivSugar.Vector(1, 2, 3));
-    assertEquals_object(
-            new DivSugar.Matrix(
-                new DivSugar.Vector(0, 0.5, 0),
-                new DivSugar.Vector(0, 0, -2),
-                new DivSugar.Vector(2, 0, 0),
-                new DivSugar.Vector(0, 0, 0)),
-            mat1.toLocal_noTrans(mat2));
+test('toGlobal', function() {
+  var mat1 = new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 4, 1, -4);
+  var mat2 = new DivSugar.Matrix(0, 0, 0.5, 2, 0, 0, 0, -0.5, 0, 1, 2, 3);
+  var mat3 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 5);
+  mat1.toGlobal(mat2);
+  deepEqual(mat1, mat3);
 
-    /* toGlobal_noTrans */
-    mat1.set(
-            new DivSugar.Vector(0, 0.5, 0),
-            new DivSugar.Vector(0, 0, -2),
-            new DivSugar.Vector(2, 0, 0),
-            new DivSugar.Vector(0, 0, 0));
-    mat2.set(
-            new DivSugar.Vector(0, 0, 0.5),
-            new DivSugar.Vector(2, 0, 0),
-            new DivSugar.Vector(0, -0.5, 0),
-            new DivSugar.Vector(1, 2, 3));
-    assertEquals_object(
-            new DivSugar.Matrix(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, DivSugar.Vector.ZERO),
-            mat1.toGlobal_noTrans(mat2));
+  ok(mat1.toGlobal(mat2).toGlobal(mat2));
+});
 
-    /* lookAt */
-    assertEquals_object(
-            new DivSugar.Matrix(
-                new DivSugar.Vector(0, 1, 0),
-                new DivSugar.Vector(0, 0, 1),
-                new DivSugar.Vector(1, 0, 0),
-                new DivSugar.Vector(5, 2, -3)),
-            mat1.lookAt(
-                new DivSugar.Vector(5, 2, -3), new DivSugar.Vector(-5, 2, -3), new DivSugar.Vector(1, 0, 10)));
+test('toLocal_noTrans', function() {
+  var mat1 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 5);
+  var mat2 = new DivSugar.Matrix(0, 0, 0.5, 2, 0, 0, 0, -0.5, 0, 1, 2, 3);
+  var mat3 = new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0);
+  mat1.toLocal_noTrans(mat2);
+  deepEqual(mat1, mat3);
+
+  ok(mat1.toLocal_noTrans(mat2).toLocal_noTrans(mat2));
+});
+
+test('toGlobal_noTrans', function() {
+  var mat1 = new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0);
+  var mat2 = new DivSugar.Matrix(0, 0, 0.5, 2, 0, 0, 0, -0.5, 0, 1, 2, 3);
+  var mat3 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0);
+  mat1.toGlobal_noTrans(mat2);
+  deepEqual(mat1, mat3);
+
+  ok(mat1.toGlobal_noTrans(mat2).toGlobal_noTrans(mat2));
+});
+
+test('lookAt', function() {
+  var mat1 = new DivSugar.Matrix();
+  var mat2 = new DivSugar.Matrix(0, 1, 0, 0, 0, 1, 1, 0, 0, 5, 2, -3);
+  mat1.lookAt(new DivSugar.Vector(5, 2, -3), new DivSugar.Vector(-5, 2, -3), new DivSugar.Vector(1, 0, 10));
+  deepEqual(mat1, mat2);
+
+  ok(mat1.lookAt(DivSugar.Vector.ZERO, DivSugar.Vector.Z_UNIT, DivSugar.Vector.Y_UNIT)
+    .lookAt(DivSugar.Vector.ZERO, DivSugar.Vector.Z_UNIT, DivSugar.Vector.Y_UNIT));
+});
 
 test('equal', function() {
   var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
