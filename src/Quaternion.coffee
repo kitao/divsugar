@@ -45,25 +45,26 @@ class DivSugar.Quaternion
     else
       k = if matYAxis.y > matXAxis.x then (if matZAxis.z > matYAxis.y then 2 else 1) else (if matZAxis.z > matXAxis.x then 2 else 0)
 
-      if k is 0
-        root = Math.sqrt matXAxis.x - (matYAxis.y + matZAxis.z) + 1
-        scale = if root isnt 0 then 0.5 / root else root
-        @set root * 0.5, (matXAxis.y + matYAxis.x) * scale, (matZAxis.x + matXAxis.z) * scale, (matYAxis.z - matZAxis.y) * scale
-      else if k is 1
-        root = Math.sqrt matYAxis.y - (matZAxis.z + matXAxis.x) + 1
-        scale = if root isnt 0 then 0.5 / root else root
-        @set (matXAxis.y + matYAxis.x) * scale, root * 0.5, (matYAxis.z + matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale
-      else # k is 2
-        root = Math.sqrt matZAxis.z - (matXAxis.x + matYAxis.y) + 1
-        scale = if root isnt 0 then 0.5 / root else root
-        @set (matZAxis.x + matXAxis.z) * scale, (matYAxis.z + matZAxis.y) * scale, root * 0.5, (matXAxis.y - matYAxis.x) * scale
+      switch k
+        when 0
+          root = Math.sqrt matXAxis.x - (matYAxis.y + matZAxis.z) + 1
+          scale = if root isnt 0 then 0.5 / root else root
+          @set root * 0.5, (matXAxis.y + matYAxis.x) * scale, (matZAxis.x + matXAxis.z) * scale, (matYAxis.z - matZAxis.y) * scale
+        when 1
+          root = Math.sqrt matYAxis.y - (matZAxis.z + matXAxis.x) + 1
+          scale = if root isnt 0 then 0.5 / root else root
+          @set (matXAxis.y + matYAxis.x) * scale, root * 0.5, (matYAxis.z + matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale
+        else # 2
+          root = Math.sqrt matZAxis.z - (matXAxis.x + matYAxis.y) + 1
+          scale = if root isnt 0 then 0.5 / root else root
+          @set (matZAxis.x + matXAxis.z) * scale, (matYAxis.z + matZAxis.y) * scale, root * 0.5, (matXAxis.y - matYAxis.x) * scale
 
     return @
 
   slerp: (to, ratio) ->
     if ratio > 1 - DivSugar.EPSILON
       @set to
-    else if  ratio >= DivSugar.EPSILON
+    else if ratio >= DivSugar.EPSILON
       quat = DivSugar.Quaternion._tmpQuat1
       cosOmega = @x * to.x + @y * to.y + @z * to.z + @w * to.w
 
@@ -76,7 +77,7 @@ class DivSugar.Quaternion
       if cosOmega >= 1
         @set to
       else
-        omega = Math.acos if cosOmega > 1 else 1 : cosOmega
+        omega = Math.acos if cosOmega > 1 then 1 else cosOmega
         sinOmega = Math.sin omega
         scale0 = Math.sin(omega * (1 - ratio)) / sinOmega
         scale1 = Math.sin(omega * ratio) / sinOmega
