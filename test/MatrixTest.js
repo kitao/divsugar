@@ -6,22 +6,22 @@ test('constants', function() {
 
 test('constructor', function() {
   var mat1 = new DivSugar.Matrix();
-  nearlyEqual(mat1.xAxis, DivSugar.Vector.ZERO);
-  nearlyEqual(mat1.yAxis, DivSugar.Vector.ZERO);
-  nearlyEqual(mat1.zAxis, DivSugar.Vector.ZERO);
-  nearlyEqual(mat1.trans, DivSugar.Vector.ZERO);
+  deepEqual(mat1.xAxis, DivSugar.Vector.ZERO);
+  deepEqual(mat1.yAxis, DivSugar.Vector.ZERO);
+  deepEqual(mat1.zAxis, DivSugar.Vector.ZERO);
+  deepEqual(mat1.trans, DivSugar.Vector.ZERO);
 
   var mat2 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-  nearlyEqual(mat2.xAxis, new DivSugar.Vector(1, 2, 3));
-  nearlyEqual(mat2.yAxis, new DivSugar.Vector(4, 5, 6));
-  nearlyEqual(mat2.zAxis, new DivSugar.Vector(7, 8, 9));
-  nearlyEqual(mat2.trans, new DivSugar.Vector(10, 11, 12));
+  deepEqual(mat2.xAxis, new DivSugar.Vector(1, 2, 3));
+  deepEqual(mat2.yAxis, new DivSugar.Vector(4, 5, 6));
+  deepEqual(mat2.zAxis, new DivSugar.Vector(7, 8, 9));
+  deepEqual(mat2.trans, new DivSugar.Vector(10, 11, 12));
 
   var mat3 = new DivSugar.Matrix(mat2);
-  nearlyEqual(mat3.xAxis, new DivSugar.Vector(1, 2, 3));
-  nearlyEqual(mat3.yAxis, new DivSugar.Vector(4, 5, 6));
-  nearlyEqual(mat3.zAxis, new DivSugar.Vector(7, 8, 9));
-  nearlyEqual(mat3.trans, new DivSugar.Vector(10, 11, 12));
+  deepEqual(mat3.xAxis, new DivSugar.Vector(1, 2, 3));
+  deepEqual(mat3.yAxis, new DivSugar.Vector(4, 5, 6));
+  deepEqual(mat3.zAxis, new DivSugar.Vector(7, 8, 9));
+  deepEqual(mat3.trans, new DivSugar.Vector(10, 11, 12));
 });
 
 test('set', function() {
@@ -30,7 +30,7 @@ test('set', function() {
   deepEqual(mat1, new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 
   var mat2 = new DivSugar.Matrix();
-  mat2.set(mat1).set(mat1);
+  mat2.set(mat1);
   deepEqual(mat2, new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 
   ok(mat1.set(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12).set(mat2).set(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
@@ -85,7 +85,7 @@ test('scale', function() {
   var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
   var mat2 = new DivSugar.Matrix(0, 0, -2, -3, 0, 0, 0, -1, 0, 100, 200, 300);
   mat1.scale(2, 3, -1);
-  nearlyEqual(mat1, mat2);
+  deepEqual(mat1, mat2);
 
   ok(mat1.scale(1, 1, 1).scale(1, 1, 1));
 });
@@ -94,7 +94,7 @@ test('translate', function() {
   var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
   var mat2 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 120, 230, 290);
   mat1.translate(10, -20, 30);
-  nearlyEqual(mat1, mat2);
+  deepEqual(mat1, mat2);
 
   ok(mat1.translate(0, 0, 0).translate(0, 0, 0));
 });
@@ -230,4 +230,9 @@ test('equal', function() {
 test('toString', function() {
   var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
   strictEqual(mat1.toString(), '((1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12))');
+});
+
+test('toCSSTransform', function() {
+  var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+  strictEqual(mat1.toCSSTransform(), 'matrix3d(1, 2, 3, 0, 4, 5, 6, 0, 7, 8, 9, 0, 10, 11, 12, 1)');
 });
