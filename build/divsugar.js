@@ -297,8 +297,7 @@
 
   DivSugar.Matrix = (function() {
 
-    function Matrix(xAxis, yAxis, zAxis, trans) {
-      var mat;
+    function Matrix(mat) {
       switch (arguments.length) {
         case 0:
           this.xAxis = new DivSugar.Vector;
@@ -307,33 +306,30 @@
           this.trans = new DivSugar.Vector;
           break;
         case 1:
-          mat = xAxis;
           this.xAxis = new DivSugar.Vector(mat.xAxis);
           this.yAxis = new DivSugar.Vector(mat.yAxis);
           this.zAxis = new DivSugar.Vector(mat.zAxis);
           this.trans = new DivSugar.Vector(mat.trans);
           break;
         default:
-          this.xAxis = new DivSugar.Vector(xAxis);
-          this.yAxis = new DivSugar.Vector(yAxis);
-          this.zAxis = new DivSugar.Vector(zAxis);
-          this.trans = new DivSugar.Vector(trans);
+          this.xAxis = new DivSugar.Vector(arguments[0], arguments[1], arguments[2]);
+          this.yAxis = new DivSugar.Vector(arguments[3], arguments[4], arguments[5]);
+          this.zAxis = new DivSugar.Vector(arguments[6], arguments[7], arguments[8]);
+          this.trans = new DivSugar.Vector(arguments[9], arguments[10], arguments[11]);
       }
     }
 
-    Matrix.prototype.set = function(xAxis, yAxis, zAxis, trans) {
-      var mat;
+    Matrix.prototype.set = function(mat) {
       if (arguments.length === 1) {
-        mat = xAxis;
         this.xAxis.set(mat.xAxis);
         this.yAxis.set(mat.yAxis);
         this.zAxis.set(mat.zAxis);
         this.trans.set(mat.trans);
       } else {
-        this.xAxis.set(xAxis);
-        this.yAxis.set(yAxis);
-        this.zAxis.set(zAxis);
-        this.trans.set(trans);
+        this.xAxis.set(arguments[0], arguments[1], arguments[2]);
+        this.yAxis.set(arguments[3], arguments[4], arguments[5]);
+        this.zAxis.set(arguments[6], arguments[7], arguments[8]);
+        this.trans.set(arguments[9], arguments[10], arguments[11]);
       }
       return this;
     };
@@ -356,10 +352,7 @@
       yy2 = quatY * y2;
       yz2 = quatY * z2;
       zz2 = quatZ * z2;
-      this.xAxis.set(1 - (yy2 + zz2), xy2 + wz2, xz2 - wy2);
-      this.yAxis.set(xy2 - wz2, 1 - (xx2 + zz2), yz2 + wx2);
-      this.zAxis.set(xz2 + wy2, yz2 - wx2, 1 - (xx2 + yy2));
-      this.trans.set(DivSugar.Vector.ZERO);
+      this.set(1 - (yy2 + zz2), xy2 + wz2, xz2 - wy2, xy2 - wz2, 1 - (xx2 + zz2), yz2 + wx2, xz2 + wy2, yz2 - wx2, 1 - (xx2 + yy2), 0, 0, 0);
       return this;
     };
 
@@ -371,7 +364,10 @@
       vec3.set(this.zAxis).normalize();
       vec1.set(this.yAxis).cross(this.zAxis).normalize();
       vec2.set(vec3).cross(vec1);
-      return this.set(vec1, vec2, vec3, this.trans);
+      this.xAxis.set(vec1);
+      this.yAxis.set(vec2);
+      this.zAxis.set(vec3);
+      return this;
     };
 
     Matrix.prototype.rotateX = function(deg) {
@@ -379,10 +375,7 @@
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       mat = DivSugar.Matrix._tmpMat1;
-      mat.xAxis.set(DivSugar.Vector.X_UNIT);
-      mat.yAxis.set(0, cos, sin);
-      mat.zAxis.set(0, -sin, cos);
-      mat.trans.set(DivSugar.Vector.ZERO);
+      mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0);
       mat.toGlobal(this);
       return this.set(mat);
     };
@@ -392,10 +385,7 @@
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       mat = DivSugar.Matrix._tmpMat1;
-      mat.xAxis.set(cos, 0, -sin);
-      mat.yAxis.set(DivSugar.Vector.Y_UNIT);
-      mat.zAxis.set(sin, 0, cos);
-      mat.trans.set(DivSugar.Vector.ZERO);
+      mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0);
       mat.toGlobal(this);
       return this.set(mat);
     };
@@ -405,10 +395,7 @@
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       mat = DivSugar.Matrix._tmpMat1;
-      mat.xAxis.set(cos, sin, 0);
-      mat.yAxis.set(-sin, cos, 0);
-      mat.zAxis.set(DivSugar.Vector.Z_UNIT);
-      mat.trans.set(DivSugar.Vector.ZERO);
+      mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0);
       mat.toGlobal(this);
       return this.set(mat);
     };
@@ -425,9 +412,9 @@
       vec1 = DivSugar.Matrix._tmpVec1;
       vec2 = DivSugar.Matrix._tmpVec2;
       vec3 = DivSugar.Matrix._tmpVec3;
-      vec1.set(this.xAxis.mul(offsetX));
-      vec2.set(this.yAxis.mul(offsetY));
-      vec3.set(this.zAxis.mul(offsetZ));
+      vec1.set(this.xAxis).mul(offsetX);
+      vec2.set(this.yAxis).mul(offsetY);
+      vec3.set(this.zAxis).mul(offsetZ);
       this.trans.add(vec1).add(vec2).add(vec3);
       return this;
     };
@@ -452,9 +439,7 @@
     Matrix.prototype.slerp_noTrans = function(to, ratio) {
       var quat1, quat2;
       if (ratio > 1 - DivSugar.EPSILON) {
-        this.xAxis.set(to.xAxis);
-        this.yAxis.set(to.yAxis);
-        this.zAxis.set(to.zAxis);
+        this.set(to);
         this.trans.set(DivSugar.Vector.ZERO);
       } else if (ratio >= DivSugar.EPSILON) {
         quat1 = DivSugar.Matrix._tmpQuat1;
@@ -475,10 +460,7 @@
       rsqYA = 1 / mat.yAxis.sqNorm();
       rsqZA = 1 / mat.zAxis.sqNorm();
       vec.set(this.trans).sub(mat.trans);
-      this.xAxis.set(this.xAxis.dot(mat.xAxis) * rsqXA, this.xAxis.dot(mat.yAxis) * rsqYA, this.xAxis.dot(mat.zAxis) * rsqZA);
-      this.yAxis.set(this.yAxis.dot(mat.xAxis) * rsqXA, this.yAxis.dot(mat.yAxis) * rsqYA, this.yAxis.dot(mat.zAxis) * rsqZA);
-      this.zAxis.set(this.zAxis.dot(mat.xAxis) * rsqXA, this.zAxis.dot(mat.yAxis) * rsqYA, this.zAxis.dot(mat.zAxis) * rsqZA);
-      this.trans.set(vec.dot(mat.xAxis) * rsqXA, vec.dot(mat.yAxis) * rsqYA, vec.dot(mat.zAxis) * rsqZA);
+      this.set(this.xAxis.dot(mat.xAxis) * rsqXA, this.xAxis.dot(mat.yAxis) * rsqYA, this.xAxis.dot(mat.zAxis) * rsqZA, this.yAxis.dot(mat.xAxis) * rsqXA, this.yAxis.dot(mat.yAxis) * rsqYA, this.yAxis.dot(mat.zAxis) * rsqZA, this.zAxis.dot(mat.xAxis) * rsqXA, this.zAxis.dot(mat.yAxis) * rsqYA, this.zAxis.dot(mat.zAxis) * rsqZA, vec.dot(mat.xAxis) * rsqXA, vec.dot(mat.yAxis) * rsqYA, vec.dot(mat.zAxis) * rsqZA);
       return this;
     };
 
@@ -495,10 +477,7 @@
       rsqXA = 1 / mat.xAxis.sqNorm();
       rsqYA = 1 / mat.yAxis.sqNorm();
       rsqZA = 1 / mat.zAxis.sqNorm();
-      this.xAxis.set(this.xAxis.dot(mat.xAxis) * rsqXA, this.xAxis.dot(mat.yAxis) * rsqYA, this.xAxis.dot(mat.zAxis) * rsqZA);
-      this.yAxis.set(this.yAxis.dot(mat.xAxis) * rsqXA, this.yAxis.dot(mat.yAxis) * rsqYA, this.yAxis.dot(mat.zAxis) * rsqZA);
-      this.zAxis.set(this.zAxis.dot(mat.xAxis) * rsqXA, this.zAxis.dot(mat.yAxis) * rsqYA, this.zAxis.dot(mat.zAxis) * rsqZA);
-      this.trans.set(DivSugar.Vector.ZERO);
+      this.set(this.xAxis.dot(mat.xAxis) * rsqXA, this.xAxis.dot(mat.yAxis) * rsqYA, this.xAxis.dot(mat.zAxis) * rsqZA, this.yAxis.dot(mat.xAxis) * rsqXA, this.yAxis.dot(mat.yAxis) * rsqYA, this.yAxis.dot(mat.zAxis) * rsqZA, this.zAxis.dot(mat.xAxis) * rsqXA, this.zAxis.dot(mat.yAxis) * rsqYA, this.zAxis.dot(mat.zAxis) * rsqZA, 0, 0, 0);
       return this;
     };
 
@@ -519,7 +498,7 @@
     };
 
     Matrix.prototype.equal = function(mat) {
-      return this.xAxis.equals(mat.xAxis) && this.yAxis.equals(mat.yAxis) && this.zAxis.equals(mat.zAxis) && this.trans.equals(mat.trans);
+      return this.xAxis.equal(mat.xAxis) && this.yAxis.equal(mat.yAxis) && this.zAxis.equal(mat.zAxis) && this.trans.equal(mat.trans);
     };
 
     Matrix.prototype.toString = function() {
@@ -530,7 +509,7 @@
 
   })();
 
-  DivSugar.Matrix.UNIT = new DivSugar.Matrix(DivSugar.Vector.X_UNIT, DivSugar.Vector.Y_UNIT, DivSugar.Vector.Z_UNIT, DivSugar.Vector.ZERO);
+  DivSugar.Matrix.UNIT = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0);
 
   DivSugar.Matrix._tmpVec1 = new DivSugar.Vector;
 
@@ -592,18 +571,21 @@
         this.set((matYAxis.z - matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale, (matXAxis.y - matYAxis.x) * scale, root * 0.5);
       } else {
         k = matYAxis.y > matXAxis.x ? (matZAxis.z > matYAxis.y ? 2 : 1) : (matZAxis.z > matXAxis.x ? 2 : 0);
-        if (k === 0) {
-          root = Math.sqrt(matXAxis.x - (matYAxis.y + matZAxis.z) + 1);
-          scale = root !== 0 ? 0.5 / root : root;
-          this.set(root * 0.5, (matXAxis.y + matYAxis.x) * scale, (matZAxis.x + matXAxis.z) * scale, (matYAxis.z - matZAxis.y) * scale);
-        } else if (k === 1) {
-          root = Math.sqrt(matYAxis.y - (matZAxis.z + matXAxis.x) + 1);
-          scale = root !== 0 ? 0.5 / root : root;
-          this.set((matXAxis.y + matYAxis.x) * scale, root * 0.5, (matYAxis.z + matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale);
-        } else {
-          root = Math.sqrt(matZAxis.z - (matXAxis.x + matYAxis.y) + 1);
-          scale = root !== 0 ? 0.5 / root : root;
-          this.set((matZAxis.x + matXAxis.z) * scale, (matYAxis.z + matZAxis.y) * scale, root * 0.5, (matXAxis.y - matYAxis.x) * scale);
+        switch (k) {
+          case 0:
+            root = Math.sqrt(matXAxis.x - (matYAxis.y + matZAxis.z) + 1);
+            scale = root !== 0 ? 0.5 / root : root;
+            this.set(root * 0.5, (matXAxis.y + matYAxis.x) * scale, (matZAxis.x + matXAxis.z) * scale, (matYAxis.z - matZAxis.y) * scale);
+            break;
+          case 1:
+            root = Math.sqrt(matYAxis.y - (matZAxis.z + matXAxis.x) + 1);
+            scale = root !== 0 ? 0.5 / root : root;
+            this.set((matXAxis.y + matYAxis.x) * scale, root * 0.5, (matYAxis.z + matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale);
+            break;
+          default:
+            root = Math.sqrt(matZAxis.z - (matXAxis.x + matYAxis.y) + 1);
+            scale = root !== 0 ? 0.5 / root : root;
+            this.set((matZAxis.x + matXAxis.z) * scale, (matYAxis.z + matZAxis.y) * scale, root * 0.5, (matXAxis.y - matYAxis.x) * scale);
         }
       }
       return this;
@@ -625,9 +607,7 @@
         if (cosOmega >= 1) {
           this.set(to);
         } else {
-          omega = Math.acos(cosOmega > 1 ? void 0 : {
-            1: cosOmega
-          });
+          omega = Math.acos(cosOmega > 1 ? 1 : cosOmega);
           sinOmega = Math.sin(omega);
           scale0 = Math.sin(omega * (1 - ratio)) / sinOmega;
           scale1 = Math.sin(omega * ratio) / sinOmega;
