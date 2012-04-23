@@ -505,6 +505,10 @@
       return "(" + (this.xAxis.toString()) + ", " + (this.yAxis.toString()) + ", " + (this.zAxis.toString()) + ", " + (this.trans.toString()) + ")";
     };
 
+    Matrix.prototype.toCSSTransform = function() {
+      return 'matrix3d(' + ("" + this.xAxis.x + ", " + this.xAxis.y + ", " + this.xAxis.z + ", 0, ") + ("" + this.yAxis.x + ", " + this.yAxis.y + ", " + this.yAxis.z + ", 0, ") + ("" + this.zAxis.x + ", " + this.zAxis.y + ", " + this.zAxis.z + ", 0, ") + ("" + this.trans.x + ", " + this.trans.y + ", " + this.trans.z + ", 1)");
+    };
+
     return Matrix;
 
   })();
