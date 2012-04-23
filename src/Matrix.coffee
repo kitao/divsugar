@@ -205,11 +205,16 @@ class DivSugar.Matrix
     @trans.set from
     return @
 
-  #toCSSTransform:
-
   equal: (mat) -> @xAxis.equal(mat.xAxis) and @yAxis.equal(mat.yAxis) and @zAxis.equal(mat.zAxis) and @trans.equal(mat.trans)
 
   toString: -> "(#{@xAxis.toString()}, #{@yAxis.toString()}, #{@zAxis.toString()}, #{@trans.toString()})"
+
+  toCSSTransform: ->
+    'matrix3d(' +
+      "#{@xAxis.x}, #{@xAxis.y}, #{@xAxis.z}, 0, " +
+      "#{@yAxis.x}, #{@yAxis.y}, #{@yAxis.z}, 0, " +
+      "#{@zAxis.x}, #{@zAxis.y}, #{@zAxis.z}, 0, " +
+      "#{@trans.x}, #{@trans.y}, #{@trans.z}, 1)"
 
 DivSugar.Matrix.UNIT = new DivSugar.Matrix 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0
 
