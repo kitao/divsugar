@@ -6,9 +6,9 @@ test('constants', function() {
 
 test('constructor', function() {
   var mat1 = new DivSugar.Matrix();
-  deepEqual(mat1.xAxis, DivSugar.Vector.ZERO);
-  deepEqual(mat1.yAxis, DivSugar.Vector.ZERO);
-  deepEqual(mat1.zAxis, DivSugar.Vector.ZERO);
+  deepEqual(mat1.xAxis, DivSugar.Vector.X_UNIT);
+  deepEqual(mat1.yAxis, DivSugar.Vector.Y_UNIT);
+  deepEqual(mat1.zAxis, DivSugar.Vector.Z_UNIT);
   deepEqual(mat1.trans, DivSugar.Vector.ZERO);
 
   var mat2 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
