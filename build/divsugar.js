@@ -289,21 +289,21 @@
 
   DivSugar.Vector.Z_UNIT = new DivSugar.Vector(0, 0, 1);
 
-  DivSugar.Vector._tmpVec1 = new DivSugar.Vector;
+  DivSugar.Vector._tmpVec1 = new DivSugar.Vector();
 
-  DivSugar.Vector._tmpVec2 = new DivSugar.Vector;
+  DivSugar.Vector._tmpVec2 = new DivSugar.Vector();
 
-  DivSugar.Vector._tmpVec3 = new DivSugar.Vector;
+  DivSugar.Vector._tmpVec3 = new DivSugar.Vector();
 
   DivSugar.Matrix = (function() {
 
     function Matrix(mat) {
       switch (arguments.length) {
         case 0:
-          this.xAxis = new DivSugar.Vector;
-          this.yAxis = new DivSugar.Vector;
-          this.zAxis = new DivSugar.Vector;
-          this.trans = new DivSugar.Vector;
+          this.xAxis = new DivSugar.Vector(DivSugar.Vector.X_UNIT);
+          this.yAxis = new DivSugar.Vector(DivSugar.Vector.Y_UNIT);
+          this.zAxis = new DivSugar.Vector(DivSugar.Vector.Z_UNIT);
+          this.trans = new DivSugar.Vector(DivSugar.Vector.ZERO);
           break;
         case 1:
           this.xAxis = new DivSugar.Vector(mat.xAxis);
@@ -375,8 +375,7 @@
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       mat = DivSugar.Matrix._tmpMat1;
-      mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0);
-      mat.toGlobal(this);
+      mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal(this);
       return this.set(mat);
     };
 
@@ -385,8 +384,7 @@
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       mat = DivSugar.Matrix._tmpMat1;
-      mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0);
-      mat.toGlobal(this);
+      mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal(this);
       return this.set(mat);
     };
 
@@ -395,8 +393,7 @@
       sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
       cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
       mat = DivSugar.Matrix._tmpMat1;
-      mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0);
-      mat.toGlobal(this);
+      mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal(this);
       return this.set(mat);
     };
 
@@ -515,13 +512,13 @@
 
   DivSugar.Matrix.UNIT = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0);
 
-  DivSugar.Matrix._tmpVec1 = new DivSugar.Vector;
+  DivSugar.Matrix._tmpVec1 = new DivSugar.Vector();
 
-  DivSugar.Matrix._tmpVec2 = new DivSugar.Vector;
+  DivSugar.Matrix._tmpVec2 = new DivSugar.Vector();
 
-  DivSugar.Matrix._tmpVec3 = new DivSugar.Vector;
+  DivSugar.Matrix._tmpVec3 = new DivSugar.Vector();
 
-  DivSugar.Matrix._tmpMat1 = new DivSugar.Matrix;
+  DivSugar.Matrix._tmpMat1 = new DivSugar.Matrix();
 
   DivSugar.Quaternion = (function() {
 
@@ -633,11 +630,11 @@
 
   })();
 
-  DivSugar.Quaternion._tmpQuat1 = new DivSugar.Quaternion;
+  DivSugar.Quaternion._tmpQuat1 = new DivSugar.Quaternion();
 
-  DivSugar.Matrix._tmpQuat1 = new DivSugar.Quaternion;
+  DivSugar.Matrix._tmpQuat1 = new DivSugar.Quaternion();
 
-  DivSugar.Matrix._tmpQuat2 = new DivSugar.Quaternion;
+  DivSugar.Matrix._tmpQuat2 = new DivSugar.Quaternion();
 
   DivSugar._Scene = {
     _initialize: function(id) {
@@ -785,10 +782,9 @@
       this.style.position = 'absolute';
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0% 0%';
+      this._transform = new DivSugar.Matrix();
       this.setSize(100, 100);
       this.setPosition(0, 0, 0);
-      this.setRotation(0, 0, 0);
-      this.setScale(1, 1, 1);
       this.setVisible(true);
       this.setClip(false);
       this.setOpacity(1);
@@ -810,93 +806,38 @@
       return this;
     },
     getPositionX: function() {
-      return this._positionX;
+      return this._transform.trans.x;
     },
     getPositionY: function() {
-      return this._positionY;
+      return this._transform.trans.y;
     },
     getPositionZ: function() {
-      return this._positionZ;
+      return this._transform.trans.z;
     },
-    getPosicion: function(vec) {
-      vec.x = this._positionX;
-      vec.y = this._positionY;
-      return vec.z = this._positionZ;
+    getPosition: function(vec) {
+      vec.x = this._transform.trans.x;
+      vec.y = this._transform.trans.y;
+      return vec.z = this._transform.trans.z;
     },
     setPosition: function(x, y, z) {
       var vec;
       if (arguments.length === 1) {
         vec = x;
-        this._positionX = vec.x;
-        this._positionY = vec.y;
-        this._positionZ = vec.z;
+        this._transform.trans.set(vec);
       } else {
-        this._positionX = x;
-        this._positionY = y;
-        this._positionZ = z;
+        this._transform.trans.x = x;
+        this._transform.trans.y = y;
+        this._transform.trans.z = z;
       }
-      this._ps = "translate3d(" + this._positionX + "px, " + this._positionY + "px, " + this._positionZ + "px) ";
-      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
+      this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
     },
-    getRotationX: function() {
-      return this._rotationX;
+    getTransform: function(mat) {
+      return mat.set(this._transform);
     },
-    getRotationY: function() {
-      return this._rotationY;
-    },
-    getRotationZ: function() {
-      return this._rotationZ;
-    },
-    getRotation: function(rotation) {
-      rotation.x = this._rotationX;
-      rotation.y = this._rotationY;
-      return rotation.z = this._rotationZ;
-    },
-    setRotation: function(x, y, z) {
-      var rotation;
-      if (arguments.length === 1) {
-        rotation = x;
-        this._rotationX = rotation.x;
-        this._rotationY = rotation.y;
-        this._rotationZ = rotation.z;
-      } else {
-        this._rotationX = x;
-        this._rotationY = y;
-        this._rotationZ = z;
-      }
-      this._rs = "rotateX(" + this._rotationX + "deg) rotateY(" + this._rotationY + "deg) rotateZ(" + this._rotationZ + "deg) ";
-      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
-      return this;
-    },
-    getScaleX: function() {
-      return this._scaleX;
-    },
-    getScaleY: function() {
-      return this._scaleX;
-    },
-    getScaleZ: function() {
-      return this._scaleX;
-    },
-    getScale: function(scale) {
-      scale.x = this._scaleX;
-      scale.y = this._scaleY;
-      return scale.z = this._scaleZ;
-    },
-    setScale: function(x, y, z) {
-      var scale;
-      if (arguments === 1) {
-        scale = x;
-        this._scaleX = scale.x;
-        this._scaleY = scale.y;
-        this._scaleZ = scale.z;
-      } else {
-        this._scaleX = x;
-        this._scaleY = y;
-        this._scaleZ = z;
-      }
-      this._ss = "scale3d(" + this._scaleX + ", " + this._scaleY + ", " + this._scaleZ + ")";
-      this.style[DivSugar._transform] = this._ps + this._rs + this._ss;
+    setTransform: function(mat) {
+      this._transform.set(mat);
+      this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
     },
     getVisible: DivSugar._Scene.getVisible,
@@ -920,6 +861,31 @@
       y = -v1 * h;
       this.style.backgroundPosition = "" + x + "px " + y + "px";
       this.style.backgroundSize = "" + w + "px " + h + "px";
+      return this;
+    },
+    rotateX: function(deg) {
+      this._transform.rotateX(deg);
+      this.style[DivSugar._transform] = this._transform.toCSSTransform();
+      return this;
+    },
+    rotateY: function(deg) {
+      this._transform.rotateY(deg);
+      this.style[DivSugar._transform] = this._transform.toCSSTransform();
+      return this;
+    },
+    rotateZ: function(deg) {
+      this._transform.rotateZ(deg);
+      this.style[DivSugar._transform] = this._transform.toCSSTransform();
+      return this;
+    },
+    scale: function(scaleX, scaleY, scaleZ) {
+      this._transform.scale(scaleX, scaleY, scaleZ);
+      this.style[DivSugar._transform] = this._transform.toCSSTransform();
+      return this;
+    },
+    translate: function(offsetX, offsetY, offsetZ) {
+      this._transform.translate(offsetX, offsetY, offsetZ);
+      this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
     }
   };
