@@ -90,7 +90,7 @@ class DivSugar.Quaternion
 
   toString: -> "(#{@x}, #{@y}, #{@z}, #{@w})"
 
-DivSugar.Quaternion._tmpQuat1 = new DivSugar.Quaternion
+DivSugar.Quaternion._tmpQuat1 = new DivSugar.Quaternion()
 
-DivSugar.Matrix._tmpQuat1 = new DivSugar.Quaternion
-DivSugar.Matrix._tmpQuat2 = new DivSugar.Quaternion
+DivSugar.Matrix._tmpQuat1 = new DivSugar.Quaternion()
+DivSugar.Matrix._tmpQuat2 = new DivSugar.Quaternion()
