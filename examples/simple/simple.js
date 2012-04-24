@@ -6,7 +6,7 @@ window.onload = function() {
   document.body.appendChild(scene);
 
   var sprite = DivSugar.createSprite();
-  sprite.setSize(100, 100).setImage('http://placekitten.com/200/200').setPosition(130, 30, 0).setRotation(0, 0, 30).setOpacity(0.5);
+  sprite.setSize(100, 100).setImage('http://placekitten.com/200/200').setPosition(130, 30, 0).setOpacity(0.5).rotateZ(30);
   scene.appendChild(sprite);
 
   var task = DivSugar.createTask('hoge');
@@ -16,10 +16,7 @@ window.onload = function() {
     var width = sprite.getWidth();
     var height = sprite.getHeight();
 
-    sprite.getRotation(vec);
-    vec.y += 1;
-
-    sprite.setSize(width + 1, height + 1).setRotation(vec);
+    sprite.setSize(width + 1, height + 1).rotateY(1);
 
     if (width > 400) {
       this.destroy();
