@@ -5,11 +5,10 @@ DivSugar._Sprite =
     @style.position = 'absolute'
     @style[DivSugar._transformStyle] = 'preserve-3d'
     @style[DivSugar._transformOrigin] = '0% 0% 0%'
+    @_transform = new DivSugar.Matrix()
 
     @setSize 100, 100
     @setPosition 0, 0, 0
-    @setRotation 0, 0, 0
-    @setScale 1, 1, 1
     @setVisible true
     @setClip false
     @setOpacity 1
@@ -29,76 +28,32 @@ DivSugar._Sprite =
     @setImageClip @_imageClipU1, @_imageClipV1, @_imageClipU2, @_imageClipV2
     return @
 
-  getPositionX: -> @_positionX
-  getPositionY: -> @_positionY
-  getPositionZ: -> @_positionZ
-  getPosicion: (vec) ->
-    vec.x = @_positionX
-    vec.y = @_positionY
-    vec.z = @_positionZ
+  getPositionX: -> @_transform.trans.x
+  getPositionY: -> @_transform.trans.y
+  getPositionZ: -> @_transform.trans.z
+  getPosition: (vec) ->
+    vec.x = @_transform.trans.x
+    vec.y = @_transform.trans.y
+    vec.z = @_transform.trans.z
 
   setPosition: (x, y, z) ->
     if arguments.length is 1
       vec = x
-      @_positionX = vec.x
-      @_positionY = vec.y
-      @_positionZ = vec.z
+      @_transform.trans.set vec
     else
-      @_positionX = x
-      @_positionY = y
-      @_positionZ = z
+      @_transform.trans.x = x
+      @_transform.trans.y = y
+      @_transform.trans.z = z
 
-    @_ps = "translate3d(#{@_positionX}px, #{@_positionY}px, #{@_positionZ}px) "
-    @style[DivSugar._transform] = @_ps + @_rs + @_ss
+    @style[DivSugar._transform] = @_transform.toCSSTransform()
 
     return @
 
-  getRotationX: -> @_rotationX
-  getRotationY: -> @_rotationY
-  getRotationZ: -> @_rotationZ
-  getRotation: (rotation) ->
-    rotation.x = @_rotationX
-    rotation.y = @_rotationY
-    rotation.z = @_rotationZ
+  getTransform: (mat) -> mat.set @_transform
 
-  setRotation: (x, y, z) ->
-    if arguments.length is 1
-      rotation = x
-      @_rotationX = rotation.x
-      @_rotationY = rotation.y
-      @_rotationZ = rotation.z
-    else
-      @_rotationX = x
-      @_rotationY = y
-      @_rotationZ = z
-
-    @_rs = "rotateX(#{@_rotationX}deg) rotateY(#{@_rotationY}deg) rotateZ(#{@_rotationZ}deg) "
-    @style[DivSugar._transform] = @_ps + @_rs + @_ss
-
-    return @
-
-  getScaleX: -> @_scaleX
-  getScaleY: -> @_scaleX
-  getScaleZ: -> @_scaleX
-  getScale: (scale) ->
-    scale.x = @_scaleX
-    scale.y = @_scaleY
-    scale.z = @_scaleZ
-
-  setScale: (x, y, z) ->
-    if arguments is 1
-      scale = x
-      @_scaleX = scale.x
-      @_scaleY = scale.y
-      @_scaleZ = scale.z
-    else
-      @_scaleX = x
-      @_scaleY = y
-      @_scaleZ = z
-
-    @_ss = "scale3d(#{@_scaleX}, #{@_scaleY}, #{@_scaleZ})"
-    @style[DivSugar._transform] = @_ps + @_rs + @_ss
-
+  setTransform: (mat) ->
+    @_transform.set mat
+    @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
 
   getVisible: DivSugar._Scene.getVisible
@@ -129,4 +84,29 @@ DivSugar._Sprite =
     @style.backgroundPosition = "#{x}px #{y}px"
     @style.backgroundSize = "#{w}px #{h}px"
 
+    return @
+
+  rotateX: (deg) ->
+    @_transform.rotateX deg
+    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    return @
+
+  rotateY: (deg) ->
+    @_transform.rotateY deg
+    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    return @
+
+  rotateZ: (deg) ->
+    @_transform.rotateZ deg
+    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    return @
+
+  scale: (scaleX, scaleY, scaleZ) ->
+    @_transform.scale scaleX, scaleY, scaleZ
+    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    return @
+
+  translate: (offsetX, offsetY, offsetZ) ->
+    @_transform.translate offsetX, offsetY, offsetZ
+    @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
