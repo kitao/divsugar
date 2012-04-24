@@ -138,6 +138,6 @@ DivSugar.Vector.X_UNIT = new DivSugar.Vector 1, 0, 0
 DivSugar.Vector.Y_UNIT = new DivSugar.Vector 0, 1, 0
 DivSugar.Vector.Z_UNIT = new DivSugar.Vector 0, 0, 1
 
-DivSugar.Vector._tmpVec1 = new DivSugar.Vector
-DivSugar.Vector._tmpVec2 = new DivSugar.Vector
-DivSugar.Vector._tmpVec3 = new DivSugar.Vector
+DivSugar.Vector._tmpVec1 = new DivSugar.Vector()
+DivSugar.Vector._tmpVec2 = new DivSugar.Vector()
+DivSugar.Vector._tmpVec3 = new DivSugar.Vector()
