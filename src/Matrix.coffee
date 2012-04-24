@@ -2,10 +2,10 @@ class DivSugar.Matrix
   constructor: (mat) ->
     switch arguments.length
       when 0
-        @xAxis = new DivSugar.Vector
-        @yAxis = new DivSugar.Vector
-        @zAxis = new DivSugar.Vector
-        @trans = new DivSugar.Vector
+        @xAxis = new DivSugar.Vector DivSugar.Vector.X_UNIT
+        @yAxis = new DivSugar.Vector DivSugar.Vector.Y_UNIT
+        @zAxis = new DivSugar.Vector DivSugar.Vector.Z_UNIT
+        @trans = new DivSugar.Vector DivSugar.Vector.ZERO
 
       when 1
         @xAxis = new DivSugar.Vector mat.xAxis
@@ -76,9 +76,7 @@ class DivSugar.Matrix
     cos = Math.cos deg * DivSugar.DEG_TO_RAD
     mat = DivSugar.Matrix._tmpMat1
 
-    mat.set 1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0
-    mat.toGlobal @
-
+    mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal @
     @set mat
 
   rotateY: (deg) ->
@@ -86,9 +84,7 @@ class DivSugar.Matrix
     cos = Math.cos deg * DivSugar.DEG_TO_RAD
     mat = DivSugar.Matrix._tmpMat1
 
-    mat.set cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0
-    mat.toGlobal @
-
+    mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal @
     @set mat
 
   rotateZ: (deg) ->
@@ -96,9 +92,7 @@ class DivSugar.Matrix
     cos = Math.cos deg * DivSugar.DEG_TO_RAD
     mat = DivSugar.Matrix._tmpMat1
 
-    mat.set cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0
-    mat.toGlobal @
-
+    mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal @
     @set mat
 
   scale: (scaleX, scaleY, scaleZ) ->
@@ -218,8 +212,8 @@ class DivSugar.Matrix
 
 DivSugar.Matrix.UNIT = new DivSugar.Matrix 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0
 
-DivSugar.Matrix._tmpVec1 = new DivSugar.Vector
-DivSugar.Matrix._tmpVec2 = new DivSugar.Vector
-DivSugar.Matrix._tmpVec3 = new DivSugar.Vector
-DivSugar.Matrix._tmpMat1 = new DivSugar.Matrix
+DivSugar.Matrix._tmpVec1 = new DivSugar.Vector()
+DivSugar.Matrix._tmpVec2 = new DivSugar.Vector()
+DivSugar.Matrix._tmpVec3 = new DivSugar.Vector()
+DivSugar.Matrix._tmpMat1 = new DivSugar.Matrix()
 # _tmpQuat1 and _tmpQuat2 are defined in Quaternion.js
