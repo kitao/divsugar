@@ -1,6 +1,6 @@
-"use strict";
-
 function nearlyEqual(actual, expected) {
+  "use strict";
+
   if (actual instanceof DivSugar.Vector) {
     nearlyEqual(actual.x, expected.x);
     nearlyEqual(actual.y, expected.y);

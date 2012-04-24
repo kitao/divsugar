@@ -1,1 +1,5 @@
-module('Scene');
+(function() {
+  "use strict";
+
+  module('Scene');
+})();

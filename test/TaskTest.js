@@ -1,1 +1,5 @@
-module('Task');
+(function() {
+  "use strict";
+
+  module('Task');
+})();
