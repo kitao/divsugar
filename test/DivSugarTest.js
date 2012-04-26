@@ -1,5 +1,5 @@
 (function() {
-  "use strict";
+  'use strict';
 
   module('DivSugar');
 
@@ -16,20 +16,32 @@
   });
 
   test('createScene', function() {
-    var scene = DivSugar.createScene('testScene');
-    strictEqual(scene instanceof HTMLDivElement, true);
-    strictEqual(scene.id, 'testScene');
+    var scene1 = DivSugar.createScene();
+    ok(scene1 instanceof HTMLDivElement);
+    ok(!scene1.id);
+
+    var scene2 = DivSugar.createScene('scene2');
+    ok(scene2 instanceof HTMLDivElement);
+    strictEqual(scene2.id, 'scene2');
   });
 
   test('createSprite', function() {
-    var sprite = DivSugar.createSprite('testSprite');
-    strictEqual(sprite instanceof HTMLDivElement, true);
-    strictEqual(sprite.id, 'testSprite');
+    var sprite1 = DivSugar.createSprite();
+    ok(sprite1 instanceof HTMLDivElement);
+    ok(!sprite1.id);
+
+    var sprite2 = DivSugar.createSprite('sprite2');
+    ok(sprite2 instanceof HTMLDivElement);
+    strictEqual(sprite2.id, 'sprite2');
   });
 
   test('createTask', function() {
-    var task = DivSugar.createTask('testTask');
-    strictEqual(task instanceof DivSugar._Task, true);
-    strictEqual(task.id, 'testTask');
+    var task1 = DivSugar.createTask();
+    ok(task1 instanceof DivSugar._Task);
+    ok(!task1.id);
+
+    var task2 = DivSugar.createTask('task2');
+    ok(task2 instanceof DivSugar._Task);
+    strictEqual(task2.id, 'task2');
   });
 })();
