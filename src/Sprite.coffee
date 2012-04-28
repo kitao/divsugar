@@ -4,7 +4,7 @@ DivSugar._Sprite =
     @style.padding = '0px'
     @style.position = 'absolute'
     @style[DivSugar._transformStyle] = 'preserve-3d'
-    @style[DivSugar._transformOrigin] = '0% 0% 0%'
+    @style[DivSugar._transformOrigin] = '0% 0%'
     @_transform = new DivSugar.Matrix()
 
     @setSize 100, 100
@@ -68,7 +68,10 @@ DivSugar._Sprite =
   getImage: DivSugar._Scene.getImage
   setImage: DivSugar._Scene.setImage
 
-  getImageClip: DivSugar._Scene.getImageClip
+  getImageClipU1: DivSugar._Scene.getImageClipU1
+  getImageClipV1: DivSugar._Scene.getImageClipV1
+  getImageClipU2: DivSugar._Scene.getImageClipU2
+  getImageClipV2: DivSugar._Scene.getImageClipV2
 
   setImageClip: (u1, v1, u2, v2) ->
     @_imageClipU1 = u1
@@ -110,3 +113,6 @@ DivSugar._Sprite =
     @_transform.translate offsetX, offsetY, offsetZ
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
+
+  append: DivSugar._Scene.append
+  appendTo: DivSugar._Scene.appendTo

@@ -5,8 +5,8 @@ DivSugar._Scene =
     @style.position = 'relative'
     @style.overflow = 'hidden'
     @style[DivSugar._transformStyle] = 'preserve-3d'
-    @style[DivSugar._transformOrigin] = '0% 0% 0%'
-    @style[DivSugar._perspectiveOrigin] = '0% 0% 0%'
+    @style[DivSugar._transformOrigin] = '0% 0%'
+    @style[DivSugar._perspectiveOrigin] = '50% 50%'
 
     @setPerspective 1000
     @setSize 100, 100
@@ -112,5 +112,21 @@ DivSugar._Scene =
 
     @style.backgroundPosition = "#{x}px #{y}px"
     @style.backgroundSize = "#{w}px #{h}px"
+
+    return @
+
+  append: (child) ->
+    if typeof child is 'string'
+      @appendChild document.getElementById child
+    else
+      @appendChild child
+
+    return @
+
+  appendTo: (parent) ->
+    if typeof parent is 'string'
+      (document.getElementById parent).appendChild @
+    else
+      parent.appendChild @
 
     return @
