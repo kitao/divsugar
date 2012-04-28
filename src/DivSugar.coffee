@@ -43,14 +43,19 @@ DivSugar =
       @_requestAnimationFrame = (callback) =>
         window[requestAnimationFrame] callback
     else
+      console.log 'DivSugar: use setTimeout instead of requestAnimationFrame'
       @_requestAnimationFrame = (callback) ->
         window.setTimeout callback, 1000 / 60 # TBD
 
     # start tasks
     updateTasks = =>
-      @rootTask.update(1) # TBD
+      curTime = (new Date()).getTime()
+      elapsedTime = curTime - @_lastUpdatedTime
+      @_lastUpdatedTime = curTime
+      @rootTask.update elapsedTime
       @_requestAnimationFrame updateTasks
 
+    @_lastUpdatedTime = (new Date()).getTime()
     @_requestAnimationFrame updateTasks
 
   createScene: (args...) ->
