@@ -644,8 +644,8 @@
       this.style.position = 'relative';
       this.style.overflow = 'hidden';
       this.style[DivSugar._transformStyle] = 'preserve-3d';
-      this.style[DivSugar._transformOrigin] = '0% 0% 0%';
-      this.style[DivSugar._perspectiveOrigin] = '0% 0% 0%';
+      this.style[DivSugar._transformOrigin] = '0% 0%';
+      this.style[DivSugar._perspectiveOrigin] = '50% 50%';
       this.setPerspective(1000);
       this.setSize(100, 100);
       this.setPosition(0, 0);
@@ -771,6 +771,22 @@
       this.style.backgroundPosition = "" + x + "px " + y + "px";
       this.style.backgroundSize = "" + w + "px " + h + "px";
       return this;
+    },
+    append: function(child) {
+      if (typeof child === 'string') {
+        this.appendChild(document.getElementById(child));
+      } else {
+        this.appendChild(child);
+      }
+      return this;
+    },
+    appendTo: function(parent) {
+      if (typeof parent === 'string') {
+        (document.getElementById(parent)).appendChild(this);
+      } else {
+        parent.appendChild(this);
+      }
+      return this;
     }
   };
 
@@ -781,7 +797,7 @@
       this.style.padding = '0px';
       this.style.position = 'absolute';
       this.style[DivSugar._transformStyle] = 'preserve-3d';
-      this.style[DivSugar._transformOrigin] = '0% 0% 0%';
+      this.style[DivSugar._transformOrigin] = '0% 0%';
       this._transform = new DivSugar.Matrix();
       this.setSize(100, 100);
       this.setPosition(0, 0, 0);
@@ -848,7 +864,10 @@
     setOpacity: DivSugar._Scene.setOpacity,
     getImage: DivSugar._Scene.getImage,
     setImage: DivSugar._Scene.setImage,
-    getImageClip: DivSugar._Scene.getImageClip,
+    getImageClipU1: DivSugar._Scene.getImageClipU1,
+    getImageClipV1: DivSugar._Scene.getImageClipV1,
+    getImageClipU2: DivSugar._Scene.getImageClipU2,
+    getImageClipV2: DivSugar._Scene.getImageClipV2,
     setImageClip: function(u1, v1, u2, v2) {
       var h, w, x, y;
       this._imageClipU1 = u1;
@@ -887,7 +906,9 @@
       this._transform.translate(offsetX, offsetY, offsetZ);
       this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
-    }
+    },
+    append: DivSugar._Scene.append,
+    appendTo: DivSugar._Scene.appendTo
   };
 
   DivSugar._Task = (function() {
