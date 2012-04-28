@@ -12,12 +12,11 @@ window.onload = function() {
   var task = DivSugar.createTask('hoge');
   var vec = new DivSugar.Vector();
 
-  task.onUpdate = function(frameCount) {
+  task.onUpdate = function(elapsedTime) {
     var width = spr.getWidth();
     var height = spr.getHeight();
 
-    spr.setSize(width + 1, height + 1).rotateX(1);
-
+    spr.setSize(width + elapsedTime * 0.05, height + elapsedTime * 0.05).rotateX(elapsedTime * 0.05);
     if (width > 400) {
       this.destroy();
     }
