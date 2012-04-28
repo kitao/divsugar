@@ -16,23 +16,23 @@
   });
 
   test('createScene', function() {
-    var scene1 = DivSugar.createScene();
-    ok(scene1 instanceof HTMLDivElement);
-    ok(!scene1.id);
+    var scn1 = DivSugar.createScene();
+    ok(scn1 instanceof HTMLDivElement);
+    ok(!scn1.id);
 
-    var scene2 = DivSugar.createScene('scene2');
-    ok(scene2 instanceof HTMLDivElement);
-    strictEqual(scene2.id, 'scene2');
+    var scn2 = DivSugar.createScene('scene2');
+    ok(scn2 instanceof HTMLDivElement);
+    strictEqual(scn2.id, 'scene2');
   });
 
   test('createSprite', function() {
-    var sprite1 = DivSugar.createSprite();
-    ok(sprite1 instanceof HTMLDivElement);
-    ok(!sprite1.id);
+    var spr1 = DivSugar.createSprite();
+    ok(spr1 instanceof HTMLDivElement);
+    ok(!spr1.id);
 
-    var sprite2 = DivSugar.createSprite('sprite2');
-    ok(sprite2 instanceof HTMLDivElement);
-    strictEqual(sprite2.id, 'sprite2');
+    var spr2 = DivSugar.createSprite('sprite2');
+    ok(spr2 instanceof HTMLDivElement);
+    strictEqual(spr2.id, 'sprite2');
   });
 
   test('createTask', function() {
