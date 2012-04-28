@@ -35,6 +35,7 @@ DivSugar._Sprite =
     vec.x = @_transform.trans.x
     vec.y = @_transform.trans.y
     vec.z = @_transform.trans.z
+    return @
 
   setPosition: (x, y, z) ->
     if arguments.length is 1
@@ -49,7 +50,9 @@ DivSugar._Sprite =
 
     return @
 
-  getTransform: (mat) -> mat.set @_transform
+  getTransform: (mat) ->
+    mat.set @_transform
+    return @
 
   setTransform: (mat) ->
     @_transform.set mat
@@ -113,6 +116,3 @@ DivSugar._Sprite =
     @_transform.translate offsetX, offsetY, offsetZ
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
-
-  append: DivSugar._Scene.append
-  appendTo: DivSugar._Scene.appendTo

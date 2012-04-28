@@ -114,19 +114,3 @@ DivSugar._Scene =
     @style.backgroundSize = "#{w}px #{h}px"
 
     return @
-
-  append: (child) ->
-    if typeof child is 'string'
-      @appendChild document.getElementById child
-    else
-      @appendChild child
-
-    return @
-
-  appendTo: (parent) ->
-    if typeof parent is 'string'
-      (document.getElementById parent).appendChild @
-    else
-      parent.appendChild @
-
-    return @
