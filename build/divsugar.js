@@ -49,14 +49,20 @@
           return window[requestAnimationFrame](callback);
         };
       } else {
+        console.log('DivSugar: use setTimeout instead of requestAnimationFrame');
         this._requestAnimationFrame = function(callback) {
           return window.setTimeout(callback, 1000 / 60);
         };
       }
       updateTasks = function() {
-        _this.rootTask.update(1);
+        var curTime, elapsedTime;
+        curTime = (new Date()).getTime();
+        elapsedTime = curTime - _this._lastUpdatedTime;
+        _this._lastUpdatedTime = curTime;
+        _this.rootTask.update(elapsedTime);
         return _this._requestAnimationFrame(updateTasks);
       };
+      this._lastUpdatedTime = (new Date()).getTime();
       return this._requestAnimationFrame(updateTasks);
     },
     createScene: function() {
@@ -771,22 +777,6 @@
       this.style.backgroundPosition = "" + x + "px " + y + "px";
       this.style.backgroundSize = "" + w + "px " + h + "px";
       return this;
-    },
-    append: function(child) {
-      if (typeof child === 'string') {
-        this.appendChild(document.getElementById(child));
-      } else {
-        this.appendChild(child);
-      }
-      return this;
-    },
-    appendTo: function(parent) {
-      if (typeof parent === 'string') {
-        (document.getElementById(parent)).appendChild(this);
-      } else {
-        parent.appendChild(this);
-      }
-      return this;
     }
   };
 
@@ -833,7 +823,8 @@
     getPosition: function(vec) {
       vec.x = this._transform.trans.x;
       vec.y = this._transform.trans.y;
-      return vec.z = this._transform.trans.z;
+      vec.z = this._transform.trans.z;
+      return this;
     },
     setPosition: function(x, y, z) {
       var vec;
@@ -849,7 +840,8 @@
       return this;
     },
     getTransform: function(mat) {
-      return mat.set(this._transform);
+      mat.set(this._transform);
+      return this;
     },
     setTransform: function(mat) {
       this._transform.set(mat);
@@ -906,9 +898,7 @@
       this._transform.translate(offsetX, offsetY, offsetZ);
       this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
-    },
-    append: DivSugar._Scene.append,
-    appendTo: DivSugar._Scene.appendTo
+    }
   };
 
   DivSugar._Task = (function() {
@@ -923,28 +913,32 @@
       this._children = [];
     }
 
-    _Task.prototype.update = function(frameCount) {
+    _Task.prototype.getParent = function() {
+      return this._parent;
+    };
+
+    _Task.prototype.update = function(elapsedTime) {
       var child, _i, _len, _ref, _results;
       if (this.active) {
-        if (typeof this.onUpdate === "function") this.onUpdate(frameCount);
+        if (typeof this.onUpdate === "function") this.onUpdate(elapsedTime);
         _ref = this._children;
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           child = _ref[_i];
-          _results.push(child.update(frameCount));
+          _results.push(child.update(elapsedTime));
         }
         return _results;
       }
     };
 
     _Task.prototype.destroy = function() {
-      var child, _i, _len, _ref, _results;
+      var child, _i, _len, _ref, _ref2, _results;
       if (typeof this.onDestroy === "function") this.onDestroy();
-      this._parent.removeChild(this);
-      _ref = this._children;
+      if ((_ref = this._parent) != null) _ref.removeChild(this);
+      _ref2 = this._children;
       _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        child = _ref[_i];
+      for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+        child = _ref2[_i];
         _results.push(child.destroy());
       }
       return _results;
@@ -961,7 +955,23 @@
       i = this._children.indexOf(task);
       if (i > -1) {
         this._children.splice(i, 1);
-        return task._parent = null;
+        task._parent = null;
+      }
+      return this;
+    };
+
+    _Task.prototype.getTaskById = function(id) {
+      var child, task, _i, _len, _ref;
+      if (this.id === id) {
+        return this;
+      } else {
+        _ref = this._children;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          child = _ref[_i];
+          task = child.getTaskById(id);
+          if (task != null) return task;
+        }
+        return null;
       }
     };
 
