@@ -10,42 +10,46 @@ DivSugar =
     @rootTask = null
 
     # cross-browser support
-    @_transform = 'transform'
-    @_transformStyle = 'transformStyle'
-    @_transformOrigin = 'transformOrigin'
-    @_perspective = 'perspective'
-    @_perspectiveOrigin = 'perspectiveOrigin'
-    @_requestAnimationFrame = 'requestAnimationFrame'
+    do =>
+      userAgent = navigator.userAgent.toLowerCase()
+      if userAgent.indexOf('safari') > -1 or userAgent.indexOf('chrome') > -1
+        @_prefix = 'webkit'
+      else if userAgent.indexOf('firefox') > -1
+        @_prefix = 'moz'
+      else if userAgent.indexOf('opera') > -1
+        @_prefix = 'o'
+      else if userAgent.indexOf('msie') > -1
+        @_prefix = 'ms'
+      else
+        @_prefix = null
 
-    div = document.createElement 'div'
+      div = document.createElement 'div'
 
-    for prefix in ['webkit', 'moz', 'ms', 'o']
-      transform = prefix + 'Transform'
-      @_transform = transform if div.style[transform]?
+      transform = @_prefix + 'Transform'
+      @_transform = if div.style[transform]? then transform else 'transform'
 
-      transformStyle = prefix + 'TransformStyle'
-      @_transformStyle = transformStyle if div.style[transformStyle]?
+      transformStyle = @_prefix + 'TransformStyle'
+      @_transformStyle = if div.style[transformStyle]? then transformStyle else 'transformStyle'
 
-      transformOrigin = prefix + 'TransformOrigin'
-      @_transformOrigin = transformOrigin if div.style[transformOrigin]?
+      transformOrigin = @_prefix + 'TransformOrigin'
+      @_transformOrigin = if div.style[transformOrigin]? then transformOrigin else 'transformOrigin'
 
-      perspective = prefix + 'Perspective'
-      @_perspective = perspective if div.style[perspective]?
+      perspective = @_prefix + 'Perspective'
+      @_perspective = if div.style[perspective]? then perspective else 'perspective'
 
-      perspectiveOrigin = prefix + 'PerspectiveOrigin'
-      @_perspectiveOrigin = perspectiveOrigin if div.style[perspectiveOrigin]?
+      perspectiveOrigin = @_prefix + 'PerspectiveOrigin'
+      @_perspectiveOrigin = if div.style[perspectiveOrigin]? then perspectiveOrigin else 'perspectiveOrigin'
 
-      requestAnimationFrame = prefix + 'RequestAnimationFrame'
-      @_requestAnimationFrame = requestAnimationFrame if window[requestAnimationFrame]?
+      requestAnimationFrame = @_prefix + 'RequestAnimationFrame'
+      requestAnimationFrame = 'requestAnimationFrame' if not window[requestAnimationFrame]?
 
-    if window[@_requestAnimationFrame]?
-      requestAnimationFrame = @_requestAnimationFrame
-      @_requestAnimationFrame = (callback) =>
-        window[requestAnimationFrame] callback
-    else
-      console.log 'DivSugar: use setTimeout instead of requestAnimationFrame'
-      @_requestAnimationFrame = (callback) ->
-        window.setTimeout callback, 1000 / 60 # TBD
+      if window[requestAnimationFrame]?
+        @_requestAnimationFrame = (callback) =>
+          window[requestAnimationFrame] callback
+      else
+        console.log 'DivSugar: use setTimeout instead of requestAnimationFrame'
+        @_requestAnimationFrame = (callback) ->
+          window.setTimeout callback, 1000 / 60 # TBD
 
     # start tasks
     updateTasks = =>
@@ -79,5 +83,13 @@ DivSugar =
     return div
 
   createTask: (args...) -> new @_Task args...
+
+  addCSSAnimation: (name) ->
+    # TODO
+    style = document.createElement('style')
+    document.head.appendChild(style)
+
+  removeCSSAnimation: (name) ->
+    # TODO
 
 (window.DivSugar = DivSugar)._initialize()

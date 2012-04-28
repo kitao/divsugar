@@ -5,55 +5,53 @@
 
   DivSugar = {
     _initialize: function() {
-      var div, perspective, perspectiveOrigin, prefix, requestAnimationFrame, transform, transformOrigin, transformStyle, updateTasks, _i, _len, _ref,
+      var updateTasks,
         _this = this;
       this.VERSION = '0.10';
       this.EPSILON = 0.0001;
       this.DEG_TO_RAD = Math.PI / 180;
       this.RAD_TO_DEG = 180 / Math.PI;
       this.rootTask = null;
-      this._transform = 'transform';
-      this._transformStyle = 'transformStyle';
-      this._transformOrigin = 'transformOrigin';
-      this._perspective = 'perspective';
-      this._perspectiveOrigin = 'perspectiveOrigin';
-      this._requestAnimationFrame = 'requestAnimationFrame';
-      div = document.createElement('div');
-      _ref = ['webkit', 'moz', 'ms', 'o'];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        prefix = _ref[_i];
-        transform = prefix + 'Transform';
-        if (div.style[transform] != null) this._transform = transform;
-        transformStyle = prefix + 'TransformStyle';
-        if (div.style[transformStyle] != null) {
-          this._transformStyle = transformStyle;
+      (function() {
+        var div, perspective, perspectiveOrigin, requestAnimationFrame, transform, transformOrigin, transformStyle, userAgent;
+        userAgent = navigator.userAgent.toLowerCase();
+        if (userAgent.indexOf('safari') > -1 || userAgent.indexOf('chrome') > -1) {
+          _this._prefix = 'webkit';
+        } else if (userAgent.indexOf('firefox') > -1) {
+          _this._prefix = 'moz';
+        } else if (userAgent.indexOf('opera') > -1) {
+          _this._prefix = 'o';
+        } else if (userAgent.indexOf('msie') > -1) {
+          _this._prefix = 'ms';
+        } else {
+          _this._prefix = null;
         }
-        transformOrigin = prefix + 'TransformOrigin';
-        if (div.style[transformOrigin] != null) {
-          this._transformOrigin = transformOrigin;
+        div = document.createElement('div');
+        transform = _this._prefix + 'Transform';
+        _this._transform = div.style[transform] != null ? transform : 'transform';
+        transformStyle = _this._prefix + 'TransformStyle';
+        _this._transformStyle = div.style[transformStyle] != null ? transformStyle : 'transformStyle';
+        transformOrigin = _this._prefix + 'TransformOrigin';
+        _this._transformOrigin = div.style[transformOrigin] != null ? transformOrigin : 'transformOrigin';
+        perspective = _this._prefix + 'Perspective';
+        _this._perspective = div.style[perspective] != null ? perspective : 'perspective';
+        perspectiveOrigin = _this._prefix + 'PerspectiveOrigin';
+        _this._perspectiveOrigin = div.style[perspectiveOrigin] != null ? perspectiveOrigin : 'perspectiveOrigin';
+        requestAnimationFrame = _this._prefix + 'RequestAnimationFrame';
+        if (!(window[requestAnimationFrame] != null)) {
+          requestAnimationFrame = 'requestAnimationFrame';
         }
-        perspective = prefix + 'Perspective';
-        if (div.style[perspective] != null) this._perspective = perspective;
-        perspectiveOrigin = prefix + 'PerspectiveOrigin';
-        if (div.style[perspectiveOrigin] != null) {
-          this._perspectiveOrigin = perspectiveOrigin;
-        }
-        requestAnimationFrame = prefix + 'RequestAnimationFrame';
         if (window[requestAnimationFrame] != null) {
-          this._requestAnimationFrame = requestAnimationFrame;
+          return _this._requestAnimationFrame = function(callback) {
+            return window[requestAnimationFrame](callback);
+          };
+        } else {
+          console.log('DivSugar: use setTimeout instead of requestAnimationFrame');
+          return _this._requestAnimationFrame = function(callback) {
+            return window.setTimeout(callback, 1000 / 60);
+          };
         }
-      }
-      if (window[this._requestAnimationFrame] != null) {
-        requestAnimationFrame = this._requestAnimationFrame;
-        this._requestAnimationFrame = function(callback) {
-          return window[requestAnimationFrame](callback);
-        };
-      } else {
-        console.log('DivSugar: use setTimeout instead of requestAnimationFrame');
-        this._requestAnimationFrame = function(callback) {
-          return window.setTimeout(callback, 1000 / 60);
-        };
-      }
+      })();
       updateTasks = function() {
         var curTime, elapsedTime;
         curTime = (new Date()).getTime();
@@ -97,7 +95,13 @@
         var child = new ctor, result = func.apply(child, args);
         return typeof result === "object" ? result : child;
       })(this._Task, args, function() {});
-    }
+    },
+    addCSSAnimation: function(name) {
+      var style;
+      style = document.createElement('style');
+      return document.head.appendChild(style);
+    },
+    removeCSSAnimation: function(name) {}
   };
 
   (window.DivSugar = DivSugar)._initialize();
