@@ -11,6 +11,8 @@
       this.EPSILON = 0.0001;
       this.DEG_TO_RAD = Math.PI / 180;
       this.RAD_TO_DEG = 180 / Math.PI;
+      this._id = 0;
+      this._animations = [];
       this.rootTask = null;
       (function() {
         var div, perspective, perspectiveOrigin, requestAnimationFrame, transform, transformOrigin, transformStyle, userAgent;
@@ -26,30 +28,37 @@
         } else {
           _this._prefix = null;
         }
+        console.log("DivSugar: use '" + _this._prefix + "' as prefix");
         div = document.createElement('div');
         transform = _this._prefix + 'Transform';
         _this._transform = div.style[transform] != null ? transform : 'transform';
+        console.log("DivSugar: use '" + _this._transform + "'");
         transformStyle = _this._prefix + 'TransformStyle';
         _this._transformStyle = div.style[transformStyle] != null ? transformStyle : 'transformStyle';
+        console.log("DivSugar: use '" + _this._transformStyle + "'");
         transformOrigin = _this._prefix + 'TransformOrigin';
         _this._transformOrigin = div.style[transformOrigin] != null ? transformOrigin : 'transformOrigin';
+        console.log("DivSugar: use '" + _this._transformOrigin + "'");
         perspective = _this._prefix + 'Perspective';
         _this._perspective = div.style[perspective] != null ? perspective : 'perspective';
+        console.log("DivSugar: use '" + _this._perspective + "'");
         perspectiveOrigin = _this._prefix + 'PerspectiveOrigin';
         _this._perspectiveOrigin = div.style[perspectiveOrigin] != null ? perspectiveOrigin : 'perspectiveOrigin';
+        console.log("DivSugar: use '" + _this._perspectiveOrigin + "'");
         requestAnimationFrame = _this._prefix + 'RequestAnimationFrame';
         if (!(window[requestAnimationFrame] != null)) {
           requestAnimationFrame = 'requestAnimationFrame';
         }
         if (window[requestAnimationFrame] != null) {
-          return _this._requestAnimationFrame = function(callback) {
+          _this._requestAnimationFrame = function(callback) {
             return window[requestAnimationFrame](callback);
           };
+          return console.log("DivSugar: use '" + requestAnimationFrame + "'");
         } else {
-          console.log('DivSugar: use setTimeout instead of requestAnimationFrame');
-          return _this._requestAnimationFrame = function(callback) {
+          _this._requestAnimationFrame = function(callback) {
             return window.setTimeout(callback, 1000 / 60);
           };
+          return console.log("DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'");
         }
       })();
       updateTasks = function() {
@@ -62,6 +71,9 @@
       };
       this._lastUpdatedTime = (new Date()).getTime();
       return this._requestAnimationFrame(updateTasks);
+    },
+    generateId: function() {
+      return "_divsugar_id_" + (++this._id);
     },
     createScene: function() {
       var args, div, func, name, _ref;
@@ -96,12 +108,91 @@
         return typeof result === "object" ? result : child;
       })(this._Task, args, function() {});
     },
-    addCSSAnimation: function(name) {
-      var style;
+    addCSSAnimation: function(name, animation) {
+      var h, height, keyframe, property, style, transform, value, w, width, x, y, _ref;
+      this.removeCSSAnimation(name);
       style = document.createElement('style');
-      return document.head.appendChild(style);
+      style.innerHTML = "@-" + this._prefix + "-keyframes " + name + "{";
+      for (keyframe in animation) {
+        style.innerHTML += " " + keyframe + "{";
+        transform = null;
+        width = height = 1;
+        _ref = animation[keyframe];
+        for (property in _ref) {
+          value = _ref[property];
+          switch (property) {
+            case 'size':
+              width = value[0];
+              height = value[1];
+              style.innerHTML += "width:" + width + "px;height:" + height + "px;";
+              break;
+            case 'visible':
+              style.innerHTML += "visibility:" + (value ? 'visible' : 'hidden') + ";";
+              break;
+            case 'clip':
+              style.innerHTML += "overflow:" + (value ? 'hidden' : 'visible') + ";";
+              break;
+            case 'opacity':
+              style.innerHTML += "opacity:" + value + ";";
+              break;
+            case 'image':
+              if (!(value != null)) {
+                style.innerHTML += 'background-color:transparent;';
+                style.innerHTML += 'background-image:none;';
+              } else if (value.charAt(0) === '#') {
+                style.innerHTML += "background-color:" + value + ";";
+                style.innerHTML += 'background-image:none;';
+              } else {
+                style.innerHTML += 'background-color:transparent;';
+                style.innerHTML += "background-image:url(" + value + ");";
+              }
+              break;
+            case 'imageClip':
+              w = width / (value[2] - value[0]);
+              h = height / (value[3] - value[1]);
+              x = -value[0] * w;
+              y = -value[1] * h;
+              style.innerHTML += "background-position:" + x + "px " + y + "px;";
+              style.innerHTML += "background-size:" + w + "px " + h + "px;";
+              break;
+            case 'transform':
+              if (transform == null) transform = new DivSugar.Matrix();
+              if (value instanceof DivSugar.Matrix) {
+                transform.set(value);
+              } else {
+                transform.set(value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8], value[9], value[10], value[11]);
+              }
+              break;
+            case 'translate':
+              if (transform == null) transform = new DivSugar.Matrix();
+              transform.translate(value[0], value[1], value[2]);
+              break;
+            case 'rotate':
+              if (transform == null) transform = new DivSugar.Matrix();
+              transform.rotate(value[0], value[1], value[2]);
+              break;
+            case 'scale':
+              if (transform == null) transform = new DivSugar.Matrix();
+              transform.scale(value[0], value[1], value[2]);
+          }
+        }
+        if (transform != null) {
+          style.innerHTML += "transform:" + (transform.toCSSTransform()) + ";";
+        }
+        style.innerHTML += '}';
+      }
+      style.innerHTML += '}';
+      document.head.appendChild(style);
+      this._animations[name] = style;
+      console.log("DivSugar: added css animation");
+      return console.log(style.innerHTML);
     },
-    removeCSSAnimation: function(name) {}
+    removeCSSAnimation: function(name) {
+      if (name in this._animations) {
+        document.head.removeChild(this._animations[name]);
+        return delete this._animations[name];
+      }
+    }
   };
 
   (window.DivSugar = DivSugar)._initialize();
@@ -380,40 +471,6 @@
       return this;
     };
 
-    Matrix.prototype.rotateX = function(deg) {
-      var cos, mat, sin;
-      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
-      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
-      mat = DivSugar.Matrix._tmpMat1;
-      mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal(this);
-      return this.set(mat);
-    };
-
-    Matrix.prototype.rotateY = function(deg) {
-      var cos, mat, sin;
-      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
-      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
-      mat = DivSugar.Matrix._tmpMat1;
-      mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal(this);
-      return this.set(mat);
-    };
-
-    Matrix.prototype.rotateZ = function(deg) {
-      var cos, mat, sin;
-      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
-      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
-      mat = DivSugar.Matrix._tmpMat1;
-      mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal(this);
-      return this.set(mat);
-    };
-
-    Matrix.prototype.scale = function(scaleX, scaleY, scaleZ) {
-      this.xAxis.mul(scaleX);
-      this.yAxis.mul(scaleY);
-      this.zAxis.mul(scaleZ);
-      return this;
-    };
-
     Matrix.prototype.translate = function(offsetX, offsetY, offsetZ) {
       var vec1, vec2, vec3;
       vec1 = DivSugar.Matrix._tmpVec1;
@@ -423,6 +480,39 @@
       vec2.set(this.yAxis).mul(offsetY);
       vec3.set(this.zAxis).mul(offsetZ);
       this.trans.add(vec1).add(vec2).add(vec3);
+      return this;
+    };
+
+    Matrix.prototype.rotate = function(rotateX, rotateY, rotateZ) {
+      var cos, mat, sin;
+      if (rotateX !== 0) {
+        sin = Math.sin(rotateX * DivSugar.DEG_TO_RAD);
+        cos = Math.cos(rotateX * DivSugar.DEG_TO_RAD);
+        mat = DivSugar.Matrix._tmpMat1;
+        mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal(this);
+        this.set(mat);
+      }
+      if (rotateY !== 0) {
+        sin = Math.sin(rotateY * DivSugar.DEG_TO_RAD);
+        cos = Math.cos(rotateY * DivSugar.DEG_TO_RAD);
+        mat = DivSugar.Matrix._tmpMat1;
+        mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal(this);
+        this.set(mat);
+      }
+      if (rotateZ !== 0) {
+        sin = Math.sin(rotateZ * DivSugar.DEG_TO_RAD);
+        cos = Math.cos(rotateZ * DivSugar.DEG_TO_RAD);
+        mat = DivSugar.Matrix._tmpMat1;
+        mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal(this);
+        this.set(mat);
+      }
+      return this;
+    };
+
+    Matrix.prototype.scale = function(scaleX, scaleY, scaleZ) {
+      this.xAxis.mul(scaleX);
+      this.yAxis.mul(scaleY);
+      this.zAxis.mul(scaleZ);
       return this;
     };
 
@@ -721,7 +811,7 @@
     },
     setVisible: function(visible) {
       this._visible = visible;
-      this.style.visibility = visible ? "visible" : "hidden";
+      this.style.visibility = visible ? 'visible' : 'hidden';
       return this;
     },
     getClip: function() {
@@ -729,7 +819,7 @@
     },
     setClip: function(clip) {
       this._clip = clip;
-      this.style.overflow = clip ? "hidden" : "visible";
+      this.style.overflow = clip ? 'hidden' : 'visible';
       return this;
     },
     getOpacity: function() {
@@ -878,28 +968,18 @@
       this.style.backgroundSize = "" + w + "px " + h + "px";
       return this;
     },
-    rotateX: function(deg) {
-      this._transform.rotateX(deg);
+    translate: function(offsetX, offsetY, offsetZ) {
+      this._transform.translate(offsetX, offsetY, offsetZ);
       this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
     },
-    rotateY: function(deg) {
-      this._transform.rotateY(deg);
-      this.style[DivSugar._transform] = this._transform.toCSSTransform();
-      return this;
-    },
-    rotateZ: function(deg) {
-      this._transform.rotateZ(deg);
+    rotate: function(rotateX, rotateY, rotateZ) {
+      this._transform.rotate(rotateX, rotateY, rotateZ);
       this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
     },
     scale: function(scaleX, scaleY, scaleZ) {
       this._transform.scale(scaleX, scaleY, scaleZ);
-      this.style[DivSugar._transform] = this._transform.toCSSTransform();
-      return this;
-    },
-    translate: function(offsetX, offsetY, offsetZ) {
-      this._transform.translate(offsetX, offsetY, offsetZ);
       this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
     }

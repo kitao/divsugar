@@ -15,6 +15,12 @@
     strictEqual(DivSugar.rootTask.id, 'root');
   });
 
+  test('generateId', function() {
+    strictEqual(DivSugar.generateId(), '_divsugar_id_1');
+    strictEqual(DivSugar.generateId(), '_divsugar_id_2');
+    strictEqual(DivSugar.generateId(), '_divsugar_id_3');
+  });
+
   test('createScene', function() {
     var scn1 = DivSugar.createScene();
     ok(scn1 instanceof HTMLDivElement);
@@ -43,5 +49,33 @@
     var task2 = DivSugar.createTask('task2');
     ok(task2 instanceof DivSugar._Task);
     strictEqual(task2.id, 'task2');
+  });
+
+  test('addCSSAnimation', function() {
+    var mat1 = new DivSugar.Matrix();
+    DivSugar.addCSSAnimation('animation1', {
+      from: {
+        size: [1, 2],
+        visible: true,
+        clip: true,
+        opacity: 1,
+        image: '#ff0000',
+        imageClip: [0.1, 0.2, 0.3, 0.4],
+        translate: [1, 2, 3],
+        rotate: [10, 20, 30],
+        scale: [2, 3, 4]
+      },
+      to: {
+        transform: mat1
+      }
+    });
+
+    ok('animation1' in DivSugar._animations);
+  });
+
+  test('removeCSSAnimation', function() {
+    DivSugar.addCSSAnimation('animation1', {});
+    DivSugar.removeCSSAnimation('animation1');
+    ok(!('animation1' in DivSugar._animations));
   });
 })();
