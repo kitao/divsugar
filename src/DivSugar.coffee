@@ -3,6 +3,7 @@ DivSugar =
     # initialize constants
     @VERSION = '0.10'
     @EPSILON = 0.0001
+    @NUM_OF_DIGITS = 4
     @DEG_TO_RAD = Math.PI / 180
     @RAD_TO_DEG = 180 / Math.PI
 
@@ -28,25 +29,33 @@ DivSugar =
 
       div = document.createElement 'div'
 
-      transform = @_prefix + 'Transform'
-      @_transform = if div.style[transform]? then transform else 'transform'
+      @_transform = "-#{@_prefix}-transform"
+      @_transform = 'transform' if not div.style[@_transform]?
       console.log "DivSugar: use '#{@_transform}'"
 
-      transformStyle = @_prefix + 'TransformStyle'
-      @_transformStyle = if div.style[transformStyle]? then transformStyle else 'transformStyle'
+      @_transformStyle = "-#{@_prefix}-transform-style"
+      @_transformStyle = 'transform-style' if not div.style[@_transformStyle]?
       console.log "DivSugar: use '#{@_transformStyle}'"
 
-      transformOrigin = @_prefix + 'TransformOrigin'
-      @_transformOrigin = if div.style[transformOrigin]? then transformOrigin else 'transformOrigin'
+      @_transformOrigin = "-#{@_prefix}-transform-origin"
+      @_transformOrigin = 'transform-origin' if not div.style[@_transformOrigin]?
       console.log "DivSugar: use '#{@_transformOrigin}'"
 
-      perspective = @_prefix + 'Perspective'
-      @_perspective = if div.style[perspective]? then perspective else 'perspective'
+      @_perspective = "-#{@_prefix}-perspective"
+      @_perspective = 'perspective' if not div.style[@_perspective]?
       console.log "DivSugar: use '#{@_perspective}'"
 
-      perspectiveOrigin = @_prefix + 'PerspectiveOrigin'
-      @_perspectiveOrigin = if div.style[perspectiveOrigin]? then perspectiveOrigin else 'perspectiveOrigin'
+      @_perspectiveOrigin = "-#{@_prefix}-perspective-origin"
+      @_perspectiveOrigin = 'perspective-origin' if not div.style[@_perspectiveOrigin]?
       console.log "DivSugar: use '#{@_perspectiveOrigin}'"
+
+      @_animationName = "-#{@_prefix}-animation-name"
+      @_animationName = 'animation-name' if not div.style[@_animationName]?
+      console.log "DivSugar: use '#{@_animationName}'"
+
+      @_animationDuration = "-#{@_prefix}-animation-duration"
+      @_animationDuration = 'animation-duratino' if not div.style[@_animationDuration]?
+      console.log "DivSugar: use '#{@_animationDuration}'"
 
       requestAnimationFrame = @_prefix + 'RequestAnimationFrame'
       requestAnimationFrame = 'requestAnimationFrame' if not window[requestAnimationFrame]?
@@ -99,9 +108,10 @@ DivSugar =
     @removeCSSAnimation name
     style = document.createElement('style')
     style.innerHTML = "@-#{@_prefix}-keyframes #{name}{"
+    nod = @NUM_OF_DIGITS
 
     for keyframe of animation
-      style.innerHTML += " #{keyframe}{"
+      style.innerHTML += "#{keyframe}{"
 
       transform = null
       width = height = 1
@@ -111,7 +121,7 @@ DivSugar =
           when 'size'
             width = value[0]
             height = value[1]
-            style.innerHTML += "width:#{width}px;height:#{height}px;"
+            style.innerHTML += "width:#{width.toFixed(nod)}px;height:#{height.toFixed(nod)}px;"
 
           when 'visible'
             style.innerHTML += "visibility:#{if value then 'visible' else 'hidden'};"
@@ -120,7 +130,7 @@ DivSugar =
             style.innerHTML += "overflow:#{if value then 'hidden' else 'visible'};"
 
           when 'opacity'
-            style.innerHTML += "opacity:#{value};"
+            style.innerHTML += "opacity:#{value.toFixed(nod)};"
 
           when 'image'
             if not value?
@@ -138,8 +148,8 @@ DivSugar =
             h = height / (value[3] - value[1])
             x = -value[0] * w
             y = -value[1] * h
-            style.innerHTML += "background-position:#{x}px #{y}px;"
-            style.innerHTML += "background-size:#{w}px #{h}px;"
+            style.innerHTML += "background-position:#{x.toFixed(nod)}px #{y.toFixed(nod)}px;"
+            style.innerHTML += "background-size:#{w.toFixed(nod)}px #{h.toFixed(nod)}px;"
 
           when 'transform'
             transform ?= new DivSugar.Matrix()
@@ -161,7 +171,7 @@ DivSugar =
             transform.scale value[0], value[1], value[2]
 
       if transform?
-        style.innerHTML += "transform:#{transform.toCSSTransform()};"
+        style.innerHTML += "#{@_transform}:#{transform.toCSSTransform()};"
 
       style.innerHTML += '}'
 
