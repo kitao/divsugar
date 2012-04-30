@@ -62,7 +62,7 @@
     strictEqual(spr2.getPositionY(), 50);
     strictEqual(spr2.getPositionZ(), 60);
 
-    ok(spr1.setSize(0, 0).setSize(vec1).setSize(1, 1));
+    ok(spr1.setPosition(0, 0, 0).setPosition(vec1).setPosition(1, 1, 1));
   });
 
   test('setTransform', function() {
