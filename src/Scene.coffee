@@ -61,14 +61,14 @@ DivSugar._Scene =
 
   setVisible: (visible) ->
     @_visible = visible
-    @style.visibility = if visible then "visible" else "hidden"
+    @style.visibility = if visible then 'visible' else 'hidden'
     return @
 
   getClip: -> @_clip
 
   setClip: (clip) ->
     @_clip = clip
-    @style.overflow = if clip then "hidden" else "visible"
+    @style.overflow = if clip then 'hidden' else 'visible'
     return @
 
   getOpacity: -> @_opacity
