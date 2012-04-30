@@ -204,11 +204,12 @@ class DivSugar.Matrix
   toString: -> "(#{@xAxis.toString()}, #{@yAxis.toString()}, #{@zAxis.toString()}, #{@trans.toString()})"
 
   toCSSTransform: ->
+    nod = DivSugar.NUM_OF_DIGITS
     'matrix3d(' +
-      "#{@xAxis.x}, #{@xAxis.y}, #{@xAxis.z}, 0, " +
-      "#{@yAxis.x}, #{@yAxis.y}, #{@yAxis.z}, 0, " +
-      "#{@zAxis.x}, #{@zAxis.y}, #{@zAxis.z}, 0, " +
-      "#{@trans.x}, #{@trans.y}, #{@trans.z}, 1)"
+      "#{@xAxis.x.toFixed(nod)}, #{@xAxis.y.toFixed(nod)}, #{@xAxis.z.toFixed(nod)}, 0, " +
+      "#{@yAxis.x.toFixed(nod)}, #{@yAxis.y.toFixed(nod)}, #{@yAxis.z.toFixed(nod)}, 0, " +
+      "#{@zAxis.x.toFixed(nod)}, #{@zAxis.y.toFixed(nod)}, #{@zAxis.z.toFixed(nod)}, 0, " +
+      "#{@trans.x.toFixed(nod)}, #{@trans.y.toFixed(nod)}, #{@trans.z.toFixed(nod)}, 1)"
 
 DivSugar.Matrix.UNIT = new DivSugar.Matrix 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0
 

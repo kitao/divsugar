@@ -21,7 +21,7 @@ DivSugar._Scene =
 
   setPerspective: (perspective) ->
     @_perspective = perspective
-    @style[DivSugar._perspective] = "#{perspective}px"
+    @style[DivSugar._perspective] = "#{perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getWidth: -> @_width
@@ -39,10 +39,11 @@ DivSugar._Scene =
     y = (height - viewHeight) / 2
     sx = width / viewWidth
     sy = height / viewHeight
+    nod = DivSugar.NUM_OF_DIGITS
 
-    @style.width = "#{viewWidth}px"
-    @style.height = "#{viewHeight}px"
-    @style[DivSugar._transform] = "translate(#{x}px, #{y}px) scale(#{sx}, #{sy})"
+    @style.width = "#{viewWidth.toFixed(nod)}px"
+    @style.height = "#{viewHeight.toFixed(nod)}px"
+    @style[DivSugar._transform] = "translate(#{x.toFixed(nod)}px, #{y.toFixed(nod)}px) scale(#{sx.toFixed(nod)}, #{sy.toFixed(nod)})"
 
     @setImageClip @_imageClipU1, @_imageClipV1, @_imageClipU2, @_imageClipV2
     return @
@@ -53,8 +54,8 @@ DivSugar._Scene =
   setPosition: (x, y) ->
     @_positionX = x
     @_positionY = y
-    @style.left = "#{x}px"
-    @style.top = "#{y}px"
+    @style.left = "#{x.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @style.top = "#{y.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getVisible: -> @_visible
@@ -74,7 +75,8 @@ DivSugar._Scene =
   getOpacity: -> @_opacity
 
   setOpacity: (opacity) ->
-    @_opacity = @style.opacity = opacity
+    @_opacity = opacity
+    @style.opacity = opacity.toFixed(DivSugar.NUM_OF_DIGITS)
     return @
 
   getImage: -> @_image
@@ -109,8 +111,9 @@ DivSugar._Scene =
     h = @_viewHeight / (v2 - v1)
     x = -u1 * w
     y = -v1 * h
+    nod = DivSugar.NUM_OF_DIGITS
 
-    @style.backgroundPosition = "#{x}px #{y}px"
-    @style.backgroundSize = "#{w}px #{h}px"
+    @style.backgroundPosition = "#{x.toFixed(nod)}px #{y.toFixed(nod)}px"
+    @style.backgroundSize = "#{w.toFixed(nod)}px #{h.toFixed(nod)}px"
 
     return @

@@ -22,8 +22,8 @@ DivSugar._Sprite =
     @_width = width
     @_height = height
 
-    @style.width = "#{width}px"
-    @style.height = "#{height}px"
+    @style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
 
     @setImageClip @_imageClipU1, @_imageClipV1, @_imageClipU2, @_imageClipV2
     return @
@@ -86,9 +86,10 @@ DivSugar._Sprite =
     h = @_height / (v2 - v1)
     x = -u1 * w
     y = -v1 * h
+    nod = DivSugar.NUM_OF_DIGITS
 
-    @style.backgroundPosition = "#{x}px #{y}px"
-    @style.backgroundSize = "#{w}px #{h}px"
+    @style.backgroundPosition = "#{x.toFixed(nod)}px #{y.toFixed(nod)}px"
+    @style.backgroundSize = "#{w.toFixed(nod)}px #{h.toFixed(nod)}px"
 
     return @
 
@@ -106,3 +107,7 @@ DivSugar._Sprite =
     @_transform.scale scaleX, scaleY, scaleZ
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
+
+  playCSSAnimation: (name, duration) ->
+    @style[DivSugar._animationName] = name
+    @style[DivSugar._animationDuration] = "#{duration.toFixed(DivSugar.NUM_OF_DIGITS)}s"

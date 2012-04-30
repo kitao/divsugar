@@ -230,6 +230,7 @@
 
   test('toCSSTransform', function() {
     var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-    strictEqual(mat1.toCSSTransform(), 'matrix3d(1, 2, 3, 0, 4, 5, 6, 0, 7, 8, 9, 0, 10, 11, 12, 1)');
+    strictEqual(mat1.toCSSTransform(),
+      'matrix3d(1.0000, 2.0000, 3.0000, 0, 4.0000, 5.0000, 6.0000, 0, 7.0000, 8.0000, 9.0000, 0, 10.0000, 11.0000, 12.0000, 1)');
   });
 })();
