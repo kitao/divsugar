@@ -57,31 +57,32 @@
     ok(mat1.orthonormalize().orthonormalize());
   });
 
-  test('rotateX', function() {
+  test('translate', function() {
+    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    var mat2 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 120, 230, 290);
+    mat1.translate(10, -20, 30);
+    deepEqual(mat1, mat2);
+
+    ok(mat1.translate(0, 0, 0).translate(0, 0, 0));
+  });
+
+  test('rotate', function() {
     var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
     var mat2 = new DivSugar.Matrix(0, 0, -1, 0, 1, 0, 1, 0, 0, 100, 200, 300);
-    mat1.rotateX(90);
+    mat1.rotate(90, 0, 0);
     nearlyEqual(mat1, mat2);
 
-    ok(mat1.rotateX(0).rotateX(0));
-  });
+    var mat3 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    var mat4 = new DivSugar.Matrix(0, -1, 0, -1, 0, 0, 0, 0, -1, 100, 200, 300);
+    mat3.rotate(0, 90, 0);
+    nearlyEqual(mat3, mat4);
 
-  test('rotateY', function() {
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    var mat2 = new DivSugar.Matrix(0, -1, 0, -1, 0, 0, 0, 0, -1, 100, 200, 300);
-    mat1.rotateY(90);
-    nearlyEqual(mat1, mat2);
+    var mat5 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    var mat6 = new DivSugar.Matrix(-1, 0, 0, 0, 0, 1, 0, 1, 0, 100, 200, 300);
+    mat5.rotate(0, 0, 90);
+    nearlyEqual(mat5, mat6);
 
-    ok(mat1.rotateY(0).rotateY(0));
-  });
-
-  test('rotateZ', function() {
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    var mat2 = new DivSugar.Matrix(-1, 0, 0, 0, 0, 1, 0, 1, 0, 100, 200, 300);
-    mat1.rotateZ(90);
-    nearlyEqual(mat1, mat2);
-
-    ok(mat1.rotateZ(0).rotateZ(0));
+    ok(mat1.rotate(0, 0, 0).rotate(0, 0, 0));
   });
 
   test('scale', function() {
@@ -93,15 +94,6 @@
     ok(mat1.scale(1, 1, 1).scale(1, 1, 1));
   });
 
-  test('translate', function() {
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    var mat2 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 120, 230, 290);
-    mat1.translate(10, -20, 30);
-    deepEqual(mat1, mat2);
-
-    ok(mat1.translate(0, 0, 0).translate(0, 0, 0));
-  });
-
   test('slerp', function() {
     var ratio;
     var mat1 = new DivSugar.Matrix();
@@ -110,20 +102,20 @@
 
     for (var ratio = 0; ratio <= 1; ratio += 0.1) {
       mat1.set(DivSugar.Matrix.UNIT);
-      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateX(90);
-      mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotateX(90 * ratio);
+      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotate(90, 0, 0);
+      mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotate(90 * ratio, 0, 0);
       mat1.slerp(mat2, ratio);
       nearlyEqual(mat1, mat3);
 
       mat1.set(DivSugar.Matrix.UNIT);
-      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateY(90);
-      mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotateY(90 * ratio);
+      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotate(0, 90, 0);
+      mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotate(0, 90 * ratio, 0);
       mat1.slerp(mat2, ratio);
       nearlyEqual(mat1, mat3);
 
       mat1.set(DivSugar.Matrix.UNIT);
-      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateZ(90);
-      mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotateZ(90 * ratio);
+      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotate(0, 0, 90);
+      mat3.set(DivSugar.Matrix.UNIT).translate(2 * ratio, 4 * ratio, 6 * ratio).rotate(0, 0, 90 * ratio);
       mat1.slerp(mat2, ratio);
       nearlyEqual(mat1, mat3);
     }
@@ -138,20 +130,20 @@
 
     for (var ratio = 0; ratio <= 1; ratio += 0.1) {
       mat1.set(DivSugar.Matrix.UNIT).translate(1, 2, 3);
-      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateX(90);
-      mat3.set(DivSugar.Matrix.UNIT).rotateX(90 * ratio);
+      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotate(90, 0, 0);
+      mat3.set(DivSugar.Matrix.UNIT).rotate(90 * ratio, 0, 0);
       mat1.slerp_noTrans(mat2, ratio);
       nearlyEqual(mat1, mat3);
 
       mat1.set(DivSugar.Matrix.UNIT).translate(1, 2, 3);
-      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateY(90);
-      mat3.set(DivSugar.Matrix.UNIT).rotateY(90 * ratio);
+      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotate(0, 90, 0);
+      mat3.set(DivSugar.Matrix.UNIT).rotate(0, 90 * ratio, 0);
       mat1.slerp_noTrans(mat2, ratio);
       nearlyEqual(mat1, mat3);
 
       mat1.set(DivSugar.Matrix.UNIT).translate(1, 2, 3);
-      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotateZ(90);
-      mat3.set(DivSugar.Matrix.UNIT).rotateZ(90 * ratio);
+      mat2.set(DivSugar.Matrix.UNIT).translate(2, 4, 6).rotate(0, 0, 90);
+      mat3.set(DivSugar.Matrix.UNIT).rotate(0, 0, 90 * ratio);
       mat1.slerp_noTrans(mat2, ratio);
       nearlyEqual(mat1, mat3);
     }

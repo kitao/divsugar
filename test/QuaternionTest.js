@@ -50,20 +50,20 @@
 
     for (var ratio = 0; ratio <= 1; ratio += 0.1) {
       quat1.fromMatrix(new DivSugar.Matrix(DivSugar.Matrix.UNIT));
-      quat2.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotateX(90));
-      quat3.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotateX(90 * ratio));
+      quat2.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotate(90, 0, 0));
+      quat3.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotate(90 * ratio, 0, 0));
       quat1.slerp(quat2, ratio);
       nearlyEqual(quat1, quat3);
 
       quat1.fromMatrix(new DivSugar.Matrix(DivSugar.Matrix.UNIT));
-      quat2.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotateY(90));
-      quat3.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotateY(90 * ratio));
+      quat2.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotate(0, 90, 0));
+      quat3.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotate(0, 90 * ratio, 0));
       quat1.slerp(quat2, ratio);
       nearlyEqual(quat1, quat3);
 
       quat1.fromMatrix(new DivSugar.Matrix(DivSugar.Matrix.UNIT));
-      quat2.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotateZ(90));
-      quat3.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotateZ(90 * ratio));
+      quat2.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotate(0, 0, 90));
+      quat3.fromMatrix((new DivSugar.Matrix(DivSugar.Matrix.UNIT)).rotate(0, 0, 90 * ratio));
       quat1.slerp(quat2, ratio);
       nearlyEqual(quat1, quat3);
     }

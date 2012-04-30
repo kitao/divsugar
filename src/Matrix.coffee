@@ -71,36 +71,6 @@ class DivSugar.Matrix
 
     return @
 
-  rotateX: (deg) ->
-    sin = Math.sin deg * DivSugar.DEG_TO_RAD
-    cos = Math.cos deg * DivSugar.DEG_TO_RAD
-    mat = DivSugar.Matrix._tmpMat1
-
-    mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal @
-    @set mat
-
-  rotateY: (deg) ->
-    sin = Math.sin deg * DivSugar.DEG_TO_RAD
-    cos = Math.cos deg * DivSugar.DEG_TO_RAD
-    mat = DivSugar.Matrix._tmpMat1
-
-    mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal @
-    @set mat
-
-  rotateZ: (deg) ->
-    sin = Math.sin deg * DivSugar.DEG_TO_RAD
-    cos = Math.cos deg * DivSugar.DEG_TO_RAD
-    mat = DivSugar.Matrix._tmpMat1
-
-    mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal @
-    @set mat
-
-  scale: (scaleX, scaleY, scaleZ) ->
-    @xAxis.mul scaleX
-    @yAxis.mul scaleY
-    @zAxis.mul scaleZ
-    return @
-
   translate: (offsetX, offsetY, offsetZ) ->
     vec1 = DivSugar.Matrix._tmpVec1
     vec2 = DivSugar.Matrix._tmpVec2
@@ -111,6 +81,36 @@ class DivSugar.Matrix
     vec3.set(@zAxis).mul(offsetZ)
     @trans.add(vec1).add(vec2).add(vec3)
 
+    return @
+
+  rotate: (rotateX, rotateY, rotateZ) ->
+    if rotateX isnt 0
+      sin = Math.sin rotateX * DivSugar.DEG_TO_RAD
+      cos = Math.cos rotateX * DivSugar.DEG_TO_RAD
+      mat = DivSugar.Matrix._tmpMat1
+      mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal @
+      @set mat
+
+    if rotateY isnt 0
+      sin = Math.sin rotateY * DivSugar.DEG_TO_RAD
+      cos = Math.cos rotateY * DivSugar.DEG_TO_RAD
+      mat = DivSugar.Matrix._tmpMat1
+      mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal @
+      @set mat
+
+    if rotateZ isnt 0
+      sin = Math.sin rotateZ * DivSugar.DEG_TO_RAD
+      cos = Math.cos rotateZ * DivSugar.DEG_TO_RAD
+      mat = DivSugar.Matrix._tmpMat1
+      mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal @
+      @set mat
+
+    return @
+
+  scale: (scaleX, scaleY, scaleZ) ->
+    @xAxis.mul scaleX
+    @yAxis.mul scaleY
+    @zAxis.mul scaleZ
     return @
 
   slerp: (to, ratio) ->

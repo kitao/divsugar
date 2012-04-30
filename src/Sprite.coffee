@@ -92,27 +92,17 @@ DivSugar._Sprite =
 
     return @
 
-  rotateX: (deg) ->
-    @_transform.rotateX deg
+  translate: (offsetX, offsetY, offsetZ) ->
+    @_transform.translate offsetX, offsetY, offsetZ
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
 
-  rotateY: (deg) ->
-    @_transform.rotateY deg
-    @style[DivSugar._transform] = @_transform.toCSSTransform()
-    return @
-
-  rotateZ: (deg) ->
-    @_transform.rotateZ deg
+  rotate: (rotateX, rotateY, rotateZ) ->
+    @_transform.rotate rotateX, rotateY, rotateZ
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
 
   scale: (scaleX, scaleY, scaleZ) ->
     @_transform.scale scaleX, scaleY, scaleZ
-    @style[DivSugar._transform] = @_transform.toCSSTransform()
-    return @
-
-  translate: (offsetX, offsetY, offsetZ) ->
-    @_transform.translate offsetX, offsetY, offsetZ
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @

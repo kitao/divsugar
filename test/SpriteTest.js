@@ -119,43 +119,48 @@
     ok(spr1.setImageClip(0, 0, 0, 0).setImageClip(0, 0, 0, 0));
   });
 
-  test('rotateX', function() {
+  test('translate', function() {
     var spr1 = DivSugar.createSprite();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
     spr1.setTransform(mat1);
-    spr1.rotateX(90);
-    mat1.rotateX(90);
+    spr1.translate(10, 20, 30);
+    mat1.translate(10, 20, 30);
     spr1.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
+    deepEqual(mat2, mat1);
 
-    ok(spr1.rotateX(0).rotateX(0));
+    ok(spr1.translate(0, 0, 0).translate(0, 0, 0));
   });
 
-  test('rotateY', function() {
+  test('rotate', function() {
     var spr1 = DivSugar.createSprite();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
     spr1.setTransform(mat1);
-    spr1.rotateY(90);
-    mat1.rotateY(90);
+    spr1.rotate(90, 0, 0);
+    mat1.rotate(90, 0, 0);
     spr1.getTransform(mat2);
     nearlyEqual(mat2, mat1);
 
-    ok(spr1.rotateY(0).rotateY(0));
-  });
+    var spr2 = DivSugar.createSprite();
+    var mat3 = new DivSugar.Matrix();
+    var mat4 = new DivSugar.Matrix();
+    spr2.setTransform(mat3);
+    spr2.rotate(0, 90, 0);
+    mat3.rotate(0, 90, 0);
+    spr2.getTransform(mat4);
+    nearlyEqual(mat4, mat3);
 
-  test('rotateZ', function() {
-    var spr1 = DivSugar.createSprite();
-    var mat1 = new DivSugar.Matrix();
-    var mat2 = new DivSugar.Matrix();
-    spr1.setTransform(mat1);
-    spr1.rotateZ(90);
-    mat1.rotateZ(90);
-    spr1.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
+    var spr3 = DivSugar.createSprite();
+    var mat5 = new DivSugar.Matrix();
+    var mat6 = new DivSugar.Matrix();
+    spr3.setTransform(mat5);
+    spr3.rotate(0, 0, 90);
+    mat5.rotate(0, 0, 90);
+    spr3.getTransform(mat6);
+    nearlyEqual(mat6, mat5);
 
-    ok(spr1.rotateZ(0).rotateZ(0));
+    ok(spr1.rotate(0, 0, 0).rotate(0, 0, 0));
   });
 
   test('scale', function() {
@@ -169,18 +174,5 @@
     deepEqual(mat2, mat1);
 
     ok(spr1.scale(1, 1, 1).scale(1, 1, 1));
-  });
-
-  test('translate', function() {
-    var spr1 = DivSugar.createSprite();
-    var mat1 = new DivSugar.Matrix();
-    var mat2 = new DivSugar.Matrix();
-    spr1.setTransform(mat1);
-    spr1.translate(10, 20, 30);
-    mat1.translate(10, 20, 30);
-    spr1.getTransform(mat2);
-    deepEqual(mat2, mat1);
-
-    ok(spr1.translate(0, 0, 0).translate(0, 0, 0));
   });
 })();
