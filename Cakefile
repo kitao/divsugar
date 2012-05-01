@@ -11,7 +11,7 @@ sourceFiles = [
   'Matrix.coffee'
   'Quaternion.coffee'
   'Scene.coffee'
-  'Sprite.coffee'
+  'Node.coffee'
   'Task.coffee'
 ]
 
