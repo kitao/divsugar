@@ -1,7 +1,9 @@
 DivSugar =
   _initialize: ->
     # initialize constants
-    @VERSION = '0.10'
+    @VERSION = '0.1.0'
+    console.log "DivSugar: version #{@VERSION}"
+
     @EPSILON = 0.0001
     @NUM_OF_DIGITS = 4
     @DEG_TO_RAD = Math.PI / 180
