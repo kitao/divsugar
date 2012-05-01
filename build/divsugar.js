@@ -9,13 +9,14 @@
         _this = this;
       this.VERSION = '0.10';
       this.EPSILON = 0.0001;
+      this.NUM_OF_DIGITS = 4;
       this.DEG_TO_RAD = Math.PI / 180;
       this.RAD_TO_DEG = 180 / Math.PI;
       this._id = 0;
       this._animations = [];
       this.rootTask = null;
       (function() {
-        var div, perspective, perspectiveOrigin, requestAnimationFrame, transform, transformOrigin, transformStyle, userAgent;
+        var div, requestAnimationFrame, userAgent;
         userAgent = navigator.userAgent.toLowerCase();
         if (userAgent.indexOf('safari') > -1 || userAgent.indexOf('chrome') > -1) {
           _this._prefix = 'webkit';
@@ -30,21 +31,64 @@
         }
         console.log("DivSugar: use '" + _this._prefix + "' as prefix");
         div = document.createElement('div');
-        transform = _this._prefix + 'Transform';
-        _this._transform = div.style[transform] != null ? transform : 'transform';
+        _this._transform = "-" + _this._prefix + "-transform";
+        if (!(div.style[_this._transform] != null)) _this._transform = 'transform';
         console.log("DivSugar: use '" + _this._transform + "'");
-        transformStyle = _this._prefix + 'TransformStyle';
-        _this._transformStyle = div.style[transformStyle] != null ? transformStyle : 'transformStyle';
+        _this._transformStyle = "-" + _this._prefix + "-transform-style";
+        if (!(div.style[_this._transformStyle] != null)) {
+          _this._transformStyle = 'transform-style';
+        }
         console.log("DivSugar: use '" + _this._transformStyle + "'");
-        transformOrigin = _this._prefix + 'TransformOrigin';
-        _this._transformOrigin = div.style[transformOrigin] != null ? transformOrigin : 'transformOrigin';
+        _this._transformOrigin = "-" + _this._prefix + "-transform-origin";
+        if (!(div.style[_this._transformOrigin] != null)) {
+          _this._transformOrigin = 'transform-origin';
+        }
         console.log("DivSugar: use '" + _this._transformOrigin + "'");
-        perspective = _this._prefix + 'Perspective';
-        _this._perspective = div.style[perspective] != null ? perspective : 'perspective';
+        _this._perspective = "-" + _this._prefix + "-perspective";
+        if (!(div.style[_this._perspective] != null)) {
+          _this._perspective = 'perspective';
+        }
         console.log("DivSugar: use '" + _this._perspective + "'");
-        perspectiveOrigin = _this._prefix + 'PerspectiveOrigin';
-        _this._perspectiveOrigin = div.style[perspectiveOrigin] != null ? perspectiveOrigin : 'perspectiveOrigin';
+        _this._perspectiveOrigin = "-" + _this._prefix + "-perspective-origin";
+        if (!(div.style[_this._perspectiveOrigin] != null)) {
+          _this._perspectiveOrigin = 'perspective-origin';
+        }
         console.log("DivSugar: use '" + _this._perspectiveOrigin + "'");
+        _this._animationName = "-" + _this._prefix + "-animation-name";
+        if (!(div.style[_this._animationName] != null)) {
+          _this._animationName = 'animation-name';
+        }
+        console.log("DivSugar: use '" + _this._animationName + "'");
+        _this._animationDuration = "-" + _this._prefix + "-animation-duration";
+        if (!(div.style[_this._animationDuration] != null)) {
+          _this._animationDuration = 'animation-duration';
+        }
+        console.log("DivSugar: use '" + _this._animationDuration + "'");
+        _this._animationTimingFunction = "-" + _this._prefix + "-animation-timing-function";
+        if (!(div.style[_this._animationTimingFunction] != null)) {
+          _this._animationTimingFunction = 'animation-timing-function';
+        }
+        console.log("DivSugar: use '" + _this._animationTimingFunction + "'");
+        _this._animationDelay = "-" + _this._prefix + "-animation-delay";
+        if (!(div.style[_this._animationDelay] != null)) {
+          _this._animationDelay = 'animation-delay';
+        }
+        console.log("DivSugar: use '" + _this._animationDelay + "'");
+        _this._animationIterationCount = "-" + _this._prefix + "-animation-iteration-count";
+        if (!(div.style[_this._animationIterationCount] != null)) {
+          _this._animationIterationCount = 'animation-iteration-count';
+        }
+        console.log("DivSugar: use '" + _this._animationIterationCount + "'");
+        _this._animationDirection = "-" + _this._prefix + "-animation-direction";
+        if (!(div.style[_this._animationDirection] != null)) {
+          _this._animationDirection = 'animation-direction';
+        }
+        console.log("DivSugar: use '" + _this._animationDirection + "'");
+        _this._animationFillMode = "-" + _this._prefix + "-animation-fill-mode";
+        if (!(div.style[_this._animationFillMode] != null)) {
+          _this._animationFillMode = 'animation-fill-mode';
+        }
+        console.log("DivSugar: use '" + _this._animationFillMode + "'");
         requestAnimationFrame = _this._prefix + 'RequestAnimationFrame';
         if (!(window[requestAnimationFrame] != null)) {
           requestAnimationFrame = 'requestAnimationFrame';
@@ -109,22 +153,20 @@
       })(this._Task, args, function() {});
     },
     addCSSAnimation: function(name, animation) {
-      var h, height, keyframe, property, style, transform, value, w, width, x, y, _ref;
+      var h, keyframe, nod, property, style, transform, value, w, x, y, _ref;
       this.removeCSSAnimation(name);
       style = document.createElement('style');
       style.innerHTML = "@-" + this._prefix + "-keyframes " + name + "{";
+      nod = this.NUM_OF_DIGITS;
       for (keyframe in animation) {
-        style.innerHTML += " " + keyframe + "{";
+        style.innerHTML += "" + keyframe + "{";
         transform = null;
-        width = height = 1;
         _ref = animation[keyframe];
         for (property in _ref) {
           value = _ref[property];
           switch (property) {
             case 'size':
-              width = value[0];
-              height = value[1];
-              style.innerHTML += "width:" + width + "px;height:" + height + "px;";
+              style.innerHTML += "width:" + (value[0].toFixed(nod)) + "px;height:" + (value[1].toFixed(nod)) + "px;";
               break;
             case 'visible':
               style.innerHTML += "visibility:" + (value ? 'visible' : 'hidden') + ";";
@@ -133,7 +175,7 @@
               style.innerHTML += "overflow:" + (value ? 'hidden' : 'visible') + ";";
               break;
             case 'opacity':
-              style.innerHTML += "opacity:" + value + ";";
+              style.innerHTML += "opacity:" + (value.toFixed(nod)) + ";";
               break;
             case 'image':
               if (!(value != null)) {
@@ -148,20 +190,17 @@
               }
               break;
             case 'imageClip':
-              w = width / (value[2] - value[0]);
-              h = height / (value[3] - value[1]);
-              x = -value[0] * w;
-              y = -value[1] * h;
-              style.innerHTML += "background-position:" + x + "px " + y + "px;";
-              style.innerHTML += "background-size:" + w + "px " + h + "px;";
+              w = 1 / (value[2] - value[0]) * 100;
+              h = 1 / (value[3] - value[1]) * 100;
+              x = value[0] * w;
+              y = value[1] * h;
+              nod = DivSugar.NUM_OF_DIGITS;
+              style.innerHTML += "background-position:" + (x.toFixed(nod)) + "% " + (y.toFixed(nod)) + "%;";
+              style.innerHTML += "background-size:" + (w.toFixed(nod)) + "% " + (h.toFixed(nod)) + "%;";
               break;
             case 'transform':
               if (transform == null) transform = new DivSugar.Matrix();
-              if (value instanceof DivSugar.Matrix) {
-                transform.set(value);
-              } else {
-                transform.set(value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8], value[9], value[10], value[11]);
-              }
+              transform.set(value);
               break;
             case 'translate':
               if (transform == null) transform = new DivSugar.Matrix();
@@ -177,7 +216,7 @@
           }
         }
         if (transform != null) {
-          style.innerHTML += "transform:" + (transform.toCSSTransform()) + ";";
+          style.innerHTML += "" + this._transform + ":" + (transform.toCSSTransform()) + ";";
         }
         style.innerHTML += '}';
       }
@@ -603,7 +642,9 @@
     };
 
     Matrix.prototype.toCSSTransform = function() {
-      return 'matrix3d(' + ("" + this.xAxis.x + ", " + this.xAxis.y + ", " + this.xAxis.z + ", 0, ") + ("" + this.yAxis.x + ", " + this.yAxis.y + ", " + this.yAxis.z + ", 0, ") + ("" + this.zAxis.x + ", " + this.zAxis.y + ", " + this.zAxis.z + ", 0, ") + ("" + this.trans.x + ", " + this.trans.y + ", " + this.trans.z + ", 1)");
+      var nod;
+      nod = DivSugar.NUM_OF_DIGITS;
+      return 'matrix3d(' + ("" + (this.xAxis.x.toFixed(nod)) + ", " + (this.xAxis.y.toFixed(nod)) + ", " + (this.xAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.yAxis.x.toFixed(nod)) + ", " + (this.yAxis.y.toFixed(nod)) + ", " + (this.yAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.zAxis.x.toFixed(nod)) + ", " + (this.zAxis.y.toFixed(nod)) + ", " + (this.zAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.trans.x.toFixed(nod)) + ", " + (this.trans.y.toFixed(nod)) + ", " + (this.trans.z.toFixed(nod)) + ", 1)");
     };
 
     return Matrix;
@@ -760,7 +801,7 @@
     },
     setPerspective: function(perspective) {
       this._perspective = perspective;
-      this.style[DivSugar._perspective] = "" + perspective + "px";
+      this.style[DivSugar._perspective] = "" + (perspective.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       return this;
     },
     getWidth: function() {
@@ -776,7 +817,7 @@
       return this._viewHeight;
     },
     setSize: function(width, height, viewWidth, viewHeight) {
-      var sx, sy, x, y;
+      var nod, sx, sy, x, y;
       if (viewWidth == null) viewWidth = width;
       if (viewHeight == null) viewHeight = height;
       this._width = width;
@@ -787,9 +828,10 @@
       y = (height - viewHeight) / 2;
       sx = width / viewWidth;
       sy = height / viewHeight;
-      this.style.width = "" + viewWidth + "px";
-      this.style.height = "" + viewHeight + "px";
-      this.style[DivSugar._transform] = "translate(" + x + "px, " + y + "px) scale(" + sx + ", " + sy + ")";
+      nod = DivSugar.NUM_OF_DIGITS;
+      this.style.width = "" + (viewWidth.toFixed(nod)) + "px";
+      this.style.height = "" + (viewHeight.toFixed(nod)) + "px";
+      this.style[DivSugar._transform] = "translate(" + (x.toFixed(nod)) + "px, " + (y.toFixed(nod)) + "px) scale(" + (sx.toFixed(nod)) + ", " + (sy.toFixed(nod)) + ")";
       this.setImageClip(this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2);
       return this;
     },
@@ -802,8 +844,8 @@
     setPosition: function(x, y) {
       this._positionX = x;
       this._positionY = y;
-      this.style.left = "" + x + "px";
-      this.style.top = "" + y + "px";
+      this.style.left = "" + (x.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
+      this.style.top = "" + (y.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       return this;
     },
     getVisible: function() {
@@ -826,7 +868,8 @@
       return this._opacity;
     },
     setOpacity: function(opacity) {
-      this._opacity = this.style.opacity = opacity;
+      this._opacity = opacity;
+      this.style.opacity = opacity.toFixed(DivSugar.NUM_OF_DIGITS);
       return this;
     },
     getImage: function() {
@@ -859,17 +902,18 @@
       return this._imageClipV2;
     },
     setImageClip: function(u1, v1, u2, v2) {
-      var h, w, x, y;
+      var h, nod, w, x, y;
       this._imageClipU1 = u1;
       this._imageClipV1 = v1;
       this._imageClipU2 = u2;
       this._imageClipV2 = v2;
-      w = this._viewWidth / (u2 - u1);
-      h = this._viewHeight / (v2 - v1);
-      x = -u1 * w;
-      y = -v1 * h;
-      this.style.backgroundPosition = "" + x + "px " + y + "px";
-      this.style.backgroundSize = "" + w + "px " + h + "px";
+      w = 1 / (u2 - u1) * 100;
+      h = 1 / (v2 - v1) * 100;
+      x = u1 * w;
+      y = v1 * h;
+      nod = DivSugar.NUM_OF_DIGITS;
+      this.style.backgroundPosition = "" + (x.toFixed(nod)) + "% " + (y.toFixed(nod)) + "%";
+      this.style.backgroundSize = "" + (w.toFixed(nod)) + "% " + (h.toFixed(nod)) + "%";
       return this;
     }
   };
@@ -889,7 +933,8 @@
       this.setClip(false);
       this.setOpacity(1);
       this.setImage(null);
-      return this.setImageClip(0, 0, 1, 1);
+      this.setImageClip(0, 0, 1, 1);
+      return this.stopCSSAnimation();
     },
     getWidth: function() {
       return this._width;
@@ -900,8 +945,8 @@
     setSize: function(width, height) {
       this._width = width;
       this._height = height;
-      this.style.width = "" + width + "px";
-      this.style.height = "" + height + "px";
+      this.style.width = "" + (width.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
+      this.style.height = "" + (height.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       this.setImageClip(this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2);
       return this;
     },
@@ -954,18 +999,29 @@
     getImageClipV1: DivSugar._Scene.getImageClipV1,
     getImageClipU2: DivSugar._Scene.getImageClipU2,
     getImageClipV2: DivSugar._Scene.getImageClipV2,
-    setImageClip: function(u1, v1, u2, v2) {
-      var h, w, x, y;
-      this._imageClipU1 = u1;
-      this._imageClipV1 = v1;
-      this._imageClipU2 = u2;
-      this._imageClipV2 = v2;
-      w = this._width / (u2 - u1);
-      h = this._height / (v2 - v1);
-      x = -u1 * w;
-      y = -v1 * h;
-      this.style.backgroundPosition = "" + x + "px " + y + "px";
-      this.style.backgroundSize = "" + w + "px " + h + "px";
+    setImageClip: DivSugar._Scene.setImageClip,
+    getCSSAnimation: function() {
+      return this._cssAnimation;
+    },
+    playCSSAnimation: function(name, duration, timing, delay, count, direction, fill) {
+      if (timing == null) timing = 'ease';
+      if (delay == null) delay = 0;
+      if (count == null) count = 1;
+      if (direction == null) direction = 'normal';
+      if (fill == null) fill = 'both';
+      this._cssAnimation = name;
+      this.style[DivSugar._animationName] = name;
+      this.style[DivSugar._animationDuration] = "" + (duration.toFixed(DivSugar.NUM_OF_DIGITS)) + "s";
+      this.style[DivSugar._animationTimingFunction] = timing;
+      this.style[DivSugar._animationDirection] = "" + (delay.toFixed(DivSugar.NUM_OF_DIGITS)) + "s";
+      this.style[DivSugar._animationIterationCount] = count;
+      this.style[DivSugar._animationDirection] = direction;
+      this.style[DivSugar._animationFillMode] = fill;
+      return this;
+    },
+    stopCSSAnimation: function(name) {
+      this._cssAnimation = null;
+      this.style[DivSugar._animationName] = 'none';
       return this;
     },
     translate: function(offsetX, offsetY, offsetZ) {
