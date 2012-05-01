@@ -2,7 +2,7 @@
 {spawn, exec} = require 'child_process'
 
 targetDir = 'build'
-targetFile = 'divsugar.js'
+targetName = 'divsugar'
 
 sourceDir = 'src'
 sourceFiles = [
@@ -15,15 +15,19 @@ sourceFiles = [
   'Task.coffee'
 ]
 
-target = "#{targetDir}/#{targetFile}"
+target = "#{targetDir}/#{targetName}.js"
+minTarget = "#{targetDir}/#{targetName}.min.js"
 sources = ("#{sourceDir}/#{s}" for s in sourceFiles)
 
 task 'watch', 'Watch source files and build changes', ->
   coffee = spawn 'coffee', ['-c', '-w', '-j', target].concat sources
-  coffee.stderr.on 'data', (data) ->
-    process.stderr.write data.toString()
-  coffee.stdout.on 'data', (data) ->
-    print data.toString()
+  coffee.stdout.on 'data', (data) -> print data.toString()
+  coffee.stderr.on 'data', (data) -> process.stderr.write data.toString()
 
-task 'clean', 'Delete target file', ->
-  exec "rm -f #{target}"
+task 'minify', 'Make minified version of target', ->
+  yui = spawn 'yuicompressor', [target, '-o', minTarget]
+  yui.stdout.on 'data', (data) -> print data.toString()
+  yui.stderr.on 'data', (data) -> process.stderr.write data.toString()
+
+task 'clean', 'Delete target files', ->
+  exec "rm -f #{target} #{minTarget}"
