@@ -107,13 +107,13 @@ DivSugar._Scene =
     @_imageClipU2 = u2
     @_imageClipV2 = v2
 
-    w = @_viewWidth / (u2 - u1)
-    h = @_viewHeight / (v2 - v1)
-    x = -u1 * w
-    y = -v1 * h
+    w = 1 / (u2 - u1) * 100
+    h = 1 / (v2 - v1) * 100
+    x = u1 * w
+    y = v1 * h
     nod = DivSugar.NUM_OF_DIGITS
 
-    @style.backgroundPosition = "#{x.toFixed(nod)}px #{y.toFixed(nod)}px"
-    @style.backgroundSize = "#{w.toFixed(nod)}px #{h.toFixed(nod)}px"
+    @style.backgroundPosition = "#{x.toFixed(nod)}% #{y.toFixed(nod)}%"
+    @style.backgroundSize = "#{w.toFixed(nod)}% #{h.toFixed(nod)}%"
 
     return @
