@@ -52,7 +52,7 @@
     strictEqual(task2.id, 'task2');
   });
 
-  test('addCSSAnimation', function() {
+  test('addCSSAnimation and removeCSSAnimation', function() {
     var mat1 = new DivSugar.Matrix();
     DivSugar.addCSSAnimation('animation1', {
       from: {
@@ -70,12 +70,8 @@
         transform: mat1
       }
     });
-
     ok('animation1' in DivSugar._animations);
-  });
 
-  test('removeCSSAnimation', function() {
-    DivSugar.addCSSAnimation('animation1', {});
     DivSugar.removeCSSAnimation('animation1');
     ok(!('animation1' in DivSugar._animations));
   });
