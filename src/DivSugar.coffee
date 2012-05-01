@@ -114,10 +114,10 @@ DivSugar =
 
     return div
 
-  createSprite: (args...) ->
+  createNode: (args...) ->
     div = document.createElement 'div'
 
-    for name, func of @_Sprite
+    for name, func of @_Node
       div[name] = func
 
     div._initialize args...
