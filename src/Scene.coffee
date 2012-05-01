@@ -8,8 +8,11 @@ DivSugar._Scene =
     @style[DivSugar._transformOrigin] = '0% 0%'
     @style[DivSugar._perspectiveOrigin] = '50% 50%'
 
+    @rootNode = DivSugar.createNode 'rootNode'
+    @appendChild @rootNode
+
     @setPerspective 1000
-    @setSize 100, 100
+    @setSize 400, 300
     @setPosition 0, 0
     @setVisible true
     @setClip true
@@ -34,18 +37,9 @@ DivSugar._Scene =
     @_height = height
     @_viewWidth = viewWidth
     @_viewHeight = viewHeight
-
-    x = (width - viewWidth) / 2
-    y = (height - viewHeight) / 2
-    sx = width / viewWidth
-    sy = height / viewHeight
-    nod = DivSugar.NUM_OF_DIGITS
-
-    @style.width = "#{viewWidth.toFixed(nod)}px"
-    @style.height = "#{viewHeight.toFixed(nod)}px"
-    @style[DivSugar._transform] = "translate(#{x.toFixed(nod)}px, #{y.toFixed(nod)}px) scale(#{sx.toFixed(nod)}, #{sy.toFixed(nod)})"
-
-    @setImageClip @_imageClipU1, @_imageClipV1, @_imageClipU2, @_imageClipV2
+    @style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight)
     return @
 
   getPositionX: -> @_positionX
@@ -115,5 +109,27 @@ DivSugar._Scene =
 
     @style.backgroundPosition = "#{x.toFixed(nod)}% #{y.toFixed(nod)}%"
     @style.backgroundSize = "#{w.toFixed(nod)}% #{h.toFixed(nod)}%"
+
+    return @
+
+  resize: (width, height, mode) ->
+    if @parentNode?
+      switch mode
+        when 'center'
+          break
+
+        when 'contain'
+          if width < height * @_viewWidth / @_viewHeight
+            @setSize width, width * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
+          else
+            @setSize height * @_viewWidth / @_viewHeight, height, @_viewWidth, @_viewHeight
+
+        when 'cover'
+          if width > height * @_viewWidth / @_viewHeight
+            @setSize width, width * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
+          else
+            @setSize height * @_viewWidth / @_viewHeight, height, @_viewWidth, @_viewHeight
+
+      @setPosition (width - @_width) / 2, (height - @_height) / 2
 
     return @
