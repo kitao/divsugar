@@ -44,4 +44,4 @@ class DivSugar._Task
         return task if task?
       return null
 
-DivSugar.rootTask = DivSugar.createTask('root')
+DivSugar.rootTask = DivSugar.createTask('rootTask')
