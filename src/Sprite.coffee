@@ -75,23 +75,7 @@ DivSugar._Sprite =
   getImageClipV1: DivSugar._Scene.getImageClipV1
   getImageClipU2: DivSugar._Scene.getImageClipU2
   getImageClipV2: DivSugar._Scene.getImageClipV2
-
-  setImageClip: (u1, v1, u2, v2) ->
-    @_imageClipU1 = u1
-    @_imageClipV1 = v1
-    @_imageClipU2 = u2
-    @_imageClipV2 = v2
-
-    w = @_width / (u2 - u1)
-    h = @_height / (v2 - v1)
-    x = -u1 * w
-    y = -v1 * h
-    nod = DivSugar.NUM_OF_DIGITS
-
-    @style.backgroundPosition = "#{x.toFixed(nod)}px #{y.toFixed(nod)}px"
-    @style.backgroundSize = "#{w.toFixed(nod)}px #{h.toFixed(nod)}px"
-
-    return @
+  setImageClip: DivSugar._Scene.setImageClip
 
   translate: (offsetX, offsetY, offsetZ) ->
     @_transform.translate offsetX, offsetY, offsetZ
@@ -108,6 +92,14 @@ DivSugar._Sprite =
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
 
-  playCSSAnimation: (name, duration) ->
+  playCSSAnimation: (name, duration, timing = 'ease', delay = 0, count = 1, direction = 'normal', fill = 'both') ->
     @style[DivSugar._animationName] = name
     @style[DivSugar._animationDuration] = "#{duration.toFixed(DivSugar.NUM_OF_DIGITS)}s"
+    @style[DivSugar._animationTimingFunction] = timing
+    @style[DivSugar._animationDirection] = "#{delay.toFixed(DivSugar.NUM_OF_DIGITS)}s"
+    @style[DivSugar._animationIterationCount] = count
+    @style[DivSugar._animationDirection] = direction
+    @style[DivSugar._animationFillMode] = fill
+
+  stopCSSAnimation: (name) ->
+    @style[DivSugar._animationName] = 'none'
