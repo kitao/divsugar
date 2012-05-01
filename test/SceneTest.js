@@ -7,10 +7,10 @@
     var scn1 = DivSugar.createScene('scene1');
     strictEqual(scn1.id, 'scene1');
     strictEqual(scn1.getPerspective(), 1000);
-    strictEqual(scn1.getWidth(), 100);
-    strictEqual(scn1.getHeight(), 100);
-    strictEqual(scn1.getViewWidth(), 100);
-    strictEqual(scn1.getViewHeight(), 100);
+    strictEqual(scn1.getWidth(), 800);
+    strictEqual(scn1.getHeight(), 600);
+    strictEqual(scn1.getViewWidth(), 800);
+    strictEqual(scn1.getViewHeight(), 600);
     strictEqual(scn1.getPositionX(), 0);
     strictEqual(scn1.getPositionY(), 0);
     strictEqual(scn1.getVisible(), true);
