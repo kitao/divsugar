@@ -6,11 +6,12 @@
   test('constructor and getters', function() {
     var scn1 = DivSugar.createScene('scene1');
     strictEqual(scn1.id, 'scene1');
+    strictEqual(scn1.rootNode instanceof HTMLDivElement, true);
     strictEqual(scn1.getPerspective(), 1000);
-    strictEqual(scn1.getWidth(), 800);
-    strictEqual(scn1.getHeight(), 600);
-    strictEqual(scn1.getViewWidth(), 800);
-    strictEqual(scn1.getViewHeight(), 600);
+    strictEqual(scn1.getWidth(), 400);
+    strictEqual(scn1.getHeight(), 300);
+    strictEqual(scn1.getViewWidth(), 400);
+    strictEqual(scn1.getViewHeight(), 300);
     strictEqual(scn1.getPositionX(), 0);
     strictEqual(scn1.getPositionY(), 0);
     strictEqual(scn1.getVisible(), true);
@@ -99,5 +100,13 @@
     strictEqual(scn1.getImageClipV2(), 0.4);
 
     ok(scn1.setImageClip(0, 0, 0, 0).setImageClip(0, 0, 0, 0));
+  });
+
+  test('resize', function() {
+    var scn1 = DivSugar.createScene();
+
+    // TODO
+
+    ok(scn1.resize(1, 1, 'center').resize(1, 1, 'center'));
   });
 })();
