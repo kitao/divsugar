@@ -1,4 +1,4 @@
-DivSugar._Sprite =
+DivSugar._Node =
   _initialize: (@id = null) ->
     @style.margin = '0px'
     @style.padding = '0px'
@@ -7,7 +7,7 @@ DivSugar._Sprite =
     @style[DivSugar._transformOrigin] = '0% 0%'
     @_transform = new DivSugar.Matrix()
 
-    @setSize 100, 100
+    @setSize 0, 0
     @setPosition 0, 0, 0
     @setVisible true
     @setClip false
