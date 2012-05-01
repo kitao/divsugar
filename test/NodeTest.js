@@ -1,194 +1,194 @@
 (function() {
   'use strict';
 
-  module('Sprite');
+  module('Node');
 
   test('constructor and getters', function() {
-    var spr1 = DivSugar.createSprite('sprite1');
-    strictEqual(spr1.id, 'sprite1');
-    strictEqual(spr1.getWidth(), 100);
-    strictEqual(spr1.getHeight(), 100);
-    strictEqual(spr1.getPositionX(), 0);
-    strictEqual(spr1.getPositionY(), 0);
-    strictEqual(spr1.getPositionZ(), 0);
-    strictEqual(spr1.getVisible(), true);
-    strictEqual(spr1.getClip(), false);
-    strictEqual(spr1.getOpacity(), 1);
-    strictEqual(spr1.getImage(), null);
-    strictEqual(spr1.getImageClipU1(), 0);
-    strictEqual(spr1.getImageClipV1(), 0);
-    strictEqual(spr1.getImageClipU2(), 1);
-    strictEqual(spr1.getImageClipV2(), 1);
-    strictEqual(spr1.getCSSAnimation(), null);
+    var node1 = DivSugar.createNode('node1');
+    strictEqual(node1.id, 'node1');
+    strictEqual(node1.getWidth(), 0);
+    strictEqual(node1.getHeight(), 0);
+    strictEqual(node1.getPositionX(), 0);
+    strictEqual(node1.getPositionY(), 0);
+    strictEqual(node1.getPositionZ(), 0);
+    strictEqual(node1.getVisible(), true);
+    strictEqual(node1.getClip(), false);
+    strictEqual(node1.getOpacity(), 1);
+    strictEqual(node1.getImage(), null);
+    strictEqual(node1.getImageClipU1(), 0);
+    strictEqual(node1.getImageClipV1(), 0);
+    strictEqual(node1.getImageClipU2(), 1);
+    strictEqual(node1.getImageClipV2(), 1);
+    strictEqual(node1.getCSSAnimation(), null);
   });
 
   test('getPosition', function() {
-    var spr1 = DivSugar.createSprite();
+    var node1 = DivSugar.createNode();
     var vec1 = new DivSugar.Vector(1, 2, 3);
-    spr1.getPosition(vec1);
+    node1.getPosition(vec1);
     deepEqual(vec1, DivSugar.Vector.ZERO);
 
-    ok(spr1.getPosition(vec1).getPosition(vec1));
+    ok(node1.getPosition(vec1).getPosition(vec1));
   });
 
   test('getTransform', function() {
-    var spr1 = DivSugar.createSprite();
+    var node1 = DivSugar.createNode();
     var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-    spr1.getTransform(mat1);
+    node1.getTransform(mat1);
     deepEqual(mat1, DivSugar.Matrix.UNIT);
 
-    ok(spr1.getTransform(mat1).getTransform(mat1));
+    ok(node1.getTransform(mat1).getTransform(mat1));
   });
 
   test('setSize', function() {
-    var spr1 = DivSugar.createSprite();
-    spr1.setSize(10, 20);
-    strictEqual(spr1.getWidth(), 10);
-    strictEqual(spr1.getHeight(), 20);
+    var node1 = DivSugar.createNode();
+    node1.setSize(10, 20);
+    strictEqual(node1.getWidth(), 10);
+    strictEqual(node1.getHeight(), 20);
 
-    ok(spr1.setSize(1, 1).setSize(1, 1));
+    ok(node1.setSize(1, 1).setSize(1, 1));
   });
 
   test('setPosition', function() {
-    var spr1 = DivSugar.createSprite();
-    spr1.setPosition(10, 20, 30);
-    strictEqual(spr1.getPositionX(), 10);
-    strictEqual(spr1.getPositionY(), 20);
-    strictEqual(spr1.getPositionZ(), 30);
+    var node1 = DivSugar.createNode();
+    node1.setPosition(10, 20, 30);
+    strictEqual(node1.getPositionX(), 10);
+    strictEqual(node1.getPositionY(), 20);
+    strictEqual(node1.getPositionZ(), 30);
 
-    var spr2 = DivSugar.createSprite();
+    var node2 = DivSugar.createNode();
     var vec1 = new DivSugar.Vector(40, 50, 60);
-    spr2.setPosition(vec1);
-    strictEqual(spr2.getPositionX(), 40);
-    strictEqual(spr2.getPositionY(), 50);
-    strictEqual(spr2.getPositionZ(), 60);
+    node2.setPosition(vec1);
+    strictEqual(node2.getPositionX(), 40);
+    strictEqual(node2.getPositionY(), 50);
+    strictEqual(node2.getPositionZ(), 60);
 
-    ok(spr1.setPosition(0, 0, 0).setPosition(vec1).setPosition(1, 1, 1));
+    ok(node1.setPosition(0, 0, 0).setPosition(vec1).setPosition(1, 1, 1));
   });
 
   test('setTransform', function() {
-    var spr1 = DivSugar.createSprite();
+    var node1 = DivSugar.createNode();
     var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
     var mat2 = new DivSugar.Matrix();
-    spr1.setTransform(mat1);
-    spr1.getTransform(mat2);
+    node1.setTransform(mat1);
+    node1.getTransform(mat2);
     deepEqual(mat2, mat1);
 
-    ok(spr1.setTransform(mat1).setTransform(mat1));
+    ok(node1.setTransform(mat1).setTransform(mat1));
   });
 
   test('setVisible', function() {
-    var spr1 = DivSugar.createSprite();
-    spr1.setVisible(false);
-    strictEqual(spr1.getVisible(), false);
+    var node1 = DivSugar.createNode();
+    node1.setVisible(false);
+    strictEqual(node1.getVisible(), false);
 
-    ok(spr1.setVisible(true).setVisible(true));
+    ok(node1.setVisible(true).setVisible(true));
   });
 
   test('setClip', function() {
-    var spr1 = DivSugar.createSprite();
-    spr1.setClip(true);
-    strictEqual(spr1.getClip(), true);
+    var node1 = DivSugar.createNode();
+    node1.setClip(true);
+    strictEqual(node1.getClip(), true);
 
-    ok(spr1.setClip(true).setClip(true));
+    ok(node1.setClip(true).setClip(true));
   });
 
   test('setOpacity', function() {
-    var spr1 = DivSugar.createSprite();
-    spr1.setOpacity(0.5);
-    strictEqual(spr1.getOpacity(), 0.5);
+    var node1 = DivSugar.createNode();
+    node1.setOpacity(0.5);
+    strictEqual(node1.getOpacity(), 0.5);
 
-    ok(spr1.setOpacity(0).setOpacity(0));
+    ok(node1.setOpacity(0).setOpacity(0));
   });
 
   test('setImage', function() {
-    var spr1 = DivSugar.createSprite();
-    spr1.setImage('http://test.test');
-    strictEqual(spr1.getImage(), 'http://test.test');
+    var node1 = DivSugar.createNode();
+    node1.setImage('http://test.test');
+    strictEqual(node1.getImage(), 'http://test.test');
 
-    ok(spr1.setImage(null).setImage(null));
+    ok(node1.setImage(null).setImage(null));
   });
 
   test('setImageClip', function() {
-    var spr1 = DivSugar.createSprite();
-    spr1.setImageClip(0.1, 0.2, 0.3, 0.4);
-    strictEqual(spr1.getImageClipU1(), 0.1);
-    strictEqual(spr1.getImageClipV1(), 0.2);
-    strictEqual(spr1.getImageClipU2(), 0.3);
-    strictEqual(spr1.getImageClipV2(), 0.4);
+    var node1 = DivSugar.createNode();
+    node1.setImageClip(0.1, 0.2, 0.3, 0.4);
+    strictEqual(node1.getImageClipU1(), 0.1);
+    strictEqual(node1.getImageClipV1(), 0.2);
+    strictEqual(node1.getImageClipU2(), 0.3);
+    strictEqual(node1.getImageClipV2(), 0.4);
 
-    ok(spr1.setImageClip(0, 0, 0, 0).setImageClip(0, 0, 0, 0));
+    ok(node1.setImageClip(0, 0, 0, 0).setImageClip(0, 0, 0, 0));
   });
 
   test('playCSSAnimation and stopCSSAnimation', function() {
-    var spr1 = DivSugar.createSprite();
+    var node1 = DivSugar.createNode();
     DivSugar.addCSSAnimation('animation1', {});
-    spr1.playCSSAnimation('animation1', 1, 'linear', 1, 'infinite', 'alternate', 'forwards');
-    strictEqual(spr1.getCSSAnimation(), 'animation1');
+    node1.playCSSAnimation('animation1', 1, 'linear', 1, 'infinite', 'alternate', 'forwards');
+    strictEqual(node1.getCSSAnimation(), 'animation1');
 
-    spr1.stopCSSAnimation();
-    strictEqual(spr1.getCSSAnimation(), null);
+    node1.stopCSSAnimation();
+    strictEqual(node1.getCSSAnimation(), null);
 
-    ok(spr1.playCSSAnimation('animation1', 1).playCSSAnimation('animation1', 1));
-    ok(spr1.stopCSSAnimation().stopCSSAnimation());
+    ok(node1.playCSSAnimation('animation1', 1).playCSSAnimation('animation1', 1));
+    ok(node1.stopCSSAnimation().stopCSSAnimation());
 
     DivSugar.removeCSSAnimation('animation1');
   });
 
   test('translate', function() {
-    var spr1 = DivSugar.createSprite();
+    var node1 = DivSugar.createNode();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
-    spr1.setTransform(mat1);
-    spr1.translate(10, 20, 30);
+    node1.setTransform(mat1);
+    node1.translate(10, 20, 30);
     mat1.translate(10, 20, 30);
-    spr1.getTransform(mat2);
+    node1.getTransform(mat2);
     deepEqual(mat2, mat1);
 
-    ok(spr1.translate(0, 0, 0).translate(0, 0, 0));
+    ok(node1.translate(0, 0, 0).translate(0, 0, 0));
   });
 
   test('rotate', function() {
-    var spr1 = DivSugar.createSprite();
+    var node1 = DivSugar.createNode();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
-    spr1.setTransform(mat1);
-    spr1.rotate(90, 0, 0);
+    node1.setTransform(mat1);
+    node1.rotate(90, 0, 0);
     mat1.rotate(90, 0, 0);
-    spr1.getTransform(mat2);
+    node1.getTransform(mat2);
     nearlyEqual(mat2, mat1);
 
-    var spr2 = DivSugar.createSprite();
+    var node2 = DivSugar.createNode();
     var mat3 = new DivSugar.Matrix();
     var mat4 = new DivSugar.Matrix();
-    spr2.setTransform(mat3);
-    spr2.rotate(0, 90, 0);
+    node2.setTransform(mat3);
+    node2.rotate(0, 90, 0);
     mat3.rotate(0, 90, 0);
-    spr2.getTransform(mat4);
+    node2.getTransform(mat4);
     nearlyEqual(mat4, mat3);
 
-    var spr3 = DivSugar.createSprite();
+    var node3 = DivSugar.createNode();
     var mat5 = new DivSugar.Matrix();
     var mat6 = new DivSugar.Matrix();
-    spr3.setTransform(mat5);
-    spr3.rotate(0, 0, 90);
+    node3.setTransform(mat5);
+    node3.rotate(0, 0, 90);
     mat5.rotate(0, 0, 90);
-    spr3.getTransform(mat6);
+    node3.getTransform(mat6);
     nearlyEqual(mat6, mat5);
 
-    ok(spr1.rotate(0, 0, 0).rotate(0, 0, 0));
+    ok(node1.rotate(0, 0, 0).rotate(0, 0, 0));
   });
 
   test('scale', function() {
-    var spr1 = DivSugar.createSprite();
+    var node1 = DivSugar.createNode();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
-    spr1.setTransform(mat1);
-    spr1.scale(10, 20, 30);
+    node1.setTransform(mat1);
+    node1.scale(10, 20, 30);
     mat1.scale(10, 20, 30);
-    spr1.getTransform(mat2);
+    node1.getTransform(mat2);
     deepEqual(mat2, mat1);
 
-    ok(spr1.scale(1, 1, 1).scale(1, 1, 1));
+    ok(node1.scale(1, 1, 1).scale(1, 1, 1));
   });
 })();
