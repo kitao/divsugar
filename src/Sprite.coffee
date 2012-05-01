@@ -22,11 +22,8 @@ DivSugar._Sprite =
   setSize: (width, height) ->
     @_width = width
     @_height = height
-
     @style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     @style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
-
-    @setImageClip @_imageClipU1, @_imageClipV1, @_imageClipU2, @_imageClipV2
     return @
 
   getPositionX: -> @_transform.trans.x
