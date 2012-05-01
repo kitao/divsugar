@@ -135,11 +135,11 @@
       div._initialize.apply(div, args);
       return div;
     },
-    createSprite: function() {
+    createNode: function() {
       var args, div, func, name, _ref;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       div = document.createElement('div');
-      _ref = this._Sprite;
+      _ref = this._Node;
       for (name in _ref) {
         func = _ref[name];
         div[name] = func;
@@ -805,8 +805,10 @@
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0%';
       this.style[DivSugar._perspectiveOrigin] = '50% 50%';
+      this.rootNode = DivSugar.createNode('rootNode');
+      this.appendChild(this.rootNode);
       this.setPerspective(1000);
-      this.setSize(100, 100);
+      this.setSize(400, 300);
       this.setPosition(0, 0);
       this.setVisible(true);
       this.setClip(true);
@@ -835,7 +837,6 @@
       return this._viewHeight;
     },
     setSize: function(width, height, viewWidth, viewHeight) {
-      var nod, sx, sy, x, y;
       if (viewWidth == null) {
         viewWidth = width;
       }
@@ -846,15 +847,9 @@
       this._height = height;
       this._viewWidth = viewWidth;
       this._viewHeight = viewHeight;
-      x = (width - viewWidth) / 2;
-      y = (height - viewHeight) / 2;
-      sx = width / viewWidth;
-      sy = height / viewHeight;
-      nod = DivSugar.NUM_OF_DIGITS;
-      this.style.width = "" + (viewWidth.toFixed(nod)) + "px";
-      this.style.height = "" + (viewHeight.toFixed(nod)) + "px";
-      this.style[DivSugar._transform] = "translate(" + (x.toFixed(nod)) + "px, " + (y.toFixed(nod)) + "px) scale(" + (sx.toFixed(nod)) + ", " + (sy.toFixed(nod)) + ")";
-      this.setImageClip(this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2);
+      this.style.width = "" + (width.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
+      this.style.height = "" + (height.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
+      this.rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight);
       return this;
     },
     getPositionX: function() {
@@ -937,10 +932,33 @@
       this.style.backgroundPosition = "" + (x.toFixed(nod)) + "% " + (y.toFixed(nod)) + "%";
       this.style.backgroundSize = "" + (w.toFixed(nod)) + "% " + (h.toFixed(nod)) + "%";
       return this;
+    },
+    resize: function(width, height, mode) {
+      if (this.parentNode != null) {
+        switch (mode) {
+          case 'center':
+            break;
+          case 'contain':
+            if (width < height * this._viewWidth / this._viewHeight) {
+              this.setSize(width, width * this._viewHeight / this._viewWidth, this._viewWidth, this._viewHeight);
+            } else {
+              this.setSize(height * this._viewWidth / this._viewHeight, height, this._viewWidth, this._viewHeight);
+            }
+            break;
+          case 'cover':
+            if (width > height * this._viewWidth / this._viewHeight) {
+              this.setSize(width, width * this._viewHeight / this._viewWidth, this._viewWidth, this._viewHeight);
+            } else {
+              this.setSize(height * this._viewWidth / this._viewHeight, height, this._viewWidth, this._viewHeight);
+            }
+        }
+        this.setPosition((width - this._width) / 2, (height - this._height) / 2);
+      }
+      return this;
     }
   };
 
-  DivSugar._Sprite = {
+  DivSugar._Node = {
     _initialize: function(id) {
       this.id = id != null ? id : null;
       this.style.margin = '0px';
@@ -949,7 +967,7 @@
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0%';
       this._transform = new DivSugar.Matrix();
-      this.setSize(100, 100);
+      this.setSize(0, 0);
       this.setPosition(0, 0, 0);
       this.setVisible(true);
       this.setClip(false);
@@ -969,7 +987,6 @@
       this._height = height;
       this.style.width = "" + (width.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       this.style.height = "" + (height.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
-      this.setImageClip(this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2);
       return this;
     },
     getPositionX: function() {
@@ -1162,6 +1179,6 @@
 
   })();
 
-  DivSugar.rootTask = DivSugar.createTask('root');
+  DivSugar.rootTask = DivSugar.createTask('rootTask');
 
 }).call(this);
