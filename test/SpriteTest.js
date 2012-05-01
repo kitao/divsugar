@@ -19,6 +19,7 @@
     strictEqual(spr1.getImageClipV1(), 0);
     strictEqual(spr1.getImageClipU2(), 1);
     strictEqual(spr1.getImageClipV2(), 1);
+    strictEqual(spr1.getCSSAnimation(), null);
   });
 
   test('getPosition', function() {
@@ -117,6 +118,21 @@
     strictEqual(spr1.getImageClipV2(), 0.4);
 
     ok(spr1.setImageClip(0, 0, 0, 0).setImageClip(0, 0, 0, 0));
+  });
+
+  test('playCSSAnimation and stopCSSAnimation', function() {
+    var spr1 = DivSugar.createSprite();
+    DivSugar.addCSSAnimation('animation1', {});
+    spr1.playCSSAnimation('animation1', 1, 'linear', 1, 'infinite', 'alternate', 'forwards');
+    strictEqual(spr1.getCSSAnimation(), 'animation1');
+
+    spr1.stopCSSAnimation();
+    strictEqual(spr1.getCSSAnimation(), null);
+
+    ok(spr1.playCSSAnimation('animation1', 1).playCSSAnimation('animation1', 1));
+    ok(spr1.stopCSSAnimation().stopCSSAnimation());
+
+    DivSugar.removeCSSAnimation('animation1');
   });
 
   test('translate', function() {
