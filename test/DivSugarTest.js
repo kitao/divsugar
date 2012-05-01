@@ -13,7 +13,7 @@
 
   test('rootTask', function() {
     strictEqual(DivSugar.rootTask instanceof DivSugar._Task, true);
-    strictEqual(DivSugar.rootTask.id, 'root');
+    strictEqual(DivSugar.rootTask.id, 'rootTask');
   });
 
   test('generateId', function() {
@@ -32,14 +32,14 @@
     strictEqual(scn2.id, 'scene2');
   });
 
-  test('createSprite', function() {
-    var spr1 = DivSugar.createSprite();
-    ok(spr1 instanceof HTMLDivElement);
-    ok(!spr1.id);
+  test('createNode', function() {
+    var node1 = DivSugar.createNode();
+    ok(node1 instanceof HTMLDivElement);
+    ok(!node1.id);
 
-    var spr2 = DivSugar.createSprite('sprite2');
-    ok(spr2 instanceof HTMLDivElement);
-    strictEqual(spr2.id, 'sprite2');
+    var node2 = DivSugar.createNode('node2');
+    ok(node2 instanceof HTMLDivElement);
+    strictEqual(node2.id, 'node2');
   });
 
   test('createTask', function() {
