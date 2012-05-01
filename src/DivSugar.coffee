@@ -54,8 +54,28 @@ DivSugar =
       console.log "DivSugar: use '#{@_animationName}'"
 
       @_animationDuration = "-#{@_prefix}-animation-duration"
-      @_animationDuration = 'animation-duratino' if not div.style[@_animationDuration]?
+      @_animationDuration = 'animation-duration' if not div.style[@_animationDuration]?
       console.log "DivSugar: use '#{@_animationDuration}'"
+
+      @_animationTimingFunction = "-#{@_prefix}-animation-timing-function"
+      @_animationTimingFunction = 'animation-timing-function' if not div.style[@_animationTimingFunction]?
+      console.log "DivSugar: use '#{@_animationTimingFunction}'"
+
+      @_animationDelay = "-#{@_prefix}-animation-delay"
+      @_animationDelay = 'animation-delay' if not div.style[@_animationDelay]?
+      console.log "DivSugar: use '#{@_animationDelay}'"
+
+      @_animationIterationCount = "-#{@_prefix}-animation-iteration-count"
+      @_animationIterationCount = 'animation-iteration-count' if not div.style[@_animationIterationCount]?
+      console.log "DivSugar: use '#{@_animationIterationCount}'"
+
+      @_animationDirection = "-#{@_prefix}-animation-direction"
+      @_animationDirection = 'animation-direction' if not div.style[@_animationDirection]?
+      console.log "DivSugar: use '#{@_animationDirection}'"
+
+      @_animationFillMode = "-#{@_prefix}-animation-fill-mode"
+      @_animationFillMode = 'animation-fill-mode' if not div.style[@_animationFillMode]?
+      console.log "DivSugar: use '#{@_animationFillMode}'"
 
       requestAnimationFrame = @_prefix + 'RequestAnimationFrame'
       requestAnimationFrame = 'requestAnimationFrame' if not window[requestAnimationFrame]?
@@ -112,16 +132,13 @@ DivSugar =
 
     for keyframe of animation
       style.innerHTML += "#{keyframe}{"
-
       transform = null
-      width = height = 1
+
       for property, value of animation[keyframe]
 
         switch property
           when 'size'
-            width = value[0]
-            height = value[1]
-            style.innerHTML += "width:#{width.toFixed(nod)}px;height:#{height.toFixed(nod)}px;"
+            style.innerHTML += "width:#{value[0].toFixed(nod)}px;height:#{value[1].toFixed(nod)}px;"
 
           when 'visible'
             style.innerHTML += "visibility:#{if value then 'visible' else 'hidden'};"
@@ -144,19 +161,18 @@ DivSugar =
               style.innerHTML += "background-image:url(#{value});"
 
           when 'imageClip'
-            w = width / (value[2] - value[0])
-            h = height / (value[3] - value[1])
-            x = -value[0] * w
-            y = -value[1] * h
-            style.innerHTML += "background-position:#{x.toFixed(nod)}px #{y.toFixed(nod)}px;"
-            style.innerHTML += "background-size:#{w.toFixed(nod)}px #{h.toFixed(nod)}px;"
+            w = 1 / (value[2] - value[0]) * 100
+            h = 1 / (value[3] - value[1]) * 100
+            x = value[0] * w
+            y = value[1] * h
+            nod = DivSugar.NUM_OF_DIGITS
+
+            style.innerHTML += "background-position:#{x.toFixed(nod)}% #{y.toFixed(nod)}%;"
+            style.innerHTML += "background-size:#{w.toFixed(nod)}% #{h.toFixed(nod)}%;"
 
           when 'transform'
             transform ?= new DivSugar.Matrix()
-            if value instanceof DivSugar.Matrix
-              transform.set value
-            else
-              transform.set value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8], value[9], value[10], value[11]
+            transform.set value
 
           when 'translate'
             transform ?= new DivSugar.Matrix()
