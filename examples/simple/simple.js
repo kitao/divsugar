@@ -1,14 +1,14 @@
 window.onload = function() {
-  "use strict";
+  'use strict';
 
   var scn = DivSugar.createScene();
   scn.setSize(600, 400).setPosition(200, 30).setImage('#0000ff');
   document.body.appendChild(scn);
 
-  var spr = DivSugar.createSprite();
-  spr.setSize(200, 200).setImage('http://placekitten.com/200/200').setPosition(330, 130, 0).setOpacity(0.5).rotate(0, 0, 30);
-  spr.setImageClip(0, 0, 1, 1);
-  scn.appendChild(spr);
+  var node = DivSugar.createNode();
+  node.setSize(200, 200).setImage('http://placekitten.com/200/200').setPosition(330, 130, 0).setOpacity(0.5).rotate(0, 0, 30);
+  node.setImageClip(0, 0, 1, 1);
+  scn.rootNode.appendChild(node);
 
   DivSugar.addCSSAnimation('testAnim', {
     from: {
@@ -30,20 +30,20 @@ window.onload = function() {
   var task = DivSugar.createTask('hoge');
   var vec = new DivSugar.Vector();
 
-  //spr.playCSSAnimation('testAnim', 2, 'linear', 0, 'infinite', 'alternate');
+  //node.playCSSAnimation('testAnim', 2, 'linear', 0, 'infinite', 'alternate');
 
   task.onUpdate = function(elapsedTime) {
-    var width = spr.getWidth();
-    var height = spr.getHeight();
+    var width = node.getWidth();
+    var height = node.getHeight();
 
-    spr.setSize(width + elapsedTime * 0.05, height + elapsedTime * 0.05).rotate(elapsedTime * 0.05, 0, 0);
+    node.setSize(width + elapsedTime * 0.05, height + elapsedTime * 0.05).rotate(elapsedTime * 0.05, 0, 0);
     if (width > 400) {
       this.destroy();
     }
   };
 
   task.onDestroy = function() {
-    spr.parentNode.removeChild(spr);
+    node.parentNode.removeChild(node);
   };
 
   DivSugar.rootTask.appendChild(task);
