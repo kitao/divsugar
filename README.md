@@ -18,7 +18,7 @@ Examples
 Getting Started
 ---------------
 Just include **divsugar.js** file.
-```javascript
+```html
 <script src="divsugar.js"></script>
 ```
 
