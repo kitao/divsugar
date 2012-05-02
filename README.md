@@ -6,10 +6,11 @@ Each element of the scene graph is an extended div element, so it is very easy t
 
 Features
 --------
-- CSS-based 3D scene graph
-- Chainable methods to reduce code
+- 3D scene graph using div elements as nodes
+- Chainable methods to reduce redundant code
+- Geometry classes such as Vector, Matrix, and Quaternion
 - Task management system for interactive animations
-- Dynamic CSS animation support
+- Dynamic CSS animation support functions
 
 Examples
 --------
