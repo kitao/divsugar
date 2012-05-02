@@ -805,9 +805,29 @@
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0%';
       this.style[DivSugar._perspectiveOrigin] = '50% 50%';
-      this.rootNode = DivSugar.createNode('rootNode');
-      this.appendChild(this.rootNode);
-      this.setPerspective(1000);
+      this._rootNode = DivSugar.createNode('rootNode');
+      this.appendChild(this._rootNode);
+      this.appendChild = function() {
+        var args, _ref;
+        args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        return (_ref = this._rootNode).appendChild.apply(_ref, args);
+      };
+      this.insertBefore = function() {
+        var args, _ref;
+        args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        return (_ref = this._rootNode).insertBefore.apply(_ref, args);
+      };
+      this.removeChild = function() {
+        var args, _ref;
+        args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        return (_ref = this._rootNode).removeChild.apply(_ref, args);
+      };
+      this.replaceChild = function() {
+        var args, _ref;
+        args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        return (_ref = this._rootNode).replaceChild.apply(_ref, args);
+      };
+      this.setViewAngle(45);
       this.setSize(400, 300);
       this.setPosition(0, 0);
       this.setVisible(true);
@@ -816,12 +836,16 @@
       this.setImage('#0000ff');
       return this.setImageClip(0, 0, 1, 1);
     },
+    getViewAngle: function() {
+      return this._viewAngle;
+    },
     getPerspective: function() {
       return this._perspective;
     },
-    setPerspective: function(perspective) {
-      this._perspective = perspective;
-      this.style[DivSugar._perspective] = "" + (perspective.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
+    setViewAngle: function(viewAngle) {
+      this._viewAngle = viewAngle;
+      this._perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * this._viewWidth / 2;
+      this.style[DivSugar._perspective] = "" + (this._perspective.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       return this;
     },
     getWidth: function() {
@@ -849,7 +873,8 @@
       this._viewHeight = viewHeight;
       this.style.width = "" + (width.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       this.style.height = "" + (height.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
-      this.rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight);
+      this._rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1);
+      this.setViewAngle(this._viewAngle);
       return this;
     },
     getPositionX: function() {
@@ -933,9 +958,9 @@
       this.style.backgroundSize = "" + (w.toFixed(nod)) + "% " + (h.toFixed(nod)) + "%";
       return this;
     },
-    resize: function(width, height, mode) {
+    adjustLayout: function(width, height, style) {
       if (this.parentNode != null) {
-        switch (mode) {
+        switch (style) {
           case 'center':
             break;
           case 'contain':
