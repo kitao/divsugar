@@ -119,24 +119,22 @@ DivSugar._Scene =
 
     return @
 
-  adjustLayout: (width, height, style) ->
-    if @parentNode?
-      switch style
-        when 'center'
-          break
+  adjustLayout: (parentWidth, parentHeight, style) ->
+    switch style
+      when 'center'
+        break
 
-        when 'contain'
-          if width < height * @_viewWidth / @_viewHeight
-            @setSize width, width * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
-          else
-            @setSize height * @_viewWidth / @_viewHeight, height, @_viewWidth, @_viewHeight
+      when 'contain'
+        if parentWidth < parentHeight * @_viewWidth / @_viewHeight
+          @setSize parentWidth, parentWidth * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
+        else
+          @setSize parentHeight * @_viewWidth / @_viewHeight, parentHeight, @_viewWidth, @_viewHeight
 
-        when 'cover'
-          if width > height * @_viewWidth / @_viewHeight
-            @setSize width, width * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
-          else
-            @setSize height * @_viewWidth / @_viewHeight, height, @_viewWidth, @_viewHeight
+      when 'cover'
+        if parentWidth > parentHeight * @_viewWidth / @_viewHeight
+          @setSize parentWidth, parentWidth * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
+        else
+          @setSize parentHeight * @_viewWidth / @_viewHeight, parentHeight, @_viewWidth, @_viewHeight
 
-      @setPosition (width - @_width) / 2, (height - @_height) / 2
-
+    @setPosition (parentWidth - @_width) / 2, (parentHeight - @_height) / 2
     return @
