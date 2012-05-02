@@ -6,8 +6,8 @@
   test('constructor and getters', function() {
     var scn1 = DivSugar.createScene('scene1');
     strictEqual(scn1.id, 'scene1');
-    strictEqual(scn1.rootNode instanceof HTMLDivElement, true);
-    strictEqual(scn1.getPerspective(), 1000);
+    strictEqual(scn1.getViewAngle(), 45);
+    nearlyEqual(scn1.getPerspective(), 482.8427);
     strictEqual(scn1.getWidth(), 400);
     strictEqual(scn1.getHeight(), 300);
     strictEqual(scn1.getViewWidth(), 400);
@@ -24,17 +24,34 @@
     strictEqual(scn1.getImageClipV2(), 1);
   });
 
-  test('setPerspective', function() {
+  test('overridden methods', function() {
     var scn1 = DivSugar.createScene();
-    scn1.setPerspective(123);
-    strictEqual(scn1.getPerspective(), 123);
+    var node1 = DivSugar.createNode();
+    var node2 = DivSugar.createNode();
+    scn1.appendChild(node1);
+    strictEqual(scn1._rootNode.firstChild, node1);
+    scn1.insertBefore(node2, node1);
+    strictEqual(scn1._rootNode.firstChild, node2);
+    scn1.removeChild(node2);
+    strictEqual(scn1._rootNode.firstChild, node1);
+    scn1.replaceChild(node2, node1);
+    strictEqual(scn1._rootNode.firstChild, node2);
+  });
 
-    ok(scn1.setPerspective(1).setPerspective(1));
+  test('setViewAngle', function() {
+    var scn1 = DivSugar.createScene();
+    scn1.setSize(800, 600);
+    scn1.setViewAngle(90);
+    strictEqual(scn1.getViewAngle(), 90);
+    nearlyEqual(scn1.getPerspective(), 400);
+
+    ok(scn1.setViewAngle(90).setViewAngle(90));
   });
 
   test('setSize', function() {
     var scn1 = DivSugar.createScene();
     scn1.setSize(10, 20);
+    nearlyEqual(scn1.getPerspective(), 12.0711);
     strictEqual(scn1.getWidth(), 10);
     strictEqual(scn1.getHeight(), 20);
     strictEqual(scn1.getViewWidth(), 10);
@@ -42,6 +59,7 @@
 
     var scn2 = DivSugar.createScene();
     scn2.setSize(100, 200, 300, 400);
+    nearlyEqual(scn2.getPerspective(), 362.1320);
     strictEqual(scn2.getWidth(), 100);
     strictEqual(scn2.getHeight(), 200);
     strictEqual(scn2.getViewWidth(), 300);
@@ -102,11 +120,40 @@
     ok(scn1.setImageClip(0, 0, 0, 0).setImageClip(0, 0, 0, 0));
   });
 
-  test('resize', function() {
+  test('adjustLayout', function() {
     var scn1 = DivSugar.createScene();
+    scn1.setSize(100, 200, 300, 400);
 
-    // TODO
+    scn1.adjustLayout(1000, 2000, 'center');
+    nearlyEqual(scn1.getWidth(), 100);
+    nearlyEqual(scn1.getHeight(), 200);
+    nearlyEqual(scn1.getPositionX(), 450);
+    nearlyEqual(scn1.getPositionY(), 900);
 
-    ok(scn1.resize(1, 1, 'center').resize(1, 1, 'center'));
+    scn1.adjustLayout(1000, 2000, 'contain');
+    nearlyEqual(scn1.getWidth(), 1000);
+    nearlyEqual(scn1.getHeight(), 1333.3333);
+    nearlyEqual(scn1.getPositionX(), 0);
+    nearlyEqual(scn1.getPositionY(), 333.3333);
+
+    scn1.adjustLayout(2000, 1000, 'contain');
+    nearlyEqual(scn1.getWidth(), 750);
+    nearlyEqual(scn1.getHeight(), 1000);
+    nearlyEqual(scn1.getPositionX(), 625);
+    nearlyEqual(scn1.getPositionY(), 0);
+
+    scn1.adjustLayout(1000, 2000, 'cover');
+    nearlyEqual(scn1.getWidth(), 1500);
+    nearlyEqual(scn1.getHeight(), 2000);
+    nearlyEqual(scn1.getPositionX(), -250);
+    nearlyEqual(scn1.getPositionY(), 0);
+
+    scn1.adjustLayout(2000, 1000, 'cover');
+    nearlyEqual(scn1.getWidth(), 2000);
+    nearlyEqual(scn1.getHeight(), 2666.6667);
+    nearlyEqual(scn1.getPositionX(), 0);
+    nearlyEqual(scn1.getPositionY(), -833.3333);
+
+    ok(scn1.adjustLayout(1, 1, 'center').adjustLayout(1, 1, 'center'));
   });
 })();
