@@ -4,18 +4,21 @@
   module('Task');
 
   test('constructor, properties, and getters', function() {
-    var task1 = DivSugar.createTask('task1');
-    strictEqual(task1.id, 'task1');
+    var task1 = new DivSugar.Task();
+    strictEqual(task1.id, null);
     strictEqual(task1.active, true);
     strictEqual(task1.onUpdate, null);
     strictEqual(task1.onDestroy, null);
     strictEqual(task1.getParent(), null);
+
+    var task2 = new DivSugar.Task('task2');
+    strictEqual(task2.id, 'task2');
   });
 
   test('update', function() {
     var updatedCount = 0;
-    var task1 = DivSugar.createTask();
-    var task2 = DivSugar.createTask();
+    var task1 = new DivSugar.Task();
+    var task2 = new DivSugar.Task();
     task1.onUpdate = task2.onUpdate = function(elapsedTime) {
       strictEqual(elapsedTime, 123);
       updatedCount++;
@@ -27,8 +30,8 @@
 
   test('destroy', function() {
     var destroyedCount = 0;
-    var task1 = DivSugar.createTask();
-    var task2 = DivSugar.createTask();
+    var task1 = new DivSugar.Task();
+    var task2 = new DivSugar.Task();
     task1.onDestroy = task2.onDestroy = function() { destroyedCount++; };
     task1.appendChild(task2);
     task1.destroy();
@@ -36,10 +39,10 @@
   });
 
   test('appendChild', function() {
-    var task1 = DivSugar.createTask('task1');
-    var task2 = DivSugar.createTask('task2');
-    var task3 = DivSugar.createTask('task3');
-    var task4 = DivSugar.createTask('task4');
+    var task1 = new DivSugar.Task('task1');
+    var task2 = new DivSugar.Task('task2');
+    var task3 = new DivSugar.Task('task3');
+    var task4 = new DivSugar.Task('task4');
     task1.appendChild(task2);
     task1.appendChild(task3);
     task3.appendChild(task4);
@@ -52,10 +55,10 @@
   });
 
   test('removeChild', function() {
-    var task1 = DivSugar.createTask('task1');
-    var task2 = DivSugar.createTask('task2');
-    var task3 = DivSugar.createTask('task3');
-    var task4 = DivSugar.createTask('task4');
+    var task1 = new DivSugar.Task('task1');
+    var task2 = new DivSugar.Task('task2');
+    var task3 = new DivSugar.Task('task3');
+    var task4 = new DivSugar.Task('task4');
     task1.appendChild(task2);
     task1.appendChild(task3);
     task3.appendChild(task4);
@@ -69,10 +72,10 @@
   });
 
   test('getTaskById', function() {
-    var task1 = DivSugar.createTask('task1');
-    var task2 = DivSugar.createTask('task2');
-    var task3 = DivSugar.createTask('task3');
-    var task4 = DivSugar.createTask('task4');
+    var task1 = new DivSugar.Task('task1');
+    var task2 = new DivSugar.Task('task2');
+    var task3 = new DivSugar.Task('task3');
+    var task4 = new DivSugar.Task('task4');
     task1.appendChild(task2);
     task1.appendChild(task3);
     task3.appendChild(task4);

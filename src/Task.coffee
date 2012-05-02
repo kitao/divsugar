@@ -1,5 +1,5 @@
-class DivSugar._Task
-  constructor: (@id) ->
+class DivSugar.Task
+  constructor: (@id = null) ->
     @active = true
     @onUpdate = null
     @onDestroy = null
@@ -44,4 +44,4 @@ class DivSugar._Task
         return task if task?
       return null
 
-DivSugar.rootTask = DivSugar.createTask('rootTask')
+DivSugar.rootTask = new DivSugar.Task('rootTask')
