@@ -958,27 +958,25 @@
       this.style.backgroundSize = "" + (w.toFixed(nod)) + "% " + (h.toFixed(nod)) + "%";
       return this;
     },
-    adjustLayout: function(width, height, style) {
-      if (this.parentNode != null) {
-        switch (style) {
-          case 'center':
-            break;
-          case 'contain':
-            if (width < height * this._viewWidth / this._viewHeight) {
-              this.setSize(width, width * this._viewHeight / this._viewWidth, this._viewWidth, this._viewHeight);
-            } else {
-              this.setSize(height * this._viewWidth / this._viewHeight, height, this._viewWidth, this._viewHeight);
-            }
-            break;
-          case 'cover':
-            if (width > height * this._viewWidth / this._viewHeight) {
-              this.setSize(width, width * this._viewHeight / this._viewWidth, this._viewWidth, this._viewHeight);
-            } else {
-              this.setSize(height * this._viewWidth / this._viewHeight, height, this._viewWidth, this._viewHeight);
-            }
-        }
-        this.setPosition((width - this._width) / 2, (height - this._height) / 2);
+    adjustLayout: function(parentWidth, parentHeight, style) {
+      switch (style) {
+        case 'center':
+          break;
+        case 'contain':
+          if (parentWidth < parentHeight * this._viewWidth / this._viewHeight) {
+            this.setSize(parentWidth, parentWidth * this._viewHeight / this._viewWidth, this._viewWidth, this._viewHeight);
+          } else {
+            this.setSize(parentHeight * this._viewWidth / this._viewHeight, parentHeight, this._viewWidth, this._viewHeight);
+          }
+          break;
+        case 'cover':
+          if (parentWidth > parentHeight * this._viewWidth / this._viewHeight) {
+            this.setSize(parentWidth, parentWidth * this._viewHeight / this._viewWidth, this._viewWidth, this._viewHeight);
+          } else {
+            this.setSize(parentHeight * this._viewWidth / this._viewHeight, parentHeight, this._viewWidth, this._viewHeight);
+          }
       }
+      this.setPosition((parentWidth - this._width) / 2, (parentHeight - this._height) / 2);
       return this;
     }
   };
