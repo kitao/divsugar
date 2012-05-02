@@ -147,15 +147,6 @@
       div._initialize.apply(div, args);
       return div;
     },
-    createTask: function() {
-      var args;
-      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return (function(func, args, ctor) {
-        ctor.prototype = func.prototype;
-        var child = new ctor, result = func.apply(child, args), t = typeof result;
-        return t == "object" || t == "function" ? result || child : child;
-      })(this._Task, args, function(){});
-    },
     addCSSAnimation: function(name, animation) {
       var h, keyframe, nod, property, style, transform, value, w, x, y, _ref;
       this.removeCSSAnimation(name);
@@ -1113,12 +1104,12 @@
     }
   };
 
-  DivSugar._Task = (function() {
+  DivSugar.Task = (function() {
 
-    _Task.name = '_Task';
+    Task.name = 'Task';
 
-    function _Task(id) {
-      this.id = id;
+    function Task(id) {
+      this.id = id != null ? id : null;
       this.update = __bind(this.update, this);
 
       this.active = true;
@@ -1128,11 +1119,11 @@
       this._children = [];
     }
 
-    _Task.prototype.getParent = function() {
+    Task.prototype.getParent = function() {
       return this._parent;
     };
 
-    _Task.prototype.update = function(elapsedTime) {
+    Task.prototype.update = function(elapsedTime) {
       var child, _i, _len, _ref, _results;
       if (this.active) {
         if (typeof this.onUpdate === "function") {
@@ -1148,7 +1139,7 @@
       }
     };
 
-    _Task.prototype.destroy = function() {
+    Task.prototype.destroy = function() {
       var child, _i, _len, _ref, _ref1, _results;
       if (typeof this.onDestroy === "function") {
         this.onDestroy();
@@ -1165,13 +1156,13 @@
       return _results;
     };
 
-    _Task.prototype.appendChild = function(task) {
+    Task.prototype.appendChild = function(task) {
       this.removeChild(task);
       this._children.push(task);
       return task._parent = this;
     };
 
-    _Task.prototype.removeChild = function(task) {
+    Task.prototype.removeChild = function(task) {
       var i;
       i = this._children.indexOf(task);
       if (i > -1) {
@@ -1181,7 +1172,7 @@
       return this;
     };
 
-    _Task.prototype.getTaskById = function(id) {
+    Task.prototype.getTaskById = function(id) {
       var child, task, _i, _len, _ref;
       if (this.id === id) {
         return this;
@@ -1198,10 +1189,10 @@
       }
     };
 
-    return _Task;
+    return Task;
 
   })();
 
-  DivSugar.rootTask = DivSugar.createTask('rootTask');
+  DivSugar.rootTask = new DivSugar.Task('rootTask');
 
 }).call(this);
