@@ -124,8 +124,6 @@ DivSugar =
 
     return div
 
-  createTask: (args...) -> new @_Task args...
-
   addCSSAnimation: (name, animation) ->
     @removeCSSAnimation name
     style = document.createElement('style')
