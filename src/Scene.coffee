@@ -8,10 +8,14 @@ DivSugar._Scene =
     @style[DivSugar._transformOrigin] = '0% 0%'
     @style[DivSugar._perspectiveOrigin] = '50% 50%'
 
-    @rootNode = DivSugar.createNode 'rootNode'
-    @appendChild @rootNode
+    @_rootNode = DivSugar.createNode 'rootNode'
+    @appendChild @_rootNode
+    @appendChild = (args...) -> @_rootNode.appendChild args...
+    @insertBefore = (args...) -> @_rootNode.insertBefore args...
+    @removeChild = (args...) -> @_rootNode.removeChild args...
+    @replaceChild = (args...) -> @_rootNode.replaceChild args...
 
-    @setPerspective 1000
+    @setViewAngle 45
     @setSize 400, 300
     @setPosition 0, 0
     @setVisible true
@@ -20,11 +24,13 @@ DivSugar._Scene =
     @setImage '#0000ff'
     @setImageClip 0, 0, 1, 1
 
+  getViewAngle: -> @_viewAngle
   getPerspective: -> @_perspective
 
-  setPerspective: (perspective) ->
-    @_perspective = perspective
-    @style[DivSugar._perspective] = "#{perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+  setViewAngle: (viewAngle) ->
+    @_viewAngle = viewAngle
+    @_perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * @_viewWidth / 2
+    @style[DivSugar._perspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getWidth: -> @_width
@@ -39,7 +45,8 @@ DivSugar._Scene =
     @_viewHeight = viewHeight
     @style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     @style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
-    @rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight)
+    @_rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1)
+    @setViewAngle @_viewAngle
     return @
 
   getPositionX: -> @_positionX
@@ -112,9 +119,9 @@ DivSugar._Scene =
 
     return @
 
-  resize: (width, height, mode) ->
+  adjustLayout: (width, height, style) ->
     if @parentNode?
-      switch mode
+      switch style
         when 'center'
           break
 
