@@ -18,9 +18,9 @@ window.onload = function() {
   node1.appendChild(node2);
 
   // create a task which rotates the nodes
-  var task1 = DivSugar.createTask();
-  task1.onUpdate = function(elapsedTime) { node1.rotate(elapsedTime * 0.02, elapsedTime * 0.03, elapsedTime * 0.015); };
-  DivSugar.rootTask.appendChild(task1);
+  var task = DivSugar.createTask();
+  task.onUpdate = function(elapsedTime) { node1.rotate(elapsedTime * 0.02, elapsedTime * 0.03, elapsedTime * 0.015); };
+  DivSugar.rootTask.appendChild(task);
 
   // maximize the scene size as possible
   function resize() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); }
