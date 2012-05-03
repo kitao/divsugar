@@ -9,7 +9,7 @@ class DivSugar.Task
 
   getParent: -> @_parent
 
-  update: (elapsedTime) =>
+  update: (elapsedTime) ->
     if @active
       @onUpdate? elapsedTime
 
