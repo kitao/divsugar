@@ -16,6 +16,36 @@
     strictEqual(DivSugar.rootTask.id, 'rootTask');
   });
 
+  test('inherit', function() {
+    function Class1(a, b) {
+      this.a = a;
+      this.b = b;
+      this.c = 123;
+    }
+    Class1.prototype.getValue = function() { return this.c; };
+
+    function Class2(a, b) {
+      this.constructor.uber.constructor(a * 10, b * 10);
+      this.d = 456;
+    }
+    DivSugar.inherit(Class2, Class1);
+    Class2.prototype.getValue = function() { return this.d; };
+    Class2.prototype.getParentValue = function() { return this.constructor.uber.getValue(); };
+
+    var ins1 = new Class1(1, 2);
+    strictEqual(ins1.a, 1);
+    strictEqual(ins1.b, 2);
+    strictEqual(ins1.c, 123);
+    strictEqual(ins1.getValue(), 123);
+
+    var ins2 = new Class2(1, 2);
+    strictEqual(ins2.a, 10);
+    strictEqual(ins2.b, 20);
+    strictEqual(ins2.c, 123);
+    strictEqual(ins2.getValue(), 456);
+    strictEqual(ins2.getParentValue(), 123);
+  });
+
   test('generateId', function() {
     strictEqual(DivSugar.generateId(), '_divsugar_id_1');
     strictEqual(DivSugar.generateId(), '_divsugar_id_2');

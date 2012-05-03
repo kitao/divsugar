@@ -102,6 +102,13 @@ DivSugar =
     @_lastUpdatedTime = (new Date()).getTime()
     @_requestAnimationFrame updateTasks
 
+  inherit: (C, P) ->
+    F = ->
+    F.prototype = P.prototype
+    C.prototype = new F()
+    C.uber = P.prototype
+    C.prototype.constructor = C
+
   generateId: -> "_divsugar_id_#{++@_id}"
 
   createScene: (args...) ->
