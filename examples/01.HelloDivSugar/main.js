@@ -6,6 +6,10 @@ window.onload = function() {
   scn.setSize(800, 600).setImage('#000080');
   document.body.appendChild(scn);
 
+  // maximize the scene size as possible
+  window.resize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
+  window.resize();
+
   // create a parent node used as the center of rotation
   var node1 = DivSugar.createNode();
   node1.setPosition(400, 300, 0);
@@ -21,9 +25,4 @@ window.onload = function() {
   var task = new DivSugar.Task();
   task.onUpdate = function(elapsedTime) { node1.rotate(elapsedTime * 0.02, elapsedTime * 0.03, elapsedTime * 0.015); };
   DivSugar.rootTask.appendChild(task);
-
-  // maximize the scene size as possible
-  function resize() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); }
-  window.addEventListener('resize', resize, false);
-  resize();
 };
