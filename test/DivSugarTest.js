@@ -79,6 +79,7 @@
       from: {
         size: [1, 2],
         visible: true,
+        backface: true,
         clip: true,
         opacity: 1,
         image: '#ff0000',

@@ -178,6 +178,9 @@
             case 'visible':
               style.innerHTML += "visibility:" + (value ? 'visible' : 'hidden') + ";";
               break;
+            case 'backface':
+              style.innerHTML += "" + this._backfaceVisibility + ":" + (value ? 'visible' : 'hidden') + ";";
+              break;
             case 'clip':
               style.innerHTML += "overflow:" + (value ? 'hidden' : 'visible') + ";";
               break;

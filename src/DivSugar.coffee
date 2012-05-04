@@ -154,6 +154,9 @@ DivSugar =
           when 'visible'
             style.innerHTML += "visibility:#{if value then 'visible' else 'hidden'};"
 
+          when 'backface'
+            style.innerHTML += "#{@_backfaceVisibility}:#{if value then 'visible' else 'hidden'};"
+
           when 'clip'
             style.innerHTML += "overflow:#{if value then 'hidden' else 'visible'};"
 
