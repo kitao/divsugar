@@ -241,6 +241,14 @@
         document.head.removeChild(this._animations[name]);
         return delete this._animations[name];
       }
+    },
+    getImageSize: function(src, callback) {
+      var image;
+      image = new Image();
+      image.src = src;
+      return image.onload = function() {
+        return callback(image.width, image.height);
+      };
     }
   };
 
@@ -976,7 +984,8 @@
       }
       this.setPosition((parentWidth - this._width) / 2, (parentHeight - this._height) / 2);
       return this;
-    }
+    },
+    adjustImage: function(imageWidth, imageHeight, style) {}
   };
 
   DivSugar._Node = {
