@@ -57,6 +57,11 @@
           _this._perspectiveOrigin = 'perspective-origin';
         }
         console.log("DivSugar: use '" + _this._perspectiveOrigin + "'");
+        _this._backfaceVisibility = "-" + _this._prefix + "-backface-visibility";
+        if (!(div.style[_this._backfaceVisibility] != null)) {
+          _this._backfaceVisibility = 'backface-visibility';
+        }
+        console.log("DivSugar: use '" + _this._backfaceVisibility + "'");
         _this._animationName = "-" + _this._prefix + "-animation-name";
         if (!(div.style[_this._animationName] != null)) {
           _this._animationName = 'animation-name';
@@ -1009,6 +1014,7 @@
       this.setSize(0, 0);
       this.setPosition(0, 0, 0);
       this.setVisible(true);
+      this.setBackface(true);
       this.setClip(false);
       this.setOpacity(1);
       this.setImage(null);
@@ -1067,6 +1073,14 @@
     },
     getVisible: DivSugar._Scene.getVisible,
     setVisible: DivSugar._Scene.setVisible,
+    getBackface: function() {
+      return this._backface;
+    },
+    setBackface: function(backface) {
+      this._backface = backface;
+      this.style[DivSugar._backfaceVisibility] = backface ? 'visible' : 'hidden';
+      return this;
+    },
     getClip: DivSugar._Scene.getClip,
     setClip: DivSugar._Scene.setClip,
     getOpacity: DivSugar._Scene.getOpacity,
