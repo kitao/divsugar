@@ -7,7 +7,7 @@
     _initialize: function() {
       var updateTasks,
         _this = this;
-      this.VERSION = '0.1.0';
+      this.VERSION = '2012.05';
       console.log("DivSugar: version " + this.VERSION);
       this.EPSILON = 0.0001;
       this.NUM_OF_DIGITS = 4;

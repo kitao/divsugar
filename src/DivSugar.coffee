@@ -1,7 +1,7 @@
 DivSugar =
   _initialize: ->
     # initialize constants
-    @VERSION = '0.1.0'
+    @VERSION = '2012.05'
     console.log "DivSugar: version #{@VERSION}"
 
     @EPSILON = 0.0001
