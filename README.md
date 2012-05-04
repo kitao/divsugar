@@ -27,6 +27,35 @@ node.setSize(300, 300).setImage('image.jpg').setPosition(10, 20, 30);
 scn.appendChild(node);
 ```
 
+DivSugar provides the two kinds of animation system. One is the task system, which calls the onUpdate method of the registered tasks in every redering time. It also calls the onDestroy method when the task's destroy mothod is called.
+```javascript
+var task = new DivSugar.Task('someTask');
+
+task.onUpdate = function(elapsedTime) {
+  node.rotate(elapsedTime * 0.1, elapsedTime * 0.2, elapsedTime * 0.3);
+};
+
+task.onDestroy = function() {
+  scn.removeChild(node);
+};
+```
+The other is CSS animation generator, which helps with making new CSS animations dynamically. Each generated animation can be adapted to nodes.
+```javascript
+DivSugar.addCSSAnimation('someAnimation', {
+  from: {
+    size: [100, 100],
+    opacity: 0
+  },
+  to: {
+    size: [300, 300],
+    opacity: 0.5,
+    rotate: [0, 0, 180]
+  }
+});
+
+node.playCSSAnimation('someAnimation', 15);
+```
+
 Examples
 --------
 - TBD
