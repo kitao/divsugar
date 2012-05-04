@@ -12,11 +12,11 @@ First, include **divsugar.min.js** for normal use or **divsugar.js** for debug u
 ```html
 <script src="divsugar.min.js"></script>
 ```
-Then all of the functions get available via the DivSugar variable.
+Then all of the functions get available via the **DivSugar** global variable.
 
-A scene is the root node of a scene graph and can also specify the rendering area.
-A node is an element of a scene graph and can draw an image.
-Both of them are extended div elements and created by factory methods of DivSugar.
+A scene is the root node of a scene graph and specifies the rendering area.
+A node is an element of a scene graph and draws an image.
+Both of them are extended div elements and created by the factory methods of DivSugar.
 ```javascript
 var scn = DivSugar.createScene('someScene');
 document.body.appendChild(scn);
@@ -27,10 +27,6 @@ scn.appendChild(node);
 
 Examples
 --------
-- TBD
-
-Supported Browsers
-------------------
 - TBD
 
 Documentaion
