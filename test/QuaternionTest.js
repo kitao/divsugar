@@ -30,7 +30,7 @@
 
     var quat2 = new DivSugar.Quaternion();
     quat2.set(quat1);
-    deepEqual(quat2, new DivSugar.Quaternion(1, 2, 3, 4));
+    deepEqual(quat2, quat1);
 
     ok(quat1.set(0, 0, 0, 0).set(quat2).set(1, 1, 1, 1));
   });
@@ -72,8 +72,11 @@
   });
 
   test('equal', function() {
-    var quat1 = new DivSugar.Quaternion(1, 2, 3, 4);
-    var quat2 = new DivSugar.Quaternion(quat1);
+    var quat1 = new DivSugar.Quaternion();
+    var quat2 = new DivSugar.Quaternion();
+
+    quat1.set(1, 2, 3, 4);
+    quat2.set(quat1);
     ok(quat1.equal(quat2));
 
     quat2.set(1.1, 2, 3, 4);

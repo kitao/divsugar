@@ -34,7 +34,7 @@
 
     var vec2 = new DivSugar.Vector();
     vec2.set(vec1);
-    deepEqual(vec2, new DivSugar.Vector(1, 2, 3));
+    deepEqual(vec2, vec1);
 
     ok(vec1.set(0, 0, 0).set(vec2).set(1, 1, 1));
   });
@@ -119,7 +119,9 @@
   });
 
   test('normalize', function() {
-    var vec1 = new DivSugar.Vector(3, 4, 12);
+    var vec1 = new DivSugar.Vector();
+
+    vec1.set(3, 4, 12);
     vec1.normalize();
     deepEqual(vec1, new DivSugar.Vector(3/13, 4/13, 12/13));
 
@@ -155,8 +157,11 @@
   });
 
   test('lerp', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    var vec2 = new DivSugar.Vector(-1, -2, -3);
+    var vec1 = new DivSugar.Vector();
+    var vec2 = new DivSugar.Vector();
+
+    vec1.set(1, 2, 3);
+    vec2.set(-1, -2, -3);
     vec1.lerp(vec2, -1);
     deepEqual(vec1, new DivSugar.Vector(1, 2, 3));
 
@@ -210,8 +215,11 @@
   });
 
   test('equal', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    var vec2 = new DivSugar.Vector(vec1);
+    var vec1 = new DivSugar.Vector();
+    var vec2 = new DivSugar.Vector();
+
+    vec1.set(1, 2, 3);
+    vec2.set(vec1);
     ok(vec1.equal(vec2));
 
     vec2.set(1.1, 2, 3);

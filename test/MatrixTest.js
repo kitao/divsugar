@@ -34,7 +34,7 @@
 
     var mat2 = new DivSugar.Matrix();
     mat2.set(mat1);
-    deepEqual(mat2, new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
+    deepEqual(mat2, mat1);
 
     ok(mat1.set(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12).set(mat2).set(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
   });
@@ -67,20 +67,23 @@
   });
 
   test('rotate', function() {
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    var mat2 = new DivSugar.Matrix(0, 0, -1, 0, 1, 0, 1, 0, 0, 100, 200, 300);
+    var mat1 = new DivSugar.Matrix();
+    var mat2 = new DivSugar.Matrix();
+
+    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat2.set(0, 0, -1, 0, 1, 0, 1, 0, 0, 100, 200, 300);
     mat1.rotate(90, 0, 0);
     nearlyEqual(mat1, mat2);
 
-    var mat3 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    var mat4 = new DivSugar.Matrix(0, -1, 0, -1, 0, 0, 0, 0, -1, 100, 200, 300);
-    mat3.rotate(0, 90, 0);
-    nearlyEqual(mat3, mat4);
+    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat2.set(0, -1, 0, -1, 0, 0, 0, 0, -1, 100, 200, 300);
+    mat1.rotate(0, 90, 0);
+    nearlyEqual(mat1, mat2);
 
-    var mat5 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    var mat6 = new DivSugar.Matrix(-1, 0, 0, 0, 0, 1, 0, 1, 0, 100, 200, 300);
-    mat5.rotate(0, 0, 90);
-    nearlyEqual(mat5, mat6);
+    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat2.set(-1, 0, 0, 0, 0, 1, 0, 1, 0, 100, 200, 300);
+    mat1.rotate(0, 0, 90);
+    nearlyEqual(mat1, mat2);
 
     ok(mat1.rotate(0, 0, 0).rotate(0, 0, 0));
   });
@@ -95,7 +98,6 @@
   });
 
   test('slerp', function() {
-    var ratio;
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
     var mat3 = new DivSugar.Matrix();
@@ -202,8 +204,11 @@
   });
 
   test('equal', function() {
-    var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-    var mat2 = new DivSugar.Matrix(mat1);
+    var mat1 = new DivSugar.Matrix();
+    var mat2 = new DivSugar.Matrix();
+
+    mat1.set(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    mat2.set(mat1);
     ok(mat1.equal(mat2));
 
     mat2.set(mat1);

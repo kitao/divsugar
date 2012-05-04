@@ -43,10 +43,10 @@
   });
 
   test('appendChild', function() {
-    var task1 = new DivSugar.Task('task1');
-    var task2 = new DivSugar.Task('task2');
-    var task3 = new DivSugar.Task('task3');
-    var task4 = new DivSugar.Task('task4');
+    var task1 = new DivSugar.Task();
+    var task2 = new DivSugar.Task();
+    var task3 = new DivSugar.Task();
+    var task4 = new DivSugar.Task();
     task1.appendChild(task2);
     task1.appendChild(task3);
     task3.appendChild(task4);
@@ -59,10 +59,10 @@
   });
 
   test('removeChild', function() {
-    var task1 = new DivSugar.Task('task1');
-    var task2 = new DivSugar.Task('task2');
-    var task3 = new DivSugar.Task('task3');
-    var task4 = new DivSugar.Task('task4');
+    var task1 = new DivSugar.Task();
+    var task2 = new DivSugar.Task();
+    var task3 = new DivSugar.Task();
+    var task4 = new DivSugar.Task();
     task1.appendChild(task2);
     task1.appendChild(task3);
     task3.appendChild(task4);

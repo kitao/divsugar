@@ -55,7 +55,7 @@
   test('createScene', function() {
     var scn1 = DivSugar.createScene();
     ok(scn1 instanceof HTMLDivElement);
-    ok(!scn1.id);
+    strictEqual(scn1.id, '');
 
     var scn2 = DivSugar.createScene('scene2');
     ok(scn2 instanceof HTMLDivElement);
@@ -65,7 +65,7 @@
   test('createNode', function() {
     var node1 = DivSugar.createNode();
     ok(node1 instanceof HTMLDivElement);
-    ok(!node1.id);
+    strictEqual(node1.id, '');
 
     var node2 = DivSugar.createNode('node2');
     ok(node2 instanceof HTMLDivElement);
@@ -74,6 +74,7 @@
 
   test('addCSSAnimation and removeCSSAnimation', function() {
     var mat1 = new DivSugar.Matrix();
+
     DivSugar.addCSSAnimation('animation1', {
       from: {
         size: [1, 2],

@@ -28,12 +28,16 @@
     var scn1 = DivSugar.createScene();
     var node1 = DivSugar.createNode();
     var node2 = DivSugar.createNode();
+
     scn1.appendChild(node1);
     strictEqual(scn1._rootNode.firstChild, node1);
+
     scn1.insertBefore(node2, node1);
     strictEqual(scn1._rootNode.firstChild, node2);
+
     scn1.removeChild(node2);
     strictEqual(scn1._rootNode.firstChild, node1);
+
     scn1.replaceChild(node2, node1);
     strictEqual(scn1._rootNode.firstChild, node2);
   });
@@ -50,6 +54,7 @@
 
   test('setSize', function() {
     var scn1 = DivSugar.createScene();
+
     scn1.setSize(10, 20);
     nearlyEqual(scn1.getPerspective(), 12.0711);
     strictEqual(scn1.getWidth(), 10);
@@ -57,13 +62,12 @@
     strictEqual(scn1.getViewWidth(), 10);
     strictEqual(scn1.getViewHeight(), 20);
 
-    var scn2 = DivSugar.createScene();
-    scn2.setSize(100, 200, 300, 400);
-    nearlyEqual(scn2.getPerspective(), 362.1320);
-    strictEqual(scn2.getWidth(), 100);
-    strictEqual(scn2.getHeight(), 200);
-    strictEqual(scn2.getViewWidth(), 300);
-    strictEqual(scn2.getViewHeight(), 400);
+    scn1.setSize(100, 200, 300, 400);
+    nearlyEqual(scn1.getPerspective(), 362.1320);
+    strictEqual(scn1.getWidth(), 100);
+    strictEqual(scn1.getHeight(), 200);
+    strictEqual(scn1.getViewWidth(), 300);
+    strictEqual(scn1.getViewHeight(), 400);
 
     ok(scn1.setSize(1, 1).setSize(1, 1));
   });
@@ -111,11 +115,24 @@
 
   test('setImageClip', function() {
     var scn1 = DivSugar.createScene();
+
     scn1.setImageClip(0.1, 0.2, 0.3, 0.4);
     strictEqual(scn1.getImageClipU1(), 0.1);
     strictEqual(scn1.getImageClipV1(), 0.2);
     strictEqual(scn1.getImageClipU2(), 0.3);
     strictEqual(scn1.getImageClipV2(), 0.4);
+
+    scn1.setImageClip(-1, -2, -3, -4);
+    strictEqual(scn1.getImageClipU1(), 0);
+    strictEqual(scn1.getImageClipV1(), 0);
+    strictEqual(scn1.getImageClipU2(), 0);
+    strictEqual(scn1.getImageClipV2(), 0);
+
+    scn1.setImageClip(2, 3, 4, 5);
+    strictEqual(scn1.getImageClipU1(), 1);
+    strictEqual(scn1.getImageClipV1(), 1);
+    strictEqual(scn1.getImageClipU2(), 1);
+    strictEqual(scn1.getImageClipV2(), 1);
 
     ok(scn1.setImageClip(0, 0, 0, 0).setImageClip(0, 0, 0, 0));
   });
