@@ -23,7 +23,7 @@ scn.setSize(800, 600).setImage('#000080');
 document.body.appendChild(scn);
 
 var node = DivSugar.createNode('someNode');
-node.setSize(300, 300).setPosition(10, 20, 30).setImage('image.jpg');
+node.setSize(300, 300).setImage('image.jpg').setPosition(10, 20, 30);
 scn.appendChild(node);
 ```
 
