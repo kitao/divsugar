@@ -27,7 +27,6 @@ node.setSize(300, 300).setImage('image.jpg').setPosition(10, 20, 30);
 scn.appendChild(node);
 ```
 
-
 DivSugar provides the two kinds of animation system.
 One is the task system, which calls the onUpdate method of the registered tasks in every redering time.
 It also calls the onDestroy method when the task's destroy mothod is called.
@@ -66,7 +65,9 @@ node.playCSSAnimation('someAnimation', 15);
 
 Examples
 --------
-- TBD
+- Simple application
+- Task animation
+- Dynamic CSS animation
 
 Documentaion
 ------------
