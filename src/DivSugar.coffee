@@ -210,4 +210,9 @@ DivSugar =
       document.head.removeChild @_animations[name]
       delete @_animations[name]
 
+  getImageSize: (src, callback) ->
+    image = new Image()
+    image.src = src
+    image.onload = -> callback(image.width, image.height)
+
 (window.DivSugar = DivSugar)._initialize()

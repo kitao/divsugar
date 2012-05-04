@@ -95,4 +95,13 @@
     DivSugar.removeCSSAnimation('animation1');
     ok(!('animation1' in DivSugar._animations));
   });
+
+  test('getImageSize', function() {
+    DivSugar.getImageSize('http://placekitten.com/200/300', function(width, height) {
+      start();
+      strictEqual(width, 200);
+      strictEqual(height, 300);
+    });
+    stop();
+  });
 })();
