@@ -98,10 +98,10 @@
   });
 
   test('getImageSize', function() {
-    DivSugar.getImageSize('http://placekitten.com/200/300', function(width, height) {
+    DivSugar.getImageSize('../examples/assets/coin.png', function(width, height) {
       start();
-      strictEqual(width, 200);
-      strictEqual(height, 300);
+      strictEqual(width, 400);
+      strictEqual(height, 200);
     });
     stop();
   });
