@@ -103,6 +103,11 @@ DivSugar._Scene =
   getImageClipV2: -> @_imageClipV2
 
   setImageClip: (u1, v1, u2, v2) ->
+    u1 = if u1 < 0 then 0 else if u1 > 1 then 1 else u1
+    v1 = if v1 < 0 then 0 else if v1 > 1 then 1 else v1
+    u2 = if u2 < 0 then 0 else if u2 > 1 then 1 else u2
+    v2 = if v2 < 0 then 0 else if v2 > 1 then 1 else v2
+
     @_imageClipU1 = u1
     @_imageClipV1 = v1
     @_imageClipU2 = u2
