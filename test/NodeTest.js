@@ -12,6 +12,7 @@
     strictEqual(node1.getPositionY(), 0);
     strictEqual(node1.getPositionZ(), 0);
     strictEqual(node1.getVisible(), true);
+    strictEqual(node1.getBackface(), true);
     strictEqual(node1.getClip(), false);
     strictEqual(node1.getOpacity(), 1);
     strictEqual(node1.getImage(), null);
@@ -83,6 +84,14 @@
     strictEqual(node1.getVisible(), false);
 
     ok(node1.setVisible(true).setVisible(true));
+  });
+
+  test('setBackface', function() {
+    var node1 = DivSugar.createNode();
+    node1.setBackface(false);
+    strictEqual(node1.getBackface(), false);
+
+    ok(node1.setBackface(true).setBackface(true));
   });
 
   test('setClip', function() {

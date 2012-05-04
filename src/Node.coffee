@@ -10,6 +10,7 @@ DivSugar._Node =
     @setSize 0, 0
     @setPosition 0, 0, 0
     @setVisible true
+    @setBackface true
     @setClip false
     @setOpacity 1
     @setImage null
@@ -59,6 +60,13 @@ DivSugar._Node =
 
   getVisible: DivSugar._Scene.getVisible
   setVisible: DivSugar._Scene.setVisible
+
+  getBackface: -> @_backface
+
+  setBackface: (backface) ->
+    @_backface = backface
+    @style[DivSugar._backfaceVisibility] = if backface then 'visible' else 'hidden'
+    return @
 
   getClip: DivSugar._Scene.getClip
   setClip: DivSugar._Scene.setClip

@@ -51,6 +51,10 @@ DivSugar =
       @_perspectiveOrigin = 'perspective-origin' if not div.style[@_perspectiveOrigin]?
       console.log "DivSugar: use '#{@_perspectiveOrigin}'"
 
+      @_backfaceVisibility = "-#{@_prefix}-backface-visibility"
+      @_backfaceVisibility = 'backface-visibility' if not div.style[@_backfaceVisibility]?
+      console.log "DivSugar: use '#{@_backfaceVisibility}'"
+
       @_animationName = "-#{@_prefix}-animation-name"
       @_animationName = 'animation-name' if not div.style[@_animationName]?
       console.log "DivSugar: use '#{@_animationName}'"
