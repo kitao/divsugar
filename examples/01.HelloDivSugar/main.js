@@ -17,12 +17,12 @@ window.onload = function() {
 
   // create a child node render an image and text
   var node2 = DivSugar.createNode();
-  node2.setSize(300, 300).setPosition(-150, -150, 200).setImage('http://placekitten.com/300/300');
-  node2.innerHTML = '<h1 style="text-align:center">Hello, DivSugar!</h1>';
+  node2.setSize(300, 300).setPosition(-150, -150, 200).setImage('../assets/kitten.jpg');
+  node2.innerHTML = '<h1 style="text-align:center; color:white; text-shadow:1px 1px black">Hello, DivSugar!</h1>';
   node1.appendChild(node2);
 
   // create a task which rotates the nodes
   var task = new DivSugar.Task();
-  task.onUpdate = function(elapsedTime) { node1.rotate(elapsedTime * 0.02, elapsedTime * 0.03, elapsedTime * 0.015); };
+  task.onUpdate = function(elapsedTime) { node1.rotate(elapsedTime * 0.01, elapsedTime * 0.05, elapsedTime * -0.015); };
   DivSugar.rootTask.appendChild(task);
 };
