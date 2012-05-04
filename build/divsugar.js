@@ -951,6 +951,10 @@
     },
     setImageClip: function(u1, v1, u2, v2) {
       var h, nod, w, x, y;
+      u1 = u1 < 0 ? 0 : u1 > 1 ? 1 : u1;
+      v1 = v1 < 0 ? 0 : v1 > 1 ? 1 : v1;
+      u2 = u2 < 0 ? 0 : u2 > 1 ? 1 : u2;
+      v2 = v2 < 0 ? 0 : v2 > 1 ? 1 : v2;
       this._imageClipU1 = u1;
       this._imageClipV1 = v1;
       this._imageClipU2 = u2;
@@ -984,8 +988,7 @@
       }
       this.setPosition((parentWidth - this._width) / 2, (parentHeight - this._height) / 2);
       return this;
-    },
-    adjustImage: function(imageWidth, imageHeight, style) {}
+    }
   };
 
   DivSugar._Node = {
