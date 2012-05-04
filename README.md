@@ -8,7 +8,7 @@ DivSugar depends on CSS 3D transform and runs on Safari, Chrome, and Firefox for
 
 Getting Started
 ---------------
-First, include **divsugar.min.js** for normal use or **divsugar.js** for debug use.
+Include **divsugar.min.js** for normal use or **divsugar.js** for debug use.
 ```html
 <script src="divsugar.min.js"></script>
 ```
