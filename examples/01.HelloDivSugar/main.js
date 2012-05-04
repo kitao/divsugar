@@ -7,8 +7,8 @@ window.onload = function() {
   document.body.appendChild(scn);
 
   // maximize the scene size as possible
-  window.resize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
-  window.resize();
+  window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
+  window.onresize();
 
   // create a parent node used as the center of rotation
   var node1 = DivSugar.createNode();
@@ -17,7 +17,7 @@ window.onload = function() {
 
   // create a child node render an image and text
   var node2 = DivSugar.createNode();
-  node2.setSize(300, 300).setPosition(-150, -150, 200).setImage('../assets/kitten.jpg');
+  node2.setSize(300, 300).setImage('../assets/kitten.jpg').setPosition(-150, -150, 200);
   node2.innerHTML = '<h1 style="text-align:center; color:white; text-shadow:1px 1px black">Hello, DivSugar!</h1>';
   node1.appendChild(node2);
 
