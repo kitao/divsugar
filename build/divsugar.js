@@ -923,7 +923,10 @@
     getImage: function() {
       return this._image;
     },
-    setImage: function(image) {
+    setImage: function(image, callback) {
+      if (callback == null) {
+        callback = null;
+      }
       this._image = image;
       if (!(image != null)) {
         this.style.backgroundColor = null;
@@ -934,6 +937,9 @@
       } else {
         this.style.backgroundColor = null;
         this.style.backgroundImage = "url(" + image + ")";
+        if (callback != null) {
+          DivSugar.getImageSize(image, callback);
+        }
       }
       return this;
     },

@@ -103,8 +103,16 @@
 
   test('setImage', function() {
     var node1 = DivSugar.createNode();
-    node1.setImage('http://test.test');
-    strictEqual(node1.getImage(), 'http://test.test');
+
+    node1.setImage('../examples/assets/coin.png');
+    strictEqual(node1.getImage(), '../examples/assets/coin.png');
+
+    node1.setImage('../examples/assets/coin.png', function(width, height) {
+      start();
+      strictEqual(width, 400);
+      strictEqual(height, 200);
+    });
+    stop();
 
     ok(node1.setImage(null).setImage(null));
   });

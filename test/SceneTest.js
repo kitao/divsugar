@@ -107,8 +107,16 @@
 
   test('setImage', function() {
     var scn1 = DivSugar.createScene();
-    scn1.setImage('http://test.test');
-    strictEqual(scn1.getImage(), 'http://test.test');
+
+    scn1.setImage('../examples/assets/coin.png');
+    strictEqual(scn1.getImage(), '../examples/assets/coin.png');
+
+    scn1.setImage('../examples/assets/coin.png', function(width, height) {
+      start();
+      strictEqual(width, 400);
+      strictEqual(height, 200);
+    });
+    stop();
 
     ok(scn1.setImage(null).setImage(null));
   });
