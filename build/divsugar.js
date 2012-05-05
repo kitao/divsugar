@@ -161,7 +161,7 @@
       return div;
     },
     addCSSAnimation: function(name, animation) {
-      var h, keyframe, nod, property, style, transform, value, w, x, y, _ref;
+      var h, keyframe, nod, property, style, transform, u1, u2, v1, v2, value, w, x, y, _ref;
       this.removeCSSAnimation(name);
       style = document.createElement('style');
       style.innerHTML = "@-" + this._prefix + "-keyframes " + name + "{";
@@ -201,10 +201,18 @@
               }
               break;
             case 'imageClip':
-              w = 1 / (value[2] - value[0]) * 100;
-              h = 1 / (value[3] - value[1]) * 100;
-              x = value[0] * w;
-              y = value[1] * h;
+              u1 = value[0];
+              v1 = value[1];
+              u2 = value[2];
+              v2 = value[3];
+              u1 = u1 < 0 ? 0 : u1 > 1 ? 1 : u1;
+              v1 = v1 < 0 ? 0 : v1 > 1 ? 1 : v1;
+              u2 = u2 < 0 ? 0 : u2 > 1 ? 1 : u2;
+              v2 = v2 < 0 ? 0 : v2 > 1 ? 1 : v2;
+              w = 1 / (u2 - u1) * 100;
+              h = 1 / (v2 - v1) * 100;
+              x = u1 * w;
+              y = v1 * h;
               nod = DivSugar.NUM_OF_DIGITS;
               style.innerHTML += "background-position:" + (x.toFixed(nod)) + "% " + (y.toFixed(nod)) + "%;";
               style.innerHTML += "background-size:" + (w.toFixed(nod)) + "% " + (h.toFixed(nod)) + "%;";

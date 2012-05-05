@@ -176,10 +176,20 @@ DivSugar =
               style.innerHTML += "background-image:url(#{value});"
 
           when 'imageClip'
-            w = 1 / (value[2] - value[0]) * 100
-            h = 1 / (value[3] - value[1]) * 100
-            x = value[0] * w
-            y = value[1] * h
+            u1 = value[0]
+            v1 = value[1]
+            u2 = value[2]
+            v2 = value[3]
+
+            u1 = if u1 < 0 then 0 else if u1 > 1 then 1 else u1
+            v1 = if v1 < 0 then 0 else if v1 > 1 then 1 else v1
+            u2 = if u2 < 0 then 0 else if u2 > 1 then 1 else u2
+            v2 = if v2 < 0 then 0 else if v2 > 1 then 1 else v2
+
+            w = 1 / (u2 - u1) * 100
+            h = 1 / (v2 - v1) * 100
+            x = u1 * w
+            y = v1 * h
             nod = DivSugar.NUM_OF_DIGITS
 
             style.innerHTML += "background-position:#{x.toFixed(nod)}% #{y.toFixed(nod)}%;"
