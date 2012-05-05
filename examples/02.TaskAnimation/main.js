@@ -34,6 +34,7 @@ window.onload = function() {
     DivSugar.rootTask.appendChild(this);
   }
 
+  // inherit the task class
   DivSugar.inherit(Coin, DivSugar.Task);
 
   Coin.prototype.onUpdate = function(elapsedTime) {
