@@ -130,7 +130,8 @@
       F.prototype = P.prototype;
       C.prototype = new F();
       C.uber = P.prototype;
-      return C.prototype.constructor = C;
+      C.prototype.constructor = C;
+      return this;
     },
     generateId: function() {
       return "_divsugar_id_" + (++this._id);
@@ -242,21 +243,24 @@
       document.head.appendChild(style);
       this._animations[name] = style;
       console.log("DivSugar: added css animation");
-      return console.log(style.innerHTML);
+      console.log(style.innerHTML);
+      return this;
     },
     removeCSSAnimation: function(name) {
       if (name in this._animations) {
         document.head.removeChild(this._animations[name]);
-        return delete this._animations[name];
+        delete this._animations[name];
       }
+      return this;
     },
     getImageSize: function(src, callback) {
       var image;
       image = new Image();
       image.src = src;
-      return image.onload = function() {
+      image.onload = function() {
         return callback(image.width, image.height);
       };
+      return this;
     }
   };
 
@@ -1164,23 +1168,22 @@
     };
 
     Task.prototype.update = function(elapsedTime) {
-      var child, _i, _len, _ref, _results;
+      var child, _i, _len, _ref;
       if (this.active) {
         if (typeof this.onUpdate === "function") {
           this.onUpdate(elapsedTime);
         }
         _ref = this._children;
-        _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           child = _ref[_i];
-          _results.push(child.update(elapsedTime));
+          child.update(elapsedTime);
         }
-        return _results;
       }
+      return this;
     };
 
     Task.prototype.destroy = function() {
-      var child, _i, _len, _ref, _ref1, _results;
+      var child, _i, _len, _ref, _ref1;
       if (typeof this.onDestroy === "function") {
         this.onDestroy();
       }
@@ -1188,18 +1191,18 @@
         _ref.removeChild(this);
       }
       _ref1 = this._children;
-      _results = [];
       for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
         child = _ref1[_i];
-        _results.push(child.destroy());
+        child.destroy();
       }
-      return _results;
+      return this;
     };
 
     Task.prototype.appendChild = function(task) {
       this.removeChild(task);
       this._children.push(task);
-      return task._parent = this;
+      task._parent = this;
+      return this;
     };
 
     Task.prototype.removeChild = function(task) {

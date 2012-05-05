@@ -44,6 +44,8 @@
     strictEqual(ins2.c, 123);
     strictEqual(ins2.getValue(), 456);
     strictEqual(ins2.getParentValue(), 123);
+
+    ok(DivSugar.inherit(Class2, Class1).inherit(Class2, Class1));
   });
 
   test('generateId', function() {
@@ -94,8 +96,12 @@
     });
     ok('animation1' in DivSugar._animations);
 
+    ok(DivSugar.addCSSAnimation('animation1', {}).addCSSAnimation('animation1'));
+
     DivSugar.removeCSSAnimation('animation1');
     ok(!('animation1' in DivSugar._animations));
+
+    ok(DivSugar.removeCSSAnimation('animation1').removeCSSAnimation('animation1'));
   });
 
   test('getImageSize', function() {
@@ -105,5 +111,7 @@
       strictEqual(height, 200);
     });
     stop();
+
+    ok(DivSugar.getImageSize('', function() {}).getImageSize('', function() {}));
   });
 })();

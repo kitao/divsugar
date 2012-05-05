@@ -16,6 +16,8 @@ class DivSugar.Task
       for child in @_children
         child.update elapsedTime
 
+    return @
+
   destroy: ->
     @onDestroy?()
     @_parent?.removeChild this
@@ -23,10 +25,13 @@ class DivSugar.Task
     for child in @_children
       child.destroy()
 
+    return @
+
   appendChild: (task) ->
     @removeChild task
     @_children.push task
     task._parent = this
+    return @
 
   removeChild: (task) ->
     i = @_children.indexOf task

@@ -30,6 +30,9 @@
     task1.appendChild(task2);
     task1.update(123);
     strictEqual(updatedCount, 2);
+
+    task1.onUpdate = task2.onUpdate = null;
+    ok(task1.update(1).update(1));
   });
 
   test('destroy', function() {
@@ -40,6 +43,8 @@
     task1.appendChild(task2);
     task1.destroy();
     strictEqual(destroyedCount, 2);
+
+    ok(task1.destroy().destroy());
   });
 
   test('appendChild', function() {

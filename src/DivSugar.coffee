@@ -112,6 +112,7 @@ DivSugar =
     C.prototype = new F()
     C.uber = P.prototype
     C.prototype.constructor = C
+    return @
 
   generateId: -> "_divsugar_id_#{++@_id}"
 
@@ -211,15 +212,18 @@ DivSugar =
 
     console.log "DivSugar: added css animation"
     console.log style.innerHTML
+    return @
 
   removeCSSAnimation: (name) ->
     if name of @_animations
       document.head.removeChild @_animations[name]
       delete @_animations[name]
+    return @
 
   getImageSize: (src, callback) ->
     image = new Image()
     image.src = src
     image.onload = -> callback(image.width, image.height)
+    return @
 
 (window.DivSugar = DivSugar)._initialize()
