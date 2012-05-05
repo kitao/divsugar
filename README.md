@@ -66,7 +66,7 @@ node.playCSSAnimation('someAnimation', 15);
 Examples
 --------
 - Simple application
-- Task animation
+- Animation with the task system
 - Dynamic CSS animation
 
 Documentaion
