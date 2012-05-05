@@ -47,8 +47,8 @@ DivSugar.rootTask.appendChild(task);
 
 Examples
 --------
-- 01.SimpleApplication
-- 02.TaskSystem
+- 01.SimpleApplication ([demo](http://kitao.github.com/divsugar/examples/01.SimpleApplication/), [code](https://github.com/kitao/divsugar/blob/master/examples/01.SimpleApplication/main.js))
+- 02.TaskSystem ([demo](http://kitao.github.com/divsugar/examples/02.TaskSystem/), [code](https://github.com/kitao/divsugar/blob/master/examples/02.TaskSystem/main.js))
 
 Documentaion
 ------------
