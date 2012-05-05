@@ -32,59 +32,59 @@ DivSugar =
       div = document.createElement 'div'
 
       @_transform = "-#{@_prefix}-transform"
-      @_transform = 'transform' if not div.style[@_transform]?
+      @_transform = 'transform' unless div.style[@_transform]?
       console.log "DivSugar: use '#{@_transform}'"
 
       @_transformStyle = "-#{@_prefix}-transform-style"
-      @_transformStyle = 'transform-style' if not div.style[@_transformStyle]?
+      @_transformStyle = 'transform-style' unless div.style[@_transformStyle]?
       console.log "DivSugar: use '#{@_transformStyle}'"
 
       @_transformOrigin = "-#{@_prefix}-transform-origin"
-      @_transformOrigin = 'transform-origin' if not div.style[@_transformOrigin]?
+      @_transformOrigin = 'transform-origin' unless div.style[@_transformOrigin]?
       console.log "DivSugar: use '#{@_transformOrigin}'"
 
       @_perspective = "-#{@_prefix}-perspective"
-      @_perspective = 'perspective' if not div.style[@_perspective]?
+      @_perspective = 'perspective' unless div.style[@_perspective]?
       console.log "DivSugar: use '#{@_perspective}'"
 
       @_perspectiveOrigin = "-#{@_prefix}-perspective-origin"
-      @_perspectiveOrigin = 'perspective-origin' if not div.style[@_perspectiveOrigin]?
+      @_perspectiveOrigin = 'perspective-origin' unless div.style[@_perspectiveOrigin]?
       console.log "DivSugar: use '#{@_perspectiveOrigin}'"
 
       @_backfaceVisibility = "-#{@_prefix}-backface-visibility"
-      @_backfaceVisibility = 'backface-visibility' if not div.style[@_backfaceVisibility]?
+      @_backfaceVisibility = 'backface-visibility' unless div.style[@_backfaceVisibility]?
       console.log "DivSugar: use '#{@_backfaceVisibility}'"
 
       @_animationName = "-#{@_prefix}-animation-name"
-      @_animationName = 'animation-name' if not div.style[@_animationName]?
+      @_animationName = 'animation-name' unless div.style[@_animationName]?
       console.log "DivSugar: use '#{@_animationName}'"
 
       @_animationDuration = "-#{@_prefix}-animation-duration"
-      @_animationDuration = 'animation-duration' if not div.style[@_animationDuration]?
+      @_animationDuration = 'animation-duration' unless div.style[@_animationDuration]?
       console.log "DivSugar: use '#{@_animationDuration}'"
 
       @_animationTimingFunction = "-#{@_prefix}-animation-timing-function"
-      @_animationTimingFunction = 'animation-timing-function' if not div.style[@_animationTimingFunction]?
+      @_animationTimingFunction = 'animation-timing-function' unless div.style[@_animationTimingFunction]?
       console.log "DivSugar: use '#{@_animationTimingFunction}'"
 
       @_animationDelay = "-#{@_prefix}-animation-delay"
-      @_animationDelay = 'animation-delay' if not div.style[@_animationDelay]?
+      @_animationDelay = 'animation-delay' unless div.style[@_animationDelay]?
       console.log "DivSugar: use '#{@_animationDelay}'"
 
       @_animationIterationCount = "-#{@_prefix}-animation-iteration-count"
-      @_animationIterationCount = 'animation-iteration-count' if not div.style[@_animationIterationCount]?
+      @_animationIterationCount = 'animation-iteration-count' unless div.style[@_animationIterationCount]?
       console.log "DivSugar: use '#{@_animationIterationCount}'"
 
       @_animationDirection = "-#{@_prefix}-animation-direction"
-      @_animationDirection = 'animation-direction' if not div.style[@_animationDirection]?
+      @_animationDirection = 'animation-direction' unless div.style[@_animationDirection]?
       console.log "DivSugar: use '#{@_animationDirection}'"
 
       @_animationFillMode = "-#{@_prefix}-animation-fill-mode"
-      @_animationFillMode = 'animation-fill-mode' if not div.style[@_animationFillMode]?
+      @_animationFillMode = 'animation-fill-mode' unless div.style[@_animationFillMode]?
       console.log "DivSugar: use '#{@_animationFillMode}'"
 
       requestAnimationFrame = @_prefix + 'RequestAnimationFrame'
-      requestAnimationFrame = 'requestAnimationFrame' if not window[requestAnimationFrame]?
+      requestAnimationFrame = 'requestAnimationFrame' unless window[requestAnimationFrame]?
 
       if window[requestAnimationFrame]?
         @_requestAnimationFrame = (callback) =>
@@ -165,7 +165,7 @@ DivSugar =
             style.innerHTML += "opacity:#{value.toFixed(nod)};"
 
           when 'image'
-            if not value?
+            unless value?
               style.innerHTML += 'background-color:transparent;'
               style.innerHTML += 'background-image:none;'
             else if value.charAt(0) is '#'
