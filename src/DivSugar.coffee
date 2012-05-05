@@ -201,9 +201,7 @@ DivSugar =
             transform ?= new DivSugar.Matrix()
             transform.scale value[0], value[1], value[2]
 
-      if transform?
-        style.innerHTML += "#{@_transform}:#{transform.toCSSTransform()};"
-
+      style.innerHTML += "#{@_transform}:#{transform.toCSSTransform()};" if transform?
       style.innerHTML += '}'
 
     style.innerHTML += '}'
