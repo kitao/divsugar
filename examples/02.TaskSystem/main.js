@@ -14,6 +14,7 @@ window.onload = function() {
     // call parent class's constructor
     this.constructor.uber.constructor();
 
+    this.vec = new DivSugar.Vector();
     this.pos = new DivSugar.Vector(Math.random() * 800, 900, Math.random() * 800 - 1000);
     this.vel = new DivSugar.Vector(Math.random() * 6 - 3, Math.random() * 8 - 20, Math.random() * 6 - 3);
     this.rot = new DivSugar.Vector(Math.random() * 0.1, Math.random() * 0.1, Math.random() * 0.1);
@@ -39,7 +40,7 @@ window.onload = function() {
 
   Coin.prototype.onUpdate = function(elapsedTime) {
     this.vel.y += elapsedTime * 0.01;
-    this.pos.add(this.vel);
+    this.pos.add(this.vec.set(this.vel).mul(elapsedTime * 0.06));
     this.center.setPosition(this.pos).rotate(elapsedTime * this.rot.x, elapsedTime * this.rot.y, elapsedTime * this.rot.z);
 
     // when fall enough, destroy this task and create an another task
