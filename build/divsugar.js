@@ -33,72 +33,72 @@
         console.log("DivSugar: use '" + _this._prefix + "' as prefix");
         div = document.createElement('div');
         _this._transform = "-" + _this._prefix + "-transform";
-        if (!(div.style[_this._transform] != null)) {
+        if (div.style[_this._transform] == null) {
           _this._transform = 'transform';
         }
         console.log("DivSugar: use '" + _this._transform + "'");
         _this._transformStyle = "-" + _this._prefix + "-transform-style";
-        if (!(div.style[_this._transformStyle] != null)) {
+        if (div.style[_this._transformStyle] == null) {
           _this._transformStyle = 'transform-style';
         }
         console.log("DivSugar: use '" + _this._transformStyle + "'");
         _this._transformOrigin = "-" + _this._prefix + "-transform-origin";
-        if (!(div.style[_this._transformOrigin] != null)) {
+        if (div.style[_this._transformOrigin] == null) {
           _this._transformOrigin = 'transform-origin';
         }
         console.log("DivSugar: use '" + _this._transformOrigin + "'");
         _this._perspective = "-" + _this._prefix + "-perspective";
-        if (!(div.style[_this._perspective] != null)) {
+        if (div.style[_this._perspective] == null) {
           _this._perspective = 'perspective';
         }
         console.log("DivSugar: use '" + _this._perspective + "'");
         _this._perspectiveOrigin = "-" + _this._prefix + "-perspective-origin";
-        if (!(div.style[_this._perspectiveOrigin] != null)) {
+        if (div.style[_this._perspectiveOrigin] == null) {
           _this._perspectiveOrigin = 'perspective-origin';
         }
         console.log("DivSugar: use '" + _this._perspectiveOrigin + "'");
         _this._backfaceVisibility = "-" + _this._prefix + "-backface-visibility";
-        if (!(div.style[_this._backfaceVisibility] != null)) {
+        if (div.style[_this._backfaceVisibility] == null) {
           _this._backfaceVisibility = 'backface-visibility';
         }
         console.log("DivSugar: use '" + _this._backfaceVisibility + "'");
         _this._animationName = "-" + _this._prefix + "-animation-name";
-        if (!(div.style[_this._animationName] != null)) {
+        if (div.style[_this._animationName] == null) {
           _this._animationName = 'animation-name';
         }
         console.log("DivSugar: use '" + _this._animationName + "'");
         _this._animationDuration = "-" + _this._prefix + "-animation-duration";
-        if (!(div.style[_this._animationDuration] != null)) {
+        if (div.style[_this._animationDuration] == null) {
           _this._animationDuration = 'animation-duration';
         }
         console.log("DivSugar: use '" + _this._animationDuration + "'");
         _this._animationTimingFunction = "-" + _this._prefix + "-animation-timing-function";
-        if (!(div.style[_this._animationTimingFunction] != null)) {
+        if (div.style[_this._animationTimingFunction] == null) {
           _this._animationTimingFunction = 'animation-timing-function';
         }
         console.log("DivSugar: use '" + _this._animationTimingFunction + "'");
         _this._animationDelay = "-" + _this._prefix + "-animation-delay";
-        if (!(div.style[_this._animationDelay] != null)) {
+        if (div.style[_this._animationDelay] == null) {
           _this._animationDelay = 'animation-delay';
         }
         console.log("DivSugar: use '" + _this._animationDelay + "'");
         _this._animationIterationCount = "-" + _this._prefix + "-animation-iteration-count";
-        if (!(div.style[_this._animationIterationCount] != null)) {
+        if (div.style[_this._animationIterationCount] == null) {
           _this._animationIterationCount = 'animation-iteration-count';
         }
         console.log("DivSugar: use '" + _this._animationIterationCount + "'");
         _this._animationDirection = "-" + _this._prefix + "-animation-direction";
-        if (!(div.style[_this._animationDirection] != null)) {
+        if (div.style[_this._animationDirection] == null) {
           _this._animationDirection = 'animation-direction';
         }
         console.log("DivSugar: use '" + _this._animationDirection + "'");
         _this._animationFillMode = "-" + _this._prefix + "-animation-fill-mode";
-        if (!(div.style[_this._animationFillMode] != null)) {
+        if (div.style[_this._animationFillMode] == null) {
           _this._animationFillMode = 'animation-fill-mode';
         }
         console.log("DivSugar: use '" + _this._animationFillMode + "'");
         requestAnimationFrame = _this._prefix + 'RequestAnimationFrame';
-        if (!(window[requestAnimationFrame] != null)) {
+        if (window[requestAnimationFrame] == null) {
           requestAnimationFrame = 'requestAnimationFrame';
         }
         if (window[requestAnimationFrame] != null) {
@@ -189,7 +189,7 @@
               style.innerHTML += "opacity:" + (value.toFixed(nod)) + ";";
               break;
             case 'image':
-              if (!(value != null)) {
+              if (value == null) {
                 style.innerHTML += 'background-color:transparent;';
                 style.innerHTML += 'background-image:none;';
               } else if (value.charAt(0) === '#') {
@@ -940,7 +940,7 @@
         callback = null;
       }
       this._image = image;
-      if (!(image != null)) {
+      if (image == null) {
         this.style.backgroundColor = null;
         this.style.backgroundImage = null;
       } else if (image.charAt(0) === '#') {
@@ -1168,15 +1168,22 @@
     };
 
     Task.prototype.update = function(elapsedTime) {
-      var child, _i, _len, _ref;
+      var child, i, len;
       if (this.active) {
         if (typeof this.onUpdate === "function") {
           this.onUpdate(elapsedTime);
         }
-        _ref = this._children;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          child = _ref[_i];
-          child.update(elapsedTime);
+        i = 0;
+        len = this._children.length;
+        while (i < len) {
+          child = this._children[i];
+          if (child != null) {
+            child.update(elapsedTime);
+            i++;
+          } else {
+            this._children.splice(i, 1);
+            len--;
+          }
         }
       }
       return this;
@@ -1193,7 +1200,9 @@
       _ref1 = this._children;
       for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
         child = _ref1[_i];
-        child.destroy();
+        if (child != null) {
+          child.destroy();
+        }
       }
       return this;
     };
@@ -1209,7 +1218,7 @@
       var i;
       i = this._children.indexOf(task);
       if (i > -1) {
-        this._children.splice(i, 1);
+        this._children[i] = null;
         task._parent = null;
       }
       return this;
@@ -1223,9 +1232,11 @@
         _ref = this._children;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           child = _ref[_i];
-          task = child.getTaskById(id);
-          if (task != null) {
-            return task;
+          if (child != null) {
+            task = child.getTaskById(id);
+            if (task != null) {
+              return task;
+            }
           }
         }
         return null;
