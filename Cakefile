@@ -16,7 +16,6 @@ sourceFiles = [
 ]
 
 target = "#{targetDir}/#{targetName}.js"
-minTarget = "#{targetDir}/#{targetName}.min.js"
 sources = ("#{sourceDir}/#{s}" for s in sourceFiles)
 
 task 'watch', 'Watch the source files and build the changes', ->
@@ -24,10 +23,5 @@ task 'watch', 'Watch the source files and build the changes', ->
   coffee.stdout.on 'data', (data) -> print data.toString()
   coffee.stderr.on 'data', (data) -> process.stderr.write data.toString()
 
-task 'minify', 'Make a minified-version of the target', ->
-  exec "yuicompressor #{target} -o #{minTarget}", (err, stdout, stderr) ->
-    throw err if err
-    console.log stdout + stderr
-
 task 'clean', 'Delete the target files', ->
-  exec "rm -f #{target} #{minTarget}"
+  exec "rm -f #{target}"
