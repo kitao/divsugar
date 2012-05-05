@@ -14,7 +14,7 @@ Include **divsugar.min.js**, then all of the functions get available via the **D
 <script src="divsugar.js"></script>
 ```
 
-A scene is the root node of a scene graph and specifies the rendering area.
+A scene is the root of a scene graph and specifies the rendering area.
 A node is an element of a scene graph and draws an image.
 Both of them are extended div elements and created by the factory methods of DivSugar.
 
@@ -28,9 +28,8 @@ node.setSize(300, 300).setImage('image.jpg').setPosition(10, 20, 30);
 scn.appendChild(node);
 ```
 
-DivSugar provides the two kinds of animation system.
-One is the task system, which calls the onUpdate method of the registered tasks in every redering time.
-It also calls the onDestroy method when the task's destroy mothod is called.
+DivSugar provides the task system, which calls the onUpdate method of the registered tasks in every frame.
+It also calls the onDestroy method when the task is destroyed.
 
 ```javascript
 var task = new DivSugar.Task('someTask');
@@ -42,33 +41,14 @@ task.onUpdate = function(elapsedTime) {
 task.onDestroy = function() {
   scn.removeChild(node);
 };
-```
 
-The other is the CSS animation generator, which helps with making new CSS animations dynamically.
-Each generated animation can be adapted to nodes.
-
-```javascript
-DivSugar.addCSSAnimation('someAnimation', {
-  from: {
-    size: [100, 100],
-    opacity: 0,
-    rotate: [0, 0, 0]
-  },
-  to: {
-    size: [300, 300],
-    opacity: 1,
-    rotate: [0, 0, 180]
-  }
-});
-
-node.playCSSAnimation('someAnimation', 15);
+DivSugar.rootTask.appendChild(task);
 ```
 
 Examples
 --------
-- Simple application
-- Animation with the task system
-- Dynamic CSS animation
+- 01.SimpleApplication
+- 02.TaskSystem
 
 Documentaion
 ------------
