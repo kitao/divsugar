@@ -13,8 +13,16 @@ class DivSugar.Task
     if @active
       @onUpdate? elapsedTime
 
-      for child in @_children
-        child.update elapsedTime
+      i = 0
+      len = @_children.length
+      while i < len
+        child = @_children[i]
+        if child?
+          child.update elapsedTime
+          i++
+        else
+          @_children.splice i, 1
+          len--
 
     return @
 
@@ -23,7 +31,7 @@ class DivSugar.Task
     @_parent?.removeChild this
 
     for child in @_children
-      child.destroy()
+      child?.destroy()
 
     return @
 
@@ -36,7 +44,7 @@ class DivSugar.Task
   removeChild: (task) ->
     i = @_children.indexOf task
     if i > -1
-      @_children.splice i, 1
+      @_children[i] = null
       task._parent = null
     return @
 
@@ -45,8 +53,9 @@ class DivSugar.Task
       return @
     else
       for child in @_children
-        task = child.getTaskById id
-        return task if task?
+        if child?
+          task = child.getTaskById id
+          return task if task?
       return null
 
 DivSugar.rootTask = new DivSugar.Task('rootTask')
