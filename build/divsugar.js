@@ -14,7 +14,6 @@
       this.DEG_TO_RAD = Math.PI / 180;
       this.RAD_TO_DEG = 180 / Math.PI;
       this._id = 0;
-      this._animations = [];
       this.rootTask = null;
       (function() {
         var div, requestAnimationFrame, userAgent;
@@ -62,41 +61,6 @@
           _this._backfaceVisibility = 'backface-visibility';
         }
         console.log("DivSugar: use '" + _this._backfaceVisibility + "'");
-        _this._animationName = "-" + _this._prefix + "-animation-name";
-        if (div.style[_this._animationName] == null) {
-          _this._animationName = 'animation-name';
-        }
-        console.log("DivSugar: use '" + _this._animationName + "'");
-        _this._animationDuration = "-" + _this._prefix + "-animation-duration";
-        if (div.style[_this._animationDuration] == null) {
-          _this._animationDuration = 'animation-duration';
-        }
-        console.log("DivSugar: use '" + _this._animationDuration + "'");
-        _this._animationTimingFunction = "-" + _this._prefix + "-animation-timing-function";
-        if (div.style[_this._animationTimingFunction] == null) {
-          _this._animationTimingFunction = 'animation-timing-function';
-        }
-        console.log("DivSugar: use '" + _this._animationTimingFunction + "'");
-        _this._animationDelay = "-" + _this._prefix + "-animation-delay";
-        if (div.style[_this._animationDelay] == null) {
-          _this._animationDelay = 'animation-delay';
-        }
-        console.log("DivSugar: use '" + _this._animationDelay + "'");
-        _this._animationIterationCount = "-" + _this._prefix + "-animation-iteration-count";
-        if (div.style[_this._animationIterationCount] == null) {
-          _this._animationIterationCount = 'animation-iteration-count';
-        }
-        console.log("DivSugar: use '" + _this._animationIterationCount + "'");
-        _this._animationDirection = "-" + _this._prefix + "-animation-direction";
-        if (div.style[_this._animationDirection] == null) {
-          _this._animationDirection = 'animation-direction';
-        }
-        console.log("DivSugar: use '" + _this._animationDirection + "'");
-        _this._animationFillMode = "-" + _this._prefix + "-animation-fill-mode";
-        if (div.style[_this._animationFillMode] == null) {
-          _this._animationFillMode = 'animation-fill-mode';
-        }
-        console.log("DivSugar: use '" + _this._animationFillMode + "'");
         requestAnimationFrame = _this._prefix + 'RequestAnimationFrame';
         if (window[requestAnimationFrame] == null) {
           requestAnimationFrame = 'requestAnimationFrame';
@@ -159,107 +123,6 @@
       }
       div._initialize.apply(div, args);
       return div;
-    },
-    addCSSAnimation: function(name, animation) {
-      var h, keyframe, nod, property, style, transform, u1, u2, v1, v2, value, w, x, y, _ref;
-      this.removeCSSAnimation(name);
-      style = document.createElement('style');
-      style.innerHTML = "@-" + this._prefix + "-keyframes " + name + "{";
-      nod = this.NUM_OF_DIGITS;
-      for (keyframe in animation) {
-        style.innerHTML += "" + keyframe + "{";
-        transform = null;
-        _ref = animation[keyframe];
-        for (property in _ref) {
-          value = _ref[property];
-          switch (property) {
-            case 'size':
-              style.innerHTML += "width:" + (value[0].toFixed(nod)) + "px;height:" + (value[1].toFixed(nod)) + "px;";
-              break;
-            case 'visible':
-              style.innerHTML += "visibility:" + (value ? 'visible' : 'hidden') + ";";
-              break;
-            case 'backface':
-              style.innerHTML += "" + this._backfaceVisibility + ":" + (value ? 'visible' : 'hidden') + ";";
-              break;
-            case 'clip':
-              style.innerHTML += "overflow:" + (value ? 'hidden' : 'visible') + ";";
-              break;
-            case 'opacity':
-              style.innerHTML += "opacity:" + (value.toFixed(nod)) + ";";
-              break;
-            case 'image':
-              if (value == null) {
-                style.innerHTML += 'background-color:transparent;';
-                style.innerHTML += 'background-image:none;';
-              } else if (value.charAt(0) === '#') {
-                style.innerHTML += "background-color:" + value + ";";
-                style.innerHTML += 'background-image:none;';
-              } else {
-                style.innerHTML += 'background-color:transparent;';
-                style.innerHTML += "background-image:url(" + value + ");";
-              }
-              break;
-            case 'imageClip':
-              u1 = value[0];
-              v1 = value[1];
-              u2 = value[2];
-              v2 = value[3];
-              u1 = u1 < 0 ? 0 : u1 > 1 ? 1 : u1;
-              v1 = v1 < 0 ? 0 : v1 > 1 ? 1 : v1;
-              u2 = u2 < 0 ? 0 : u2 > 1 ? 1 : u2;
-              v2 = v2 < 0 ? 0 : v2 > 1 ? 1 : v2;
-              w = 1 / (u2 - u1) * 100;
-              h = 1 / (v2 - v1) * 100;
-              x = u1 * w;
-              y = v1 * h;
-              nod = DivSugar.NUM_OF_DIGITS;
-              style.innerHTML += "background-position:" + (x.toFixed(nod)) + "% " + (y.toFixed(nod)) + "%;";
-              style.innerHTML += "background-size:" + (w.toFixed(nod)) + "% " + (h.toFixed(nod)) + "%;";
-              break;
-            case 'transform':
-              if (transform == null) {
-                transform = new DivSugar.Matrix();
-              }
-              transform.set(value);
-              break;
-            case 'translate':
-              if (transform == null) {
-                transform = new DivSugar.Matrix();
-              }
-              transform.translate(value[0], value[1], value[2]);
-              break;
-            case 'rotate':
-              if (transform == null) {
-                transform = new DivSugar.Matrix();
-              }
-              transform.rotate(value[0], value[1], value[2]);
-              break;
-            case 'scale':
-              if (transform == null) {
-                transform = new DivSugar.Matrix();
-              }
-              transform.scale(value[0], value[1], value[2]);
-          }
-        }
-        if (transform != null) {
-          style.innerHTML += "" + this._transform + ":" + (transform.toCSSTransform()) + ";";
-        }
-        style.innerHTML += '}';
-      }
-      style.innerHTML += '}';
-      document.head.appendChild(style);
-      this._animations[name] = style;
-      console.log("DivSugar: added css animation");
-      console.log(style.innerHTML);
-      return this;
-    },
-    removeCSSAnimation: function(name) {
-      if (name in this._animations) {
-        document.head.removeChild(this._animations[name]);
-        delete this._animations[name];
-      }
-      return this;
     },
     getImageSize: function(src, callback) {
       var image;
@@ -1033,8 +896,7 @@
       this.setClip(false);
       this.setOpacity(1);
       this.setImage(null);
-      this.setImageClip(0, 0, 1, 1);
-      return this.stopCSSAnimation();
+      return this.setImageClip(0, 0, 1, 1);
     },
     getWidth: function() {
       return this._width;
@@ -1107,40 +969,6 @@
     getImageClipU2: DivSugar._Scene.getImageClipU2,
     getImageClipV2: DivSugar._Scene.getImageClipV2,
     setImageClip: DivSugar._Scene.setImageClip,
-    getCSSAnimation: function() {
-      return this._cssAnimation;
-    },
-    playCSSAnimation: function(name, duration, timing, delay, count, direction, fill) {
-      if (timing == null) {
-        timing = 'ease';
-      }
-      if (delay == null) {
-        delay = 0;
-      }
-      if (count == null) {
-        count = 1;
-      }
-      if (direction == null) {
-        direction = 'normal';
-      }
-      if (fill == null) {
-        fill = 'both';
-      }
-      this._cssAnimation = name;
-      this.style[DivSugar._animationName] = name;
-      this.style[DivSugar._animationDuration] = "" + (duration.toFixed(DivSugar.NUM_OF_DIGITS)) + "s";
-      this.style[DivSugar._animationTimingFunction] = timing;
-      this.style[DivSugar._animationDirection] = "" + (delay.toFixed(DivSugar.NUM_OF_DIGITS)) + "s";
-      this.style[DivSugar._animationIterationCount] = count;
-      this.style[DivSugar._animationDirection] = direction;
-      this.style[DivSugar._animationFillMode] = fill;
-      return this;
-    },
-    stopCSSAnimation: function(name) {
-      this._cssAnimation = null;
-      this.style[DivSugar._animationName] = 'none';
-      return this;
-    },
     translate: function(offsetX, offsetY, offsetZ) {
       this._transform.translate(offsetX, offsetY, offsetZ);
       this.style[DivSugar._transform] = this._transform.toCSSTransform();

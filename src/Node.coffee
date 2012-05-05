@@ -15,7 +15,6 @@ DivSugar._Node =
     @setOpacity 1
     @setImage null
     @setImageClip 0, 0, 1, 1
-    @stopCSSAnimation()
 
   getWidth: -> @_width
   getHeight: -> @_height
@@ -82,24 +81,6 @@ DivSugar._Node =
   getImageClipU2: DivSugar._Scene.getImageClipU2
   getImageClipV2: DivSugar._Scene.getImageClipV2
   setImageClip: DivSugar._Scene.setImageClip
-
-  getCSSAnimation: -> @_cssAnimation
-
-  playCSSAnimation: (name, duration, timing = 'ease', delay = 0, count = 1, direction = 'normal', fill = 'both') ->
-    @_cssAnimation = name
-    @style[DivSugar._animationName] = name
-    @style[DivSugar._animationDuration] = "#{duration.toFixed(DivSugar.NUM_OF_DIGITS)}s"
-    @style[DivSugar._animationTimingFunction] = timing
-    @style[DivSugar._animationDirection] = "#{delay.toFixed(DivSugar.NUM_OF_DIGITS)}s"
-    @style[DivSugar._animationIterationCount] = count
-    @style[DivSugar._animationDirection] = direction
-    @style[DivSugar._animationFillMode] = fill
-    return @
-
-  stopCSSAnimation: (name) ->
-    @_cssAnimation = null
-    @style[DivSugar._animationName] = 'none'
-    return @
 
   translate: (offsetX, offsetY, offsetZ) ->
     @_transform.translate offsetX, offsetY, offsetZ

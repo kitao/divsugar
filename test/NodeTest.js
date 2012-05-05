@@ -20,7 +20,6 @@
     strictEqual(node1.getImageClipV1(), 0);
     strictEqual(node1.getImageClipU2(), 1);
     strictEqual(node1.getImageClipV2(), 1);
-    strictEqual(node1.getCSSAnimation(), null);
   });
 
   test('getPosition', function() {
@@ -148,22 +147,6 @@
     strictEqual(node1.getImageClipV2(), 1);
 
     ok(node1.setImageClip(0, 0, 0, 0).setImageClip(0, 0, 0, 0));
-  });
-
-  test('playCSSAnimation and stopCSSAnimation', function() {
-    var node1 = DivSugar.createNode();
-    DivSugar.addCSSAnimation('animation1', {});
-
-    node1.playCSSAnimation('animation1', 1, 'linear', 1, 'infinite', 'alternate', 'forwards');
-    strictEqual(node1.getCSSAnimation(), 'animation1');
-
-    node1.stopCSSAnimation();
-    strictEqual(node1.getCSSAnimation(), null);
-
-    ok(node1.playCSSAnimation('animation1', 1).playCSSAnimation('animation1', 1));
-    ok(node1.stopCSSAnimation().stopCSSAnimation());
-
-    DivSugar.removeCSSAnimation('animation1');
   });
 
   test('translate', function() {

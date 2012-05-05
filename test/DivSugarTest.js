@@ -74,36 +74,6 @@
     strictEqual(node2.id, 'node2');
   });
 
-  test('addCSSAnimation and removeCSSAnimation', function() {
-    var mat1 = new DivSugar.Matrix();
-
-    DivSugar.addCSSAnimation('animation1', {
-      from: {
-        size: [1, 2],
-        visible: true,
-        backface: true,
-        clip: true,
-        opacity: 1,
-        image: '#ff0000',
-        imageClip: [0.1, 0.2, 0.3, 0.4],
-        translate: [1, 2, 3],
-        rotate: [10, 20, 30],
-        scale: [2, 3, 4]
-      },
-      to: {
-        transform: mat1
-      }
-    });
-    ok('animation1' in DivSugar._animations);
-
-    ok(DivSugar.addCSSAnimation('animation1', {}).addCSSAnimation('animation1'));
-
-    DivSugar.removeCSSAnimation('animation1');
-    ok(!('animation1' in DivSugar._animations));
-
-    ok(DivSugar.removeCSSAnimation('animation1').removeCSSAnimation('animation1'));
-  });
-
   test('getImageSize', function() {
     DivSugar.getImageSize('../examples/assets/coin.png', function(width, height) {
       start();
