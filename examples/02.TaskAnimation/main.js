@@ -52,6 +52,6 @@ window.onload = function() {
   Coin.prototype.onDestroy = function() { scn.removeChild(this.center); };
 
   // create instances of the animation class
-  var dummy; // for avoiding jslint warnings
+  var dummy; // for avoiding JSLint warnings
   for (var i = 0; i < 30; i++) { dummy = new Coin(); }
 };
