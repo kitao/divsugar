@@ -8,15 +8,16 @@ DivSugar depends on CSS 3D transform and runs on Safari, Chrome, and Firefox for
 
 Getting Started
 ---------------
-Include **divsugar.min.js** for normal use or **divsugar.js** for debug use.
+Include **divsugar.min.js**, then all of the functions get available via the **DivSugar** global variable.
+
 ```html
-<script src="divsugar.min.js"></script>
+<script src="divsugar.js"></script>
 ```
-Then all of the functions get available via the **DivSugar** global variable.
 
 A scene is the root node of a scene graph and specifies the rendering area.
 A node is an element of a scene graph and draws an image.
 Both of them are extended div elements and created by the factory methods of DivSugar.
+
 ```javascript
 var scn = DivSugar.createScene('someScene');
 scn.setSize(800, 600).setImage('#000080');
