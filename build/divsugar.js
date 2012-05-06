@@ -7,8 +7,7 @@
     _initialize: function() {
       var updateTasks,
         _this = this;
-      this.VERSION = '2012.05';
-      console.log("DivSugar: version " + this.VERSION);
+      console.log('DivSugar: a CSS-based 3D graphics library (https://github.com/kitao/divsugar)');
       this.EPSILON = 0.0001;
       this.NUM_OF_DIGITS = 4;
       this.DEG_TO_RAD = Math.PI / 180;

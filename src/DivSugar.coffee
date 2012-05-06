@@ -1,8 +1,7 @@
 DivSugar =
   _initialize: ->
     # initialize constants
-    @VERSION = '2012.05'
-    console.log "DivSugar: version #{@VERSION}"
+    console.log 'DivSugar: a CSS-based 3D graphics library (https://github.com/kitao/divsugar)'
 
     @EPSILON = 0.0001
     @NUM_OF_DIGITS = 4
