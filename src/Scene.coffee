@@ -82,19 +82,19 @@ DivSugar._Scene =
 
   getImage: -> @_image
 
-  setImage: (image, callback = null) ->
-    @_image = image
+  setImage: (src, callback = null) ->
+    @_image = src
 
-    unless image?
+    unless src?
       @style.backgroundColor = null
       @style.backgroundImage = null
-    else if image.charAt(0) is '#'
-      @style.backgroundColor = image
+    else if src.charAt(0) is '#'
+      @style.backgroundColor = src
       @style.backgroundImage = null
     else
       @style.backgroundColor = null
-      @style.backgroundImage = "url(#{image})"
-      DivSugar.getImageSize image, callback if callback?
+      @style.backgroundImage = "url(#{src})"
+      DivSugar.getImageSize src, callback if callback?
 
     return @
 
