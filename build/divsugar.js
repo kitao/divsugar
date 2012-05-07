@@ -99,6 +99,15 @@
     generateId: function() {
       return "_divsugar_id_" + (++this._id);
     },
+    getImageSize: function(src, callback) {
+      var image;
+      image = new Image();
+      image.src = src;
+      image.onload = function() {
+        return callback(image.width, image.height);
+      };
+      return this;
+    },
     createScene: function() {
       var args, div, func, name, _ref;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -122,15 +131,6 @@
       }
       div._initialize.apply(div, args);
       return div;
-    },
-    getImageSize: function(src, callback) {
-      var image;
-      image = new Image();
-      image.src = src;
-      image.onload = function() {
-        return callback(image.width, image.height);
-      };
-      return this;
     }
   };
 
@@ -805,22 +805,22 @@
     getImage: function() {
       return this._image;
     },
-    setImage: function(image, callback) {
+    setImage: function(src, callback) {
       if (callback == null) {
         callback = null;
       }
-      this._image = image;
-      if (image == null) {
+      this._image = src;
+      if (src == null) {
         this.style.backgroundColor = null;
         this.style.backgroundImage = null;
-      } else if (image.charAt(0) === '#') {
-        this.style.backgroundColor = image;
+      } else if (src.charAt(0) === '#') {
+        this.style.backgroundColor = src;
         this.style.backgroundImage = null;
       } else {
         this.style.backgroundColor = null;
-        this.style.backgroundImage = "url(" + image + ")";
+        this.style.backgroundImage = "url(" + src + ")";
         if (callback != null) {
-          DivSugar.getImageSize(image, callback);
+          DivSugar.getImageSize(src, callback);
         }
       }
       return this;
