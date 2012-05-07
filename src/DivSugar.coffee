@@ -86,6 +86,12 @@ DivSugar =
 
   generateId: -> "_divsugar_id_#{++@_id}"
 
+  getImageSize: (src, callback) ->
+    image = new Image()
+    image.src = src
+    image.onload = -> callback(image.width, image.height)
+    return @
+
   createScene: (args...) ->
     div = document.createElement 'div'
 
@@ -105,11 +111,5 @@ DivSugar =
     div._initialize args...
 
     return div
-
-  getImageSize: (src, callback) ->
-    image = new Image()
-    image.src = src
-    image.onload = -> callback(image.width, image.height)
-    return @
 
 (window.DivSugar = DivSugar)._initialize()
