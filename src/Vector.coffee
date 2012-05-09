@@ -3,14 +3,12 @@ class DivSugar.Vector
     switch arguments.length
       when 0
         @x = @y = @z = 0
-
       when 1
         vec = x
         @x = vec.x
         @y = vec.y
         @z = vec.z
-
-      else
+      when 2
         @x = x
         @y = y
         @z = z

@@ -3,15 +3,13 @@ class DivSugar.Quaternion
     switch arguments.length
       when 0
         @x = @y = @z = @w = 0
-
       when 1
         quat = x
         @x = quat.x
         @y = quat.y
         @z = quat.z
         @w = quat.w
-
-      else
+      when 4
         @x = x
         @y = y
         @z = z
@@ -54,7 +52,7 @@ class DivSugar.Quaternion
           root = Math.sqrt matYAxis.y - (matZAxis.z + matXAxis.x) + 1
           scale = if root isnt 0 then 0.5 / root else root
           @set (matXAxis.y + matYAxis.x) * scale, root * 0.5, (matYAxis.z + matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale
-        else # 2
+        when 2
           root = Math.sqrt matZAxis.z - (matXAxis.x + matYAxis.y) + 1
           scale = if root isnt 0 then 0.5 / root else root
           @set (matZAxis.x + matXAxis.z) * scale, (matYAxis.z + matZAxis.y) * scale, root * 0.5, (matXAxis.y - matYAxis.x) * scale

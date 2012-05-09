@@ -6,14 +6,12 @@ class DivSugar.Matrix
         @yAxis = new DivSugar.Vector DivSugar.Vector.Y_UNIT
         @zAxis = new DivSugar.Vector DivSugar.Vector.Z_UNIT
         @trans = new DivSugar.Vector DivSugar.Vector.ZERO
-
       when 1
         @xAxis = new DivSugar.Vector mat.xAxis
         @yAxis = new DivSugar.Vector mat.yAxis
         @zAxis = new DivSugar.Vector mat.zAxis
         @trans = new DivSugar.Vector mat.trans
-
-      else
+      when 12
         @xAxis = new DivSugar.Vector arguments[0], arguments[1], arguments[2]
         @yAxis = new DivSugar.Vector arguments[3], arguments[4], arguments[5]
         @zAxis = new DivSugar.Vector arguments[6], arguments[7], arguments[8]

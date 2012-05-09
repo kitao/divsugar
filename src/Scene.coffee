@@ -129,13 +129,11 @@ DivSugar._Scene =
     switch style
       when 'center'
         break
-
       when 'contain'
         if parentWidth < parentHeight * @_viewWidth / @_viewHeight
           @setSize parentWidth, parentWidth * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
         else
           @setSize parentHeight * @_viewWidth / @_viewHeight, parentHeight, @_viewWidth, @_viewHeight
-
       when 'cover'
         if parentWidth > parentHeight * @_viewWidth / @_viewHeight
           @setSize parentWidth, parentWidth * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
