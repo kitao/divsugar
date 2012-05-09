@@ -8,7 +8,7 @@ class DivSugar.Vector
         @x = vec.x
         @y = vec.y
         @z = vec.z
-      when 2
+      when 3
         @x = x
         @y = y
         @z = z
