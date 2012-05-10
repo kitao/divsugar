@@ -200,4 +200,97 @@
 
     ok(node1.scale(1, 1, 1).scale(1, 1, 1));
   });
+
+  test('playAnimation', function() {
+    var callCount = 0;
+    var mat1 = new DivSugar.Matrix();
+    var node1 = DivSugar.createNode();
+    var cmds1 = [
+      ['to', {
+          size: [100, 200],
+          position: [1, 2, 3],
+          transform: new DivSugar.Matrix().rotate(0, 90, 0),
+          visible: false,
+          backface: false,
+          clip: true,
+          opacity: 0.5,
+          image: '../examples/assets/coin.png',
+          imageClip: [0.1, 0.2, 0.3, 0.4],
+          translate: [10, 20, 30],
+          rotate: [10, 20, 30],
+          scale: [1, 2, 3]
+        }, 100, DivSugar.Ease.quadInOut ],
+      ['call', function() { callCount++; }],
+      ['wait', 50]
+    ];
+    var anim1 = node1.playAnimation(cmds1);
+
+    strictEqual(callCount, 0);
+    strictEqual(anim1.commands, cmds1);
+    strictEqual(anim1.task.getParent(), DivSugar.rootTask);
+    strictEqual(node1.getWidth(), 0);
+    strictEqual(node1.getHeight(), 0);
+    strictEqual(node1.getVisible(), true);
+    strictEqual(node1.getBackface(), true);
+    strictEqual(node1.getClip(), false);
+    strictEqual(node1.getOpacity(), 1);
+    strictEqual(node1.getImage(), null);
+    strictEqual(node1.getImageClipU1(), 0);
+    strictEqual(node1.getImageClipV1(), 0);
+    strictEqual(node1.getImageClipU2(), 1);
+    strictEqual(node1.getImageClipV2(), 1);
+    node1.getTransform(mat1);
+    deepEqual(mat1, DivSugar.Matrix.UNIT);
+
+    anim1.task.update(100);
+    strictEqual(callCount, 0);
+    strictEqual(anim1.task.getParent(), DivSugar.rootTask);
+    strictEqual(node1.getWidth(), 100);
+    strictEqual(node1.getHeight(), 200);
+    strictEqual(node1.getVisible(), false);
+    strictEqual(node1.getBackface(), false);
+    strictEqual(node1.getClip(), true);
+    strictEqual(node1.getOpacity(), 0.5);
+    strictEqual(node1.getImage(), '../examples/assets/coin.png');
+    strictEqual(node1.getImageClipU1(), 0.1);
+    strictEqual(node1.getImageClipV1(), 0.2);
+    strictEqual(node1.getImageClipU2(), 0.3);
+    strictEqual(node1.getImageClipV2(), 0.4);
+    node1.getTransform(mat1);
+    deepEqual(mat1, new DivSugar.Matrix().rotate(0, 90, 0).translate(10, 20, 30).rotate(10, 20, 30).scale(1, 2, 3));
+
+    anim1.task.update(1);
+    strictEqual(callCount, 1);
+    strictEqual(anim1.task.getParent(), DivSugar.rootTask);
+
+    anim1.task.update(49);
+    strictEqual(callCount, 1);
+    strictEqual(anim1.task.getParent(), DivSugar.rootTask);
+
+    anim1.task.update(1);
+    strictEqual(callCount, 1);
+    strictEqual(anim1.task.getParent(), null);
+  });
+
+  test('stopAnimation', function() {
+    var node1 = DivSugar.createNode();
+    var anim1 = node1.playAnimation([['wait', 100]]);
+
+    anim1.task.update(50);
+    strictEqual(anim1.task.getParent(), DivSugar.rootTask);
+
+    node1.stopAnimation(anim1);
+    strictEqual(anim1.task.getParent(), null);
+
+    var anim2 = node1.playAnimation([['wait', 100]]);
+    var anim3 = node1.playAnimation([['wait', 100]]);
+
+    anim1.task.update(50);
+    strictEqual(anim2.task.getParent(), DivSugar.rootTask);
+    strictEqual(anim3.task.getParent(), DivSugar.rootTask);
+
+    node1.stopAnimation();
+    strictEqual(anim2.task.getParent(), null);
+    strictEqual(anim3.task.getParent(), null);
+  });
 })();
