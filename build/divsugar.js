@@ -888,7 +888,7 @@
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0%';
       this._transform = new DivSugar.Matrix();
-      this._animations = [];
+      this._animTasks = [];
       this.setSize(0, 0);
       this.setPosition(0, 0, 0);
       this.setVisible(true);
@@ -984,74 +984,53 @@
       this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
     },
-    playAnimation: function(commands) {
-      var animation, task,
+    playAnimation: function(animation) {
+      var animTask,
         _this = this;
-      task = new DivSugar.Task();
-      animation = {
-        commands: commands,
-        task: task,
-        _elapsedTime: 0,
-        _cmdIndex: 0,
-        _firstFrame: true
+      animTask = new DivSugar.Task();
+      animTask.animation = animation;
+      animTask._elapsedTime = 0;
+      animTask._cmdIndex = 0;
+      animTask._firstFrame = true;
+      animTask.onUpdate = function(elapsedTime) {
+        return _this._updateAnimation(animTask, elapsedTime);
       };
-      task.onUpdate = function(elapsedTime) {
-        return _this._updateAnimation(elapsedTime, animation);
+      animTask.onDestroy = function() {
+        return _this._destroyAnimation(animTask);
       };
-      DivSugar.rootTask.appendChild(task);
-      this._animations.push(animation);
-      return animation;
+      DivSugar.rootTask.appendChild(animTask);
+      this._animTasks.push(animTask);
+      return animTask;
     },
-    stopAnimation: function(animation) {
-      var index, _i, _len, _ref;
-      if (animation == null) {
-        animation = null;
-      }
-      if (animation != null) {
-        index = this._animations.indexOf(animation);
-        if (index > -1) {
-          animation.task.destroy();
-          this._animations.splice(index, 1);
-        }
-      } else {
-        _ref = this._animations;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          animation = _ref[_i];
-          animation.task.destroy();
-        }
-        this._animations = [];
-      }
-      return this;
-    },
-    _updateAnimation: function(elapsedTime, animation) {
+    _updateAnimation: function(animTask, elapsedTime) {
       var a0, a1, clip, command, param, pos, size, value, _ref, _ref1, _ref2, _ref3;
-      animation._elapsedTime += elapsedTime;
-      while (animation._elapsedTime > 0) {
-        if (animation._cmdIndex >= animation.commands.length) {
-          this.stopAnimation(animation);
+      animTask._elapsedTime += elapsedTime;
+      while (animTask._elapsedTime > 0) {
+        if (animTask._cmdIndex >= animTask.animation.length) {
+          animTask.destroy();
           return;
         }
-        command = animation.commands[animation._cmdIndex];
+        command = animTask.animation[animTask._cmdIndex];
         switch (command[0]) {
           case 'to':
-            if (animation._firstFrame) {
-              animation._firstFrame = false;
-              animation._currentTime = 0;
-              animation._totalTime = (_ref = command[2]) != null ? _ref : 0;
-              animation._easeFunc = (_ref1 = command[3]) != null ? _ref1 : DivSugar.Ease.linear;
+            if (animTask._firstFrame) {
+              animTask._firstFrame = false;
+              animTask._currentTime = 0;
+              animTask._totalTime = (_ref = command[2]) != null ? _ref : 0;
+              animTask._easeFunc = (_ref1 = command[3]) != null ? _ref1 : DivSugar.Ease.linear;
               _ref2 = command[1];
               for (param in _ref2) {
                 value = _ref2[param];
                 switch (param) {
                   case 'size':
-                    animation._fromSize = [this._width, this._height];
+                    animTask._fromSize = [this._width, this._height];
                     break;
                   case 'position':
-                    animation._fromPosition = [this._transform.trans.x, this._transform.trans.y, this._transform.trans.z];
+                    animTask._fromPosition = [this._transform.trans.x, this._transform.trans.y, this._transform.trans.z];
                     break;
                   case 'transform':
-                    if (animation._fromTransform == null) {
-                      animation._fromTransform = new DivSugar.Matrix(this._transform);
+                    if (animTask._fromTransform == null) {
+                      animTask._fromTransform = new DivSugar.Matrix(this._transform);
                     }
                     break;
                   case 'visible':
@@ -1064,45 +1043,45 @@
                     this.setClip(value);
                     break;
                   case 'opacity':
-                    animation._fromOpacity = this._opacity;
+                    animTask._fromOpacity = this._opacity;
                     break;
                   case 'image':
                     this.setImage(value);
                     break;
                   case 'imageClip':
-                    animation._fromImageClip = [this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2];
+                    animTask._fromImageClip = [this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2];
                     break;
                   case 'translate':
-                    if (animation._fromTransform == null) {
-                      animation._fromTransform = new DivSugar.Matrix(this._transform);
+                    if (animTask._fromTransform == null) {
+                      animTask._fromTransform = new DivSugar.Matrix(this._transform);
                     }
                     break;
                   case 'rotate':
-                    if (animation._fromTransform == null) {
-                      animation._fromTransform = new DivSugar.Matrix(this._transform);
+                    if (animTask._fromTransform == null) {
+                      animTask._fromTransform = new DivSugar.Matrix(this._transform);
                     }
                     break;
                   case 'scale':
-                    if (animation._fromTransform == null) {
-                      animation._fromTransform = new DivSugar.Matrix(this._transform);
+                    if (animTask._fromTransform == null) {
+                      animTask._fromTransform = new DivSugar.Matrix(this._transform);
                     }
                 }
               }
             }
-            if (animation._fromImageClip != null) {
-              this._transform.set(animation._fromTransform);
+            if (animTask._fromImageClip != null) {
+              this._transform.set(animTask._fromTransform);
             }
-            if (animation._totalTime > animation._elapsedTime) {
-              animation._currentTime += animation._elapsedTime;
-              animation._elapsedTime = 0;
+            if (animTask._totalTime > animTask._elapsedTime) {
+              animTask._currentTime += animTask._elapsedTime;
+              animTask._elapsedTime = 0;
             } else {
-              animation._currentTime = animation._totalTime;
-              animation._elapsedTime -= animation._totalTime;
-              animation._cmdIndex++;
-              animation._firstFrame = true;
+              animTask._currentTime = animTask._totalTime;
+              animTask._elapsedTime -= animTask._totalTime;
+              animTask._cmdIndex++;
+              animTask._firstFrame = true;
             }
-            if (animation._totalTime > 0) {
-              a1 = animation._easeFunc(animation._currentTime / animation._totalTime);
+            if (animTask._totalTime > 0) {
+              a1 = animTask._easeFunc(animTask._currentTime / animTask._totalTime);
               a0 = 1 - a1;
             } else {
               a1 = 1;
@@ -1113,21 +1092,21 @@
               value = _ref3[param];
               switch (param) {
                 case 'size':
-                  size = animation._fromSize;
+                  size = animTask._fromSize;
                   this.setSize(size[0] * a0 + value[0] * a1, size[1] * a0 + value[1] * a1);
                   break;
                 case 'position':
-                  pos = animation._fromPosition;
+                  pos = animTask._fromPosition;
                   this.setPosition(pos[0] * a0 + value[0] * a1, pos[1] * a0 + value[1] * a1, pos[2] * a0 + value[2] * a1);
                   break;
                 case 'transform':
                   this.setTransform(DivSugar._Node._tmpMat1.set(this._transform).slerp(value, a1));
                   break;
                 case 'opacity':
-                  this.setOpacity(animation._fromOpacity * a0 + value * a1);
+                  this.setOpacity(animTask._fromOpacity * a0 + value * a1);
                   break;
                 case 'imageClip':
-                  clip = animation._fromImageClip;
+                  clip = animTask._fromImageClip;
                   this.setImageClip(clip[0] * a0 + value[0] * a1, clip[1] * a0 + value[1] * a1, clip[2] * a0 + value[2] * a1, clip[3] * a0 + value[3]);
                   break;
                 case 'translate':
@@ -1142,26 +1121,39 @@
             }
             break;
           case 'wait':
-            if (animation._firstFrame) {
-              animation._firstFrame = false;
-              animation._waitTime = command[1];
+            if (animTask._firstFrame) {
+              animTask._firstFrame = false;
+              animTask._waitTime = command[1];
             }
-            if (animation._waitTime > animation._elapsedTime) {
-              animation._waitTime -= animation._elapsedTime;
-              animation._elapsedTime = 0;
+            if (animTask._waitTime > animTask._elapsedTime) {
+              animTask._waitTime -= animTask._elapsedTime;
+              animTask._elapsedTime = 0;
             } else {
-              animation._elapsedTime -= animation._waitTime;
-              animation._waitTime = 0;
-              animation._cmdIndex++;
-              animation._firstFrame = true;
+              animTask._elapsedTime -= animTask._waitTime;
+              animTask._waitTime = 0;
+              animTask._cmdIndex++;
+              animTask._firstFrame = true;
             }
             break;
           case 'call':
             command[1]();
-            animation._cmdIndex++;
-            animation._firstFrame = true;
+            animTask._cmdIndex++;
+            animTask._firstFrame = true;
         }
       }
+    },
+    _destroyAnimation: function(animTask) {
+      var index;
+      index = this._animTasks.indexOf(animTask);
+      if (index > -1) {
+        return this._animTasks.splice(index, 1);
+      }
+    },
+    clearAnimation: function() {
+      while (this._animTasks.length > 0) {
+        this._animTasks.shift().destroy();
+      }
+      return this;
     }
   };
 
