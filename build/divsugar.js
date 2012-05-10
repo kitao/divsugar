@@ -989,7 +989,6 @@
         _this = this;
       animTask = new DivSugar.Task();
       animTask.animation = animation;
-      animTask._elapsedTime = 0;
       animTask._cmdIndex = 0;
       animTask._firstFrame = true;
       animTask.onUpdate = function(elapsedTime) {
@@ -1004,8 +1003,7 @@
     },
     _updateAnimation: function(animTask, elapsedTime) {
       var a0, a1, clip, command, param, pos, size, value, _ref, _ref1, _ref2, _ref3;
-      animTask._elapsedTime += elapsedTime;
-      while (animTask._elapsedTime > 0) {
+      while (elapsedTime > 0) {
         if (animTask._cmdIndex >= animTask.animation.length) {
           animTask.destroy();
           return;
@@ -1071,12 +1069,12 @@
             if (animTask._fromImageClip != null) {
               this._transform.set(animTask._fromTransform);
             }
-            if (animTask._totalTime > animTask._elapsedTime) {
-              animTask._currentTime += animTask._elapsedTime;
-              animTask._elapsedTime = 0;
+            if (animTask._totalTime > elapsedTime) {
+              animTask._currentTime += elapsedTime;
+              elapsedTime = 0;
             } else {
+              elapsedTime -= animTask._totalTime;
               animTask._currentTime = animTask._totalTime;
-              animTask._elapsedTime -= animTask._totalTime;
               animTask._cmdIndex++;
               animTask._firstFrame = true;
             }
@@ -1125,11 +1123,11 @@
               animTask._firstFrame = false;
               animTask._waitTime = command[1];
             }
-            if (animTask._waitTime > animTask._elapsedTime) {
-              animTask._waitTime -= animTask._elapsedTime;
-              animTask._elapsedTime = 0;
+            if (animTask._waitTime > elapsedTime) {
+              animTask._waitTime -= elapsedTime;
+              elapsedTime = 0;
             } else {
-              animTask._elapsedTime -= animTask._waitTime;
+              elapsedTime -= animTask._waitTime;
               animTask._waitTime = 0;
               animTask._cmdIndex++;
               animTask._firstFrame = true;
