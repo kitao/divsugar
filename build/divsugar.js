@@ -1016,6 +1016,7 @@
               animTask._currentTime = 0;
               animTask._totalTime = (_ref = command[2]) != null ? _ref : 0;
               animTask._easeFunc = (_ref1 = command[3]) != null ? _ref1 : DivSugar.Ease.linear;
+              animTask._fromTransform = null;
               _ref2 = command[1];
               for (param in _ref2) {
                 value = _ref2[param];
@@ -1066,10 +1067,10 @@
                 }
               }
             }
-            if (animTask._fromImageClip != null) {
+            if (animTask._fromTransform != null) {
               this._transform.set(animTask._fromTransform);
             }
-            if (animTask._totalTime > elapsedTime) {
+            if (animTask._totalTime > animTask._currentTime + elapsedTime) {
               animTask._currentTime += elapsedTime;
               elapsedTime = 0;
             } else {
@@ -1114,7 +1115,7 @@
                   this.rotate(value[0] * a1, value[1] * a1, value[2] * a1);
                   break;
                 case 'scale':
-                  this.scale(value[0] * a1, value[1] * a1, value[2] * a1);
+                  this.scale(a0 + value[0] * a1, a0 + value[1] * a1, a0 + value[2] * a1);
               }
             }
             break;

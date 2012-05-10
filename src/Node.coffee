@@ -124,6 +124,7 @@ DivSugar._Node =
             animTask._currentTime = 0
             animTask._totalTime = command[2] ? 0
             animTask._easeFunc = command[3] ? DivSugar.Ease.linear
+            animTask._fromTransform = null
 
             for param, value of command[1]
               switch param
@@ -140,9 +141,9 @@ DivSugar._Node =
                 when 'rotate'     then animTask._fromTransform ?= new DivSugar.Matrix @_transform
                 when 'scale'      then animTask._fromTransform ?= new DivSugar.Matrix @_transform
 
-          @_transform.set animTask._fromTransform if animTask._fromImageClip?
+          @_transform.set animTask._fromTransform if animTask._fromTransform?
 
-          if animTask._totalTime > elapsedTime
+          if animTask._totalTime > animTask._currentTime + elapsedTime
             animTask._currentTime += elapsedTime
             elapsedTime = 0
           else
@@ -178,7 +179,7 @@ DivSugar._Node =
               when 'rotate'
                 @rotate value[0] * a1, value[1] * a1, value[2] * a1
               when 'scale'
-                @scale value[0] * a1, value[1] * a1, value[2] * a1
+                @scale a0 + value[0] * a1, a0 + value[1] * a1, a0 + value[2] * a1
 
         when 'wait'
           if animTask._firstFrame
