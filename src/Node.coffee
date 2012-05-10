@@ -199,6 +199,17 @@ DivSugar._Node =
           animTask._cmdIndex++
           animTask._firstFrame = true
 
+        when 'repeat'
+          animTask._repeatCount = command[1] ? -1 unless animTask._repeatCount?
+
+          if animTask._repeatCount is 0
+            animTask._cmdIndex++
+            animTask._firstFrame = true
+          else
+            animTask._repeatCount-- if animTask._repeatCount > 0
+            animTask._cmdIndex = 0
+            animTask._firstFrame = true
+
   _destroyAnimation: (animTask) ->
     index = @_animTasks.indexOf animTask
     if index > -1

@@ -1002,7 +1002,7 @@
       return animTask;
     },
     _updateAnimation: function(animTask, elapsedTime) {
-      var a0, a1, clip, command, param, pos, size, value, _ref, _ref1, _ref2, _ref3;
+      var a0, a1, clip, command, param, pos, size, value, _ref, _ref1, _ref2, _ref3, _ref4;
       while (elapsedTime > 0) {
         if (animTask._cmdIndex >= animTask.animation.length) {
           animTask.destroy();
@@ -1137,6 +1137,21 @@
             command[1]();
             animTask._cmdIndex++;
             animTask._firstFrame = true;
+            break;
+          case 'repeat':
+            if (animTask._repeatCount == null) {
+              animTask._repeatCount = (_ref4 = command[1]) != null ? _ref4 : -1;
+            }
+            if (animTask._repeatCount === 0) {
+              animTask._cmdIndex++;
+              animTask._firstFrame = true;
+            } else {
+              if (animTask._repeatCount > 0) {
+                animTask._repeatCount--;
+              }
+              animTask._cmdIndex = 0;
+              animTask._firstFrame = true;
+            }
         }
       }
     },

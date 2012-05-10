@@ -219,9 +219,11 @@
           translate: [10, 20, 30],
           rotate: [10, 20, 30],
           scale: [1, 2, 3]
-        }, 100, DivSugar.Ease.quadInOut ],
+        }, 10, DivSugar.Ease.quadInOut ],
       ['call', function() { callCount++; }],
-      ['wait', 50]
+      ['wait', 5],
+      ['repeat', 2],
+      ['wait', 5]
     ];
     var task1 = node1.playAnimation(anim1);
 
@@ -242,7 +244,7 @@
     node1.getTransform(mat1);
     deepEqual(mat1, DivSugar.Matrix.UNIT);
 
-    DivSugar.rootTask.update(100);
+    DivSugar.rootTask.update(10);
     strictEqual(callCount, 0);
     strictEqual(task1.getParent(), DivSugar.rootTask);
     strictEqual(node1.getWidth(), 100);
@@ -263,22 +265,22 @@
     strictEqual(callCount, 1);
     strictEqual(task1.getParent(), DivSugar.rootTask);
 
-    DivSugar.rootTask.update(49);
-    strictEqual(callCount, 1);
+    DivSugar.rootTask.update(39);
+    strictEqual(callCount, 3);
     strictEqual(task1.getParent(), DivSugar.rootTask);
 
     DivSugar.rootTask.update(1);
-    strictEqual(callCount, 1);
+    strictEqual(callCount, 3);
     strictEqual(task1.getParent(), null);
   });
 
   test('clearAnimation', function() {
     var node1 = DivSugar.createNode();
-    var task1 = node1.playAnimation([['wait', 100]]);
-    var task2 = node1.playAnimation([['wait', 100]]);
-    var task3 = node1.playAnimation([['wait', 100]]);
+    var task1 = node1.playAnimation([['wait', 10]]);
+    var task2 = node1.playAnimation([['wait', 10]]);
+    var task3 = node1.playAnimation([['wait', 10]]);
 
-    DivSugar.rootTask.update(50);
+    DivSugar.rootTask.update(5);
     strictEqual(task1.getParent(), DivSugar.rootTask);
     strictEqual(task2.getParent(), DivSugar.rootTask);
     strictEqual(task3.getParent(), DivSugar.rootTask);
