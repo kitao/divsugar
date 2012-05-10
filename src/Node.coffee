@@ -6,7 +6,7 @@ DivSugar._Node =
     @style[DivSugar._transformStyle] = 'preserve-3d'
     @style[DivSugar._transformOrigin] = '0% 0%'
     @_transform = new DivSugar.Matrix()
-    @_animations = []
+    @_animTasks = []
 
     @setSize 0, 0
     @setPosition 0, 0, 0
@@ -98,73 +98,64 @@ DivSugar._Node =
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
 
-  playAnimation: (commands) ->
-    task = new DivSugar.Task()
-    animation = { commands: commands, task: task, _elapsedTime: 0, _cmdIndex: 0, _firstFrame: true }
-    task.onUpdate = (elapsedTime) => @_updateAnimation elapsedTime, animation
-    DivSugar.rootTask.appendChild task
-    @_animations.push animation
-    return animation
+  playAnimation: (animation) ->
+    animTask = new DivSugar.Task()
+    animTask.animation = animation
+    animTask._elapsedTime = 0
+    animTask._cmdIndex = 0
+    animTask._firstFrame = true
+    animTask.onUpdate = (elapsedTime) => @_updateAnimation animTask, elapsedTime
+    animTask.onDestroy = => @_destroyAnimation animTask
+    DivSugar.rootTask.appendChild animTask
+    @_animTasks.push animTask
+    return animTask
 
-  stopAnimation: (animation = null) ->
-    if animation?
-      index = @_animations.indexOf animation
-      if index > -1
-        animation.task.destroy()
-        @_animations.splice index, 1
-    else
-      for animation in @_animations
-        animation.task.destroy()
-      @_animations = []
+  _updateAnimation: (animTask, elapsedTime) ->
+    animTask._elapsedTime += elapsedTime
 
-    return @
-
-  _updateAnimation: (elapsedTime, animation) ->
-    animation._elapsedTime += elapsedTime
-
-    while animation._elapsedTime > 0
-      if animation._cmdIndex >= animation.commands.length
-        @stopAnimation animation
+    while animTask._elapsedTime > 0
+      if animTask._cmdIndex >= animTask.animation.length
+        animTask.destroy()
         return
 
-      command = animation.commands[animation._cmdIndex]
+      command = animTask.animation[animTask._cmdIndex]
 
       switch command[0]
         when 'to'
-          if animation._firstFrame
-            animation._firstFrame = false
-            animation._currentTime = 0
-            animation._totalTime = command[2] ? 0
-            animation._easeFunc = command[3] ? DivSugar.Ease.linear
+          if animTask._firstFrame
+            animTask._firstFrame = false
+            animTask._currentTime = 0
+            animTask._totalTime = command[2] ? 0
+            animTask._easeFunc = command[3] ? DivSugar.Ease.linear
 
             for param, value of command[1]
               switch param
-                when 'size'       then animation._fromSize = [@_width, @_height]
-                when 'position'   then animation._fromPosition = [@_transform.trans.x, @_transform.trans.y, @_transform.trans.z]
-                when 'transform'  then animation._fromTransform ?= new DivSugar.Matrix @_transform
+                when 'size'       then animTask._fromSize = [@_width, @_height]
+                when 'position'   then animTask._fromPosition = [@_transform.trans.x, @_transform.trans.y, @_transform.trans.z]
+                when 'transform'  then animTask._fromTransform ?= new DivSugar.Matrix @_transform
                 when 'visible'    then @setVisible value
                 when 'backface'   then @setBackface value
                 when 'clip'       then @setClip value
-                when 'opacity'    then animation._fromOpacity = @_opacity
+                when 'opacity'    then animTask._fromOpacity = @_opacity
                 when 'image'      then @setImage value
-                when 'imageClip'  then animation._fromImageClip = [@_imageClipU1, @_imageClipV1, @_imageClipU2, @_imageClipV2]
-                when 'translate'  then animation._fromTransform ?= new DivSugar.Matrix @_transform
-                when 'rotate'     then animation._fromTransform ?= new DivSugar.Matrix @_transform
-                when 'scale'      then animation._fromTransform ?= new DivSugar.Matrix @_transform
+                when 'imageClip'  then animTask._fromImageClip = [@_imageClipU1, @_imageClipV1, @_imageClipU2, @_imageClipV2]
+                when 'translate'  then animTask._fromTransform ?= new DivSugar.Matrix @_transform
+                when 'rotate'     then animTask._fromTransform ?= new DivSugar.Matrix @_transform
+                when 'scale'      then animTask._fromTransform ?= new DivSugar.Matrix @_transform
 
-          @_transform.set animation._fromTransform if animation._fromImageClip?
+          @_transform.set animTask._fromTransform if animTask._fromImageClip?
 
-          if animation._totalTime > animation._elapsedTime
-            animation._currentTime += animation._elapsedTime
-            animation._elapsedTime = 0
+          if animTask._totalTime > animTask._elapsedTime
+            animTask._currentTime += animTask._elapsedTime
+            animTask._elapsedTime = 0
           else
-            animation._currentTime = animation._totalTime
-            animation._elapsedTime -= animation._totalTime
-            animation._cmdIndex++
-            animation._firstFrame = true
+            animTask._currentTime = animTask._totalTime
+            animTask._elapsedTime -= animTask._totalTime
+            animTask._cmdIndex++
+            animTask._firstFrame = true
 
-          if animation._totalTime > 0
-            a1 = animation._easeFunc animation._currentTime / animation._totalTime
+          if animTask._totalTime > 0
+            a1 = animTask._easeFunc animTask._currentTime / animTask._totalTime
             a0 = 1 - a1
           else
             a1 = 1
@@ -173,17 +164,17 @@ DivSugar._Node =
           for param, value of command[1]
             switch param
               when 'size'
-                size = animation._fromSize
+                size = animTask._fromSize
                 @setSize size[0] * a0 + value[0] * a1, size[1] * a0 + value[1] * a1
               when 'position'
-                pos = animation._fromPosition
+                pos = animTask._fromPosition
                 @setPosition pos[0] * a0 + value[0] * a1, pos[1] * a0 + value[1] * a1, pos[2] * a0 + value[2] * a1
               when 'transform'
                 @setTransform DivSugar._Node._tmpMat1.set(@_transform).slerp(value, a1)
               when 'opacity'
-                @setOpacity animation._fromOpacity * a0 + value * a1
+                @setOpacity animTask._fromOpacity * a0 + value * a1
               when 'imageClip'
-                clip = animation._fromImageClip
+                clip = animTask._fromImageClip
                 @setImageClip clip[0] * a0 + value[0] * a1, clip[1]* a0 + value[1] * a1, clip[2] * a0 + value[2] * a1, clip[3] * a0 + value[3]
               when 'translate'
                 @translate value[0] * a1, value[1] * a1, value[2] * a1
@@ -193,22 +184,32 @@ DivSugar._Node =
                 @scale value[0] * a1, value[1] * a1, value[2] * a1
 
         when 'wait'
-          if animation._firstFrame
-            animation._firstFrame = false
-            animation._waitTime = command[1]
+          if animTask._firstFrame
+            animTask._firstFrame = false
+            animTask._waitTime = command[1]
 
-          if animation._waitTime > animation._elapsedTime
-            animation._waitTime -= animation._elapsedTime
-            animation._elapsedTime = 0
+          if animTask._waitTime > animTask._elapsedTime
+            animTask._waitTime -= animTask._elapsedTime
+            animTask._elapsedTime = 0
           else
-            animation._elapsedTime -= animation._waitTime
-            animation._waitTime = 0
-            animation._cmdIndex++
-            animation._firstFrame = true
+            animTask._elapsedTime -= animTask._waitTime
+            animTask._waitTime = 0
+            animTask._cmdIndex++
+            animTask._firstFrame = true
 
         when 'call'
           command[1]()
-          animation._cmdIndex++
-          animation._firstFrame = true
+          animTask._cmdIndex++
+          animTask._firstFrame = true
+
+  _destroyAnimation: (animTask) ->
+    index = @_animTasks.indexOf animTask
+    if index > -1
+      @_animTasks.splice index, 1
+
+  clearAnimation: ->
+    while @_animTasks.length > 0
+      @_animTasks.shift().destroy()
+    return @
 
 DivSugar._Node._tmpMat1 = new DivSugar.Matrix()
