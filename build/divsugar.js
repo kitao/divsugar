@@ -152,7 +152,7 @@
           this.y = vec.y;
           this.z = vec.z;
           break;
-        default:
+        case 3:
           this.x = x;
           this.y = y;
           this.z = z;
@@ -355,7 +355,7 @@
           this.zAxis = new DivSugar.Vector(mat.zAxis);
           this.trans = new DivSugar.Vector(mat.trans);
           break;
-        default:
+        case 12:
           this.xAxis = new DivSugar.Vector(arguments[0], arguments[1], arguments[2]);
           this.yAxis = new DivSugar.Vector(arguments[3], arguments[4], arguments[5]);
           this.zAxis = new DivSugar.Vector(arguments[6], arguments[7], arguments[8]);
@@ -582,7 +582,7 @@
           this.z = quat.z;
           this.w = quat.w;
           break;
-        default:
+        case 4:
           this.x = x;
           this.y = y;
           this.z = z;
@@ -630,7 +630,7 @@
             scale = root !== 0 ? 0.5 / root : root;
             this.set((matXAxis.y + matYAxis.x) * scale, root * 0.5, (matYAxis.z + matZAxis.y) * scale, (matZAxis.x - matXAxis.z) * scale);
             break;
-          default:
+          case 2:
             root = Math.sqrt(matZAxis.z - (matXAxis.x + matYAxis.y) + 1);
             scale = root !== 0 ? 0.5 / root : root;
             this.set((matZAxis.x + matXAxis.z) * scale, (matYAxis.z + matZAxis.y) * scale, root * 0.5, (matXAxis.y - matYAxis.x) * scale);
@@ -888,6 +888,7 @@
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0%';
       this._transform = new DivSugar.Matrix();
+      this._animations = [];
       this.setSize(0, 0);
       this.setPosition(0, 0, 0);
       this.setVisible(true);
@@ -982,8 +983,189 @@
       this._transform.scale(scaleX, scaleY, scaleZ);
       this.style[DivSugar._transform] = this._transform.toCSSTransform();
       return this;
+    },
+    playAnimation: function(commands) {
+      var animation, task,
+        _this = this;
+      task = new DivSugar.Task();
+      animation = {
+        commands: commands,
+        task: task,
+        _elapsedTime: 0,
+        _cmdIndex: 0,
+        _firstFrame: true
+      };
+      task.onUpdate = function(elapsedTime) {
+        return _this._updateAnimation(elapsedTime, animation);
+      };
+      DivSugar.rootTask.appendChild(task);
+      this._animations.push(animation);
+      return animation;
+    },
+    stopAnimation: function(animation) {
+      var index, _i, _len, _ref;
+      if (animation == null) {
+        animation = null;
+      }
+      if (animation != null) {
+        index = this._animations.indexOf(animation);
+        if (index > -1) {
+          animation.task.destroy();
+          this._animations.splice(index, 1);
+        }
+      } else {
+        _ref = this._animations;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          animation = _ref[_i];
+          animation.task.destroy();
+        }
+        this._animations = [];
+      }
+      return this;
+    },
+    _updateAnimation: function(elapsedTime, animation) {
+      var a0, a1, clip, command, param, pos, size, value, _ref, _ref1, _ref2, _ref3;
+      animation._elapsedTime += elapsedTime;
+      while (animation._elapsedTime > 0) {
+        if (animation._cmdIndex >= animation.commands.length) {
+          this.stopAnimation(animation);
+          return;
+        }
+        command = animation.commands[animation._cmdIndex];
+        switch (command[0]) {
+          case 'to':
+            if (animation._firstFrame) {
+              animation._firstFrame = false;
+              animation._currentTime = 0;
+              animation._totalTime = (_ref = command[2]) != null ? _ref : 0;
+              animation._easeFunc = (_ref1 = command[3]) != null ? _ref1 : DivSugar.Ease.linear;
+              _ref2 = command[1];
+              for (param in _ref2) {
+                value = _ref2[param];
+                switch (param) {
+                  case 'size':
+                    animation._fromSize = [this._width, this._height];
+                    break;
+                  case 'position':
+                    animation._fromPosition = [this._transform.trans.x, this._transform.trans.y, this._transform.trans.z];
+                    break;
+                  case 'transform':
+                    if (animation._fromTransform == null) {
+                      animation._fromTransform = new DivSugar.Matrix(this._transform);
+                    }
+                    break;
+                  case 'visible':
+                    this.setVisible(value);
+                    break;
+                  case 'backface':
+                    this.setBackface(value);
+                    break;
+                  case 'clip':
+                    this.setClip(value);
+                    break;
+                  case 'opacity':
+                    animation._fromOpacity = this._opacity;
+                    break;
+                  case 'image':
+                    this.setImage(value);
+                    break;
+                  case 'imageClip':
+                    animation._fromImageClip = [this._imageClipU1, this._imageClipV1, this._imageClipU2, this._imageClipV2];
+                    break;
+                  case 'translate':
+                    if (animation._fromTransform == null) {
+                      animation._fromTransform = new DivSugar.Matrix(this._transform);
+                    }
+                    break;
+                  case 'rotate':
+                    if (animation._fromTransform == null) {
+                      animation._fromTransform = new DivSugar.Matrix(this._transform);
+                    }
+                    break;
+                  case 'scale':
+                    if (animation._fromTransform == null) {
+                      animation._fromTransform = new DivSugar.Matrix(this._transform);
+                    }
+                }
+              }
+            }
+            if (animation._fromImageClip != null) {
+              this._transform.set(animation._fromTransform);
+            }
+            if (animation._totalTime > animation._elapsedTime) {
+              animation._currentTime += animation._elapsedTime;
+              animation._elapsedTime = 0;
+            } else {
+              animation._currentTime = animation._totalTime;
+              animation._elapsedTime -= animation._totalTime;
+              animation._cmdIndex++;
+              animation._firstFrame = true;
+            }
+            if (animation._totalTime > 0) {
+              a1 = animation._easeFunc(animation._currentTime / animation._totalTime);
+              a0 = 1 - a1;
+            } else {
+              a1 = 1;
+              a0 = 0;
+            }
+            _ref3 = command[1];
+            for (param in _ref3) {
+              value = _ref3[param];
+              switch (param) {
+                case 'size':
+                  size = animation._fromSize;
+                  this.setSize(size[0] * a0 + value[0] * a1, size[1] * a0 + value[1] * a1);
+                  break;
+                case 'position':
+                  pos = animation._fromPosition;
+                  this.setPosition(pos[0] * a0 + value[0] * a1, pos[1] * a0 + value[1] * a1, pos[2] * a0 + value[2] * a1);
+                  break;
+                case 'transform':
+                  this.setTransform(DivSugar._Node._tmpMat1.set(this._transform).slerp(value, a1));
+                  break;
+                case 'opacity':
+                  this.setOpacity(animation._fromOpacity * a0 + value * a1);
+                  break;
+                case 'imageClip':
+                  clip = animation._fromImageClip;
+                  this.setImageClip(clip[0] * a0 + value[0] * a1, clip[1] * a0 + value[1] * a1, clip[2] * a0 + value[2] * a1, clip[3] * a0 + value[3]);
+                  break;
+                case 'translate':
+                  this.translate(value[0] * a1, value[1] * a1, value[2] * a1);
+                  break;
+                case 'rotate':
+                  this.rotate(value[0] * a1, value[1] * a1, value[2] * a1);
+                  break;
+                case 'scale':
+                  this.scale(value[0] * a1, value[1] * a1, value[2] * a1);
+              }
+            }
+            break;
+          case 'wait':
+            if (animation._firstFrame) {
+              animation._firstFrame = false;
+              animation._waitTime = command[1];
+            }
+            if (animation._waitTime > animation._elapsedTime) {
+              animation._waitTime -= animation._elapsedTime;
+              animation._elapsedTime = 0;
+            } else {
+              animation._elapsedTime -= animation._waitTime;
+              animation._waitTime = 0;
+              animation._cmdIndex++;
+              animation._firstFrame = true;
+            }
+            break;
+          case 'call':
+            command[1]();
+            animation._cmdIndex++;
+            animation._firstFrame = true;
+        }
+      }
     }
   };
+
+  DivSugar._Node._tmpMat1 = new DivSugar.Matrix();
 
   DivSugar.Task = (function() {
 
@@ -1083,5 +1265,63 @@
   })();
 
   DivSugar.rootTask = new DivSugar.Task('rootTask');
+
+  DivSugar.Ease = {
+    linear: function(t) {
+      return t;
+    },
+    quadIn: function(t) {
+      return Math.pow(t, 2);
+    },
+    quadOut: function(t) {
+      return 1 - Math.pow(1 - t, 2);
+    },
+    quadInOut: function(t) {
+      if (t < 0.5) {
+        return Math.pow(t * 2, 2) * 0.5;
+      } else {
+        return 1 - Math.abs(Math.pow(2 - t * 2, 2)) * 0.5;
+      }
+    },
+    cubicIn: function(t) {
+      return Math.pow(t, 3);
+    },
+    cubicOut: function(t) {
+      return 1 - Math.pow(1 - t, 3);
+    },
+    cubicInOut: function(t) {
+      if (t < 0.5) {
+        return Math.pow(t * 2, 3) * 0.5;
+      } else {
+        return 1 - Math.abs(Math.pow(2 - t * 2, 3)) * 0.5;
+      }
+    },
+    quartIn: function(t) {
+      return Math.pow(t, 4);
+    },
+    quartOut: function(t) {
+      return 1 - Math.pow(1 - t, 4);
+    },
+    quartInOut: function(t) {
+      if (t < 0.5) {
+        return Math.pow(t * 2, 4) * 0.5;
+      } else {
+        return 1 - Math.abs(Math.pow(2 - t * 2, 4)) * 0.5;
+      }
+    },
+    quintIn: function(t) {
+      return Math.pow(t, 5);
+    },
+    quintOut: function(t) {
+      return 1 - Math.pow(1 - t, 5);
+    },
+    quintInOut: function(t) {
+      if (t < 0.5) {
+        return Math.pow(t * 2, 5) * 0.5;
+      } else {
+        return 1 - Math.abs(Math.pow(2 - t * 2, 5)) * 0.5;
+      }
+    }
+  };
 
 }).call(this);
