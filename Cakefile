@@ -13,6 +13,7 @@ sourceFiles = [
   'Scene.coffee'
   'Node.coffee'
   'Task.coffee'
+  'Ease.coffee'
 ]
 
 target = "#{targetDir}/#{targetName}.js"
