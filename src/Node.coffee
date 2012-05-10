@@ -101,7 +101,6 @@ DivSugar._Node =
   playAnimation: (animation) ->
     animTask = new DivSugar.Task()
     animTask.animation = animation
-    animTask._elapsedTime = 0
     animTask._cmdIndex = 0
     animTask._firstFrame = true
     animTask.onUpdate = (elapsedTime) => @_updateAnimation animTask, elapsedTime
@@ -111,9 +110,7 @@ DivSugar._Node =
     return animTask
 
   _updateAnimation: (animTask, elapsedTime) ->
-    animTask._elapsedTime += elapsedTime
-
-    while animTask._elapsedTime > 0
+    while elapsedTime > 0
       if animTask._cmdIndex >= animTask.animation.length
         animTask.destroy()
         return
@@ -145,12 +142,12 @@ DivSugar._Node =
 
           @_transform.set animTask._fromTransform if animTask._fromImageClip?
 
-          if animTask._totalTime > animTask._elapsedTime
-            animTask._currentTime += animTask._elapsedTime
-            animTask._elapsedTime = 0
+          if animTask._totalTime > elapsedTime
+            animTask._currentTime += elapsedTime
+            elapsedTime = 0
           else
+            elapsedTime -= animTask._totalTime
             animTask._currentTime = animTask._totalTime
-            animTask._elapsedTime -= animTask._totalTime
             animTask._cmdIndex++
             animTask._firstFrame = true
 
@@ -188,11 +185,11 @@ DivSugar._Node =
             animTask._firstFrame = false
             animTask._waitTime = command[1]
 
-          if animTask._waitTime > animTask._elapsedTime
-            animTask._waitTime -= animTask._elapsedTime
-            animTask._elapsedTime = 0
+          if animTask._waitTime > elapsedTime
+            animTask._waitTime -= elapsedTime
+            elapsedTime = 0
           else
-            animTask._elapsedTime -= animTask._waitTime
+            elapsedTime -= animTask._waitTime
             animTask._waitTime = 0
             animTask._cmdIndex++
             animTask._firstFrame = true
