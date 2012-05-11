@@ -58,4 +58,4 @@ class DivSugar.Task
           return task if task?
       return null
 
-DivSugar.rootTask = new DivSugar.Task('rootTask')
+DivSugar.rootTask = new DivSugar.Task()

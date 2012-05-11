@@ -12,7 +12,6 @@
 
   test('rootTask', function() {
     strictEqual(DivSugar.rootTask instanceof DivSugar.Task, true);
-    strictEqual(DivSugar.rootTask.id, 'rootTask');
   });
 
   test('inherit', function() {
