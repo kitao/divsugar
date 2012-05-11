@@ -693,7 +693,7 @@
       this.style[DivSugar._transformStyle] = 'preserve-3d';
       this.style[DivSugar._transformOrigin] = '0% 0%';
       this.style[DivSugar._perspectiveOrigin] = '50% 50%';
-      this._rootNode = DivSugar.createNode('rootNode');
+      this._rootNode = DivSugar.createNode();
       this.appendChild(this._rootNode);
       this.appendChild = function() {
         var args, _ref;
@@ -1270,7 +1270,7 @@
 
   })();
 
-  DivSugar.rootTask = new DivSugar.Task('rootTask');
+  DivSugar.rootTask = new DivSugar.Task();
 
   DivSugar.Ease = {
     linear: function(t) {
