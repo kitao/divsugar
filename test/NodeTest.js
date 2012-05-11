@@ -289,5 +289,7 @@
     strictEqual(task1.getParent(), null);
     strictEqual(task2.getParent(), null);
     strictEqual(task3.getParent(), null);
+
+    ok(node1.clearAnimation().clearAnimation());
   });
 })();
