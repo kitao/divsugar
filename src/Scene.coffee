@@ -116,8 +116,8 @@ DivSugar._Scene =
 
     w = 1 / (u2 - u1) * 100
     h = 1 / (v2 - v1) * 100
-    x = u1 * w
-    y = v1 * h
+    x = if w > 100 then u1 * w / (w - 100) * 100 else 0
+    y = if h > 100 then v1 * h / (h - 100) * 100 else 0
     nod = DivSugar.NUM_OF_DIGITS
 
     @style.backgroundPosition = "#{x.toFixed(nod)}% #{y.toFixed(nod)}%"

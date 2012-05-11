@@ -849,8 +849,8 @@
       this._imageClipV2 = v2;
       w = 1 / (u2 - u1) * 100;
       h = 1 / (v2 - v1) * 100;
-      x = u1 * w;
-      y = v1 * h;
+      x = w > 100 ? u1 * w / (w - 100) * 100 : 0;
+      y = h > 100 ? v1 * h / (h - 100) * 100 : 0;
       nod = DivSugar.NUM_OF_DIGITS;
       this.style.backgroundPosition = "" + (x.toFixed(nod)) + "% " + (y.toFixed(nod)) + "%";
       this.style.backgroundSize = "" + (w.toFixed(nod)) + "% " + (h.toFixed(nod)) + "%";
@@ -1106,7 +1106,7 @@
                   break;
                 case 'imageClip':
                   clip = animTask._fromImageClip;
-                  this.setImageClip(clip[0] * a0 + value[0] * a1, clip[1] * a0 + value[1] * a1, clip[2] * a0 + value[2] * a1, clip[3] * a0 + value[3]);
+                  this.setImageClip(clip[0] * a0 + value[0] * a1, clip[1] * a0 + value[1] * a1, clip[2] * a0 + value[2] * a1, clip[3] * a0 + value[3] * a1);
                   break;
                 case 'translate':
                   this.translate(value[0] * a1, value[1] * a1, value[2] * a1);

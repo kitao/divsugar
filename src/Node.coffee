@@ -173,7 +173,7 @@ DivSugar._Node =
                 @setOpacity animTask._fromOpacity * a0 + value * a1
               when 'imageClip'
                 clip = animTask._fromImageClip
-                @setImageClip clip[0] * a0 + value[0] * a1, clip[1]* a0 + value[1] * a1, clip[2] * a0 + value[2] * a1, clip[3] * a0 + value[3]
+                @setImageClip clip[0] * a0 + value[0] * a1, clip[1]* a0 + value[1] * a1, clip[2] * a0 + value[2] * a1, clip[3] * a0 + value[3] * a1
               when 'translate'
                 @translate value[0] * a1, value[1] * a1, value[2] * a1
               when 'rotate'
