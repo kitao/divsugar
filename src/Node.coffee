@@ -98,39 +98,6 @@ DivSugar._Node =
     @style[DivSugar._transform] = @_transform.toCSSTransform()
     return @
 
-  faceCamera: (rotateZ = 0) ->
-    vec = DivSugar._Node._tmpVec1
-    mat = DivSugar._Node._tmpMat1
-
-    mat.set DivSugar.Matrix.UNIT
-    parent = @parentNode
-
-    while parent? and parent._transform?
-      mat.toGlobal_noTrans parent._transform
-      parent = parent.parentNode
-
-    vec.set(mat.xAxis).add(mat.yAxis).add(mat.zAxis)
-    scaleX = mat.xAxis.norm() #vec.dot DivSugar.Vector.X_UNIT
-    scaleY = mat.yAxis.norm() #vec.dot DivSugar.Vector.Y_UNIT
-    scaleZ = mat.zAxis.norm() #vec.dot DivSugar.Vector.Z_UNIT
-
-    mat.xAxis.mul 1 / scaleX
-    mat.yAxis.mul 1 / scaleY
-    mat.zAxis.mul 1 / scaleZ
-    #mat.scale 1 / scaleX, 1 / scaleY, 1 / scaleZ
-
-    #sqSclZ = mat.zAxis.sqNorm()
-    #scaleZ = if Math.abs(sqSclZ - 1) < DivSugar.EPSILON then 1 else Math.sqrt sqSclZ
-
-    vec.set @_transform.trans
-    @_transform.set DivSugar.Matrix.UNIT
-    @_transform.toLocal_noTrans mat
-    @_transform.trans.set vec
-    @_transform.rotate(0, 0, rotateZ)
-    @setTransform @_transform
-
-    return @
-
   playAnimation: (animation) ->
     animTask = new DivSugar.Task()
     animTask.animation = animation
@@ -254,5 +221,4 @@ DivSugar._Node =
       @_animTasks.shift().destroy()
     return @
 
-DivSugar._Node._tmpVec1 = new DivSugar.Vector()
 DivSugar._Node._tmpMat1 = new DivSugar.Matrix()
