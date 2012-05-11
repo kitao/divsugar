@@ -8,7 +8,7 @@ DivSugar._Scene =
     @style[DivSugar._transformOrigin] = '0% 0%'
     @style[DivSugar._perspectiveOrigin] = '50% 50%'
 
-    @_rootNode = DivSugar.createNode 'rootNode'
+    @_rootNode = DivSugar.createNode()
     @appendChild @_rootNode
     @appendChild = (args...) -> @_rootNode.appendChild args...
     @insertBefore = (args...) -> @_rootNode.insertBefore args...
