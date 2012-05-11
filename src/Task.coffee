@@ -35,17 +35,17 @@ class DivSugar.Task
 
     return @
 
-  appendChild: (task) ->
-    @removeChild task
-    @_children.push task
-    task._parent = this
+  appendChild: (child) ->
+    @removeChild child
+    @_children.push child
+    child._parent = this
     return @
 
-  removeChild: (task) ->
-    i = @_children.indexOf task
+  removeChild: (child) ->
+    i = @_children.indexOf child
     if i > -1
       @_children[i] = null
-      task._parent = null
+      child._parent = null
     return @
 
   getTaskById: (id) ->

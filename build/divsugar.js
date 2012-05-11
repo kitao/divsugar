@@ -1230,19 +1230,19 @@
       return this;
     };
 
-    Task.prototype.appendChild = function(task) {
-      this.removeChild(task);
-      this._children.push(task);
-      task._parent = this;
+    Task.prototype.appendChild = function(child) {
+      this.removeChild(child);
+      this._children.push(child);
+      child._parent = this;
       return this;
     };
 
-    Task.prototype.removeChild = function(task) {
+    Task.prototype.removeChild = function(child) {
       var i;
-      i = this._children.indexOf(task);
+      i = this._children.indexOf(child);
       if (i > -1) {
         this._children[i] = null;
-        task._parent = null;
+        child._parent = null;
       }
       return this;
     };
