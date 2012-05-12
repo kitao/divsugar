@@ -28,20 +28,24 @@ class DivSugar.Task
 
   destroy: ->
     @onDestroy?()
-    @_parent?.removeChild this
+    @_parent?.remove this
 
     for child in @_children
       child?.destroy()
 
     return @
 
-  appendChild: (child) ->
-    @removeChild child
+  append: (child) ->
+    @remove child
     @_children.push child
     child._parent = this
     return @
 
-  removeChild: (child) ->
+  appendTo: (parent) ->
+    parent.append @
+    return @
+
+  remove: (child) ->
     i = @_children.indexOf child
     if i > -1
       @_children[i] = null
@@ -59,3 +63,4 @@ class DivSugar.Task
       return null
 
 DivSugar.rootTask = new DivSugar.Task()
+DivSugar.rootTask.isRootTask = true

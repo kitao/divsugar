@@ -27,7 +27,7 @@
       strictEqual(elapsedTime, 123);
       updatedCount++;
     };
-    task1.appendChild(task2);
+    task1.append(task2);
     task1.update(123);
     strictEqual(updatedCount, 2);
 
@@ -40,44 +40,44 @@
     var task1 = new DivSugar.Task();
     var task2 = new DivSugar.Task();
     task1.onDestroy = task2.onDestroy = function() { destroyedCount++; };
-    task1.appendChild(task2);
+    task1.append(task2);
     task1.destroy();
     strictEqual(destroyedCount, 2);
 
     ok(task1.destroy().destroy());
   });
 
-  test('appendChild', function() {
+  test('append', function() {
     var task1 = new DivSugar.Task();
     var task2 = new DivSugar.Task();
     var task3 = new DivSugar.Task();
     var task4 = new DivSugar.Task();
-    task1.appendChild(task2);
-    task1.appendChild(task3);
-    task3.appendChild(task4);
+    task1.append(task2);
+    task1.append(task3);
+    task3.append(task4);
     strictEqual(task1.getParent(), null);
     strictEqual(task2.getParent(), task1);
     strictEqual(task3.getParent(), task1);
     strictEqual(task4.getParent(), task3);
 
-    ok(task1.appendChild(task2).appendChild(task2));
+    ok(task1.append(task2).append(task2));
   });
 
-  test('removeChild', function() {
+  test('remove', function() {
     var task1 = new DivSugar.Task();
     var task2 = new DivSugar.Task();
     var task3 = new DivSugar.Task();
     var task4 = new DivSugar.Task();
-    task1.appendChild(task2);
-    task1.appendChild(task3);
-    task3.appendChild(task4);
-    task1.removeChild(task3);
+    task1.append(task2);
+    task1.append(task3);
+    task3.append(task4);
+    task1.remove(task3);
     strictEqual(task1.getParent(), null);
     strictEqual(task2.getParent(), task1);
     strictEqual(task3.getParent(), null);
     strictEqual(task4.getParent(), task3);
 
-    ok(task1.removeChild(task2).removeChild(task2));
+    ok(task1.remove(task2).remove(task2));
   });
 
   test('getTaskById', function() {
@@ -85,9 +85,9 @@
     var task2 = new DivSugar.Task('task2');
     var task3 = new DivSugar.Task('task3');
     var task4 = new DivSugar.Task('task4');
-    task1.appendChild(task2);
-    task1.appendChild(task3);
-    task3.appendChild(task4);
+    task1.append(task2);
+    task1.append(task3);
+    task3.append(task4);
     strictEqual(task1.getTaskById('task4'), task4);
     strictEqual(task1.getTaskById('dummy'), null);
   });
