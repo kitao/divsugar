@@ -8,14 +8,14 @@ DivSugar depends on CSS 3D transform and runs on Safari, Chrome, and Firefox for
 
 Getting Started
 ---------------
-Include **divsugar.min.js**, then all of the functions get available via the **DivSugar** global variable.
+Include `divsugar.js`, then all of the functions get available via the `DivSugar` global variable.
 
 ```html
 <script src="divsugar.js"></script>
 ```
 
-A scene is the root of a scene graph and specifies the rendering area.
-A node is an element of a scene graph and draws an image.
+A `Scene` is the root of a scene graph and specifies the rendering area.
+A `Node` is an element of a scene graph and draws an image.
 Both of them are extended div elements and created by the factory methods of DivSugar.
 
 ```javascript
@@ -31,8 +31,8 @@ var node = DivSugar.createNode('someNode')
   .appendTo(scn);
 ```
 
-DivSugar provides the task system, which calls the onUpdate method of the registered tasks in every frame.
-It also calls the onDestroy method when the task is destroyed.
+DivSugar provides the `Task`, which calls the `onUpdate` method of the registered tasks in every frame.
+It also calls the `onDestroy` method when the task is destroyed.
 
 ```javascript
 var task = new DivSugar.Task('someTask').appendTo(DivSugar.rootTask);
@@ -46,7 +46,7 @@ task.onDestroy = function() {
 };
 ```
 
-With the playAnimation method of nodes, it is possible to make the task which plays a sequence of animations automatically.
+With the `playAnimation` method of nodes, it is possible to make the task which plays a sequence of animations automatically.
 
 ```javasscript
 node.playAnimation([
