@@ -42,9 +42,6 @@ window.onload = function() {
       .setBackface(false)
       .rotate(0, 180, 0)
       .appendTo(this.center);
-
-    // register this task to the rootTask to be updated in every frame
-    this.appendTo(DivSugar.rootTask);
   }
 
   // inherit the task class
@@ -61,13 +58,13 @@ window.onload = function() {
     // when fall enough, destroy this task and create an another task
     if (this.pos.y > 1000) {
       this.destroy();
-      var dummy = new Coin();
+      new Coin().appendTo(DivSugar.rootTask);
     }
   };
 
   Coin.prototype.onDestroy = function() { scn.removeChild(this.center); };
 
-  // create instances of the animation class
-  var i, dummy;
-  for (i = 0; i < 30; i++) { dummy = new Coin(); }
+  // create and register instances of the animation class
+  var i;
+  for (i = 0; i < 30; i++) { new Coin().appendTo(DivSugar.rootTask); }
 };
