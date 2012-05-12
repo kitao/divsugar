@@ -85,7 +85,7 @@
         _this.rootTask.update(elapsedTime);
         return _this.requestAnimationFrame(updateTasks);
       };
-      this._lastUpdatedTime = (new Date()).getTime();
+      this._lastUpdatedTime = new Date().getTime();
       return this.requestAnimationFrame(updateTasks);
     },
     inherit: function(C, P) {
@@ -1273,10 +1273,10 @@
     };
 
     Task.prototype.remove = function(child) {
-      var i;
-      i = this._children.indexOf(child);
-      if (i > -1) {
-        this._children[i] = null;
+      var index;
+      index = this._children.indexOf(child);
+      if (index > -1) {
+        this._children[index] = null;
         child._parent = null;
       }
       return this;
@@ -1316,8 +1316,26 @@
     quadIn: function(t) {
       return Math.pow(t, 2);
     },
+    cubicIn: function(t) {
+      return Math.pow(t, 3);
+    },
+    quartIn: function(t) {
+      return Math.pow(t, 4);
+    },
+    quintIn: function(t) {
+      return Math.pow(t, 5);
+    },
     quadOut: function(t) {
       return 1 - Math.pow(1 - t, 2);
+    },
+    cubicOut: function(t) {
+      return 1 - Math.pow(1 - t, 3);
+    },
+    quartOut: function(t) {
+      return 1 - Math.pow(1 - t, 4);
+    },
+    quintOut: function(t) {
+      return 1 - Math.pow(1 - t, 5);
     },
     quadInOut: function(t) {
       if (t < 0.5) {
@@ -1326,12 +1344,6 @@
         return 1 - Math.abs(Math.pow(2 - t * 2, 2)) * 0.5;
       }
     },
-    cubicIn: function(t) {
-      return Math.pow(t, 3);
-    },
-    cubicOut: function(t) {
-      return 1 - Math.pow(1 - t, 3);
-    },
     cubicInOut: function(t) {
       if (t < 0.5) {
         return Math.pow(t * 2, 3) * 0.5;
@@ -1339,24 +1351,12 @@
         return 1 - Math.abs(Math.pow(2 - t * 2, 3)) * 0.5;
       }
     },
-    quartIn: function(t) {
-      return Math.pow(t, 4);
-    },
-    quartOut: function(t) {
-      return 1 - Math.pow(1 - t, 4);
-    },
     quartInOut: function(t) {
       if (t < 0.5) {
         return Math.pow(t * 2, 4) * 0.5;
       } else {
         return 1 - Math.abs(Math.pow(2 - t * 2, 4)) * 0.5;
       }
-    },
-    quintIn: function(t) {
-      return Math.pow(t, 5);
-    },
-    quintOut: function(t) {
-      return 1 - Math.pow(1 - t, 5);
     },
     quintInOut: function(t) {
       if (t < 0.5) {

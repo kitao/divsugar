@@ -86,7 +86,7 @@ DivSugar._Scene =
 
   setOpacity: (opacity) ->
     @_opacity = opacity
-    @style.opacity = opacity.toFixed(DivSugar.NUM_OF_DIGITS)
+    @style.opacity = opacity.toFixed DivSugar.NUM_OF_DIGITS
     return @
 
   getImage: -> @_image

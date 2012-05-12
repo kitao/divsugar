@@ -3,7 +3,6 @@ class DivSugar.Task
     @active = true
     @onUpdate = null
     @onDestroy = null
-
     @_parent = null
     @_children = []
 
@@ -29,10 +28,7 @@ class DivSugar.Task
   destroy: ->
     @onDestroy?()
     @_parent?.remove this
-
-    for child in @_children
-      child?.destroy()
-
+    child?.destroy() for child in @_children
     return @
 
   append: (child) ->
@@ -46,9 +42,9 @@ class DivSugar.Task
     return @
 
   remove: (child) ->
-    i = @_children.indexOf child
-    if i > -1
-      @_children[i] = null
+    index = @_children.indexOf child
+    if index > -1
+      @_children[index] = null
       child._parent = null
     return @
 

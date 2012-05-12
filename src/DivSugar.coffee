@@ -57,12 +57,10 @@ DivSugar =
       requestAnimationFrame = 'requestAnimationFrame' unless window[requestAnimationFrame]?
 
       if window[requestAnimationFrame]?
-        @requestAnimationFrame = (callback) =>
-          window[requestAnimationFrame] callback
+        @requestAnimationFrame = (callback) => window[requestAnimationFrame] callback
         console.log "DivSugar: use '#{requestAnimationFrame}'"
       else
-        @requestAnimationFrame = (callback) ->
-          window.setTimeout callback, 1000 / 60 # TBD
+        @requestAnimationFrame = (callback) -> window.setTimeout callback, 1000 / 60 # TBD
         console.log "DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'"
 
     # start tasks
@@ -73,7 +71,7 @@ DivSugar =
       @rootTask.update elapsedTime
       @requestAnimationFrame updateTasks
 
-    @_lastUpdatedTime = (new Date()).getTime()
+    @_lastUpdatedTime = new Date().getTime()
     @requestAnimationFrame updateTasks
 
   inherit: (C, P) ->
@@ -94,22 +92,14 @@ DivSugar =
 
   createScene: (args...) ->
     div = document.createElement 'div'
-
-    for name, func of @_Scene
-      div[name] = func
-
+    div[name] = func for name, func of @_Scene
     div._initialize args...
-
     return div
 
   createNode: (args...) ->
     div = document.createElement 'div'
-
-    for name, func of @_Node
-      div[name] = func
-
+    div[name] = func for name, func of @_Node
     div._initialize args...
-
     return div
 
 (window.DivSugar = DivSugar)._initialize()

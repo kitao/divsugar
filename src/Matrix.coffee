@@ -86,21 +86,21 @@ class DivSugar.Matrix
       sin = Math.sin rotateX * DivSugar.DEG_TO_RAD
       cos = Math.cos rotateX * DivSugar.DEG_TO_RAD
       mat = DivSugar.Matrix._tmpMat1
-      mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal @
+      mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal(@)
       @set mat
 
     if rotateY isnt 0
       sin = Math.sin rotateY * DivSugar.DEG_TO_RAD
       cos = Math.cos rotateY * DivSugar.DEG_TO_RAD
       mat = DivSugar.Matrix._tmpMat1
-      mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal @
+      mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal(@)
       @set mat
 
     if rotateZ isnt 0
       sin = Math.sin rotateZ * DivSugar.DEG_TO_RAD
       cos = Math.cos rotateZ * DivSugar.DEG_TO_RAD
       mat = DivSugar.Matrix._tmpMat1
-      mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal @
+      mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal(@)
       @set mat
 
     return @
@@ -215,4 +215,4 @@ DivSugar.Matrix._tmpVec1 = new DivSugar.Vector()
 DivSugar.Matrix._tmpVec2 = new DivSugar.Vector()
 DivSugar.Matrix._tmpVec3 = new DivSugar.Vector()
 DivSugar.Matrix._tmpMat1 = new DivSugar.Matrix()
-# _tmpQuat1 and _tmpQuat2 are defined in Quaternion.js
+# _tmpQuat1 and _tmpQuat2 are defined in Quaternion.coffee

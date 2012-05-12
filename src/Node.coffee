@@ -58,7 +58,6 @@ DivSugar._Node =
       @_transform.trans.z = z
 
     @style[DivSugar.cssTransform] = @_transform.toCSSTransform()
-
     return @
 
   getTransform: (mat) ->
@@ -225,12 +224,10 @@ DivSugar._Node =
 
   _destroyAnimation: (animTask) ->
     index = @_animTasks.indexOf animTask
-    if index > -1
-      @_animTasks.splice index, 1
+    @_animTasks.splice index, 1 if index > -1
 
   clearAnimation: ->
-    while @_animTasks.length > 0
-      @_animTasks.shift().destroy()
+    @_animTasks.shift().destroy() while @_animTasks.length > 0
     return @
 
   getWorldPosition: (vec) ->
