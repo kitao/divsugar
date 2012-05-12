@@ -1,7 +1,7 @@
 DivSugar
 ========
 
-DivSugar is a CSS-based 3D graphics library, which provides a 3D scene graph, an animation system, and geometry classes.
+**DivSugar is a CSS-based 3D graphics library,** which provides a 3D scene graph, an animation system, and geometry classes.
 Each node of the scene graph is an extended div element, so it is very easy to integrate 3D animations into existing web pages.
 
 DivSugar depends on CSS 3D transform and runs on Safari, Chrome, and Firefox for now.
@@ -45,10 +45,23 @@ task.onDestroy = function() {
 DivSugar.rootTask.appendChild(task);
 ```
 
+With the playAnimation method of nodes, it is possible to make the task which plays a sequence of animations automatically.
+
+```javasscript
+node.playAnimation([
+  ['to', { size: [100, 100], opacity: 1 }, 1000, DivSugar.Ease.quadInOut],
+  ['wait', 500],
+  ['to', { size: [200, 200], opacity: 0 }, 500, DivSugar.Ease.linear],
+  ['call', someFunction],
+  ['repeat', 10]
+]);
+```
+
 Examples
 --------
 - 01.SimpleApplication ([demo](http://kitao.github.com/divsugar/examples/01.SimpleApplication/) | [code](https://github.com/kitao/divsugar/blob/master/examples/01.SimpleApplication))
 - 02.TaskSystem ([demo](http://kitao.github.com/divsugar/examples/02.TaskSystem/) | [code](https://github.com/kitao/divsugar/blob/master/examples/02.TaskSystem))
+- 03.TweenAnimation ([demo](http://kitao.github.com/divsugar/examples/03.TweenAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/03.TweenAnimation))
 
 Documentaion
 ------------
