@@ -65,6 +65,5 @@ window.onload = function() {
   Coin.prototype.onDestroy = function() { scn.removeChild(this.center); };
 
   // create and register instances of the animation class
-  var i;
-  for (i = 0; i < 30; i++) { new Coin().appendTo(DivSugar.rootTask); }
+  for (var i = 0; i < 30; i++) { new Coin().appendTo(DivSugar.rootTask); }
 };
