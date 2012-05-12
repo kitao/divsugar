@@ -1,15 +1,15 @@
 DivSugar =
   _initialize: ->
-    # initialize constants
     console.log 'DivSugar: a CSS-based 3D graphics library (https://github.com/kitao/divsugar)'
 
+    # initialize constants
     @EPSILON = 0.0001
     @NUM_OF_DIGITS = 4
     @DEG_TO_RAD = Math.PI / 180
     @RAD_TO_DEG = 180 / Math.PI
 
     # initialize properties
-    @_id = 0
+    @_curId = 0
     @rootTask = null
 
     # cross-browser support
@@ -29,39 +29,39 @@ DivSugar =
 
       div = document.createElement 'div'
 
-      @_transform = "-#{@_prefix}-transform"
-      @_transform = 'transform' unless div.style[@_transform]?
-      console.log "DivSugar: use '#{@_transform}'"
+      @cssTransform = "-#{@_prefix}-transform"
+      @cssTransform = 'transform' unless div.style[@cssTransform]?
+      console.log "DivSugar: use '#{@cssTransform}'"
 
-      @_transformStyle = "-#{@_prefix}-transform-style"
-      @_transformStyle = 'transform-style' unless div.style[@_transformStyle]?
-      console.log "DivSugar: use '#{@_transformStyle}'"
+      @cssTransformStyle = "-#{@_prefix}-transform-style"
+      @cssTransformStyle = 'transform-style' unless div.style[@cssTransformStyle]?
+      console.log "DivSugar: use '#{@cssTransformStyle}'"
 
-      @_transformOrigin = "-#{@_prefix}-transform-origin"
-      @_transformOrigin = 'transform-origin' unless div.style[@_transformOrigin]?
-      console.log "DivSugar: use '#{@_transformOrigin}'"
+      @cssTransformOrigin = "-#{@_prefix}-transform-origin"
+      @cssTransformOrigin = 'transform-origin' unless div.style[@cssTransformOrigin]?
+      console.log "DivSugar: use '#{@cssTransformOrigin}'"
 
-      @_perspective = "-#{@_prefix}-perspective"
-      @_perspective = 'perspective' unless div.style[@_perspective]?
-      console.log "DivSugar: use '#{@_perspective}'"
+      @cssPerspective = "-#{@_prefix}-perspective"
+      @cssPerspective = 'perspective' unless div.style[@cssPerspective]?
+      console.log "DivSugar: use '#{@cssPerspective}'"
 
-      @_perspectiveOrigin = "-#{@_prefix}-perspective-origin"
-      @_perspectiveOrigin = 'perspective-origin' unless div.style[@_perspectiveOrigin]?
-      console.log "DivSugar: use '#{@_perspectiveOrigin}'"
+      @cssPerspectiveOrigin = "-#{@_prefix}-perspective-origin"
+      @cssPerspectiveOrigin = 'perspective-origin' unless div.style[@cssPerspectiveOrigin]?
+      console.log "DivSugar: use '#{@cssPerspectiveOrigin}'"
 
-      @_backfaceVisibility = "-#{@_prefix}-backface-visibility"
-      @_backfaceVisibility = 'backface-visibility' unless div.style[@_backfaceVisibility]?
-      console.log "DivSugar: use '#{@_backfaceVisibility}'"
+      @cssBackfaceVisibility = "-#{@_prefix}-backface-visibility"
+      @cssBackfaceVisibility = 'backface-visibility' unless div.style[@cssBackfaceVisibility]?
+      console.log "DivSugar: use '#{@cssBackfaceVisibility}'"
 
       requestAnimationFrame = @_prefix + 'RequestAnimationFrame'
       requestAnimationFrame = 'requestAnimationFrame' unless window[requestAnimationFrame]?
 
       if window[requestAnimationFrame]?
-        @_requestAnimationFrame = (callback) =>
+        @requestAnimationFrame = (callback) =>
           window[requestAnimationFrame] callback
         console.log "DivSugar: use '#{requestAnimationFrame}'"
       else
-        @_requestAnimationFrame = (callback) ->
+        @requestAnimationFrame = (callback) ->
           window.setTimeout callback, 1000 / 60 # TBD
         console.log "DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'"
 
@@ -71,10 +71,10 @@ DivSugar =
       elapsedTime = curTime - @_lastUpdatedTime
       @_lastUpdatedTime = curTime
       @rootTask.update elapsedTime
-      @_requestAnimationFrame updateTasks
+      @requestAnimationFrame updateTasks
 
     @_lastUpdatedTime = (new Date()).getTime()
-    @_requestAnimationFrame updateTasks
+    @requestAnimationFrame updateTasks
 
   inherit: (C, P) ->
     F = ->
@@ -84,7 +84,7 @@ DivSugar =
     C.prototype.constructor = C
     return @
 
-  generateId: -> "_divsugar_id_#{++@_id}"
+  generateId: -> "_divsugar_id_#{++@_curId}"
 
   getImageSize: (src, callback) ->
     image = new Image()
