@@ -24,22 +24,38 @@
     strictEqual(scn1.getImageClipV2(), 1);
   });
 
-  test('overridden methods', function() {
+  test('rootNode', function() {
+    var scn1 = DivSugar.createScene('scene1');
+    ok(scn1.rootNode instanceof HTMLDivElement);
+    strictEqual(scn1.rootNode.isRootNode, true);
+  });
+
+  test('append', function() {
     var scn1 = DivSugar.createScene();
     var node1 = DivSugar.createNode();
-    var node2 = DivSugar.createNode();
+    scn1.append(node1);
+    strictEqual(scn1.rootNode.firstChild, node1);
 
-    scn1.appendChild(node1);
-    strictEqual(scn1._rootNode.firstChild, node1);
+    ok(scn1.append(node1).append(node1));
+  });
 
-    scn1.insertBefore(node2, node1);
-    strictEqual(scn1._rootNode.firstChild, node2);
+  test('appendTo', function() {
+    var div1 = document.createElement('div');
+    var scn1 = DivSugar.createScene();
+    scn1.appendTo(div1);
+    strictEqual(div1.firstChild, scn1);
 
-    scn1.removeChild(node2);
-    strictEqual(scn1._rootNode.firstChild, node1);
+    ok(scn1.appendTo(div1).appendTo(div1));
+  });
 
-    scn1.replaceChild(node2, node1);
-    strictEqual(scn1._rootNode.firstChild, node2);
+  test('remove', function() {
+    var scn1 = DivSugar.createScene();
+    var node1 = DivSugar.createNode();
+    scn1.append(node1);
+    scn1.remove(node1);
+    strictEqual(scn1.rootNode.firstChild, null);
+
+    ok(scn1.remove(node1).remove(node1));
   });
 
   test('setViewAngle', function() {

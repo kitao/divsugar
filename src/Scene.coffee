@@ -4,17 +4,13 @@ DivSugar._Scene =
     @style.padding = '0px'
     @style.position = 'relative'
     @style.overflow = 'hidden'
-    @style[DivSugar._transformStyle] = 'preserve-3d'
-    @style[DivSugar._transformOrigin] = '0% 0%'
-    @style[DivSugar._perspectiveOrigin] = '50% 50%'
+    @style[DivSugar.cssTransformStyle] = 'preserve-3d'
+    @style[DivSugar.cssTransformOrigin] = '0% 0%'
+    @style[DivSugar.cssPerspectiveOrigin] = '50% 50%'
 
-    @_rootNode = DivSugar.createNode()
-    @_rootNode._isRootNode = true
-    @appendChild @_rootNode
-    @appendChild = (args...) -> @_rootNode.appendChild args...
-    @insertBefore = (args...) -> @_rootNode.insertBefore args...
-    @removeChild = (args...) -> @_rootNode.removeChild args...
-    @replaceChild = (args...) -> @_rootNode.replaceChild args...
+    @rootNode = DivSugar.createNode()
+    @rootNode.isRootNode = true
+    @appendChild @rootNode
 
     @setViewAngle 45
     @setSize 400, 300
@@ -25,13 +21,25 @@ DivSugar._Scene =
     @setImage '#0000ff'
     @setImageClip 0, 0, 1, 1
 
+  append: (child) ->
+    @rootNode.appendChild child
+    return @
+
+  appendTo: (parent) ->
+    parent.appendChild @
+    return @
+
+  remove: (child) ->
+    @rootNode.removeChild child if child in @rootNode.childNodes
+    return @
+
   getViewAngle: -> @_viewAngle
   getPerspective: -> @_perspective
 
   setViewAngle: (viewAngle) ->
     @_viewAngle = viewAngle
     @_perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * @_viewWidth / 2
-    @style[DivSugar._perspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @style[DivSugar.cssPerspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getWidth: -> @_width
@@ -46,7 +54,7 @@ DivSugar._Scene =
     @_viewHeight = viewHeight
     @style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     @style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
-    @_rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1)
+    @rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1)
     @setViewAngle @_viewAngle
     return @
 
