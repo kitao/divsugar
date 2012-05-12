@@ -2,10 +2,12 @@ window.onload = function() {
   'use strict';
 
   // create a scene
-  var scn = DivSugar.createScene();
-  scn.setSize(800, 600).setImage('../assets/sunset.jpg');
-  document.body.appendChild(scn);
+  var scn = DivSugar.createScene()
+    .setSize(800, 600)
+    .setImage('../assets/sunset.jpg')
+    .appendTo(document.body);
 
+  // maximize the scene size as possible
   window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
   window.onresize();
 
@@ -19,20 +21,30 @@ window.onload = function() {
     this.vel = new DivSugar.Vector(Math.random() * 6 - 3, Math.random() * 8 - 20, Math.random() * 6 - 3);
     this.rot = new DivSugar.Vector(Math.random() * 0.1, Math.random() * 0.1, Math.random() * 0.1);
 
-    this.center = DivSugar.createNode();
-    this.center.setPosition(this.pos).rotate(Math.random() * 360, Math.random() * 360, Math.random() * 360);
-    scn.appendChild(this.center);
+    this.center = DivSugar.createNode()
+      .setPosition(this.pos)
+      .rotate(Math.random() * 360, Math.random() * 360, Math.random() * 360)
+      .appendTo(scn);
 
-    this.front = DivSugar.createNode();
-    this.front.setSize(200, 200).setImage('../assets/coin.png').setImageClip(0, 0, 0.5, 1).setBackface(false).setPosition(-100, -100, 0);
-    this.center.appendChild(this.front);
+    this.front = DivSugar.createNode()
+      .setSize(200, 200)
+      .setPosition(-100, -100, 0)
+      .setImage('../assets/coin.png')
+      .setImageClip(0, 0, 0.5, 1)
+      .setBackface(false)
+      .appendTo(this.center);
 
-    this.back = DivSugar.createNode();
-    this.back.setSize(200, 200).setImage('../assets/coin.png').setImageClip(0.5, 0, 1, 1).setBackface(false).setPosition(100, -100, 0).rotate(0, 180, 0);
-    this.center.appendChild(this.back);
+    this.back = DivSugar.createNode()
+      .setSize(200, 200)
+      .setPosition(100, -100, 0)
+      .setImage('../assets/coin.png')
+      .setImageClip(0.5, 0, 1, 1)
+      .setBackface(false)
+      .rotate(0, 180, 0)
+      .appendTo(this.center);
 
     // register this task to the rootTask to be updated in every frame
-    DivSugar.rootTask.appendChild(this);
+    this.appendTo(DivSugar.rootTask);
   }
 
   // inherit the task class
@@ -41,7 +53,10 @@ window.onload = function() {
   Coin.prototype.onUpdate = function(elapsedTime) {
     this.vel.y += elapsedTime * 0.01;
     this.pos.add(this.vec.set(this.vel).mul(elapsedTime * 0.06));
-    this.center.setPosition(this.pos).rotate(elapsedTime * this.rot.x, elapsedTime * this.rot.y, elapsedTime * this.rot.z);
+
+    this.center
+      .setPosition(this.pos)
+      .rotate(elapsedTime * this.rot.x, elapsedTime * this.rot.y, elapsedTime * this.rot.z);
 
     // when fall enough, destroy this task and create an another task
     if (this.pos.y > 1000) {
@@ -53,6 +68,6 @@ window.onload = function() {
   Coin.prototype.onDestroy = function() { scn.removeChild(this.center); };
 
   // create instances of the animation class
-  var dummy; // for avoiding JSLint warnings
-  for (var i = 0; i < 30; i++) { dummy = new Coin(); }
+  var i, dummy;
+  for (i = 0; i < 30; i++) { dummy = new Coin(); }
 };

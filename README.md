@@ -19,20 +19,23 @@ A node is an element of a scene graph and draws an image.
 Both of them are extended div elements and created by the factory methods of DivSugar.
 
 ```javascript
-var scn = DivSugar.createScene('someScene');
-scn.setSize(800, 600).setImage('#000080');
-document.body.appendChild(scn);
+var scn = DivSugar.createScene('someScene')
+  .setSize(800, 600)
+  .setImage('#000080')
+  .appendTo(document.body);
 
-var node = DivSugar.createNode('someNode');
-node.setSize(300, 300).setImage('image.jpg').setPosition(10, 20, 30);
-scn.appendChild(node);
+var node = DivSugar.createNode('someNode')
+  .setSize(300, 300)
+  .setPosition(10, 20, 30)
+  .setImage('image.jpg')
+  .appendTo(scn);
 ```
 
 DivSugar provides the task system, which calls the onUpdate method of the registered tasks in every frame.
 It also calls the onDestroy method when the task is destroyed.
 
 ```javascript
-var task = new DivSugar.Task('someTask');
+var task = new DivSugar.Task('someTask').appendTo(DivSugar.rootTask);
 
 task.onUpdate = function(elapsedTime) {
   node.rotate(elapsedTime * 0.1, elapsedTime * 0.2, elapsedTime * 0.3);
@@ -41,8 +44,6 @@ task.onUpdate = function(elapsedTime) {
 task.onDestroy = function() {
   scn.removeChild(node);
 };
-
-DivSugar.rootTask.appendChild(task);
 ```
 
 With the playAnimation method of nodes, it is possible to make the task which plays a sequence of animations automatically.
