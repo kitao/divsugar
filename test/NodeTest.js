@@ -292,4 +292,54 @@
 
     ok(node1.clearAnimation().clearAnimation());
   });
+
+  test('getWorldPosition', function() {
+    var vec1 = new DivSugar.Vector();
+    var scn1 = DivSugar.createScene();
+    var node1 = DivSugar.createNode().setPosition(10, 10, 10).rotate(0, 180, 0);
+    var node2 = DivSugar.createNode().setPosition(100, 100, 100).rotate(0, 180, 0);
+    var node3 = DivSugar.createNode().setPosition(1000, 1000, 1000);
+
+    node1.getWorldPosition(vec1);
+    nearlyEqual(vec1, new DivSugar.Vector(10, 10, 10));
+
+    scn1.appendChild(node1);
+    node1.getWorldPosition(vec1);
+    nearlyEqual(vec1, new DivSugar.Vector(10, 10, 10));
+
+    node1.appendChild(node2);
+    node2.getWorldPosition(vec1);
+    nearlyEqual(vec1, new DivSugar.Vector(-90, 110, -90));
+
+    node2.appendChild(node3);
+    node3.getWorldPosition(vec1);
+    nearlyEqual(vec1, new DivSugar.Vector(910, 1110, 910));
+
+    ok(node1.getWorldPosition(vec1).getWorldPosition(vec1));
+  });
+
+  test('getWorldTransform', function() {
+    var mat1 = new DivSugar.Matrix();
+    var scn1 = DivSugar.createScene();
+    var node1 = DivSugar.createNode().setPosition(10, 10, 10).rotate(0, 180, 0);
+    var node2 = DivSugar.createNode().setPosition(100, 100, 100).rotate(0, 180, 0);
+    var node3 = DivSugar.createNode().setPosition(1000, 1000, 1000);
+
+    node1.getWorldTransform(mat1);
+    nearlyEqual(mat1, new DivSugar.Matrix().translate(10, 10, 10).rotate(0, 180, 0));
+
+    scn1.appendChild(node1);
+    node1.getWorldTransform(mat1);
+    nearlyEqual(mat1, new DivSugar.Matrix().translate(10, 10, 10).rotate(0, 180, 0));
+
+    node1.appendChild(node2);
+    node2.getWorldTransform(mat1);
+    nearlyEqual(mat1, new DivSugar.Matrix().translate(-90, 110, -90));
+
+    node2.appendChild(node3);
+    node3.getWorldTransform(mat1);
+    nearlyEqual(mat1, new DivSugar.Matrix().translate(910, 1110, 910));
+
+    ok(node1.getWorldTransform(mat1).getWorldTransform(mat1));
+  });
 })();

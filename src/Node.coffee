@@ -221,4 +221,20 @@ DivSugar._Node =
       @_animTasks.shift().destroy()
     return @
 
+  getWorldPosition: (vec) ->
+    vec.set @_transform.trans
+    parent = @parentNode
+    while parent? and parent._transform? and not parent._isRootNode?
+      vec.toGlobal parent._transform
+      parent = parent.parentNode
+    return @
+
+  getWorldTransform: (mat) ->
+    mat.set @_transform
+    parent = @parentNode
+    while parent? and parent._transform? and not parent._isRootNode?
+      mat.toGlobal parent._transform
+      parent = parent.parentNode
+    return @
+
 DivSugar._Node._tmpMat1 = new DivSugar.Matrix()

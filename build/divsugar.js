@@ -694,6 +694,7 @@
       this.style[DivSugar._transformOrigin] = '0% 0%';
       this.style[DivSugar._perspectiveOrigin] = '50% 50%';
       this._rootNode = DivSugar.createNode();
+      this._rootNode._isRootNode = true;
       this.appendChild(this._rootNode);
       this.appendChild = function() {
         var args, _ref;
@@ -1166,6 +1167,26 @@
     clearAnimation: function() {
       while (this._animTasks.length > 0) {
         this._animTasks.shift().destroy();
+      }
+      return this;
+    },
+    getWorldPosition: function(vec) {
+      var parent;
+      vec.set(this._transform.trans);
+      parent = this.parentNode;
+      while ((parent != null) && (parent._transform != null) && !(parent._isRootNode != null)) {
+        vec.toGlobal(parent._transform);
+        parent = parent.parentNode;
+      }
+      return this;
+    },
+    getWorldTransform: function(mat) {
+      var parent;
+      mat.set(this._transform);
+      parent = this.parentNode;
+      while ((parent != null) && (parent._transform != null) && !(parent._isRootNode != null)) {
+        mat.toGlobal(parent._transform);
+        parent = parent.parentNode;
       }
       return this;
     }
