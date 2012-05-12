@@ -3,8 +3,8 @@ DivSugar._Node =
     @style.margin = '0px'
     @style.padding = '0px'
     @style.position = 'absolute'
-    @style[DivSugar._transformStyle] = 'preserve-3d'
-    @style[DivSugar._transformOrigin] = '0% 0%'
+    @style[DivSugar.cssTransformStyle] = 'preserve-3d'
+    @style[DivSugar.cssTransformOrigin] = '0% 0%'
     @_transform = new DivSugar.Matrix()
     @_animTasks = []
 
@@ -16,6 +16,18 @@ DivSugar._Node =
     @setOpacity 1
     @setImage null
     @setImageClip 0, 0, 1, 1
+
+  append: (child) ->
+    @appendChild child
+    return @
+
+  appendTo: (parent) ->
+    parent.appendChild @
+    return @
+
+  remove: (child) ->
+    @removeChild child if child in @childNodes
+    return @
 
   getWidth: -> @_width
   getHeight: -> @_height
@@ -45,7 +57,7 @@ DivSugar._Node =
       @_transform.trans.y = y
       @_transform.trans.z = z
 
-    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    @style[DivSugar.cssTransform] = @_transform.toCSSTransform()
 
     return @
 
@@ -55,7 +67,7 @@ DivSugar._Node =
 
   setTransform: (mat) ->
     @_transform.set mat
-    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    @style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @
 
   getVisible: DivSugar._Scene.getVisible
@@ -65,7 +77,7 @@ DivSugar._Node =
 
   setBackface: (backface) ->
     @_backface = backface
-    @style[DivSugar._backfaceVisibility] = if backface then 'visible' else 'hidden'
+    @style[DivSugar.cssBackfaceVisibility] = if backface then 'visible' else 'hidden'
     return @
 
   getClip: DivSugar._Scene.getClip
@@ -85,17 +97,17 @@ DivSugar._Node =
 
   translate: (offsetX, offsetY, offsetZ) ->
     @_transform.translate offsetX, offsetY, offsetZ
-    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    @style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @
 
   rotate: (rotateX, rotateY, rotateZ) ->
     @_transform.rotate rotateX, rotateY, rotateZ
-    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    @style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @
 
   scale: (scaleX, scaleY, scaleZ) ->
     @_transform.scale scaleX, scaleY, scaleZ
-    @style[DivSugar._transform] = @_transform.toCSSTransform()
+    @style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @
 
   playAnimation: (animation) ->
@@ -105,7 +117,7 @@ DivSugar._Node =
     animTask._firstFrame = true
     animTask.onUpdate = (elapsedTime) => @_updateAnimation animTask, elapsedTime
     animTask.onDestroy = => @_destroyAnimation animTask
-    DivSugar.rootTask.appendChild animTask
+    animTask.appendTo DivSugar.rootTask
     @_animTasks.push animTask
     return animTask
 
@@ -224,7 +236,7 @@ DivSugar._Node =
   getWorldPosition: (vec) ->
     vec.set @_transform.trans
     parent = @parentNode
-    while parent? and parent._transform? and not parent._isRootNode?
+    while parent? and parent._transform? and not parent.isRootNode?
       vec.toGlobal parent._transform
       parent = parent.parentNode
     return @
@@ -232,7 +244,7 @@ DivSugar._Node =
   getWorldTransform: (mat) ->
     mat.set @_transform
     parent = @parentNode
-    while parent? and parent._transform? and not parent._isRootNode?
+    while parent? and parent._transform? and not parent.isRootNode?
       mat.toGlobal parent._transform
       parent = parent.parentNode
     return @

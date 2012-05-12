@@ -22,6 +22,34 @@
     strictEqual(node1.getImageClipV2(), 1);
   });
 
+  test('append', function() {
+    var node1 = DivSugar.createNode();
+    var node2 = DivSugar.createNode();
+    node1.append(node2);
+    strictEqual(node1.firstChild, node2);
+
+    ok(node1.append(node2).append(node2));
+  });
+
+  test('appendTo', function() {
+    var node1 = DivSugar.createNode();
+    var node2 = DivSugar.createNode();
+    node1.appendTo(node2);
+    strictEqual(node2.firstChild, node1);
+
+    ok(node1.appendTo(node2).appendTo(node2));
+  });
+
+  test('remove', function() {
+    var node1 = DivSugar.createNode();
+    var node2 = DivSugar.createNode();
+    node1.append(node2);
+    node1.remove(node2);
+    strictEqual(node1.firstChild, null);
+
+    ok(node1.remove(node2).remove(node2));
+  });
+
   test('getPosition', function() {
     var node1 = DivSugar.createNode();
     var vec1 = new DivSugar.Vector(1, 2, 3);
@@ -303,15 +331,15 @@
     node1.getWorldPosition(vec1);
     nearlyEqual(vec1, new DivSugar.Vector(10, 10, 10));
 
-    scn1.appendChild(node1);
+    scn1.append(node1);
     node1.getWorldPosition(vec1);
     nearlyEqual(vec1, new DivSugar.Vector(10, 10, 10));
 
-    node1.appendChild(node2);
+    node1.append(node2);
     node2.getWorldPosition(vec1);
     nearlyEqual(vec1, new DivSugar.Vector(-90, 110, -90));
 
-    node2.appendChild(node3);
+    node2.append(node3);
     node3.getWorldPosition(vec1);
     nearlyEqual(vec1, new DivSugar.Vector(910, 1110, 910));
 
@@ -328,15 +356,15 @@
     node1.getWorldTransform(mat1);
     nearlyEqual(mat1, new DivSugar.Matrix().translate(10, 10, 10).rotate(0, 180, 0));
 
-    scn1.appendChild(node1);
+    scn1.append(node1);
     node1.getWorldTransform(mat1);
     nearlyEqual(mat1, new DivSugar.Matrix().translate(10, 10, 10).rotate(0, 180, 0));
 
-    node1.appendChild(node2);
+    node1.append(node2);
     node2.getWorldTransform(mat1);
     nearlyEqual(mat1, new DivSugar.Matrix().translate(-90, 110, -90));
 
-    node2.appendChild(node3);
+    node2.append(node3);
     node3.getWorldTransform(mat1);
     nearlyEqual(mat1, new DivSugar.Matrix().translate(910, 1110, 910));
 
