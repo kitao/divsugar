@@ -30,31 +30,31 @@ DivSugar =
       div = document.createElement 'div'
 
       @cssTransform = "-#{@_prefix}-transform"
-      @cssTransform = 'transform' unless div.style[@cssTransform]?
+      @cssTransform = 'transform' unless @cssTransform of div.style
       console.log "DivSugar: use '#{@cssTransform}'"
 
       @cssTransformStyle = "-#{@_prefix}-transform-style"
-      @cssTransformStyle = 'transform-style' unless div.style[@cssTransformStyle]?
+      @cssTransformStyle = 'transform-style' unless @cssTransformStyle of div.style
       console.log "DivSugar: use '#{@cssTransformStyle}'"
 
       @cssTransformOrigin = "-#{@_prefix}-transform-origin"
-      @cssTransformOrigin = 'transform-origin' unless div.style[@cssTransformOrigin]?
+      @cssTransformOrigin = 'transform-origin' unless @cssTransformOrigin of div.style
       console.log "DivSugar: use '#{@cssTransformOrigin}'"
 
       @cssPerspective = "-#{@_prefix}-perspective"
-      @cssPerspective = 'perspective' unless div.style[@cssPerspective]?
+      @cssPerspective = 'perspective' unless @cssPerspective of div.style
       console.log "DivSugar: use '#{@cssPerspective}'"
 
       @cssPerspectiveOrigin = "-#{@_prefix}-perspective-origin"
-      @cssPerspectiveOrigin = 'perspective-origin' unless div.style[@cssPerspectiveOrigin]?
+      @cssPerspectiveOrigin = 'perspective-origin' unless @cssPerspectiveOrigin of div.style
       console.log "DivSugar: use '#{@cssPerspectiveOrigin}'"
 
       @cssBackfaceVisibility = "-#{@_prefix}-backface-visibility"
-      @cssBackfaceVisibility = 'backface-visibility' unless div.style[@cssBackfaceVisibility]?
+      @cssBackfaceVisibility = 'backface-visibility' unless @cssBackfaceVisibility of div.style
       console.log "DivSugar: use '#{@cssBackfaceVisibility}'"
 
       requestAnimationFrame = @_prefix + 'RequestAnimationFrame'
-      requestAnimationFrame = 'requestAnimationFrame' unless window[requestAnimationFrame]?
+      requestAnimationFrame = 'requestAnimationFrame' unless requestAnimationFrame of window
 
       if window[requestAnimationFrame]?
         @requestAnimationFrame = (callback) => window[requestAnimationFrame] callback

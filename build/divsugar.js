@@ -32,37 +32,37 @@
         console.log("DivSugar: use '" + _this._prefix + "' as prefix");
         div = document.createElement('div');
         _this.cssTransform = "-" + _this._prefix + "-transform";
-        if (div.style[_this.cssTransform] == null) {
+        if (!(_this.cssTransform in div.style)) {
           _this.cssTransform = 'transform';
         }
         console.log("DivSugar: use '" + _this.cssTransform + "'");
         _this.cssTransformStyle = "-" + _this._prefix + "-transform-style";
-        if (div.style[_this.cssTransformStyle] == null) {
+        if (!(_this.cssTransformStyle in div.style)) {
           _this.cssTransformStyle = 'transform-style';
         }
         console.log("DivSugar: use '" + _this.cssTransformStyle + "'");
         _this.cssTransformOrigin = "-" + _this._prefix + "-transform-origin";
-        if (div.style[_this.cssTransformOrigin] == null) {
+        if (!(_this.cssTransformOrigin in div.style)) {
           _this.cssTransformOrigin = 'transform-origin';
         }
         console.log("DivSugar: use '" + _this.cssTransformOrigin + "'");
         _this.cssPerspective = "-" + _this._prefix + "-perspective";
-        if (div.style[_this.cssPerspective] == null) {
+        if (!(_this.cssPerspective in div.style)) {
           _this.cssPerspective = 'perspective';
         }
         console.log("DivSugar: use '" + _this.cssPerspective + "'");
         _this.cssPerspectiveOrigin = "-" + _this._prefix + "-perspective-origin";
-        if (div.style[_this.cssPerspectiveOrigin] == null) {
+        if (!(_this.cssPerspectiveOrigin in div.style)) {
           _this.cssPerspectiveOrigin = 'perspective-origin';
         }
         console.log("DivSugar: use '" + _this.cssPerspectiveOrigin + "'");
         _this.cssBackfaceVisibility = "-" + _this._prefix + "-backface-visibility";
-        if (div.style[_this.cssBackfaceVisibility] == null) {
+        if (!(_this.cssBackfaceVisibility in div.style)) {
           _this.cssBackfaceVisibility = 'backface-visibility';
         }
         console.log("DivSugar: use '" + _this.cssBackfaceVisibility + "'");
         requestAnimationFrame = _this._prefix + 'RequestAnimationFrame';
-        if (window[requestAnimationFrame] == null) {
+        if (!(requestAnimationFrame in window)) {
           requestAnimationFrame = 'requestAnimationFrame';
         }
         if (window[requestAnimationFrame] != null) {
