@@ -23,8 +23,8 @@
     var updatedCount = 0;
     var task1 = new DivSugar.Task();
     var task2 = new DivSugar.Task();
-    task1.onUpdate = task2.onUpdate = function(elapsedTime) {
-      strictEqual(elapsedTime, 123);
+    task1.onUpdate = task2.onUpdate = function(deltaTime) {
+      strictEqual(deltaTime, 123);
       updatedCount++;
     };
     task1.append(task2);

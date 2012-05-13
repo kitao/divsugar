@@ -8,16 +8,16 @@ class DivSugar.Task
 
   getParent: -> @_parent
 
-  update: (elapsedTime) ->
+  update: (deltaTime) ->
     if @active
-      @onUpdate? elapsedTime
+      @onUpdate? deltaTime
 
       i = 0
       len = @_children.length
       while i < len
         child = @_children[i]
         if child?
-          child.update elapsedTime
+          child.update deltaTime
           i++
         else
           @_children.splice i, 1

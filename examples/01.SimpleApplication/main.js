@@ -27,5 +27,5 @@ window.onload = function() {
 
   // create a task which rotates the nodes
   var task = new DivSugar.Task().appendTo(DivSugar.rootTask);
-  task.onUpdate = function(elapsedTime) { node1.rotate(elapsedTime * 0.01, elapsedTime * 0.05, elapsedTime * -0.015); };
+  task.onUpdate = function(deltaTime) { node1.rotate(deltaTime * 0.01, deltaTime * 0.05, deltaTime * -0.015); };
 };

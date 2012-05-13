@@ -66,9 +66,9 @@ DivSugar =
     # start tasks
     updateTasks = =>
       curTime = (new Date()).getTime()
-      elapsedTime = curTime - @_lastUpdatedTime
+      deltaTime = curTime - @_lastUpdatedTime
       @_lastUpdatedTime = curTime
-      @rootTask.update elapsedTime
+      @rootTask.update deltaTime
       @requestAnimationFrame updateTasks
 
     @_lastUpdatedTime = new Date().getTime()

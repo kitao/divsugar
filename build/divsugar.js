@@ -78,11 +78,11 @@
         }
       })();
       updateTasks = function() {
-        var curTime, elapsedTime;
+        var curTime, deltaTime;
         curTime = (new Date()).getTime();
-        elapsedTime = curTime - _this._lastUpdatedTime;
+        deltaTime = curTime - _this._lastUpdatedTime;
         _this._lastUpdatedTime = curTime;
-        _this.rootTask.update(elapsedTime);
+        _this.rootTask.update(deltaTime);
         return _this.requestAnimationFrame(updateTasks);
       };
       this._lastUpdatedTime = new Date().getTime();
@@ -1235,18 +1235,18 @@
       return this._parent;
     };
 
-    Task.prototype.update = function(elapsedTime) {
+    Task.prototype.update = function(deltaTime) {
       var child, i, len;
       if (this.active) {
         if (typeof this.onUpdate === "function") {
-          this.onUpdate(elapsedTime);
+          this.onUpdate(deltaTime);
         }
         i = 0;
         len = this._children.length;
         while (i < len) {
           child = this._children[i];
           if (child != null) {
-            child.update(elapsedTime);
+            child.update(deltaTime);
             i++;
           } else {
             this._children.splice(i, 1);
