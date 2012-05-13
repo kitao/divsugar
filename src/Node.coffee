@@ -206,8 +206,15 @@ DivSugar._Node =
             animTask._cmdIndex++
             animTask._firstFrame = true
 
+        when 'play'
+          for i, anim of command
+            @playAnimation command[i] if i > 0
+          animTask._cmdIndex++
+          animTask._firstFrame = true
+
         when 'call'
-          command[1]()
+          for i, anim of command
+            command[i]() if i > 0
           animTask._cmdIndex++
           animTask._firstFrame = true
 

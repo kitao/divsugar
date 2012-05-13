@@ -1012,7 +1012,7 @@
       return animTask;
     },
     _updateAnimation: function(animTask, elapsedTime) {
-      var a0, a1, clip, command, param, pos, size, value, _ref, _ref1, _ref2, _ref3, _ref4;
+      var a0, a1, anim, clip, command, i, param, pos, size, value, _ref, _ref1, _ref2, _ref3, _ref4;
       while (elapsedTime > 0) {
         if (animTask._cmdIndex >= animTask.animation.length) {
           animTask.destroy();
@@ -1144,8 +1144,23 @@
               animTask._firstFrame = true;
             }
             break;
+          case 'play':
+            for (i in command) {
+              anim = command[i];
+              if (i > 0) {
+                this.playAnimation(command[i]);
+              }
+            }
+            animTask._cmdIndex++;
+            animTask._firstFrame = true;
+            break;
           case 'call':
-            command[1]();
+            for (i in command) {
+              anim = command[i];
+              if (i > 0) {
+                command[i]();
+              }
+            }
             animTask._cmdIndex++;
             animTask._firstFrame = true;
             break;

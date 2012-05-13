@@ -233,7 +233,9 @@
     var callCount = 0;
     var mat1 = new DivSugar.Matrix();
     var node1 = DivSugar.createNode();
-    var anim1 = [
+    var func1 = function() { callCount++; };
+    var anim1 = [['call', func1, func1]];
+    var anim2 = [
       ['to', {
           size: [100, 200],
           position: [1, 2, 3],
@@ -248,15 +250,15 @@
           rotate: [10, 20, 30],
           scale: [1, 2, 3]
         }, 10, DivSugar.Ease.quadInOut ],
-      ['call', function() { callCount++; }],
+      ['play', anim1, anim1],
       ['wait', 5],
       ['repeat', 2],
       ['wait', 5]
     ];
-    var task1 = node1.playAnimation(anim1);
+    var task1 = node1.playAnimation(anim2);
 
     strictEqual(callCount, 0);
-    strictEqual(task1.animation, anim1);
+    strictEqual(task1.animation, anim2);
     strictEqual(task1.getParent(), DivSugar.rootTask);
     strictEqual(node1.getWidth(), 0);
     strictEqual(node1.getHeight(), 0);
@@ -290,25 +292,30 @@
     deepEqual(mat1, new DivSugar.Matrix().rotate(0, 90, 0).translate(10, 20, 30).rotate(10, 20, 30).scale(1, 2, 3));
 
     DivSugar.rootTask.update(1);
-    strictEqual(callCount, 1);
-    strictEqual(task1.getParent(), DivSugar.rootTask);
-
-    DivSugar.rootTask.update(39);
-    strictEqual(callCount, 3);
+    strictEqual(callCount, 0);
     strictEqual(task1.getParent(), DivSugar.rootTask);
 
     DivSugar.rootTask.update(1);
-    strictEqual(callCount, 3);
+    strictEqual(callCount, 4);
+    strictEqual(task1.getParent(), DivSugar.rootTask);
+
+    DivSugar.rootTask.update(38);
+    strictEqual(callCount, 4);
+    strictEqual(task1.getParent(), DivSugar.rootTask);
+
+    DivSugar.rootTask.update(1);
+    strictEqual(callCount, 12);
     strictEqual(task1.getParent(), null);
   });
 
   test('clearAnimation', function() {
     var node1 = DivSugar.createNode();
-    var task1 = node1.playAnimation([['wait', 10]]);
-    var task2 = node1.playAnimation([['wait', 10]]);
-    var task3 = node1.playAnimation([['wait', 10]]);
+    var anim1 = [['wait', 1], ['repeat']];
+    var task1 = node1.playAnimation(anim1);
+    var task2 = node1.playAnimation(anim1);
+    var task3 = node1.playAnimation(anim1);
 
-    DivSugar.rootTask.update(5);
+    DivSugar.rootTask.update(10);
     strictEqual(task1.getParent(), DivSugar.rootTask);
     strictEqual(task2.getParent(), DivSugar.rootTask);
     strictEqual(task3.getParent(), DivSugar.rootTask);
