@@ -61,7 +61,7 @@ node.playAnimation([
 Examples
 --------
 - 01.SimpleApplication ([demo](http://kitao.github.com/divsugar/examples/01.SimpleApplication/) | [code](https://github.com/kitao/divsugar/blob/master/examples/01.SimpleApplication))
-- 02.TaskSystem ([demo](http://kitao.github.com/divsugar/examples/02.TaskSystem/) | [code](https://github.com/kitao/divsugar/blob/master/examples/02.TaskSystem))
+- 02.TaskAnimation ([demo](http://kitao.github.com/divsugar/examples/02.TaskAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/02.TaskAnimation))
 - 03.TweenAnimation ([demo](http://kitao.github.com/divsugar/examples/03.TweenAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/03.TweenAnimation))
 
 Documentaion
