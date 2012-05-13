@@ -37,8 +37,8 @@ It also calls the `onDestroy` method when the task is destroyed.
 ```javascript
 var task = new DivSugar.Task('someTask').appendTo(DivSugar.rootTask);
 
-task.onUpdate = function(elapsedTime) {
-  node.rotate(elapsedTime * 0.1, elapsedTime * 0.2, elapsedTime * 0.3);
+task.onUpdate = function() {
+  node.rotate(this.deltaTime * 0.1, this.deltaTime * 0.2, this.deltaTime * 0.3);
 };
 
 task.onDestroy = function() {
