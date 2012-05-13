@@ -1,6 +1,7 @@
 class DivSugar.Task
   constructor: (@id = null) ->
     @active = true
+    @deltaTime = 0
     @onUpdate = null
     @onDestroy = null
     @_parent = null
@@ -10,7 +11,9 @@ class DivSugar.Task
 
   update: (deltaTime) ->
     if @active
-      @onUpdate? deltaTime
+      @deltaTime += deltaTime
+      @onUpdate?()
+      @deltaTime = 0
 
       i = 0
       len = @_children.length

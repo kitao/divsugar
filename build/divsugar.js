@@ -1001,8 +1001,8 @@
       animTask.animation = animation;
       animTask._cmdIndex = 0;
       animTask._firstFrame = true;
-      animTask.onUpdate = function(elapsedTime) {
-        return _this._updateAnimation(animTask, elapsedTime);
+      animTask.onUpdate = function() {
+        return _this._updateAnimation(animTask);
       };
       animTask.onDestroy = function() {
         return _this._destroyAnimation(animTask);
@@ -1011,9 +1011,9 @@
       this._animTasks.push(animTask);
       return animTask;
     },
-    _updateAnimation: function(animTask, elapsedTime) {
+    _updateAnimation: function(animTask) {
       var a0, a1, anim, clip, command, i, param, pos, size, value, _ref, _ref1, _ref2, _ref3, _ref4;
-      while (elapsedTime > 0) {
+      while (animTask.deltaTime > 0) {
         if (animTask._cmdIndex >= animTask.animation.length) {
           animTask.destroy();
           return;
@@ -1080,11 +1080,11 @@
             if (animTask._fromTransform != null) {
               this._transform.set(animTask._fromTransform);
             }
-            if (animTask._totalTime > animTask._currentTime + elapsedTime) {
-              animTask._currentTime += elapsedTime;
-              elapsedTime = 0;
+            if (animTask._totalTime > animTask._currentTime + animTask.deltaTime) {
+              animTask._currentTime += animTask.deltaTime;
+              animTask.deltaTime = 0;
             } else {
-              elapsedTime -= animTask._totalTime;
+              animTask.deltaTime -= animTask._totalTime;
               animTask._currentTime = animTask._totalTime;
               animTask._cmdIndex++;
               animTask._firstFrame = true;
@@ -1134,11 +1134,11 @@
               animTask._firstFrame = false;
               animTask._waitTime = command[1];
             }
-            if (animTask._waitTime > elapsedTime) {
-              animTask._waitTime -= elapsedTime;
-              elapsedTime = 0;
+            if (animTask._waitTime > animTask.deltaTime) {
+              animTask._waitTime -= animTask.deltaTime;
+              animTask.deltaTime = 0;
             } else {
-              elapsedTime -= animTask._waitTime;
+              animTask.deltaTime -= animTask._waitTime;
               animTask._waitTime = 0;
               animTask._cmdIndex++;
               animTask._firstFrame = true;
@@ -1225,6 +1225,7 @@
     function Task(id) {
       this.id = id != null ? id : null;
       this.active = true;
+      this.deltaTime = 0;
       this.onUpdate = null;
       this.onDestroy = null;
       this._parent = null;
@@ -1238,9 +1239,11 @@
     Task.prototype.update = function(deltaTime) {
       var child, i, len;
       if (this.active) {
+        this.deltaTime += deltaTime;
         if (typeof this.onUpdate === "function") {
-          this.onUpdate(deltaTime);
+          this.onUpdate();
         }
+        this.deltaTime = 0;
         i = 0;
         len = this._children.length;
         while (i < len) {

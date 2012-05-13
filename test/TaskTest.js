@@ -7,6 +7,7 @@
     var task1 = new DivSugar.Task();
     strictEqual(task1.id, null);
     strictEqual(task1.active, true);
+    strictEqual(task1.deltaTime, 0);
     strictEqual(task1.onUpdate, null);
     strictEqual(task1.onDestroy, null);
     strictEqual(task1.getParent(), null);
@@ -23,13 +24,16 @@
     var updatedCount = 0;
     var task1 = new DivSugar.Task();
     var task2 = new DivSugar.Task();
-    task1.onUpdate = task2.onUpdate = function(deltaTime) {
-      strictEqual(deltaTime, 123);
+    task1.deltaTime = task2.deltaTime = 100;
+    task1.onUpdate = task2.onUpdate = function() {
+      strictEqual(this.deltaTime, 223);
       updatedCount++;
     };
     task1.append(task2);
     task1.update(123);
     strictEqual(updatedCount, 2);
+    strictEqual(task1.deltaTime, 0);
+    strictEqual(task2.deltaTime, 0);
 
     task1.onUpdate = task2.onUpdate = null;
     ok(task1.update(1).update(1));

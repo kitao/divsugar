@@ -114,14 +114,14 @@ DivSugar._Node =
     animTask.animation = animation
     animTask._cmdIndex = 0
     animTask._firstFrame = true
-    animTask.onUpdate = (elapsedTime) => @_updateAnimation animTask, elapsedTime
+    animTask.onUpdate = => @_updateAnimation animTask
     animTask.onDestroy = => @_destroyAnimation animTask
     animTask.appendTo DivSugar.rootTask
     @_animTasks.push animTask
     return animTask
 
-  _updateAnimation: (animTask, elapsedTime) ->
-    while elapsedTime > 0
+  _updateAnimation: (animTask) ->
+    while animTask.deltaTime > 0
       if animTask._cmdIndex >= animTask.animation.length
         animTask.destroy()
         return
@@ -154,11 +154,11 @@ DivSugar._Node =
 
           @_transform.set animTask._fromTransform if animTask._fromTransform?
 
-          if animTask._totalTime > animTask._currentTime + elapsedTime
-            animTask._currentTime += elapsedTime
-            elapsedTime = 0
+          if animTask._totalTime > animTask._currentTime + animTask.deltaTime
+            animTask._currentTime += animTask.deltaTime
+            animTask.deltaTime = 0
           else
-            elapsedTime -= animTask._totalTime
+            animTask.deltaTime -= animTask._totalTime
             animTask._currentTime = animTask._totalTime
             animTask._cmdIndex++
             animTask._firstFrame = true
@@ -197,11 +197,11 @@ DivSugar._Node =
             animTask._firstFrame = false
             animTask._waitTime = command[1]
 
-          if animTask._waitTime > elapsedTime
-            animTask._waitTime -= elapsedTime
-            elapsedTime = 0
+          if animTask._waitTime > animTask.deltaTime
+            animTask._waitTime -= animTask.deltaTime
+            animTask.deltaTime = 0
           else
-            elapsedTime -= animTask._waitTime
+            animTask.deltaTime -= animTask._waitTime
             animTask._waitTime = 0
             animTask._cmdIndex++
             animTask._firstFrame = true

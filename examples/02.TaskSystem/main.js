@@ -47,13 +47,13 @@ window.onload = function() {
   // inherit the task class
   DivSugar.inherit(Coin, DivSugar.Task);
 
-  Coin.prototype.onUpdate = function(deltaTime) {
-    this.vel.y += deltaTime * 0.01;
-    this.pos.add(this.vec.set(this.vel).mul(deltaTime * 0.06));
+  Coin.prototype.onUpdate = function() {
+    this.vel.y += this.deltaTime * 0.01;
+    this.pos.add(this.vec.set(this.vel).mul(this.deltaTime * 0.06));
 
     this.center
       .setPosition(this.pos)
-      .rotate(deltaTime * this.rot.x, deltaTime * this.rot.y, deltaTime * this.rot.z);
+      .rotate(this.deltaTime * this.rot.x, this.deltaTime * this.rot.y, this.deltaTime * this.rot.z);
 
     // when fall enough, destroy this task and create an another task
     if (this.pos.y > 1000) {
