@@ -13,7 +13,7 @@ window.onload = function() {
 
   // define an animation class with the task system
   function Coin() {
-    // call parent class's constructor
+    // call the parent class's constructor
     this.constructor.uber.constructor();
 
     this.vec = new DivSugar.Vector();

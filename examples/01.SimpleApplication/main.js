@@ -1,7 +1,7 @@
 window.onload = function() {
   'use strict';
 
-  // create a scene which is a rendering target of nodes
+  // create a scene which is a rendering target of each node
   var scn = DivSugar.createScene()
     .setSize(800, 600)
     .setImage('#000080')
@@ -16,7 +16,7 @@ window.onload = function() {
     .setPosition(400, 300, 0)
     .appendTo(scn);
 
-  // create a child node render an image and text
+  // create a child node which renders an image and a text
   var node2 = DivSugar.createNode()
     .setSize(300, 300)
     .setPosition(-150, -150, 200)
