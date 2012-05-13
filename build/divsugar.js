@@ -899,7 +899,11 @@
       return this;
     },
     appendTo: function(parent) {
-      parent.appendChild(this);
+      if (parent.rootNode != null) {
+        parent.rootNode.appendChild(this);
+      } else {
+        parent.appendChild(this);
+      }
       return this;
     },
     remove: function(child) {

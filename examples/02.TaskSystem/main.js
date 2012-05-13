@@ -65,7 +65,7 @@ window.onload = function() {
   };
 
   Coin.prototype.onDestroy = function() {
-    scn.removeChild(this.center);
+    scn.remove(this.center);
   };
 
   // create and register instances of the animation class

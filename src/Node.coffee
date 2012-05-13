@@ -22,7 +22,10 @@ DivSugar._Node =
     return @
 
   appendTo: (parent) ->
-    parent.appendChild @
+    if parent.rootNode?
+      parent.rootNode.appendChild @
+    else
+      parent.appendChild @
     return @
 
   remove: (child) ->
