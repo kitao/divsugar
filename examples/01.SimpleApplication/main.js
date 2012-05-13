@@ -8,7 +8,9 @@ window.onload = function() {
     .appendTo(document.body);
 
   // maximize the scene size as possible
-  window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
+  window.onresize = function() {
+    scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain');
+  };
   window.onresize();
 
   // create a parent node used as the center of rotation
@@ -27,5 +29,7 @@ window.onload = function() {
 
   // create a task which rotates the nodes
   var task = new DivSugar.Task().appendTo(DivSugar.rootTask);
-  task.onUpdate = function() { node1.rotate(this.deltaTime * 0.01, this.deltaTime * 0.05, this.deltaTime * -0.015); };
+  task.onUpdate = function() {
+    node1.rotate(this.deltaTime * 0.01, this.deltaTime * 0.05, this.deltaTime * -0.015);
+  };
 };

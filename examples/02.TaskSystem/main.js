@@ -8,7 +8,9 @@ window.onload = function() {
     .appendTo(document.body);
 
   // maximize the scene size as possible
-  window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
+  window.onresize = function() {
+    scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain');
+  };
   window.onresize();
 
   // define an animation class with the task system
@@ -62,8 +64,12 @@ window.onload = function() {
     }
   };
 
-  Coin.prototype.onDestroy = function() { scn.removeChild(this.center); };
+  Coin.prototype.onDestroy = function() {
+    scn.removeChild(this.center);
+  };
 
   // create and register instances of the animation class
-  for (var i = 0; i < 30; i++) { new Coin().appendTo(DivSugar.rootTask); }
+  for (var i = 0; i < 30; i++) {
+    new Coin().appendTo(DivSugar.rootTask);
+  }
 };
