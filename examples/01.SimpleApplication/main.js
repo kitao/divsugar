@@ -4,7 +4,7 @@ window.onload = function() {
   // create a scene which is a rendering target of each node
   var scn = DivSugar.createScene().setSize(800, 600).setImage('#000080').appendTo(document.body);
 
-  // maximize the scene size as possible
+  // maximize the scene size
   window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
   window.onresize();
 

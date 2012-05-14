@@ -4,7 +4,7 @@ window.onload = function() {
   // create a scene
   var scn = DivSugar.createScene().setSize(800, 600).setImage('../assets/sunset.jpg').appendTo(document.body);
 
-  // maximize the scene size as possible
+  // maximize the scene size
   window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
   window.onresize();
 
