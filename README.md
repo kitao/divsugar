@@ -48,7 +48,7 @@ task.onDestroy = function() {
 
 With the `playAnimation` method of nodes, it is possible to make the task which plays a sequence of animations automatically.
 
-```javasscript
+```javascript
 node.playAnimation([
   ['to', { size: [100, 100], opacity: 1 }, 1000, DivSugar.Ease.quadInOut],
   ['wait', 500],
