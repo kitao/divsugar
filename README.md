@@ -53,7 +53,8 @@ node.playAnimation([
   ['to', { size: [100, 100], opacity: 1 }, 1000, DivSugar.Ease.quadInOut],
   ['wait', 500],
   ['to', { size: [200, 200], opacity: 0 }, 500, DivSugar.Ease.linear],
-  ['call', someFunction],
+  ['play', someAnim],
+  ['call', someFunc],
   ['repeat', 10]
 ]);
 ```
