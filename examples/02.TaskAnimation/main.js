@@ -34,7 +34,6 @@ window.onload = function() {
   Coin.prototype.onUpdate = function() {
     this.vel.y += this.deltaTime * 0.01;
     this.pos.add(this.vec.set(this.vel).mul(this.deltaTime * 0.06));
-
     this.center.setPosition(this.pos).rotate(this.deltaTime * this.rot.x, this.deltaTime * this.rot.y, this.deltaTime * this.rot.z);
 
     // when fall enough, destroy this task and create an another task
