@@ -18,16 +18,17 @@ class DivSugar.Matrix
         @trans = new DivSugar.Vector arguments[9], arguments[10], arguments[11]
 
   set: (mat) ->
-    if arguments.length is 1
-      @xAxis.set mat.xAxis
-      @yAxis.set mat.yAxis
-      @zAxis.set mat.zAxis
-      @trans.set mat.trans
-    else
-      @xAxis.set arguments[0], arguments[1], arguments[2]
-      @yAxis.set arguments[3], arguments[4], arguments[5]
-      @zAxis.set arguments[6], arguments[7], arguments[8]
-      @trans.set arguments[9], arguments[10], arguments[11]
+    switch arguments.length
+      when 1
+        @xAxis.set mat.xAxis
+        @yAxis.set mat.yAxis
+        @zAxis.set mat.zAxis
+        @trans.set mat.trans
+      when 12
+        @xAxis.set arguments[0], arguments[1], arguments[2]
+        @yAxis.set arguments[3], arguments[4], arguments[5]
+        @zAxis.set arguments[6], arguments[7], arguments[8]
+        @trans.set arguments[9], arguments[10], arguments[11]
 
     return @
 
