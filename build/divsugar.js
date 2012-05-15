@@ -872,6 +872,14 @@
       }
       this.setPosition((parentWidth - this._width) / 2, (parentHeight - this._height) / 2);
       return this;
+    },
+    getLocalPosition: function(clientX, clientY, vec) {
+      var rect, x, y;
+      rect = this.getBoundingClientRect();
+      x = (clientX - rect.left) * this._viewWidth / this._width;
+      y = (clientY - rect.top) * this._viewHeight / this._height;
+      vec.set(x, y, 0);
+      return this;
     }
   };
 

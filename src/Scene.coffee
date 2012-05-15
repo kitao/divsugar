@@ -151,3 +151,10 @@ DivSugar._Scene =
 
     @setPosition (parentWidth - @_width) / 2, (parentHeight - @_height) / 2
     return @
+
+  getLocalPosition: (clientX, clientY, vec) ->
+    rect = @getBoundingClientRect()
+    x = (clientX - rect.left) * @_viewWidth / @_width
+    y = (clientY - rect.top) * @_viewHeight / @_height
+    vec.set x, y, 0
+    return @

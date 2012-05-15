@@ -197,4 +197,16 @@
 
     ok(scn1.adjustLayout(1, 1, 'center').adjustLayout(1, 1, 'center'));
   });
+
+  test('getLocalPosition', function() {
+    var vec1 = new DivSugar.Vector();
+    var scn1 = DivSugar.createScene();
+    scn1.setSize(100, 200, 300, 400).appendTo(document.body);
+    scn1.getLocalPosition(100, 100, vec1);
+    ok(vec1.x !== 0 && vec1.y !== 0 && vec1.z === 0);
+
+    ok(scn1.getLocalPosition(0, 0, vec1).getLocalPosition(0, 0, vec1));
+
+    document.body.removeChild(scn1);
+  });
 })();
