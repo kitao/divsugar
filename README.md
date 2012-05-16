@@ -19,12 +19,12 @@ A `Node` is an element of a scene graph and draws an image.
 Both of them are extended div elements and created by the factory methods of DivSugar.
 
 ```javascript
-var scn = DivSugar.createScene('someScene')
+var scn = new DivSugar.Scene('someScene')
   .setSize(800, 600)
   .setImage('#000080')
   .appendTo(document.body);
 
-var node = DivSugar.createNode('someNode')
+var node = new DivSugar.Node('someNode')
   .setSize(300, 300)
   .setPosition(10, 20, 30)
   .setImage('image.jpg')
