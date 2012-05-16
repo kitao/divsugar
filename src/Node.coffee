@@ -52,13 +52,16 @@ DivSugar._Node =
     return @
 
   setPosition: (x, y, z) ->
-    if arguments.length is 1
-      vec = x
-      @_transform.trans.set vec
-    else
-      @_transform.trans.x = x
-      @_transform.trans.y = y
-      @_transform.trans.z = z
+    switch arguments.length
+      when 1
+        vec = x
+        @_transform.trans.set vec
+      when 3
+        @_transform.trans.x = x
+        @_transform.trans.y = y
+        @_transform.trans.z = z
+      else
+        console.log 'DivSugar: *** invalid number of arguments ***'
 
     @style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @
