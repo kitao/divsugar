@@ -2,14 +2,14 @@ window.onload = function() {
   'use strict';
 
   // create a scene
-  var scn = DivSugar.createScene().setSize(800, 600).setImage('#000030').appendTo(document.body);
+  var scn = new DivSugar.Scene().setSize(800, 600).setImage('#000030').appendTo(document.body);
 
   // maximize the scene size
   window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
   window.onresize();
 
   // create the center node
-  var center = DivSugar.createNode().setPosition(400, 300, 0).appendTo(scn);
+  var center = new DivSugar.Node().setPosition(400, 300, 0).appendTo(scn);
   center.playAnimation([['to', { rotate: [120, 0, -10] }, 5000, DivSugar.Ease.cubicInOut], ['wait', 2000], ['repeat']]);
 
   // create the banner nodes
@@ -34,8 +34,8 @@ window.onload = function() {
       ['repeat']
     ];
 
-    banner = DivSugar.createNode().setSize(1200, 100).setOpacity(0).rotate(0, 0, Math.random() * 180 - 90).appendTo(center);
-    banner.innerHTML = '<h1 style="color:' + color + '; font-size:50px">DivSuar, a CSS-based 3D graphics library</h1>';
+    banner = new DivSugar.Node().setSize(1200, 100).setOpacity(0).rotate(0, 0, Math.random() * 180 - 90).appendTo(center);
+    banner.div.innerHTML = '<h1 style="color:' + color + '; font-size:50px">DivSuar, a CSS-based 3D graphics library</h1>';
     banner.playAnimation([['wait', waitTime], ['play', anim]]);
   }
 };
