@@ -3,9 +3,11 @@
 
   module('Node');
 
-  test('constructor and getters', function() {
-    var node1 = DivSugar.createNode('node1');
-    strictEqual(node1.id, 'node1');
+  test('constructor, properties, and getters', function() {
+    var node1 = new DivSugar.Node('node1');
+    ok(node1.div instanceof HTMLDivElement);
+    strictEqual(node1.div.id, 'node1');
+    strictEqual(node1.div.sugar, node1);
     strictEqual(node1.getWidth(), 0);
     strictEqual(node1.getHeight(), 0);
     strictEqual(node1.getPositionX(), 0);
@@ -20,38 +22,41 @@
     strictEqual(node1.getImageClipV1(), 0);
     strictEqual(node1.getImageClipU2(), 1);
     strictEqual(node1.getImageClipV2(), 1);
+
+    var node2 = new DivSugar.Scene();
+    strictEqual(node2.div.id, '');
   });
 
   test('append', function() {
-    var node1 = DivSugar.createNode();
-    var node2 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
+    var node2 = new DivSugar.Node();
     node1.append(node2);
-    strictEqual(node1.firstChild, node2);
+    strictEqual(node1.div.firstChild, node2.div);
 
     ok(node1.append(node2).append(node2));
   });
 
   test('appendTo', function() {
-    var node1 = DivSugar.createNode();
-    var node2 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
+    var node2 = new DivSugar.Node();
     node1.appendTo(node2);
-    strictEqual(node2.firstChild, node1);
+    strictEqual(node2.div.firstChild, node1.div);
 
     ok(node1.appendTo(node2).appendTo(node2));
   });
 
   test('remove', function() {
-    var node1 = DivSugar.createNode();
-    var node2 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
+    var node2 = new DivSugar.Node();
     node1.append(node2);
     node1.remove(node2);
-    strictEqual(node1.firstChild, null);
+    strictEqual(node1.div.firstChild, null);
 
     ok(node1.remove(node2).remove(node2));
   });
 
   test('getPosition', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var vec1 = new DivSugar.Vector(1, 2, 3);
     node1.getPosition(vec1);
     deepEqual(vec1, DivSugar.Vector.ZERO);
@@ -60,7 +65,7 @@
   });
 
   test('getTransform', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
     node1.getTransform(mat1);
     deepEqual(mat1, DivSugar.Matrix.UNIT);
@@ -69,7 +74,7 @@
   });
 
   test('setSize', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     node1.setSize(10, 20);
     strictEqual(node1.getWidth(), 10);
     strictEqual(node1.getHeight(), 20);
@@ -78,7 +83,7 @@
   });
 
   test('setPosition', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var vec1 = new DivSugar.Vector(40, 50, 60);
 
     node1.setPosition(10, 20, 30);
@@ -95,7 +100,7 @@
   });
 
   test('setTransform', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
     var mat2 = new DivSugar.Matrix();
     node1.setTransform(mat1);
@@ -106,7 +111,7 @@
   });
 
   test('setVisible', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     node1.setVisible(false);
     strictEqual(node1.getVisible(), false);
 
@@ -114,7 +119,7 @@
   });
 
   test('setBackface', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     node1.setBackface(false);
     strictEqual(node1.getBackface(), false);
 
@@ -122,7 +127,7 @@
   });
 
   test('setClip', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     node1.setClip(true);
     strictEqual(node1.getClip(), true);
 
@@ -130,7 +135,7 @@
   });
 
   test('setOpacity', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     node1.setOpacity(0.5);
     strictEqual(node1.getOpacity(), 0.5);
 
@@ -138,7 +143,7 @@
   });
 
   test('setImage', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
 
     node1.setImage('../examples/assets/coin.png');
     strictEqual(node1.getImage(), '../examples/assets/coin.png');
@@ -154,7 +159,7 @@
   });
 
   test('setImageClip', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
 
     node1.setImageClip(0.1, 0.2, 0.3, 0.4);
     strictEqual(node1.getImageClipU1(), 0.1);
@@ -178,7 +183,7 @@
   });
 
   test('translate', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
     node1.setTransform(mat1);
@@ -191,7 +196,7 @@
   });
 
   test('rotate', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
 
@@ -217,7 +222,7 @@
   });
 
   test('scale', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
     node1.setTransform(mat1);
@@ -232,7 +237,7 @@
   test('playAnimation', function() {
     var callCount = 0;
     var mat1 = new DivSugar.Matrix();
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var func1 = function() { callCount++; };
     var anim1 = [['call', func1, func1]];
     var anim2 = [
@@ -309,7 +314,7 @@
   });
 
   test('clearAnimation', function() {
-    var node1 = DivSugar.createNode();
+    var node1 = new DivSugar.Node();
     var anim1 = [['wait', 1], ['repeat']];
     var task1 = node1.playAnimation(anim1);
     var task2 = node1.playAnimation(anim1);
@@ -330,10 +335,10 @@
 
   test('getWorldPosition', function() {
     var vec1 = new DivSugar.Vector();
-    var scn1 = DivSugar.createScene();
-    var node1 = DivSugar.createNode().setPosition(10, 10, 10).rotate(0, 180, 0);
-    var node2 = DivSugar.createNode().setPosition(100, 100, 100).rotate(0, 180, 0);
-    var node3 = DivSugar.createNode().setPosition(1000, 1000, 1000);
+    var scn1 = new DivSugar.Scene();
+    var node1 = new DivSugar.Node().setPosition(10, 10, 10).rotate(0, 180, 0);
+    var node2 = new DivSugar.Node().setPosition(100, 100, 100).rotate(0, 180, 0);
+    var node3 = new DivSugar.Node().setPosition(1000, 1000, 1000);
 
     node1.getWorldPosition(vec1);
     nearlyEqual(vec1, new DivSugar.Vector(10, 10, 10));
@@ -355,10 +360,10 @@
 
   test('getWorldTransform', function() {
     var mat1 = new DivSugar.Matrix();
-    var scn1 = DivSugar.createScene();
-    var node1 = DivSugar.createNode().setPosition(10, 10, 10).rotate(0, 180, 0);
-    var node2 = DivSugar.createNode().setPosition(100, 100, 100).rotate(0, 180, 0);
-    var node3 = DivSugar.createNode().setPosition(1000, 1000, 1000);
+    var scn1 = new DivSugar.Scene();
+    var node1 = new DivSugar.Node().setPosition(10, 10, 10).rotate(0, 180, 0);
+    var node2 = new DivSugar.Node().setPosition(100, 100, 100).rotate(0, 180, 0);
+    var node3 = new DivSugar.Node().setPosition(1000, 1000, 1000);
 
     node1.getWorldTransform(mat1);
     nearlyEqual(mat1, new DivSugar.Matrix().translate(10, 10, 10).rotate(0, 180, 0));
