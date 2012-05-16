@@ -16,7 +16,7 @@ Include `divsugar.js`, then all of the functions get available via the `DivSugar
 
 A `Scene` is the root of a scene graph and specifies the rendering area.
 A `Node` is an element of a scene graph and draws an image.
-Both of them are extended div elements and created by the factory methods of DivSugar.
+Both of them contain div elements as their properties.
 
 ```javascript
 var scn = new DivSugar.Scene('someScene')
