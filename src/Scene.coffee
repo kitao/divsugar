@@ -1,16 +1,19 @@
-DivSugar._Scene =
-  _initialize: (@id = null) ->
-    @style.margin = '0px'
-    @style.padding = '0px'
-    @style.position = 'relative'
-    @style.overflow = 'hidden'
-    @style[DivSugar.cssTransformStyle] = 'preserve-3d'
-    @style[DivSugar.cssTransformOrigin] = '0% 0%'
-    @style[DivSugar.cssPerspectiveOrigin] = '50% 50%'
+class DivSugar.Scene
+  constructor: (id) ->
+    @div = document.createElement 'div'
+    @div.id = id if id?
+    @div.style.margin = '0px'
+    @div.style.padding = '0px'
+    @div.style.position = 'relative'
+    @div.style.overflow = 'hidden'
+    @div.style[DivSugar.cssTransformStyle] = 'preserve-3d'
+    @div.style[DivSugar.cssTransformOrigin] = '0% 0%'
+    @div.style[DivSugar.cssPerspectiveOrigin] = '50% 50%'
+    @div.sugar = @
 
-    @rootNode = DivSugar.createNode()
+    @rootNode = new DivSugar.Node()
     @rootNode.isRootNode = true
-    @appendChild @rootNode
+    @div.appendChild @rootNode.div
 
     @setViewAngle 45
     @setSize 400, 300
@@ -22,15 +25,15 @@ DivSugar._Scene =
     @setImageClip 0, 0, 1, 1
 
   append: (child) ->
-    @rootNode.appendChild child
+    @rootNode.div.appendChild child.div
     return @
 
   appendTo: (parent) ->
-    parent.appendChild @
+    parent.appendChild @.div
     return @
 
   remove: (child) ->
-    @rootNode.removeChild child if child in @rootNode.childNodes
+    @rootNode.div.removeChild child.div if child.div in @rootNode.div.childNodes
     return @
 
   getViewAngle: -> @_viewAngle
@@ -39,7 +42,7 @@ DivSugar._Scene =
   setViewAngle: (viewAngle) ->
     @_viewAngle = viewAngle
     @_perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * @_viewWidth / 2
-    @style[DivSugar.cssPerspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @div.style[DivSugar.cssPerspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getWidth: -> @_width
@@ -52,8 +55,8 @@ DivSugar._Scene =
     @_height = height
     @_viewWidth = viewWidth
     @_viewHeight = viewHeight
-    @style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
-    @style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @div.style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @div.style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     @rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1)
     @setViewAngle @_viewAngle
     return @
@@ -64,29 +67,29 @@ DivSugar._Scene =
   setPosition: (x, y) ->
     @_positionX = x
     @_positionY = y
-    @style.left = "#{x.toFixed(DivSugar.NUM_OF_DIGITS)}px"
-    @style.top = "#{y.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @div.style.left = "#{x.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @div.style.top = "#{y.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getVisible: -> @_visible
 
   setVisible: (visible) ->
     @_visible = visible
-    @style.visibility = if visible then 'visible' else 'hidden'
+    @div.style.visibility = if visible then 'visible' else 'hidden'
     return @
 
   getClip: -> @_clip
 
   setClip: (clip) ->
     @_clip = clip
-    @style.overflow = if clip then 'hidden' else 'visible'
+    @div.style.overflow = if clip then 'hidden' else 'visible'
     return @
 
   getOpacity: -> @_opacity
 
   setOpacity: (opacity) ->
     @_opacity = opacity
-    @style.opacity = opacity.toFixed DivSugar.NUM_OF_DIGITS
+    @div.style.opacity = opacity.toFixed DivSugar.NUM_OF_DIGITS
     return @
 
   getImage: -> @_image
@@ -95,14 +98,14 @@ DivSugar._Scene =
     @_image = src
 
     unless src?
-      @style.backgroundColor = null
-      @style.backgroundImage = null
+      @div.style.backgroundColor = null
+      @div.style.backgroundImage = null
     else if src.charAt(0) is '#'
-      @style.backgroundColor = src
-      @style.backgroundImage = null
+      @div.style.backgroundColor = src
+      @div.style.backgroundImage = null
     else
-      @style.backgroundColor = null
-      @style.backgroundImage = "url(#{src})"
+      @div.style.backgroundColor = null
+      @div.style.backgroundImage = "url(#{src})"
       DivSugar.getImageSize src, callback if callback?
 
     return @
@@ -129,8 +132,8 @@ DivSugar._Scene =
     y = if h > 100 then v1 * h / (h - 100) * 100 else 0
     nod = DivSugar.NUM_OF_DIGITS
 
-    @style.backgroundPosition = "#{x.toFixed(nod)}% #{y.toFixed(nod)}%"
-    @style.backgroundSize = "#{w.toFixed(nod)}% #{h.toFixed(nod)}%"
+    @div.style.backgroundPosition = "#{x.toFixed(nod)}% #{y.toFixed(nod)}%"
+    @div.style.backgroundSize = "#{w.toFixed(nod)}% #{h.toFixed(nod)}%"
 
     return @
 
@@ -153,7 +156,7 @@ DivSugar._Scene =
     return @
 
   getLocalPosition: (clientX, clientY, vec) ->
-    rect = @getBoundingClientRect()
+    rect = @div.getBoundingClientRect()
     x = (clientX - rect.left) * @_viewWidth / @_width
     y = (clientY - rect.top) * @_viewHeight / @_height
     vec.set x, y, 0
