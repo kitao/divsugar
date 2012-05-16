@@ -8,6 +8,7 @@
     ok(node1.div instanceof HTMLDivElement);
     strictEqual(node1.div.id, 'node1');
     strictEqual(node1.div.sugar, node1);
+    strictEqual(node1.getParent(), null);
     strictEqual(node1.getWidth(), 0);
     strictEqual(node1.getHeight(), 0);
     strictEqual(node1.getPositionX(), 0);
@@ -31,7 +32,7 @@
     var node1 = new DivSugar.Node();
     var node2 = new DivSugar.Node();
     node1.append(node2);
-    strictEqual(node1.div.firstChild, node2.div);
+    strictEqual(node2.getParent(), node1);
 
     ok(node1.append(node2).append(node2));
   });
@@ -40,7 +41,7 @@
     var node1 = new DivSugar.Node();
     var node2 = new DivSugar.Node();
     node1.appendTo(node2);
-    strictEqual(node2.div.firstChild, node1.div);
+    strictEqual(node1.getParent(), node2);
 
     ok(node1.appendTo(node2).appendTo(node2));
   });
@@ -50,7 +51,7 @@
     var node2 = new DivSugar.Node();
     node1.append(node2);
     node1.remove(node2);
-    strictEqual(node1.div.firstChild, null);
+    strictEqual(node2.getParent(), null);
 
     ok(node1.remove(node2).remove(node2));
   });

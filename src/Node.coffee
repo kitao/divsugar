@@ -21,13 +21,23 @@ class DivSugar.Node
     @setImage null
     @setImageClip 0, 0, 1, 1
 
+  getParent: ->
+    parent = @div.parentNode
+    if parent?
+      if parent.sugar.isRootNode?
+        parent.parentNode.sugar
+      else
+        parent.sugar
+    else
+      null
+
   append: (child) ->
     @div.appendChild child.div
     return @
 
   appendTo: (parent) ->
-    if parent.rootNode?
-      parent.rootNode.div.appendChild @.div
+    if parent._rootNode?
+      parent._rootNode.div.appendChild @.div
     else
       parent.div.appendChild @.div
     return @
