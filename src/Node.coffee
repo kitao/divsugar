@@ -23,13 +23,7 @@ class DivSugar.Node
 
   getParent: ->
     parent = @div.parentNode
-    if parent?
-      if parent.sugar.isRootNode?
-        parent.parentNode.sugar
-      else
-        parent.sugar
-    else
-      null
+    if parent? then parent.sugar else null
 
   append: (child) ->
     @div.appendChild child.div
@@ -260,7 +254,7 @@ class DivSugar.Node
   getWorldPosition: (vec) ->
     vec.set @_transform.trans
     parent = @div.parentNode
-    while parent? and parent.sugar? and not parent.sugar.isRootNode?
+    while parent? and parent.sugar? and not parent.sugar.isScene?
       vec.toGlobal parent.sugar._transform
       parent = parent.parentNode
     return @
@@ -268,7 +262,7 @@ class DivSugar.Node
   getWorldTransform: (mat) ->
     mat.set @_transform
     parent = @div.parentNode
-    while parent? and parent.sugar? and not parent.sugar.isRootNode?
+    while parent? and parent.sugar? and not parent.sugar.isScene?
       mat.toGlobal parent.sugar._transform
       parent = parent.parentNode
     return @

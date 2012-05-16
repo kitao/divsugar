@@ -679,6 +679,7 @@
     Scene.name = 'Scene';
 
     function Scene(id) {
+      this.isScene = true;
       this.div = document.createElement('div');
       if (id != null) {
         this.div.id = id;
@@ -691,9 +692,9 @@
       this.div.style[DivSugar.cssTransformOrigin] = '0% 0%';
       this.div.style[DivSugar.cssPerspectiveOrigin] = '50% 50%';
       this.div.sugar = this;
-      this.rootNode = new DivSugar.Node();
-      this.rootNode.isRootNode = true;
-      this.div.appendChild(this.rootNode.div);
+      this._rootNode = new DivSugar.Node();
+      this._rootNode.div.sugar = this;
+      this.div.appendChild(this._rootNode.div);
       this.setViewAngle(45);
       this.setSize(400, 300);
       this.setPosition(0, 0);
@@ -704,8 +705,12 @@
       this.setImageClip(0, 0, 1, 1);
     }
 
+    Scene.prototype.getParent = function() {
+      return this.div.parentNode;
+    };
+
     Scene.prototype.append = function(child) {
-      this.rootNode.div.appendChild(child.div);
+      this._rootNode.div.appendChild(child.div);
       return this;
     };
 
@@ -716,8 +721,8 @@
 
     Scene.prototype.remove = function(child) {
       var _ref;
-      if (_ref = child.div, __indexOf.call(this.rootNode.div.childNodes, _ref) >= 0) {
-        this.rootNode.div.removeChild(child.div);
+      if (_ref = child.div, __indexOf.call(this._rootNode.div.childNodes, _ref) >= 0) {
+        this._rootNode.div.removeChild(child.div);
       }
       return this;
     };
@@ -766,7 +771,7 @@
       this._viewHeight = viewHeight;
       this.div.style.width = "" + (width.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       this.div.style.height = "" + (height.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
-      this.rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1);
+      this._rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1);
       this.setViewAngle(this._viewAngle);
       return this;
     };
@@ -940,14 +945,24 @@
       this.setImageClip(0, 0, 1, 1);
     }
 
+    Node.prototype.getParent = function() {
+      var parent;
+      parent = this.div.parentNode;
+      if (parent != null) {
+        return parent.sugar;
+      } else {
+        return null;
+      }
+    };
+
     Node.prototype.append = function(child) {
       this.div.appendChild(child.div);
       return this;
     };
 
     Node.prototype.appendTo = function(parent) {
-      if (parent.rootNode != null) {
-        parent.rootNode.div.appendChild(this.div);
+      if (parent._rootNode != null) {
+        parent._rootNode.div.appendChild(this.div);
       } else {
         parent.div.appendChild(this.div);
       }
@@ -1289,7 +1304,7 @@
       var parent;
       vec.set(this._transform.trans);
       parent = this.div.parentNode;
-      while ((parent != null) && (parent.sugar != null) && !(parent.sugar.isRootNode != null)) {
+      while ((parent != null) && (parent.sugar != null) && !(parent.sugar.isScene != null)) {
         vec.toGlobal(parent.sugar._transform);
         parent = parent.parentNode;
       }
@@ -1300,7 +1315,7 @@
       var parent;
       mat.set(this._transform);
       parent = this.div.parentNode;
-      while ((parent != null) && (parent.sugar != null) && !(parent.sugar.isRootNode != null)) {
+      while ((parent != null) && (parent.sugar != null) && !(parent.sugar.isScene != null)) {
         mat.toGlobal(parent.sugar._transform);
         parent = parent.parentNode;
       }
@@ -1419,8 +1434,6 @@
   })();
 
   DivSugar.rootTask = new DivSugar.Task();
-
-  DivSugar.rootTask.isRootTask = true;
 
   DivSugar.Ease = {
     linear: function(t) {

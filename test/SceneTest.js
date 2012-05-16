@@ -6,10 +6,10 @@
   test('constructor, properties, and getters', function() {
     var scn1 = new DivSugar.Scene('scene1');
     ok(scn1.div instanceof HTMLDivElement);
+    strictEqual(scn1.isScene, true);
     strictEqual(scn1.div.id, 'scene1');
     strictEqual(scn1.div.sugar, scn1);
-    ok(scn1.rootNode instanceof DivSugar.Node);
-    strictEqual(scn1.rootNode.isRootNode, true);
+    strictEqual(scn1.getParent(), null);
     strictEqual(scn1.getViewAngle(), 45);
     nearlyEqual(scn1.getPerspective(), 482.8427);
     strictEqual(scn1.getWidth(), 400);
@@ -35,7 +35,7 @@
     var scn1 = new DivSugar.Scene();
     var node1 = new DivSugar.Node();
     scn1.append(node1);
-    strictEqual(scn1.rootNode.div.firstChild, node1.div);
+    strictEqual(node1.getParent(), scn1);
 
     ok(scn1.append(node1).append(node1));
   });
@@ -44,7 +44,7 @@
     var div1 = document.createElement('div');
     var scn1 = new DivSugar.Scene();
     scn1.appendTo(div1);
-    strictEqual(div1.firstChild, scn1.div);
+    strictEqual(scn1.getParent(), div1);
 
     ok(scn1.appendTo(div1).appendTo(div1));
   });
@@ -54,7 +54,7 @@
     var node1 = new DivSugar.Node();
     scn1.append(node1);
     scn1.remove(node1);
-    strictEqual(scn1.rootNode.div.firstChild, null);
+    strictEqual(node1.getParent(), null);
 
     ok(scn1.remove(node1).remove(node1));
   });

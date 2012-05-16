@@ -1,5 +1,7 @@
 class DivSugar.Scene
   constructor: (id) ->
+    @isScene = true
+
     @div = document.createElement 'div'
     @div.id = id if id?
     @div.style.margin = '0px'
@@ -11,9 +13,9 @@ class DivSugar.Scene
     @div.style[DivSugar.cssPerspectiveOrigin] = '50% 50%'
     @div.sugar = @
 
-    @rootNode = new DivSugar.Node()
-    @rootNode.isRootNode = true
-    @div.appendChild @rootNode.div
+    @_rootNode = new DivSugar.Node()
+    @_rootNode.div.sugar = @
+    @div.appendChild @_rootNode.div
 
     @setViewAngle 45
     @setSize 400, 300
@@ -24,8 +26,10 @@ class DivSugar.Scene
     @setImage '#0000ff'
     @setImageClip 0, 0, 1, 1
 
+  getParent: -> @div.parentNode
+
   append: (child) ->
-    @rootNode.div.appendChild child.div
+    @_rootNode.div.appendChild child.div
     return @
 
   appendTo: (parent) ->
@@ -33,7 +37,7 @@ class DivSugar.Scene
     return @
 
   remove: (child) ->
-    @rootNode.div.removeChild child.div if child.div in @rootNode.div.childNodes
+    @_rootNode.div.removeChild child.div if child.div in @_rootNode.div.childNodes
     return @
 
   getViewAngle: -> @_viewAngle
@@ -57,7 +61,7 @@ class DivSugar.Scene
     @_viewHeight = viewHeight
     @div.style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     @div.style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
-    @rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1)
+    @_rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1)
     @setViewAngle @_viewAngle
     return @
 
