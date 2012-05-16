@@ -63,26 +63,6 @@
     strictEqual(DivSugar.generateId(), '_divsugar_id_3');
   });
 
-  test('createScene', function() {
-    var scn1 = DivSugar.createScene();
-    ok(scn1 instanceof HTMLDivElement);
-    strictEqual(scn1.id, '');
-
-    var scn2 = DivSugar.createScene('scene2');
-    ok(scn2 instanceof HTMLDivElement);
-    strictEqual(scn2.id, 'scene2');
-  });
-
-  test('createNode', function() {
-    var node1 = DivSugar.createNode();
-    ok(node1 instanceof HTMLDivElement);
-    strictEqual(node1.id, '');
-
-    var node2 = DivSugar.createNode('node2');
-    ok(node2 instanceof HTMLDivElement);
-    strictEqual(node2.id, 'node2');
-  });
-
   test('getImageSize', function() {
     DivSugar.getImageSize('../examples/assets/coin.png', function(width, height) {
       start();

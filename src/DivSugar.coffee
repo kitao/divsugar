@@ -90,16 +90,4 @@ DivSugar =
     image.onload = -> callback(image.width, image.height)
     return @
 
-  createScene: (args...) ->
-    div = document.createElement 'div'
-    div[name] = func for name, func of @_Scene
-    div._initialize args...
-    return div
-
-  createNode: (args...) ->
-    div = document.createElement 'div'
-    div[name] = func for name, func of @_Node
-    div._initialize args...
-    return div
-
 (window.DivSugar = DivSugar)._initialize()
