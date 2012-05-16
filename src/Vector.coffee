@@ -12,17 +12,22 @@ class DivSugar.Vector
         @x = x
         @y = y
         @z = z
+      else
+        console.log 'DivSugar: *** invalid number of arguments ***'
 
   set: (x, y, z) ->
-    if arguments.length is 1
-      vec = x
-      @x = vec.x
-      @y = vec.y
-      @z = vec.z
-    else
-      @x = x
-      @y = y
-      @z = z
+    switch arguments.length
+      when 1
+        vec = x
+        @x = vec.x
+        @y = vec.y
+        @z = vec.z
+      when 3
+        @x = x
+        @y = y
+        @z = z
+      else
+        console.log 'DivSugar: *** invalid number of arguments ***'
 
     return @
 
@@ -73,20 +78,23 @@ class DivSugar.Vector
     norm = @norm()
     if norm < DivSugar.EPSILON then @set DivSugar.Vector.X_UNIT else @div norm
 
-  rotateX: (deg) ->
-    sin = Math.sin deg * DivSugar.DEG_TO_RAD
-    cos = Math.cos deg * DivSugar.DEG_TO_RAD
-    @set @x, @y * cos - @z * sin, @z * cos + @y * sin
+  rotate: (rotateX, rotateY, rotateZ) ->
+    if rotateX isnt 0
+      sin = Math.sin rotateX * DivSugar.DEG_TO_RAD
+      cos = Math.cos rotateX * DivSugar.DEG_TO_RAD
+      @set @x, @y * cos - @z * sin, @z * cos + @y * sin
 
-  rotateY: (deg) ->
-    sin = Math.sin deg * DivSugar.DEG_TO_RAD
-    cos = Math.cos deg * DivSugar.DEG_TO_RAD
-    @set @x * cos + @z * sin, @y, @z * cos - @x * sin
+    if rotateY isnt 0
+      sin = Math.sin rotateY * DivSugar.DEG_TO_RAD
+      cos = Math.cos rotateY * DivSugar.DEG_TO_RAD
+      @set @x * cos + @z * sin, @y, @z * cos - @x * sin
 
-  rotateZ: (deg) ->
-    sin = Math.sin deg * DivSugar.DEG_TO_RAD
-    cos = Math.cos deg * DivSugar.DEG_TO_RAD
-    @set @x * cos - @y * sin, @y * cos + @x * sin, @z
+    if rotateZ isnt 0
+      sin = Math.sin rotateZ * DivSugar.DEG_TO_RAD
+      cos = Math.cos rotateZ * DivSugar.DEG_TO_RAD
+      @set @x * cos - @y * sin, @y * cos + @x * sin, @z
+
+    return @
 
   lerp: (to, ratio) ->
     if ratio > 1 - DivSugar.EPSILON

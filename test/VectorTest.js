@@ -132,28 +132,22 @@
     ok(vec1.normalize().normalize());
   });
 
-  test('rotateX', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    vec1.rotateX(90);
+  test('rotate', function() {
+    var vec1 = new DivSugar.Vector();
+
+    vec1.set(1, 2, 3);
+    vec1.rotate(90, 0, 0);
     nearlyEqual(vec1, new DivSugar.Vector(1, -3, 2));
 
-    ok(vec1.rotateX(0).rotateX(0));
-  });
-
-  test('rotateY', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    vec1.rotateY(90);
+    vec1.set(1, 2, 3);
+    vec1.rotate(0, 90, 0);
     nearlyEqual(vec1, new DivSugar.Vector(3, 2, -1));
 
-    ok(vec1.rotateY(0).rotateY(0));
-  });
-
-  test('rotateZ', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    vec1.rotateZ(90);
+    vec1.set(1, 2, 3);
+    vec1.rotate(0, 0, 90);
     nearlyEqual(vec1, new DivSugar.Vector(-2, 1, 3));
 
-    ok(vec1.rotateZ(0).rotateZ(0));
+    ok(vec1.rotate(0, 0, 0).rotate(0, 0, 0));
   });
 
   test('lerp', function() {
