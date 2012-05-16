@@ -12,10 +12,7 @@
 
   test('properties', function() {
     var div = document.createElement('div');
-
     strictEqual(DivSugar.rootTask instanceof DivSugar.Task, true);
-    strictEqual(DivSugar.rootTask.isRootTask, true);
-
     ok(DivSugar.cssTransform in div.style);
     ok(DivSugar.cssTransformStyle in div.style);
     ok(DivSugar.cssTransformOrigin in div.style);
