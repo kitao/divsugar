@@ -16,6 +16,8 @@ class DivSugar.Matrix
         @yAxis = new DivSugar.Vector arguments[3], arguments[4], arguments[5]
         @zAxis = new DivSugar.Vector arguments[6], arguments[7], arguments[8]
         @trans = new DivSugar.Vector arguments[9], arguments[10], arguments[11]
+      else
+        console.log 'DivSugar: *** invalid number of arguments ***'
 
   set: (mat) ->
     switch arguments.length
@@ -29,6 +31,8 @@ class DivSugar.Matrix
         @yAxis.set arguments[3], arguments[4], arguments[5]
         @zAxis.set arguments[6], arguments[7], arguments[8]
         @trans.set arguments[9], arguments[10], arguments[11]
+      else
+        console.log 'DivSugar: *** invalid number of arguments ***'
 
     return @
 
