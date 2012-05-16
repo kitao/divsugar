@@ -157,20 +157,28 @@
           this.x = x;
           this.y = y;
           this.z = z;
+          break;
+        default:
+          console.log('DivSugar: *** invalid number of arguments ***');
       }
     }
 
     Vector.prototype.set = function(x, y, z) {
       var vec;
-      if (arguments.length === 1) {
-        vec = x;
-        this.x = vec.x;
-        this.y = vec.y;
-        this.z = vec.z;
-      } else {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+      switch (arguments.length) {
+        case 1:
+          vec = x;
+          this.x = vec.x;
+          this.y = vec.y;
+          this.z = vec.z;
+          break;
+        case 3:
+          this.x = x;
+          this.y = y;
+          this.z = z;
+          break;
+        default:
+          console.log('DivSugar: *** invalid number of arguments ***');
       }
       return this;
     };
@@ -246,25 +254,24 @@
       }
     };
 
-    Vector.prototype.rotateX = function(deg) {
+    Vector.prototype.rotate = function(rotateX, rotateY, rotateZ) {
       var cos, sin;
-      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
-      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
-      return this.set(this.x, this.y * cos - this.z * sin, this.z * cos + this.y * sin);
-    };
-
-    Vector.prototype.rotateY = function(deg) {
-      var cos, sin;
-      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
-      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
-      return this.set(this.x * cos + this.z * sin, this.y, this.z * cos - this.x * sin);
-    };
-
-    Vector.prototype.rotateZ = function(deg) {
-      var cos, sin;
-      sin = Math.sin(deg * DivSugar.DEG_TO_RAD);
-      cos = Math.cos(deg * DivSugar.DEG_TO_RAD);
-      return this.set(this.x * cos - this.y * sin, this.y * cos + this.x * sin, this.z);
+      if (rotateX !== 0) {
+        sin = Math.sin(rotateX * DivSugar.DEG_TO_RAD);
+        cos = Math.cos(rotateX * DivSugar.DEG_TO_RAD);
+        this.set(this.x, this.y * cos - this.z * sin, this.z * cos + this.y * sin);
+      }
+      if (rotateY !== 0) {
+        sin = Math.sin(rotateY * DivSugar.DEG_TO_RAD);
+        cos = Math.cos(rotateY * DivSugar.DEG_TO_RAD);
+        this.set(this.x * cos + this.z * sin, this.y, this.z * cos - this.x * sin);
+      }
+      if (rotateZ !== 0) {
+        sin = Math.sin(rotateZ * DivSugar.DEG_TO_RAD);
+        cos = Math.cos(rotateZ * DivSugar.DEG_TO_RAD);
+        this.set(this.x * cos - this.y * sin, this.y * cos + this.x * sin, this.z);
+      }
+      return this;
     };
 
     Vector.prototype.lerp = function(to, ratio) {
@@ -361,20 +368,28 @@
           this.yAxis = new DivSugar.Vector(arguments[3], arguments[4], arguments[5]);
           this.zAxis = new DivSugar.Vector(arguments[6], arguments[7], arguments[8]);
           this.trans = new DivSugar.Vector(arguments[9], arguments[10], arguments[11]);
+          break;
+        default:
+          console.log('DivSugar: *** invalid number of arguments ***');
       }
     }
 
     Matrix.prototype.set = function(mat) {
-      if (arguments.length === 1) {
-        this.xAxis.set(mat.xAxis);
-        this.yAxis.set(mat.yAxis);
-        this.zAxis.set(mat.zAxis);
-        this.trans.set(mat.trans);
-      } else {
-        this.xAxis.set(arguments[0], arguments[1], arguments[2]);
-        this.yAxis.set(arguments[3], arguments[4], arguments[5]);
-        this.zAxis.set(arguments[6], arguments[7], arguments[8]);
-        this.trans.set(arguments[9], arguments[10], arguments[11]);
+      switch (arguments.length) {
+        case 1:
+          this.xAxis.set(mat.xAxis);
+          this.yAxis.set(mat.yAxis);
+          this.zAxis.set(mat.zAxis);
+          this.trans.set(mat.trans);
+          break;
+        case 12:
+          this.xAxis.set(arguments[0], arguments[1], arguments[2]);
+          this.yAxis.set(arguments[3], arguments[4], arguments[5]);
+          this.zAxis.set(arguments[6], arguments[7], arguments[8]);
+          this.trans.set(arguments[9], arguments[10], arguments[11]);
+          break;
+        default:
+          console.log('DivSugar: *** invalid number of arguments ***');
       }
       return this;
     };
@@ -950,13 +965,18 @@
     },
     setPosition: function(x, y, z) {
       var vec;
-      if (arguments.length === 1) {
-        vec = x;
-        this._transform.trans.set(vec);
-      } else {
-        this._transform.trans.x = x;
-        this._transform.trans.y = y;
-        this._transform.trans.z = z;
+      switch (arguments.length) {
+        case 1:
+          vec = x;
+          this._transform.trans.set(vec);
+          break;
+        case 3:
+          this._transform.trans.x = x;
+          this._transform.trans.y = y;
+          this._transform.trans.z = z;
+          break;
+        default:
+          console.log('DivSugar: *** invalid number of arguments ***');
       }
       this.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
       return this;
