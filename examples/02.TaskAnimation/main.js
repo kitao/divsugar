@@ -8,9 +8,9 @@ window.onload = function() {
   window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
   window.onresize();
 
-  // define an animation class with the task system
+  // define an animation class which inherits the task class
   function Coin() {
-    // call the parent class's constructor
+    // call the base class's constructor
     this.constructor.uber.constructor();
 
     this.vec = new DivSugar.Vector();
@@ -28,7 +28,6 @@ window.onload = function() {
       .setImage('../assets/coin.png').setImageClip(0.5, 0, 1, 1).rotate(0, 180, 0).appendTo(this.center);
   }
 
-  // inherit the task class
   DivSugar.inherit(Coin, DivSugar.Task);
 
   Coin.prototype.onUpdate = function() {
