@@ -65,7 +65,7 @@ DivSugar =
 
     # start tasks
     updateTasks = =>
-      curTime = (new Date()).getTime()
+      curTime = new Date().getTime()
       deltaTime = curTime - @_lastUpdatedTime
       @_lastUpdatedTime = curTime
       @rootTask.update deltaTime
