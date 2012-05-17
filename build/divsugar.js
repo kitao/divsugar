@@ -78,7 +78,7 @@
       })();
       updateTasks = function() {
         var curTime, deltaTime;
-        curTime = (new Date()).getTime();
+        curTime = new Date().getTime();
         deltaTime = curTime - _this._lastUpdatedTime;
         _this._lastUpdatedTime = curTime;
         _this.rootTask.update(deltaTime);
@@ -134,7 +134,7 @@
           this.z = z;
           break;
         default:
-          console.log('DivSugar: *** invalid number of arguments ***');
+          throw 'DivSugar: invalid number of arguments';
       }
     }
 
@@ -153,7 +153,7 @@
           this.z = z;
           break;
         default:
-          console.log('DivSugar: *** invalid number of arguments ***');
+          throw 'DivSugar: invalid number of arguments';
       }
       return this;
     };
@@ -231,6 +231,9 @@
 
     Vector.prototype.rotate = function(rotateX, rotateY, rotateZ) {
       var cos, sin;
+      if (arguments.length !== 3) {
+        throw 'DivSugar: invalid number of arguments';
+      }
       if (rotateX !== 0) {
         sin = Math.sin(rotateX * DivSugar.DEG_TO_RAD);
         cos = Math.cos(rotateX * DivSugar.DEG_TO_RAD);
@@ -345,7 +348,7 @@
           this.trans = new DivSugar.Vector(arguments[9], arguments[10], arguments[11]);
           break;
         default:
-          console.log('DivSugar: *** invalid number of arguments ***');
+          throw 'DivSugar: invalid number of arguments';
       }
     }
 
@@ -364,7 +367,7 @@
           this.trans.set(arguments[9], arguments[10], arguments[11]);
           break;
         default:
-          console.log('DivSugar: *** invalid number of arguments ***');
+          throw 'DivSugar: invalid number of arguments';
       }
       return this;
     };
@@ -407,6 +410,9 @@
 
     Matrix.prototype.translate = function(offsetX, offsetY, offsetZ) {
       var vec1, vec2, vec3;
+      if (arguments.length !== 3) {
+        throw 'DivSugar: invalid number of arguments';
+      }
       vec1 = DivSugar.Matrix._tmpVec1;
       vec2 = DivSugar.Matrix._tmpVec2;
       vec3 = DivSugar.Matrix._tmpVec3;
@@ -419,6 +425,9 @@
 
     Matrix.prototype.rotate = function(rotateX, rotateY, rotateZ) {
       var cos, mat, sin;
+      if (arguments.length !== 3) {
+        throw 'DivSugar: invalid number of arguments';
+      }
       if (rotateX !== 0) {
         sin = Math.sin(rotateX * DivSugar.DEG_TO_RAD);
         cos = Math.cos(rotateX * DivSugar.DEG_TO_RAD);
@@ -444,6 +453,9 @@
     };
 
     Matrix.prototype.scale = function(scaleX, scaleY, scaleZ) {
+      if (arguments.length !== 3) {
+        throw 'DivSugar: invalid number of arguments';
+      }
       this.xAxis.mul(scaleX);
       this.yAxis.mul(scaleY);
       this.zAxis.mul(scaleZ);
@@ -578,22 +590,30 @@
           this.y = y;
           this.z = z;
           this.w = w;
+          break;
+        default:
+          throw 'DivSugar: invalid number of arguments';
       }
     }
 
     Quaternion.prototype.set = function(x, y, z, w) {
       var quat;
-      if (arguments.length === 1) {
-        quat = x;
-        this.x = quat.x;
-        this.y = quat.y;
-        this.z = quat.z;
-        this.w = quat.w;
-      } else {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.w = w;
+      switch (arguments.length) {
+        case 1:
+          quat = x;
+          this.x = quat.x;
+          this.y = quat.y;
+          this.z = quat.z;
+          this.w = quat.w;
+          break;
+        case 4:
+          this.x = x;
+          this.y = y;
+          this.z = z;
+          this.w = w;
+          break;
+        default:
+          throw 'DivSugar: invalid number of arguments';
       }
       return this;
     };
@@ -785,6 +805,9 @@
     };
 
     Scene.prototype.setPosition = function(x, y) {
+      if (arguments.length !== 2) {
+        throw 'DivSugar: invalid number of arguments';
+      }
       this._positionX = x;
       this._positionY = y;
       this.div.style.left = "" + (x.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
@@ -827,18 +850,15 @@
     };
 
     Scene.prototype.setImage = function(src, callback) {
-      if (callback == null) {
-        callback = null;
-      }
       this._image = src;
       if (src == null) {
-        this.div.style.backgroundColor = null;
-        this.div.style.backgroundImage = null;
+        this.div.style.backgroundColor = 'transparent';
+        this.div.style.backgroundImage = 'none';
       } else if (src.charAt(0) === '#') {
         this.div.style.backgroundColor = src;
-        this.div.style.backgroundImage = null;
+        this.div.style.backgroundImage = 'none';
       } else {
-        this.div.style.backgroundColor = null;
+        this.div.style.backgroundColor = 'transparent';
         this.div.style.backgroundImage = "url(" + src + ")";
         if (callback != null) {
           DivSugar.getImageSize(src, callback);
@@ -1025,7 +1045,7 @@
           this._transform.trans.z = z;
           break;
         default:
-          console.log('DivSugar: *** invalid number of arguments ***');
+          throw 'DivSugar: invalid number of arguments';
       }
       this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
       return this;
@@ -1079,18 +1099,27 @@
     Node.prototype.setImageClip = DivSugar.Scene.prototype.setImageClip;
 
     Node.prototype.translate = function(offsetX, offsetY, offsetZ) {
+      if (arguments.length !== 3) {
+        throw 'DivSugar: invalid number of arguments';
+      }
       this._transform.translate(offsetX, offsetY, offsetZ);
       this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
       return this;
     };
 
     Node.prototype.rotate = function(rotateX, rotateY, rotateZ) {
+      if (arguments.length !== 3) {
+        throw 'DivSugar: invalid number of arguments';
+      }
       this._transform.rotate(rotateX, rotateY, rotateZ);
       this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
       return this;
     };
 
     Node.prototype.scale = function(scaleX, scaleY, scaleZ) {
+      if (arguments.length !== 3) {
+        throw 'DivSugar: invalid number of arguments';
+      }
       this._transform.scale(scaleX, scaleY, scaleZ);
       this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
       return this;

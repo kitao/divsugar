@@ -69,6 +69,9 @@ class DivSugar.Scene
   getPositionY: -> @_positionY
 
   setPosition: (x, y) ->
+    if arguments.length isnt 2
+      throw 'DivSugar: invalid number of arguments'
+
     @_positionX = x
     @_positionY = y
     @div.style.left = "#{x.toFixed(DivSugar.NUM_OF_DIGITS)}px"
@@ -98,17 +101,17 @@ class DivSugar.Scene
 
   getImage: -> @_image
 
-  setImage: (src, callback = null) ->
+  setImage: (src, callback) ->
     @_image = src
 
     unless src?
-      @div.style.backgroundColor = null
-      @div.style.backgroundImage = null
+      @div.style.backgroundColor = 'transparent'
+      @div.style.backgroundImage = 'none'
     else if src.charAt(0) is '#'
       @div.style.backgroundColor = src
-      @div.style.backgroundImage = null
+      @div.style.backgroundImage = 'none'
     else
-      @div.style.backgroundColor = null
+      @div.style.backgroundColor = 'transparent'
       @div.style.backgroundImage = "url(#{src})"
       DivSugar.getImageSize src, callback if callback?
 

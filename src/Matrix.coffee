@@ -17,7 +17,7 @@ class DivSugar.Matrix
         @zAxis = new DivSugar.Vector arguments[6], arguments[7], arguments[8]
         @trans = new DivSugar.Vector arguments[9], arguments[10], arguments[11]
       else
-        console.log 'DivSugar: *** invalid number of arguments ***'
+        throw 'DivSugar: invalid number of arguments'
 
   set: (mat) ->
     switch arguments.length
@@ -32,7 +32,7 @@ class DivSugar.Matrix
         @zAxis.set arguments[6], arguments[7], arguments[8]
         @trans.set arguments[9], arguments[10], arguments[11]
       else
-        console.log 'DivSugar: *** invalid number of arguments ***'
+        throw 'DivSugar: invalid number of arguments'
 
     return @
 
@@ -75,6 +75,9 @@ class DivSugar.Matrix
     return @
 
   translate: (offsetX, offsetY, offsetZ) ->
+    if arguments.length isnt 3
+      throw 'DivSugar: invalid number of arguments'
+
     vec1 = DivSugar.Matrix._tmpVec1
     vec2 = DivSugar.Matrix._tmpVec2
     vec3 = DivSugar.Matrix._tmpVec3
@@ -87,6 +90,9 @@ class DivSugar.Matrix
     return @
 
   rotate: (rotateX, rotateY, rotateZ) ->
+    if arguments.length isnt 3
+      throw 'DivSugar: invalid number of arguments'
+
     if rotateX isnt 0
       sin = Math.sin rotateX * DivSugar.DEG_TO_RAD
       cos = Math.cos rotateX * DivSugar.DEG_TO_RAD
@@ -111,6 +117,9 @@ class DivSugar.Matrix
     return @
 
   scale: (scaleX, scaleY, scaleZ) ->
+    if arguments.length isnt 3
+      throw 'DivSugar: invalid number of arguments'
+
     @xAxis.mul scaleX
     @yAxis.mul scaleY
     @zAxis.mul scaleZ

@@ -69,7 +69,7 @@ class DivSugar.Node
         @_transform.trans.y = y
         @_transform.trans.z = z
       else
-        console.log 'DivSugar: *** invalid number of arguments ***'
+        throw 'DivSugar: invalid number of arguments'
 
     @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @
@@ -109,16 +109,25 @@ class DivSugar.Node
   setImageClip: DivSugar.Scene.prototype.setImageClip
 
   translate: (offsetX, offsetY, offsetZ) ->
+    if arguments.length isnt 3
+      throw 'DivSugar: invalid number of arguments'
+
     @_transform.translate offsetX, offsetY, offsetZ
     @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @
 
   rotate: (rotateX, rotateY, rotateZ) ->
+    if arguments.length isnt 3
+      throw 'DivSugar: invalid number of arguments'
+
     @_transform.rotate rotateX, rotateY, rotateZ
     @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @
 
   scale: (scaleX, scaleY, scaleZ) ->
+    if arguments.length isnt 3
+      throw 'DivSugar: invalid number of arguments'
+
     @_transform.scale scaleX, scaleY, scaleZ
     @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
     return @

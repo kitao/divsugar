@@ -13,7 +13,7 @@ class DivSugar.Vector
         @y = y
         @z = z
       else
-        console.log 'DivSugar: *** invalid number of arguments ***'
+        throw 'DivSugar: invalid number of arguments'
 
   set: (x, y, z) ->
     switch arguments.length
@@ -27,7 +27,7 @@ class DivSugar.Vector
         @y = y
         @z = z
       else
-        console.log 'DivSugar: *** invalid number of arguments ***'
+        throw 'DivSugar: invalid number of arguments'
 
     return @
 
@@ -79,6 +79,9 @@ class DivSugar.Vector
     if norm < DivSugar.EPSILON then @set DivSugar.Vector.X_UNIT else @div norm
 
   rotate: (rotateX, rotateY, rotateZ) ->
+    if arguments.length isnt 3
+      throw 'DivSugar: invalid number of arguments'
+
     if rotateX isnt 0
       sin = Math.sin rotateX * DivSugar.DEG_TO_RAD
       cos = Math.cos rotateX * DivSugar.DEG_TO_RAD

@@ -14,19 +14,24 @@ class DivSugar.Quaternion
         @y = y
         @z = z
         @w = w
+      else
+        throw 'DivSugar: invalid number of arguments'
 
   set: (x, y, z, w) ->
-    if arguments.length is 1
-      quat = x
-      @x = quat.x
-      @y = quat.y
-      @z = quat.z
-      @w = quat.w
-    else
-      @x = x
-      @y = y
-      @z = z
-      @w = w
+    switch arguments.length
+      when 1
+        quat = x
+        @x = quat.x
+        @y = quat.y
+        @z = quat.z
+        @w = quat.w
+      when 4
+        @x = x
+        @y = y
+        @z = z
+        @w = w
+      else
+        throw 'DivSugar: invalid number of arguments'
 
     return @
 
