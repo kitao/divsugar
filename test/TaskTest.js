@@ -14,10 +14,6 @@
 
     var task2 = new DivSugar.Task('task2');
     strictEqual(task2.id, 'task2');
-    strictEqual(task2.active, true);
-    strictEqual(task2.onUpdate, null);
-    strictEqual(task2.onDestroy, null);
-    strictEqual(task2.getParent(), null);
   });
 
   test('update', function() {

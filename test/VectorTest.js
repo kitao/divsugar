@@ -40,11 +40,11 @@
   });
 
   test('neg', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    vec1.neg();
-    deepEqual(vec1, new DivSugar.Vector(-1, -2, -3));
+    var vec = new DivSugar.Vector(1, 2, 3);
+    vec.neg();
+    deepEqual(vec, new DivSugar.Vector(-1, -2, -3));
 
-    ok(vec1.neg().neg());
+    ok(vec.neg().neg());
   });
 
   test('add', function() {
@@ -66,29 +66,29 @@
   });
 
   test('mul', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    vec1.mul(2);
-    deepEqual(vec1, new DivSugar.Vector(2, 4, 6));
+    var vec = new DivSugar.Vector(1, 2, 3);
+    vec.mul(2);
+    deepEqual(vec, new DivSugar.Vector(2, 4, 6));
 
-    ok(vec1.mul(1).mul(1));
+    ok(vec.mul(1).mul(1));
   });
 
   test('div', function() {
-    var vec1 = new DivSugar.Vector(2, 4, 6);
-    vec1.div(2);
-    deepEqual(vec1, new DivSugar.Vector(1, 2, 3));
+    var vec = new DivSugar.Vector(2, 4, 6);
+    vec.div(2);
+    deepEqual(vec, new DivSugar.Vector(1, 2, 3));
 
-    ok(vec1.div(1).div(1));
+    ok(vec.div(1).div(1));
   });
 
   test('norm', function() {
-    var vec1 = new DivSugar.Vector(3, 4, 12);
-    strictEqual(vec1.norm(), 13);
+    var vec = new DivSugar.Vector(3, 4, 12);
+    strictEqual(vec.norm(), 13);
   });
 
   test('sqNorm', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    strictEqual(vec1.sqNorm(), 14);
+    var vec = new DivSugar.Vector(1, 2, 3);
+    strictEqual(vec.sqNorm(), 14);
   });
 
   test('dist', function() {
@@ -119,35 +119,35 @@
   });
 
   test('normalize', function() {
-    var vec1 = new DivSugar.Vector();
+    var vec = new DivSugar.Vector();
 
-    vec1.set(3, 4, 12);
-    vec1.normalize();
-    deepEqual(vec1, new DivSugar.Vector(3/13, 4/13, 12/13));
+    vec.set(3, 4, 12);
+    vec.normalize();
+    deepEqual(vec, new DivSugar.Vector(3/13, 4/13, 12/13));
 
-    vec1.set(0, 0, 0);
-    vec1.normalize();
-    deepEqual(vec1, new DivSugar.Vector(1, 0, 0));
+    vec.set(0, 0, 0);
+    vec.normalize();
+    deepEqual(vec, new DivSugar.Vector(1, 0, 0));
 
-    ok(vec1.normalize().normalize());
+    ok(vec.normalize().normalize());
   });
 
   test('rotate', function() {
-    var vec1 = new DivSugar.Vector();
+    var vec = new DivSugar.Vector();
 
-    vec1.set(1, 2, 3);
-    vec1.rotate(90, 0, 0);
-    nearlyEqual(vec1, new DivSugar.Vector(1, -3, 2));
+    vec.set(1, 2, 3);
+    vec.rotate(90, 0, 0);
+    nearlyEqual(vec, new DivSugar.Vector(1, -3, 2));
 
-    vec1.set(1, 2, 3);
-    vec1.rotate(0, 90, 0);
-    nearlyEqual(vec1, new DivSugar.Vector(3, 2, -1));
+    vec.set(1, 2, 3);
+    vec.rotate(0, 90, 0);
+    nearlyEqual(vec, new DivSugar.Vector(3, 2, -1));
 
-    vec1.set(1, 2, 3);
-    vec1.rotate(0, 0, 90);
-    nearlyEqual(vec1, new DivSugar.Vector(-2, 1, 3));
+    vec.set(1, 2, 3);
+    vec.rotate(0, 0, 90);
+    nearlyEqual(vec, new DivSugar.Vector(-2, 1, 3));
 
-    ok(vec1.rotate(0, 0, 0).rotate(0, 0, 0));
+    ok(vec.rotate(0, 0, 0).rotate(0, 0, 0));
   });
 
   test('lerp', function() {
@@ -173,39 +173,39 @@
   });
 
   test('toLocal', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    vec1.toLocal(mat1);
-    deepEqual(vec1, new DivSugar.Vector(297, 99, -198));
+    var vec = new DivSugar.Vector(1, 2, 3);
+    var mat = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    vec.toLocal(mat);
+    deepEqual(vec, new DivSugar.Vector(297, 99, -198));
 
-    ok(vec1.toLocal(mat1).toLocal(mat1));
+    ok(vec.toLocal(mat).toLocal(mat));
   });
 
   test('toGlobal', function() {
-    var vec1 = new DivSugar.Vector(297, 99, -198);
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    vec1.toGlobal(mat1);
-    deepEqual(vec1, new DivSugar.Vector(1, 2, 3));
+    var vec = new DivSugar.Vector(297, 99, -198);
+    var mat = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    vec.toGlobal(mat);
+    deepEqual(vec, new DivSugar.Vector(1, 2, 3));
 
-    ok(vec1.toGlobal(mat1).toGlobal(mat1));
+    ok(vec.toGlobal(mat).toGlobal(mat));
   });
 
   test('toLocal_noTrans', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    vec1.toLocal_noTrans(mat1);
-    deepEqual(vec1, new DivSugar.Vector(-3, -1, 2));
+    var vec = new DivSugar.Vector(1, 2, 3);
+    var mat = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    vec.toLocal_noTrans(mat);
+    deepEqual(vec, new DivSugar.Vector(-3, -1, 2));
 
-    ok(vec1.toLocal_noTrans(mat1).toLocal_noTrans(mat1));
+    ok(vec.toLocal_noTrans(mat).toLocal_noTrans(mat));
   });
 
   test('toGlobal_noTrans', function() {
-    var vec1 = new DivSugar.Vector(-3, -1, 2);
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    vec1.toGlobal_noTrans(mat1);
-    deepEqual(vec1, new DivSugar.Vector(1, 2, 3));
+    var vec = new DivSugar.Vector(-3, -1, 2);
+    var mat = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    vec.toGlobal_noTrans(mat);
+    deepEqual(vec, new DivSugar.Vector(1, 2, 3));
 
-    ok(vec1.toGlobal_noTrans(mat1).toGlobal_noTrans(mat1));
+    ok(vec.toGlobal_noTrans(mat).toGlobal_noTrans(mat));
   });
 
   test('equal', function() {
@@ -227,7 +227,7 @@
   });
 
   test('toString', function() {
-    var vec1 = new DivSugar.Vector(1, 2, 3);
-    strictEqual(vec1.toString(), '(1, 2, 3)');
+    var vec = new DivSugar.Vector(1, 2, 3);
+    strictEqual(vec.toString(), '(1, 2, 3)');
   });
 })();

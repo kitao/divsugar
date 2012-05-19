@@ -36,11 +36,11 @@
   });
 
   test('fromMatrix', function() {
-    var quat1 = new DivSugar.Quaternion();
-    quat1.fromMatrix(DivSugar.Matrix.UNIT);
-    deepEqual(quat1, new DivSugar.Quaternion(0, 0, 0, 1));
+    var quat = new DivSugar.Quaternion();
+    quat.fromMatrix(DivSugar.Matrix.UNIT);
+    deepEqual(quat, new DivSugar.Quaternion(0, 0, 0, 1));
 
-    ok(quat1.fromMatrix(DivSugar.Matrix.UNIT).fromMatrix(DivSugar.Matrix.UNIT));
+    ok(quat.fromMatrix(DivSugar.Matrix.UNIT).fromMatrix(DivSugar.Matrix.UNIT));
   });
 
   test('slerp', function() {
@@ -93,7 +93,7 @@
   });
 
   test('toString', function() {
-    var quat1 = new DivSugar.Quaternion(1, 2, 3, 4);
-    strictEqual(quat1.toString(), '(1, 2, 3, 4)');
+    var quat = new DivSugar.Quaternion(1, 2, 3, 4);
+    strictEqual(quat.toString(), '(1, 2, 3, 4)');
   });
 })();
