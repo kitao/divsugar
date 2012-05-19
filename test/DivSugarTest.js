@@ -11,14 +11,16 @@
   });
 
   test('properties', function() {
-    var div = document.createElement('div');
     strictEqual(DivSugar.rootTask instanceof DivSugar.Task, true);
+
+    var div = document.createElement('div');
     ok(DivSugar.cssTransform in div.style);
     ok(DivSugar.cssTransformStyle in div.style);
     ok(DivSugar.cssTransformOrigin in div.style);
     ok(DivSugar.cssPerspective in div.style);
     ok(DivSugar.cssPerspectiveOrigin in div.style);
     ok(DivSugar.cssBackfaceVisibility in div.style);
+
     strictEqual(typeof DivSugar.requestAnimationFrame, 'function');
   });
 

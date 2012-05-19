@@ -40,61 +40,54 @@
   });
 
   test('fromQuaternion', function() {
-    var quat1 = new DivSugar.Quaternion(0, 0, 0, 1);
-    var mat1 = new DivSugar.Matrix();
-    mat1.fromQuaternion(quat1);
-    deepEqual(mat1, DivSugar.Matrix.UNIT);
+    var quat = new DivSugar.Quaternion(0, 0, 0, 1);
+    var mat = new DivSugar.Matrix();
+    mat.fromQuaternion(quat);
+    deepEqual(mat, DivSugar.Matrix.UNIT);
 
-    ok(mat1.fromQuaternion(quat1).fromQuaternion(quat1));
+    ok(mat.fromQuaternion(quat).fromQuaternion(quat));
   });
 
   test('orthonormalize', function() {
-    var mat1 = new DivSugar.Matrix(0.1, 0.2, 0.3, 0, 3, 3, 0, 0, 0.1, 1, 0, 0);
-    var mat2 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0);
-    mat1.orthonormalize();
-    deepEqual(mat1, mat2);
+    var mat = new DivSugar.Matrix(0.1, 0.2, 0.3, 0, 3, 3, 0, 0, 0.1, 1, 0, 0);
+    mat.orthonormalize();
+    deepEqual(mat, new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0));
 
-    ok(mat1.orthonormalize().orthonormalize());
+    ok(mat.orthonormalize().orthonormalize());
   });
 
   test('translate', function() {
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    var mat2 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 120, 230, 290);
-    mat1.translate(10, -20, 30);
-    deepEqual(mat1, mat2);
+    var mat = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.translate(10, -20, 30);
+    deepEqual(mat, new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 120, 230, 290));
 
-    ok(mat1.translate(0, 0, 0).translate(0, 0, 0));
+    ok(mat.translate(0, 0, 0).translate(0, 0, 0));
   });
 
   test('rotate', function() {
-    var mat1 = new DivSugar.Matrix();
-    var mat2 = new DivSugar.Matrix();
+    var mat = new DivSugar.Matrix();
 
-    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    mat2.set(0, 0, -1, 0, 1, 0, 1, 0, 0, 100, 200, 300);
-    mat1.rotate(90, 0, 0);
-    nearlyEqual(mat1, mat2);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotate(90, 0, 0);
+    nearlyEqual(mat, new DivSugar.Matrix(0, 0, -1, 0, 1, 0, 1, 0, 0, 100, 200, 300));
 
-    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    mat2.set(0, -1, 0, -1, 0, 0, 0, 0, -1, 100, 200, 300);
-    mat1.rotate(0, 90, 0);
-    nearlyEqual(mat1, mat2);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotate(0, 90, 0);
+    nearlyEqual(mat, new DivSugar.Matrix(0, -1, 0, -1, 0, 0, 0, 0, -1, 100, 200, 300));
 
-    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    mat2.set(-1, 0, 0, 0, 0, 1, 0, 1, 0, 100, 200, 300);
-    mat1.rotate(0, 0, 90);
-    nearlyEqual(mat1, mat2);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotate(0, 0, 90);
+    nearlyEqual(mat, new DivSugar.Matrix(-1, 0, 0, 0, 0, 1, 0, 1, 0, 100, 200, 300));
 
-    ok(mat1.rotate(0, 0, 0).rotate(0, 0, 0));
+    ok(mat.rotate(0, 0, 0).rotate(0, 0, 0));
   });
 
   test('scale', function() {
-    var mat1 = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    var mat2 = new DivSugar.Matrix(0, 0, -2, -3, 0, 0, 0, -1, 0, 100, 200, 300);
-    mat1.scale(2, 3, -1);
-    deepEqual(mat1, mat2);
+    var mat = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.scale(2, 3, -1);
+    deepEqual(mat, new DivSugar.Matrix(0, 0, -2, -3, 0, 0, 0, -1, 0, 100, 200, 300));
 
-    ok(mat1.scale(1, 1, 1).scale(1, 1, 1));
+    ok(mat.scale(1, 1, 1).scale(1, 1, 1));
   });
 
   test('slerp', function() {
@@ -156,9 +149,8 @@
   test('toLocal', function() {
     var mat1 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 5);
     var mat2 = new DivSugar.Matrix(0, 0, 0.5, 2, 0, 0, 0, -0.5, 0, 1, 2, 3);
-    var mat3 = new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 4, 1, -4);
     mat1.toLocal(mat2);
-    deepEqual(mat1, mat3);
+    deepEqual(mat1, new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 4, 1, -4));
 
     ok(mat1.toLocal(mat2).toLocal(mat2));
   });
@@ -166,9 +158,8 @@
   test('toGlobal', function() {
     var mat1 = new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 4, 1, -4);
     var mat2 = new DivSugar.Matrix(0, 0, 0.5, 2, 0, 0, 0, -0.5, 0, 1, 2, 3);
-    var mat3 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 5);
     mat1.toGlobal(mat2);
-    deepEqual(mat1, mat3);
+    deepEqual(mat1, new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 5));
 
     ok(mat1.toGlobal(mat2).toGlobal(mat2));
   });
@@ -176,9 +167,8 @@
   test('toLocal_noTrans', function() {
     var mat1 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 5);
     var mat2 = new DivSugar.Matrix(0, 0, 0.5, 2, 0, 0, 0, -0.5, 0, 1, 2, 3);
-    var mat3 = new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0);
     mat1.toLocal_noTrans(mat2);
-    deepEqual(mat1, mat3);
+    deepEqual(mat1, new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0));
 
     ok(mat1.toLocal_noTrans(mat2).toLocal_noTrans(mat2));
   });
@@ -186,20 +176,18 @@
   test('toGlobal_noTrans', function() {
     var mat1 = new DivSugar.Matrix(0, 0.5, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0);
     var mat2 = new DivSugar.Matrix(0, 0, 0.5, 2, 0, 0, 0, -0.5, 0, 1, 2, 3);
-    var mat3 = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0);
     mat1.toGlobal_noTrans(mat2);
-    deepEqual(mat1, mat3);
+    deepEqual(mat1, new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0));
 
     ok(mat1.toGlobal_noTrans(mat2).toGlobal_noTrans(mat2));
   });
 
   test('lookAt', function() {
-    var mat1 = new DivSugar.Matrix();
-    var mat2 = new DivSugar.Matrix(0, 1, 0, 0, 0, 1, 1, 0, 0, 5, 2, -3);
-    mat1.lookAt(new DivSugar.Vector(5, 2, -3), new DivSugar.Vector(-5, 2, -3), new DivSugar.Vector(1, 0, 10));
-    deepEqual(mat1, mat2);
+    var mat = new DivSugar.Matrix();
+    mat.lookAt(new DivSugar.Vector(5, 2, -3), new DivSugar.Vector(-5, 2, -3), new DivSugar.Vector(1, 0, 10));
+    deepEqual(mat, new DivSugar.Matrix(0, 1, 0, 0, 0, 1, 1, 0, 0, 5, 2, -3));
 
-    ok(mat1.lookAt(DivSugar.Vector.ZERO, DivSugar.Vector.Z_UNIT, DivSugar.Vector.Y_UNIT)
+    ok(mat.lookAt(DivSugar.Vector.ZERO, DivSugar.Vector.Z_UNIT, DivSugar.Vector.Y_UNIT)
       .lookAt(DivSugar.Vector.ZERO, DivSugar.Vector.Z_UNIT, DivSugar.Vector.Y_UNIT));
   });
 
@@ -229,13 +217,13 @@
   });
 
   test('toString', function() {
-    var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-    strictEqual(mat1.toString(), '((1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12))');
+    var mat = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    strictEqual(mat.toString(), '((1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12))');
   });
 
   test('toCSSTransform', function() {
-    var mat1 = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-    strictEqual(mat1.toCSSTransform(),
+    var mat = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    strictEqual(mat.toCSSTransform(),
       'matrix3d(1.0000, 2.0000, 3.0000, 0, 4.0000, 5.0000, 6.0000, 0, 7.0000, 8.0000, 9.0000, 0, 10.0000, 11.0000, 12.0000, 1)');
   });
 })();
