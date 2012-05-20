@@ -1,12 +1,13 @@
 DivSugar =
   _initialize: ->
-    console.log 'DivSugar: a CSS-based 3D graphics library (https://github.com/kitao/divsugar)'
-
     # initialize constants
+    @VERSION = '0.8.0'
     @EPSILON = 0.0001
     @NUM_OF_DIGITS = 4
     @DEG_TO_RAD = Math.PI / 180
     @RAD_TO_DEG = 180 / Math.PI
+
+    console.log "DivSugar: version #{@VERSION}"
 
     # initialize properties
     @_curId = 0

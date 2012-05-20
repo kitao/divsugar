@@ -4,6 +4,7 @@
   module('DivSugar');
 
   test('constants', function() {
+    strictEqual(DivSugar.VERSION, '0.8.0');
     strictEqual(DivSugar.EPSILON, 0.0001);
     strictEqual(DivSugar.NUM_OF_DIGITS, 4);
     strictEqual(DivSugar.DEG_TO_RAD * 180, Math.PI);
