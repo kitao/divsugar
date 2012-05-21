@@ -41,7 +41,7 @@
 
 /**
  * @method getPerspective
- * return {Number}
+ * @return {Number}
  */
 
 /**
