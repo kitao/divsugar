@@ -8,8 +8,42 @@
  */
 
 /**
- * @constructor
- * @param {String} id If not specified,
+ * @property id
+ * @type {String}
+ * @default null
+ */
+
+/**
+ * @property active
+ * @type {Boolean}
+ * @default true
+ */
+
+/**
+ * @property deltaTime
+ * @type {Number}
+ * @default 0
+ */
+
+/**
+ * @property onUpdate
+ * @type {Function}
+ * @default null
+ */
+
+/**
+ * @property onDestroy
+ * @type {Function}
+ * @default null
+ */
+
+/**
+ * @method _constructor
+ */
+
+/**
+ * @method _constructor
+ * @param {String} id
  */
 
 /**

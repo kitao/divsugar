@@ -8,63 +8,63 @@
 
 /**
  * @property VERSION
- * @type String
- * @static
+ * @type {String}
  * @final
+ * @static
  */
 
 /**
  * @property EPSILON
- * @type Number
- * @static
+ * @type {Number}
  * @final
+ * @static
  */
 
 /**
  * @property NUM_OF_DIGITS
- * @type Number
- * @static
+ * @type {Number}
  * @final
+ * @static
  */
 
 /**
  * @property DEG_TO_RAD
- * @type Number
- * @static
+ * @type {Number}
  * @final
+ * @static
  */
 
 /**
  * @property RAD_TO_DEG
- * @type Number
- * @static
+ * @type {Number}
  * @final
+ * @static
  */
 
 /**
  * @property rootTask
- * @type DivSugar.Task
+ * @type {DivSugar.Task}
  * @static
  */
 
 /**
  * @method inherit
- * @static
  * @param {Class} C
  * @param {Class} P
  * @return {Object} this
+ * @static
  */
 
 /**
  * @method generateId
- * @static
  * @return {String}
+ * @static
  */
 
 /**
  * @method getImageSize
- * @static
  * @param {String} str
  * @param {Function} callback
  * @return {DivSugar} this
+ * @static
  */

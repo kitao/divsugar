@@ -8,8 +8,12 @@
  */
 
 /**
- * @constructor
- * @param {String} id If not specified,
+ * @method _constructor
+ */
+
+/**
+ * @method _constructor
+ * @param {String} id
  */
 
 /**
@@ -73,8 +77,14 @@
  * @method setSize
  * @param {Number} width
  * @param {Number} height
- * @param {Number} viewWidth If not specified,
- * @param {Number} viewHeight If not specified,
+ */
+
+/**
+ * @method setSize
+ * @param {Number} width
+ * @param {Number} height
+ * @param {Number} viewWidth
+ * @param {Number} viewHeight
  */
 
 /**
