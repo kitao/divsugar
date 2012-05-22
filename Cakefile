@@ -29,14 +29,14 @@ task 'watch', 'Watch the source files and build the changes', ->
   coffee.stderr.on 'data', (data) -> process.stderr.write data.toString()
 
 task 'minify', 'Make the minified version of the target', ->
-  yui = spawn 'yuicompressor', [target, '-o', minTarget]
-  yui.stdout.on 'data', (data) -> print data.toString()
-  yui.stderr.on 'data', (data) -> process.stderr.write data.toString()
+  exec "yuicompressor #{target} -o #{minTarget}", (err, stdout, stderr) ->
+    throw err if err
+    console.log stdout + stderr
 
 task 'api', 'Make the api reference', ->
-  yuidoc = spawn 'yuidoc', [apiSrcDir, '-C', '-o', apiDir]
-  yuidoc.stdout.on 'data', (data) -> print data.toString()
-  yuidoc.stderr.on 'data', (data) -> process.stderr.write data.toString()
+  exec "yuidoc #{apiSrcDir} -C -o #{apiDir}", (err, stdout, stderr) ->
+    throw err if err
+    console.log stdout + stderr
 
 task 'clean', 'Delete the target files', ->
   exec "rm -f #{target}"
