@@ -1,0 +1,3403 @@
+{
+    "project": {},
+    "files": {
+        "docs/api_src/DivSugarAPI.js": {
+            "name": "docs/api_src/DivSugarAPI.js",
+            "modules": {
+                "DivSugar": 1
+            },
+            "classes": {
+                "DivSugar": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "docs/api_src/EaseAPI.js": {
+            "name": "docs/api_src/EaseAPI.js",
+            "modules": {},
+            "classes": {
+                "DivSugar.Ease": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DivSugar": 1
+            }
+        },
+        "docs/api_src/MatrixAPI.js": {
+            "name": "docs/api_src/MatrixAPI.js",
+            "modules": {},
+            "classes": {
+                "DivSugar.Matrix": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DivSugar": 1
+            }
+        },
+        "docs/api_src/NodeAPI.js": {
+            "name": "docs/api_src/NodeAPI.js",
+            "modules": {},
+            "classes": {
+                "DivSugar.Node": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DivSugar": 1
+            }
+        },
+        "docs/api_src/QuaternionAPI.js": {
+            "name": "docs/api_src/QuaternionAPI.js",
+            "modules": {},
+            "classes": {
+                "DivSugar.Quaternion": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DivSugar": 1
+            }
+        },
+        "docs/api_src/SceneAPI.js": {
+            "name": "docs/api_src/SceneAPI.js",
+            "modules": {},
+            "classes": {
+                "DivSugar.Scene": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DivSugar": 1
+            }
+        },
+        "docs/api_src/TaskAPI.js": {
+            "name": "docs/api_src/TaskAPI.js",
+            "modules": {},
+            "classes": {
+                "DivSugar.Task": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DivSugar": 1
+            }
+        },
+        "docs/api_src/VectorAPI.js": {
+            "name": "docs/api_src/VectorAPI.js",
+            "modules": {},
+            "classes": {
+                "DivSugar.Vector": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DivSugar": 1
+            }
+        }
+    },
+    "modules": {
+        "DivSugar": {
+            "name": "DivSugar",
+            "submodules": {},
+            "classes": {
+                "DivSugar": 1,
+                "DivSugar.Ease": 1,
+                "DivSugar.Matrix": 1,
+                "DivSugar.Node": 1,
+                "DivSugar.Quaternion": 1,
+                "DivSugar.Scene": 1,
+                "DivSugar.Task": 1,
+                "DivSugar.Vector": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DivSugar": 1
+            },
+            "tag": "module",
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 5
+        }
+    },
+    "classes": {
+        "DivSugar": {
+            "name": "DivSugar",
+            "shortname": "DivSugar",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DivSugar",
+            "namespace": "",
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 5
+        },
+        "DivSugar.Ease": {
+            "name": "DivSugar.Ease",
+            "shortname": "DivSugar.Ease",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DivSugar",
+            "namespace": "DivSugar",
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 5
+        },
+        "DivSugar.Matrix": {
+            "name": "DivSugar.Matrix",
+            "shortname": "DivSugar.Matrix",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DivSugar",
+            "namespace": "DivSugar",
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 5
+        },
+        "DivSugar.Node": {
+            "name": "DivSugar.Node",
+            "shortname": "DivSugar.Node",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DivSugar",
+            "namespace": "DivSugar",
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 5
+        },
+        "DivSugar.Quaternion": {
+            "name": "DivSugar.Quaternion",
+            "shortname": "DivSugar.Quaternion",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DivSugar",
+            "namespace": "DivSugar",
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 5
+        },
+        "DivSugar.Scene": {
+            "name": "DivSugar.Scene",
+            "shortname": "DivSugar.Scene",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DivSugar",
+            "namespace": "DivSugar",
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 5
+        },
+        "DivSugar.Task": {
+            "name": "DivSugar.Task",
+            "shortname": "DivSugar.Task",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DivSugar",
+            "namespace": "DivSugar",
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 5
+        },
+        "DivSugar.Vector": {
+            "name": "DivSugar.Vector",
+            "shortname": "DivSugar.Vector",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DivSugar",
+            "namespace": "DivSugar",
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 5
+        }
+    },
+    "classitems": [
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 9,
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "{String}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "EPSILON",
+            "type": "{Number}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "NUM_OF_DIGITS",
+            "type": "{Number}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 30,
+            "itemtype": "property",
+            "name": "DEG_TO_RAD",
+            "type": "{Number}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 37,
+            "itemtype": "property",
+            "name": "RAD_TO_DEG",
+            "type": "{Number}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 44,
+            "itemtype": "property",
+            "name": "rootTask",
+            "type": "{DivSugar.Task}",
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 50,
+            "itemtype": "method",
+            "name": "inherit",
+            "params": [
+                {
+                    "name": "C",
+                    "description": "",
+                    "type": "Class"
+                },
+                {
+                    "name": "P",
+                    "description": "",
+                    "type": "Class"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "Object"
+            },
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 58,
+            "itemtype": "method",
+            "name": "generateId",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/DivSugarAPI.js",
+            "line": 64,
+            "itemtype": "method",
+            "name": "getImageSize",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar"
+            },
+            "static": 1,
+            "class": "DivSugar",
+            "module": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 10,
+            "itemtype": "method",
+            "name": "linear",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 17,
+            "itemtype": "method",
+            "name": "quadIn",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 24,
+            "itemtype": "method",
+            "name": "cubicIn",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 31,
+            "itemtype": "method",
+            "name": "quartIn",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 38,
+            "itemtype": "method",
+            "name": "quintIn",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 45,
+            "itemtype": "method",
+            "name": "quadOut",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 52,
+            "itemtype": "method",
+            "name": "cubicOut",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 59,
+            "itemtype": "method",
+            "name": "quartOut",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 66,
+            "itemtype": "method",
+            "name": "quintOut",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 73,
+            "itemtype": "method",
+            "name": "quadInOut",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 80,
+            "itemtype": "method",
+            "name": "cubicInOut",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 87,
+            "itemtype": "method",
+            "name": "quartInOut",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/EaseAPI.js",
+            "line": 94,
+            "itemtype": "method",
+            "name": "quintInOut",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "static": 1,
+            "class": "DivSugar.Ease",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 10,
+            "itemtype": "property",
+            "name": "UNIT",
+            "type": "{DivSugar.Matrix}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 17,
+            "itemtype": "property",
+            "name": "xAxis",
+            "type": "{DivSugar.Vector}",
+            "default": "DivSugar.Vector.X_UNIT",
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "yAxis",
+            "type": "{DivSugar.Vector}",
+            "default": "DivSugar.Vector.Y_UNIT",
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 29,
+            "itemtype": "property",
+            "name": "zAxis",
+            "type": "{DivSugar.Vector}",
+            "default": "DivSugar.Vector.Z_UNIT",
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 35,
+            "itemtype": "property",
+            "name": "trans",
+            "type": "{DivSugar.Vector}",
+            "default": "DivSugar.Vector.ZERO",
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 41,
+            "itemtype": "method",
+            "name": "_constructor",
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 45,
+            "itemtype": "method",
+            "name": "_constructor",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 50,
+            "itemtype": "method",
+            "name": "_constructor",
+            "params": [
+                {
+                    "name": "m11",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m12",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m13",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m21",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m22",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m23",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m31",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m32",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m33",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m41",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m42",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m43",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 66,
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 72,
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "m11",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m12",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m13",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m21",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m22",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m23",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m31",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m32",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m33",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m41",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m42",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "m43",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 89,
+            "itemtype": "method",
+            "name": "fromQuaternion",
+            "params": [
+                {
+                    "name": "quat",
+                    "description": "",
+                    "type": "DivSugar.Quaternion"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 95,
+            "itemtype": "method",
+            "name": "orthonormalize",
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 100,
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "offsetX",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "offsetY",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "offsetZ",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 108,
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "rotateX",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "rotateY",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "rotateZ",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 116,
+            "itemtype": "method",
+            "name": "scale",
+            "params": [
+                {
+                    "name": "scaleX",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "scaleY",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "scaleZ",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 124,
+            "itemtype": "method",
+            "name": "slerp",
+            "params": [
+                {
+                    "name": "to",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                },
+                {
+                    "name": "ratio",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 131,
+            "itemtype": "method",
+            "name": "slerp_noTrans",
+            "params": [
+                {
+                    "name": "to",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                },
+                {
+                    "name": "ratio",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 138,
+            "itemtype": "method",
+            "name": "toLocal",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 144,
+            "itemtype": "method",
+            "name": "toGlobal",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 150,
+            "itemtype": "method",
+            "name": "toLocal_noTrans",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 156,
+            "itemtype": "method",
+            "name": "toGlobal_noTrans",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 162,
+            "itemtype": "method",
+            "name": "lookAt",
+            "params": [
+                {
+                    "name": "from",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                },
+                {
+                    "name": "to",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                },
+                {
+                    "name": "up",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Matrix"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 170,
+            "itemtype": "method",
+            "name": "equal",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 176,
+            "itemtype": "method",
+            "name": "toString",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/MatrixAPI.js",
+            "line": 181,
+            "itemtype": "method",
+            "name": "toCSSTransform",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "DivSugar.Matrix",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 10,
+            "is_constructor": 1,
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 14,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "id",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 19,
+            "itemtype": "method",
+            "name": "getParent",
+            "return": {
+                "description": "",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 24,
+            "itemtype": "method",
+            "name": "append",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "DivSugar.Node"
+                }
+            ],
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 29,
+            "itemtype": "method",
+            "name": "appendTo",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "",
+                    "type": "DivSugar.Node"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 35,
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "DivSugar.Node"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 41,
+            "itemtype": "method",
+            "name": "getWidth",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 46,
+            "itemtype": "method",
+            "name": "getHeight",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 51,
+            "itemtype": "method",
+            "name": "getPositionX",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 56,
+            "itemtype": "method",
+            "name": "getPositionY",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 61,
+            "itemtype": "method",
+            "name": "getPositionZ",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 66,
+            "itemtype": "method",
+            "name": "setPosition",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 72,
+            "itemtype": "method",
+            "name": "setPosition",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "z",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 80,
+            "itemtype": "method",
+            "name": "getTransform",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 86,
+            "itemtype": "method",
+            "name": "setTransform",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 92,
+            "itemtype": "method",
+            "name": "getVisible",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 97,
+            "itemtype": "method",
+            "name": "setVisible",
+            "params": [
+                {
+                    "name": "visible",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 103,
+            "itemtype": "method",
+            "name": "getBackface",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 108,
+            "itemtype": "method",
+            "name": "setBackface",
+            "params": [
+                {
+                    "name": "backface",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 114,
+            "itemtype": "method",
+            "name": "getClip",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 119,
+            "itemtype": "method",
+            "name": "setClip",
+            "params": [
+                {
+                    "name": "clip",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 125,
+            "itemtype": "method",
+            "name": "getOpacity",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 130,
+            "itemtype": "method",
+            "name": "setOpacity",
+            "params": [
+                {
+                    "name": "opacity",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 137,
+            "itemtype": "method",
+            "name": "getImage",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 142,
+            "itemtype": "method",
+            "name": "setImage",
+            "params": [
+                {
+                    "name": "src",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 148,
+            "itemtype": "method",
+            "name": "getImageClipU1",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 153,
+            "itemtype": "method",
+            "name": "getImageClipV1",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 158,
+            "itemtype": "method",
+            "name": "getImageClipU2",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 163,
+            "itemtype": "method",
+            "name": "getImageClipV2",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 168,
+            "itemtype": "method",
+            "name": "setImageClip",
+            "params": [
+                {
+                    "name": "u1",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "v1",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "u2",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "v2",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Node"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 177,
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "offsetX",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "offsetY",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "offsetZ!~YUIDOC_LINE~!return",
+                    "description": "{DivSugar.Node} this",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 185,
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "rotateX",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "rotateY",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "rotateZ!~YUIDOC_LINE~!return",
+                    "description": "{DivSugar.Node} this",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 193,
+            "itemtype": "method",
+            "name": "scale",
+            "params": [
+                {
+                    "name": "scaleX",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "scaleY",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "scaleZ!~YUIDOC_LINE~!return",
+                    "description": "{DivSugar.Node} this",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 201,
+            "itemtype": "method",
+            "name": "playAnimation",
+            "params": [
+                {
+                    "name": "animation",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "DivSugar.Task"
+            },
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 207,
+            "itemtype": "method",
+            "name": "clearAnimation!~YUIDOC_LINE~!return  this",
+            "type": "DivSugar.Node",
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 212,
+            "itemtype": "method",
+            "name": "getWorldPosition",
+            "params": [
+                {
+                    "name": "vec!~YUIDOC_LINE~!return",
+                    "description": "{DivSugar.Node} this",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/NodeAPI.js",
+            "line": 218,
+            "itemtype": "method",
+            "name": "getWorldTransform",
+            "params": [
+                {
+                    "name": "mat!~YUIDOC_LINE~!return",
+                    "description": "{DivSugar.Node} this",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "class": "DivSugar.Node",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 10,
+            "itemtype": "property",
+            "name": "x",
+            "type": "{Number}",
+            "default": "0",
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "y",
+            "type": "{Number}",
+            "default": "0",
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "z",
+            "type": "{Number}",
+            "default": "0",
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 28,
+            "itemtype": "property",
+            "name": "w",
+            "type": "{Number}",
+            "default": "0",
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 34,
+            "itemtype": "method",
+            "name": "_constructor",
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 38,
+            "itemtype": "method",
+            "name": "_constructor",
+            "params": [
+                {
+                    "name": "quat",
+                    "description": "",
+                    "type": "DivSugar.Quaternion"
+                }
+            ],
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 43,
+            "itemtype": "method",
+            "name": "_constructor",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "z",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "w",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 51,
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "quat",
+                    "description": "",
+                    "type": "DivSugar.Quaternion"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Quaternion"
+            },
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 57,
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "z",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "w",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Quaternion"
+            },
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 66,
+            "itemtype": "method",
+            "name": "fromMatrix",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Quaternion"
+            },
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 72,
+            "itemtype": "method",
+            "name": "slerp",
+            "params": [
+                {
+                    "name": "to",
+                    "description": "",
+                    "type": "DivSugar.Quaternion"
+                },
+                {
+                    "name": "ratio",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Quaternion"
+            },
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 79,
+            "itemtype": "method",
+            "name": "equal",
+            "params": [
+                {
+                    "name": "quat",
+                    "description": "",
+                    "type": "DivSugar.Quaternion"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/QuaternionAPI.js",
+            "line": 85,
+            "itemtype": "method",
+            "name": "toString",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "DivSugar.Quaternion",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 10,
+            "itemtype": "method",
+            "name": "_constructor",
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 14,
+            "itemtype": "method",
+            "name": "_constructor",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 19,
+            "itemtype": "method",
+            "name": "getParent",
+            "return": {
+                "description": "",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 24,
+            "itemtype": "method",
+            "name": "append",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "DivSugar.Scene"
+                }
+            ],
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 29,
+            "itemtype": "method",
+            "name": "appendTo",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "",
+                    "type": "DivSugar.Scene"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 35,
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "DivSugar.Scene"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 41,
+            "itemtype": "method",
+            "name": "getViewAngle",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 46,
+            "itemtype": "method",
+            "name": "getPerspective",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 51,
+            "itemtype": "method",
+            "name": "setViewAngle",
+            "params": [
+                {
+                    "name": "viewangle",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 56,
+            "itemtype": "method",
+            "name": "getWidth",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 61,
+            "itemtype": "method",
+            "name": "getHeight",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 66,
+            "itemtype": "method",
+            "name": "getViewWidth",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 71,
+            "itemtype": "method",
+            "name": "getViewHeight",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 76,
+            "itemtype": "method",
+            "name": "setSize",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 82,
+            "itemtype": "method",
+            "name": "setSize",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "viewWidth",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "viewHeight",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 90,
+            "itemtype": "method",
+            "name": "getPositionX",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 95,
+            "itemtype": "method",
+            "name": "getPositionY",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 100,
+            "itemtype": "method",
+            "name": "setPosition",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "y!~YUIDOC_LINE~!return",
+                    "description": "{DivSugar.Scene} this",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 107,
+            "itemtype": "method",
+            "name": "getVisible",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 112,
+            "itemtype": "method",
+            "name": "setVisible",
+            "params": [
+                {
+                    "name": "visible",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 118,
+            "itemtype": "method",
+            "name": "getClip",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 123,
+            "itemtype": "method",
+            "name": "setClip",
+            "params": [
+                {
+                    "name": "clip",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 129,
+            "itemtype": "method",
+            "name": "getOpacity",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 134,
+            "itemtype": "method",
+            "name": "setOpacity",
+            "params": [
+                {
+                    "name": "opacity",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 140,
+            "itemtype": "method",
+            "name": "getImage",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 145,
+            "itemtype": "method",
+            "name": "setImage",
+            "params": [
+                {
+                    "name": "src",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 151,
+            "itemtype": "method",
+            "name": "getImageClipU1",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 156,
+            "itemtype": "method",
+            "name": "getImageClipV1",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 161,
+            "itemtype": "method",
+            "name": "getImageClipU2",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 166,
+            "itemtype": "method",
+            "name": "getImageClipV2",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 171,
+            "itemtype": "method",
+            "name": "setImageClip",
+            "params": [
+                {
+                    "name": "u1",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "v1",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "u2",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "v2",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 180,
+            "itemtype": "method",
+            "name": "adjustLayout",
+            "params": [
+                {
+                    "name": "parentWidth",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "parentHeight",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "style",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Scene"
+            },
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/SceneAPI.js",
+            "line": 188,
+            "itemtype": "method",
+            "name": "getLocalPosition",
+            "params": [
+                {
+                    "name": "clientX",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "clientY",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "vec!~YUIDOC_LINE~!return",
+                    "description": "{DivSugar.Scene} this",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "class": "DivSugar.Scene",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 10,
+            "itemtype": "property",
+            "name": "id",
+            "type": "{String}",
+            "default": "null",
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 16,
+            "itemtype": "property",
+            "name": "active",
+            "type": "{Boolean}",
+            "default": "true",
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "deltaTime",
+            "type": "{Number}",
+            "default": "0",
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 28,
+            "itemtype": "property",
+            "name": "onUpdate",
+            "type": "{Function}",
+            "default": "null",
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 34,
+            "itemtype": "property",
+            "name": "onDestroy",
+            "type": "{Function}",
+            "default": "null",
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 40,
+            "itemtype": "method",
+            "name": "_constructor",
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 44,
+            "itemtype": "method",
+            "name": "_constructor",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 49,
+            "itemtype": "method",
+            "name": "getParent",
+            "return": {
+                "description": "",
+                "type": "DivSugar.Task"
+            },
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 54,
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "deltaTime",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Task"
+            },
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 60,
+            "itemtype": "method",
+            "name": "destroy",
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Task"
+            },
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 65,
+            "itemtype": "method",
+            "name": "append",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "DivSugar.Task"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Task"
+            },
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 71,
+            "itemtype": "method",
+            "name": "appendTo",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "",
+                    "type": "DivSugar.Task"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Task"
+            },
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 77,
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "DivSugar.Task"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Task"
+            },
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/TaskAPI.js",
+            "line": 83,
+            "itemtype": "method",
+            "name": "getTaskById",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "DivSugar.Task"
+            },
+            "class": "DivSugar.Task",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 10,
+            "itemtype": "property",
+            "name": "ZERO",
+            "type": "{DivSugar.Vector}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 17,
+            "itemtype": "property",
+            "name": "X_UNIT",
+            "type": "{DivSugar.Vector}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 24,
+            "itemtype": "property",
+            "name": "Y_UNIT",
+            "type": "{DivSugar.Vector}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 31,
+            "itemtype": "property",
+            "name": "Z_UNIT",
+            "type": "{DivSugar.Vector}",
+            "final": 1,
+            "static": 1,
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 38,
+            "itemtype": "property",
+            "name": "x",
+            "type": "{Number}",
+            "default": "0",
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 44,
+            "itemtype": "property",
+            "name": "y",
+            "type": "{Number}",
+            "default": "0",
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 50,
+            "itemtype": "property",
+            "name": "z",
+            "type": "{Number}",
+            "default": "0",
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 56,
+            "itemtype": "method",
+            "name": "_constructor",
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 60,
+            "itemtype": "method",
+            "name": "_constructor",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 65,
+            "itemtype": "method",
+            "name": "_constructor",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "z",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 72,
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 78,
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "z",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 86,
+            "itemtype": "method",
+            "name": "neg",
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 91,
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 97,
+            "itemtype": "method",
+            "name": "sub",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 103,
+            "itemtype": "method",
+            "name": "mul",
+            "params": [
+                {
+                    "name": "s",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 109,
+            "itemtype": "method",
+            "name": "div",
+            "params": [
+                {
+                    "name": "s",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 115,
+            "itemtype": "method",
+            "name": "norm",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 120,
+            "itemtype": "method",
+            "name": "sqNorm",
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 125,
+            "itemtype": "method",
+            "name": "dist",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 131,
+            "itemtype": "method",
+            "name": "sqDist",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 137,
+            "itemtype": "method",
+            "name": "dot",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 143,
+            "itemtype": "method",
+            "name": "cross",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 149,
+            "itemtype": "method",
+            "name": "normalize",
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 154,
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "rotateX",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "rotateY",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "rotateZ",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 162,
+            "itemtype": "method",
+            "name": "lerp",
+            "params": [
+                {
+                    "name": "to",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                },
+                {
+                    "name": "ratio",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 169,
+            "itemtype": "method",
+            "name": "toLocal",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 175,
+            "itemtype": "method",
+            "name": "toGlobal",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 181,
+            "itemtype": "method",
+            "name": "toLocal_noTrans",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 187,
+            "itemtype": "method",
+            "name": "toGlobal_noTrans",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": "",
+                    "type": "DivSugar.Matrix"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "DivSugar.Vector"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 193,
+            "itemtype": "method",
+            "name": "equal",
+            "params": [
+                {
+                    "name": "vec",
+                    "description": "",
+                    "type": "DivSugar.Vector"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        },
+        {
+            "file": "docs/api_src/VectorAPI.js",
+            "line": 199,
+            "itemtype": "method",
+            "name": "toString",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "DivSugar.Vector",
+            "module": "DivSugar",
+            "namespace": "DivSugar"
+        }
+    ]
+}
