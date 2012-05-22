@@ -8,10 +8,10 @@ DivSugar depends on CSS 3D transform and runs on Safari, Chrome, and Firefox for
 
 Getting Started
 ---------------
-Include `divsugar.js`, then all of the functions get available via the `DivSugar` global variable.
+Include `divsugar.min.js` for normal use, or `divsugar.js` for debug use, then all of the functions get available via the `DivSugar` global variable.
 
 ```html
-<script src="divsugar.js"></script>
+<script src="divsugar.min.js"></script>
 ```
 
 A `Scene` is the root of a scene graph and specifies the rendering area.
