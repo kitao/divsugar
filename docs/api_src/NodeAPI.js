@@ -141,7 +141,7 @@
 
 /**
  * @method setImage
- * @param {String}
+ * @param {String} src
  * @return {DivSugar.Node} this
  */
 

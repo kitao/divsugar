@@ -8,92 +8,92 @@
  */
 
 /**
- * @property linear
- * @type {Function}
- * @final
+ * @method linear
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quadIn
- * @type {Function}
- * @final
+ * @method quadIn
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property cubicIn
- * @type {Function}
- * @final
+ * @method cubicIn
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quartIn
- * @type {Function}
- * @final
+ * @method quartIn
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quintIn
- * @type {Function}
- * @final
+ * @method quintIn
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quadOut
- * @type {Function}
- * @final
+ * @method quadOut
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property cubicOut
- * @type {Function}
- * @final
+ * @method cubicOut
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quartOut
- * @type {Function}
- * @final
+ * @method quartOut
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quintOut
- * @type {Function}
- * @final
+ * @method quintOut
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quadInOut
- * @type {Function}
- * @final
+ * @method quadInOut
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property cubicInOut
- * @type {Function}
- * @final
+ * @method cubicInOut
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quartInOut
- * @type {Function}
- * @final
+ * @method quartInOut
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
 
 /**
- * @property quintInOut
- * @type {Function}
- * @final
+ * @method quintInOut
+ * @param {Number} t
+ * @return {Number}
  * @static
  */
