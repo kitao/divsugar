@@ -16,9 +16,6 @@ srcFiles = [
   'Ease.coffee'
 ]
 
-apiDir = 'docs/api'
-apiSrcDir = 'docs/api_src'
-
 target = "#{targetDir}/#{targetName}.js"
 minTarget = "#{targetDir}/#{targetName}.min.js"
 srcs = ("#{srcDir}/#{s}" for s in srcFiles)
@@ -33,12 +30,5 @@ task 'minify', 'Make the minified version of the target', ->
     throw err if err
     console.log stdout + stderr
 
-task 'api', 'Make the api reference', ->
-  exec "yuidoc #{apiSrcDir} -C -o #{apiDir}", (err, stdout, stderr) ->
-    throw err if err
-    console.log stdout + stderr
-
 task 'clean', 'Delete the target files', ->
-  exec "rm -f #{target}"
-  exec "rm -f #{minTarget}"
-  exec "rm -rf #{apiDir}/*"
+  exec "rm -f #{target} #{minTarget}"
