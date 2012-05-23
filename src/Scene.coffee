@@ -1,7 +1,5 @@
 class DivSugar.Scene
   constructor: (id) ->
-    @isScene = true
-
     @div = document.createElement 'div'
     @div.id = id if id?
     @div.style.margin = '0px'
@@ -13,6 +11,7 @@ class DivSugar.Scene
     @div.style[DivSugar.cssPerspectiveOrigin] = '50% 50%'
     @div.sugar = @
 
+    @_isScene = true
     @_rootNode = new DivSugar.Node()
     @_rootNode.div.sugar = @
     @div.appendChild @_rootNode.div

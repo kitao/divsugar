@@ -6,7 +6,6 @@
   test('constructor, properties, and getters', function() {
     var scn1 = new DivSugar.Scene('scene1');
     ok(scn1.div instanceof HTMLDivElement);
-    strictEqual(scn1.isScene, true);
     strictEqual(scn1.div.id, 'scene1');
     strictEqual(scn1.div.sugar, scn1);
     strictEqual(scn1.getParent(), null);
