@@ -1,8 +1,8 @@
 Change Log
 ==========
 
-0.8.0
------
+DivSugar 0.8.0
+--------------
 - Added the change log
 - Added the API docs
 - Added the version number constant
@@ -16,6 +16,6 @@ Change Log
 - Changed to throw exceptions for invalid argument number
 - Added the getLocalPosition method to the Scene class
 
-0.7.0
------
+DivSugar 0.7.0
+--------------
 - First release
