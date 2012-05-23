@@ -8,7 +8,7 @@ DivSugar depends on CSS 3D transform and runs on Safari, Chrome, and Firefox for
 
 Getting Started
 ---------------
-Include `divsugar.min.js` for normal use, or `divsugar.js` for debug use, then all of the functions get available via the `DivSugar` global variable.
+Include `divsugar.js`, then all of the functions get available via the `DivSugar` global variable.
 
 ```html
 <script src="divsugar.min.js"></script>
@@ -67,7 +67,7 @@ Examples
 
 Documentaion
 ------------
-- [API Reference](https://github.com/kitao/divsugar/wiki/API-Reference)
+- [API Reference](https://github.com/kitao/divsugar/blob/master/docs)
 
 Version History
 ---------------
