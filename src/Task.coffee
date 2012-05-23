@@ -9,6 +9,23 @@ class DivSugar.Task
 
   getParent: -> @_parent
 
+  append: (child) ->
+    @remove child
+    @_children.push child
+    child._parent = this
+    return @
+
+  appendTo: (parent) ->
+    parent.append @
+    return @
+
+  remove: (child) ->
+    index = @_children.indexOf child
+    if index > -1
+      @_children[index] = null
+      child._parent = null
+    return @
+
   update: (deltaTime) ->
     if @active
       @deltaTime += deltaTime
@@ -32,23 +49,6 @@ class DivSugar.Task
     @onDestroy?()
     @_parent?.remove this
     child?.destroy() for child in @_children
-    return @
-
-  append: (child) ->
-    @remove child
-    @_children.push child
-    child._parent = this
-    return @
-
-  appendTo: (parent) ->
-    parent.append @
-    return @
-
-  remove: (child) ->
-    index = @_children.indexOf child
-    if index > -1
-      @_children[index] = null
-      child._parent = null
     return @
 
   getTaskById: (id) ->
