@@ -3,6 +3,7 @@ Change Log
 
 0.8.0
 -----
+- Added the change log
 - Added the API docs
 - Added the version number constant
 - Changed to throw exceptions for unknown animation commands/params
