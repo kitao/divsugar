@@ -1,7 +1,6 @@
 DivSugar.Node
 =============
 
-
 Constructors
 ------------
 
@@ -29,8 +28,8 @@ getPositionY()
 getPositionZ()
 getPosition( vec )
 getTransform( mat )
-getVisible: DivSugar.Scene.prototype.getVisible
-getBackface: -> @_backface
+getVisible()
+getBackface()
 getClip()
 getOpacity()
 getImage()

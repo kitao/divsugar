@@ -8,6 +8,15 @@ Constants
 UNIT
 ```
 
+Constructors
+------------
+
+```javascript
+Matrix()
+Matrix( mat )
+Matrix( m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42m, m43 )
+```
+
 Properties
 ----------
 
@@ -16,15 +25,6 @@ xAxis
 yAxis
 zAxis
 trans
-```
-
-Constructors
-------------
-
-```javascript
-Matrix()
-Matrix( mat )
-Matrix( m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42m, m43 )
 ```
 
 Methods
