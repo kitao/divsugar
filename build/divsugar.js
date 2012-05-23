@@ -692,7 +692,6 @@
   DivSugar.Scene = (function() {
 
     function Scene(id) {
-      this.isScene = true;
       this.div = document.createElement('div');
       if (id != null) {
         this.div.id = id;
@@ -705,6 +704,7 @@
       this.div.style[DivSugar.cssTransformOrigin] = '0% 0%';
       this.div.style[DivSugar.cssPerspectiveOrigin] = '50% 50%';
       this.div.sugar = this;
+      this._isScene = true;
       this._rootNode = new DivSugar.Node();
       this._rootNode.div.sugar = this;
       this.div.appendChild(this._rootNode.div);
@@ -1330,7 +1330,7 @@
       var parent;
       vec.set(this._transform.trans);
       parent = this.div.parentNode;
-      while ((parent != null) && (parent.sugar != null) && !(parent.sugar.isScene != null)) {
+      while ((parent != null) && (parent.sugar != null) && !(parent.sugar._isScene != null)) {
         vec.toGlobal(parent.sugar._transform);
         parent = parent.parentNode;
       }
@@ -1341,7 +1341,7 @@
       var parent;
       mat.set(this._transform);
       parent = this.div.parentNode;
-      while ((parent != null) && (parent.sugar != null) && !(parent.sugar.isScene != null)) {
+      while ((parent != null) && (parent.sugar != null) && !(parent.sugar._isScene != null)) {
         mat.toGlobal(parent.sugar._transform);
         parent = parent.parentNode;
       }
@@ -1368,6 +1368,28 @@
 
     Task.prototype.getParent = function() {
       return this._parent;
+    };
+
+    Task.prototype.append = function(child) {
+      this.remove(child);
+      this._children.push(child);
+      child._parent = this;
+      return this;
+    };
+
+    Task.prototype.appendTo = function(parent) {
+      parent.append(this);
+      return this;
+    };
+
+    Task.prototype.remove = function(child) {
+      var index;
+      index = this._children.indexOf(child);
+      if (index > -1) {
+        this._children[index] = null;
+        child._parent = null;
+      }
+      return this;
     };
 
     Task.prototype.update = function(deltaTime) {
@@ -1408,28 +1430,6 @@
         if (child != null) {
           child.destroy();
         }
-      }
-      return this;
-    };
-
-    Task.prototype.append = function(child) {
-      this.remove(child);
-      this._children.push(child);
-      child._parent = this;
-      return this;
-    };
-
-    Task.prototype.appendTo = function(parent) {
-      parent.append(this);
-      return this;
-    };
-
-    Task.prototype.remove = function(child) {
-      var index;
-      index = this._children.indexOf(child);
-      if (index > -1) {
-        this._children[index] = null;
-        child._parent = null;
       }
       return this;
     };
