@@ -11,7 +11,7 @@ Getting Started
 Include `divsugar.js`, then all of the functions get available via the `DivSugar` global variable.
 
 ```html
-<script src="divsugar.min.js"></script>
+<script src="divsugar.js"></script>
 ```
 
 A `Scene` is the root of a scene graph and specifies the rendering area.
