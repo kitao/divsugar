@@ -4,7 +4,7 @@
   module('DivSugar');
 
   test('constants', function() {
-    strictEqual(DivSugar.VERSION, '0.8.0');
+    strictEqual(DivSugar.VERSION, '0.9.0');
     strictEqual(DivSugar.EPSILON, 0.0001);
     strictEqual(DivSugar.NUM_OF_DIGITS, 4);
     strictEqual(DivSugar.DEG_TO_RAD * 180, Math.PI);
@@ -13,16 +13,7 @@
 
   test('properties', function() {
     strictEqual(DivSugar.rootTask instanceof DivSugar.Task, true);
-
-    var div = document.createElement('div');
-    ok(DivSugar.cssTransform in div.style);
-    ok(DivSugar.cssTransformStyle in div.style);
-    ok(DivSugar.cssTransformOrigin in div.style);
-    ok(DivSugar.cssPerspective in div.style);
-    ok(DivSugar.cssPerspectiveOrigin in div.style);
-    ok(DivSugar.cssBackfaceVisibility in div.style);
-
-    strictEqual(typeof DivSugar.requestAnimationFrame, 'function');
+    strictEqual(typeof DivSugar.browserPrefix, 'string');
   });
 
   test('inherit', function() {
