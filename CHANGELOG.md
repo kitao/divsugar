@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+DivSugar 0.9.0
+--------------
+- Added the browserPrefix property to the DivSugar class
+
 DivSugar 0.8.0
 --------------
 - Added the change log
