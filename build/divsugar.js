@@ -5,9 +5,9 @@
 
   DivSugar = {
     _initialize: function() {
-      var updateTasks,
+      var div, requestAnimationFrame, updateTasks, userAgent,
         _this = this;
-      this.VERSION = '0.8.0';
+      this.VERSION = '0.9.0';
       this.EPSILON = 0.0001;
       this.NUM_OF_DIGITS = 4;
       this.DEG_TO_RAD = Math.PI / 180;
@@ -15,78 +15,75 @@
       console.log("DivSugar: version " + this.VERSION);
       this._curId = 0;
       this.rootTask = null;
-      (function() {
-        var div, requestAnimationFrame, userAgent;
-        userAgent = navigator.userAgent.toLowerCase();
-        if (userAgent.indexOf('safari') > -1 || userAgent.indexOf('chrome') > -1) {
-          _this._prefix = 'webkit';
-        } else if (userAgent.indexOf('firefox') > -1) {
-          _this._prefix = 'moz';
-        } else if (userAgent.indexOf('opera') > -1) {
-          _this._prefix = 'o';
-        } else if (userAgent.indexOf('msie') > -1) {
-          _this._prefix = 'ms';
-        } else {
-          _this._prefix = null;
-        }
-        console.log("DivSugar: use '" + _this._prefix + "' as prefix");
-        div = document.createElement('div');
-        _this.cssTransform = "-" + _this._prefix + "-transform";
-        if (!(_this.cssTransform in div.style)) {
-          _this.cssTransform = 'transform';
-        }
-        console.log("DivSugar: use '" + _this.cssTransform + "'");
-        _this.cssTransformStyle = "-" + _this._prefix + "-transform-style";
-        if (!(_this.cssTransformStyle in div.style)) {
-          _this.cssTransformStyle = 'transform-style';
-        }
-        console.log("DivSugar: use '" + _this.cssTransformStyle + "'");
-        _this.cssTransformOrigin = "-" + _this._prefix + "-transform-origin";
-        if (!(_this.cssTransformOrigin in div.style)) {
-          _this.cssTransformOrigin = 'transform-origin';
-        }
-        console.log("DivSugar: use '" + _this.cssTransformOrigin + "'");
-        _this.cssPerspective = "-" + _this._prefix + "-perspective";
-        if (!(_this.cssPerspective in div.style)) {
-          _this.cssPerspective = 'perspective';
-        }
-        console.log("DivSugar: use '" + _this.cssPerspective + "'");
-        _this.cssPerspectiveOrigin = "-" + _this._prefix + "-perspective-origin";
-        if (!(_this.cssPerspectiveOrigin in div.style)) {
-          _this.cssPerspectiveOrigin = 'perspective-origin';
-        }
-        console.log("DivSugar: use '" + _this.cssPerspectiveOrigin + "'");
-        _this.cssBackfaceVisibility = "-" + _this._prefix + "-backface-visibility";
-        if (!(_this.cssBackfaceVisibility in div.style)) {
-          _this.cssBackfaceVisibility = 'backface-visibility';
-        }
-        console.log("DivSugar: use '" + _this.cssBackfaceVisibility + "'");
-        requestAnimationFrame = _this._prefix + 'RequestAnimationFrame';
-        if (!(requestAnimationFrame in window)) {
-          requestAnimationFrame = 'requestAnimationFrame';
-        }
-        if (window[requestAnimationFrame] != null) {
-          _this.requestAnimationFrame = function(callback) {
-            return window[requestAnimationFrame](callback);
-          };
-          return console.log("DivSugar: use '" + requestAnimationFrame + "'");
-        } else {
-          _this.requestAnimationFrame = function(callback) {
-            return window.setTimeout(callback, 1000 / 60);
-          };
-          return console.log("DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'");
-        }
-      })();
+      userAgent = navigator.userAgent.toLowerCase();
+      if (userAgent.indexOf('safari') > -1 || userAgent.indexOf('chrome') > -1) {
+        this.browserPrefix = '-webkit-';
+      } else if (userAgent.indexOf('firefox') > -1) {
+        this.browserPrefix = '-moz-';
+      } else if (userAgent.indexOf('opera') > -1) {
+        this.browserPrefix = '-o-';
+      } else if (userAgent.indexOf('msie') > -1) {
+        this.browserPrefix = '-ms-';
+      } else {
+        this.browserPrefix = '';
+      }
+      console.log("DivSugar: use '" + this.browserPrefix + "' as the prefix");
+      div = document.createElement('div');
+      this._cssTransform = this.browserPrefix + 'transform';
+      if (!(this._cssTransform in div.style)) {
+        this._cssTransform = 'transform';
+      }
+      console.log("DivSugar: use '" + this._cssTransform + "'");
+      this._cssTransformStyle = this.browserPrefix + 'transform-style';
+      if (!(this._cssTransformStyle in div.style)) {
+        this._cssTransformStyle = 'transform-style';
+      }
+      console.log("DivSugar: use '" + this._cssTransformStyle + "'");
+      this._cssTransformOrigin = this.browserPrefix + 'transform-origin';
+      if (!(this._cssTransformOrigin in div.style)) {
+        this._cssTransformOrigin = 'transform-origin';
+      }
+      console.log("DivSugar: use '" + this._cssTransformOrigin + "'");
+      this._cssPerspective = this.browserPrefix + 'perspective';
+      if (!(this._cssPerspective in div.style)) {
+        this._cssPerspective = 'perspective';
+      }
+      console.log("DivSugar: use '" + this._cssPerspective + "'");
+      this._cssPerspectiveOrigin = this.browserPrefix + 'perspective-origin';
+      if (!(this._cssPerspectiveOrigin in div.style)) {
+        this._cssPerspectiveOrigin = 'perspective-origin';
+      }
+      console.log("DivSugar: use '" + this._cssPerspectiveOrigin + "'");
+      this._cssBackfaceVisibility = this.browserPrefix + 'backface-visibility';
+      if (!(this._cssBackfaceVisibility in div.style)) {
+        this._cssBackfaceVisibility = 'backface-visibility';
+      }
+      console.log("DivSugar: use '" + this._cssBackfaceVisibility + "'");
+      requestAnimationFrame = this.browserPrefix.substring(1, this.browserPrefix.length - 1) + 'RequestAnimationFrame';
+      if (!(requestAnimationFrame in window)) {
+        requestAnimationFrame = 'requestAnimationFrame';
+      }
+      if (window[requestAnimationFrame] != null) {
+        this._requestAnimationFrame = function(callback) {
+          return window[requestAnimationFrame](callback);
+        };
+        console.log("DivSugar: use '" + requestAnimationFrame + "'");
+      } else {
+        this._requestAnimationFrame = function(callback) {
+          return window.setTimeout(callback, 1000 / 60);
+        };
+        console.log("DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'");
+      }
       updateTasks = function() {
         var curTime, deltaTime;
         curTime = new Date().getTime();
         deltaTime = curTime - _this._lastUpdatedTime;
         _this._lastUpdatedTime = curTime;
         _this.rootTask.update(deltaTime);
-        return _this.requestAnimationFrame(updateTasks);
+        return _this._requestAnimationFrame(updateTasks);
       };
       this._lastUpdatedTime = new Date().getTime();
-      return this.requestAnimationFrame(updateTasks);
+      return this._requestAnimationFrame(updateTasks);
     },
     inherit: function(C, P) {
       var F;
@@ -700,9 +697,9 @@
       this.div.style.padding = '0px';
       this.div.style.position = 'relative';
       this.div.style.overflow = 'hidden';
-      this.div.style[DivSugar.cssTransformStyle] = 'preserve-3d';
-      this.div.style[DivSugar.cssTransformOrigin] = '0% 0%';
-      this.div.style[DivSugar.cssPerspectiveOrigin] = '50% 50%';
+      this.div.style[DivSugar._cssTransformStyle] = 'preserve-3d';
+      this.div.style[DivSugar._cssTransformOrigin] = '0% 0%';
+      this.div.style[DivSugar._cssPerspectiveOrigin] = '50% 50%';
       this.div.sugar = this;
       this._isScene = true;
       this._rootNode = new DivSugar.Node();
@@ -751,7 +748,7 @@
     Scene.prototype.setViewAngle = function(viewAngle) {
       this._viewAngle = viewAngle;
       this._perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * this._viewWidth / 2;
-      this.div.style[DivSugar.cssPerspective] = "" + (this._perspective.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
+      this.div.style[DivSugar._cssPerspective] = "" + (this._perspective.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       return this;
     };
 
@@ -941,8 +938,8 @@
       this.div.style.margin = '0px';
       this.div.style.padding = '0px';
       this.div.style.position = 'absolute';
-      this.div.style[DivSugar.cssTransformStyle] = 'preserve-3d';
-      this.div.style[DivSugar.cssTransformOrigin] = '0% 0%';
+      this.div.style[DivSugar._cssTransformStyle] = 'preserve-3d';
+      this.div.style[DivSugar._cssTransformOrigin] = '0% 0%';
       this.div.sugar = this;
       this._transform = new DivSugar.Matrix();
       this._animTasks = [];
@@ -1038,7 +1035,7 @@
         default:
           throw 'DivSugar: invalid number of arguments';
       }
-      this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
       return this;
     };
 
@@ -1049,7 +1046,7 @@
 
     Node.prototype.setTransform = function(mat) {
       this._transform.set(mat);
-      this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
       return this;
     };
 
@@ -1063,7 +1060,7 @@
 
     Node.prototype.setBackface = function(backface) {
       this._backface = backface;
-      this.div.style[DivSugar.cssBackfaceVisibility] = backface ? 'visible' : 'hidden';
+      this.div.style[DivSugar._cssBackfaceVisibility] = backface ? 'visible' : 'hidden';
       return this;
     };
 
@@ -1094,7 +1091,7 @@
         throw 'DivSugar: invalid number of arguments';
       }
       this._transform.translate(offsetX, offsetY, offsetZ);
-      this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
       return this;
     };
 
@@ -1103,7 +1100,7 @@
         throw 'DivSugar: invalid number of arguments';
       }
       this._transform.rotate(rotateX, rotateY, rotateZ);
-      this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
       return this;
     };
 
@@ -1112,7 +1109,7 @@
         throw 'DivSugar: invalid number of arguments';
       }
       this._transform.scale(scaleX, scaleY, scaleZ);
-      this.div.style[DivSugar.cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
       return this;
     };
 

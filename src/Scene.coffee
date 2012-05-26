@@ -6,9 +6,9 @@ class DivSugar.Scene
     @div.style.padding = '0px'
     @div.style.position = 'relative'
     @div.style.overflow = 'hidden'
-    @div.style[DivSugar.cssTransformStyle] = 'preserve-3d'
-    @div.style[DivSugar.cssTransformOrigin] = '0% 0%'
-    @div.style[DivSugar.cssPerspectiveOrigin] = '50% 50%'
+    @div.style[DivSugar._cssTransformStyle] = 'preserve-3d'
+    @div.style[DivSugar._cssTransformOrigin] = '0% 0%'
+    @div.style[DivSugar._cssPerspectiveOrigin] = '50% 50%'
     @div.sugar = @
 
     @_isScene = true
@@ -45,7 +45,7 @@ class DivSugar.Scene
   setViewAngle: (viewAngle) ->
     @_viewAngle = viewAngle
     @_perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * @_viewWidth / 2
-    @div.style[DivSugar.cssPerspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @div.style[DivSugar._cssPerspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getWidth: -> @_width

@@ -5,8 +5,8 @@ class DivSugar.Node
     @div.style.margin = '0px'
     @div.style.padding = '0px'
     @div.style.position = 'absolute'
-    @div.style[DivSugar.cssTransformStyle] = 'preserve-3d'
-    @div.style[DivSugar.cssTransformOrigin] = '0% 0%'
+    @div.style[DivSugar._cssTransformStyle] = 'preserve-3d'
+    @div.style[DivSugar._cssTransformOrigin] = '0% 0%'
     @div.sugar = @
 
     @_transform = new DivSugar.Matrix()
@@ -71,7 +71,7 @@ class DivSugar.Node
       else
         throw 'DivSugar: invalid number of arguments'
 
-    @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
     return @
 
   getTransform: (mat) ->
@@ -80,7 +80,7 @@ class DivSugar.Node
 
   setTransform: (mat) ->
     @_transform.set mat
-    @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
     return @
 
   getVisible: DivSugar.Scene.prototype.getVisible
@@ -90,7 +90,7 @@ class DivSugar.Node
 
   setBackface: (backface) ->
     @_backface = backface
-    @div.style[DivSugar.cssBackfaceVisibility] = if backface then 'visible' else 'hidden'
+    @div.style[DivSugar._cssBackfaceVisibility] = if backface then 'visible' else 'hidden'
     return @
 
   getClip: DivSugar.Scene.prototype.getClip
@@ -113,7 +113,7 @@ class DivSugar.Node
       throw 'DivSugar: invalid number of arguments'
 
     @_transform.translate offsetX, offsetY, offsetZ
-    @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
     return @
 
   rotate: (rotateX, rotateY, rotateZ) ->
@@ -121,7 +121,7 @@ class DivSugar.Node
       throw 'DivSugar: invalid number of arguments'
 
     @_transform.rotate rotateX, rotateY, rotateZ
-    @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
     return @
 
   scale: (scaleX, scaleY, scaleZ) ->
@@ -129,7 +129,7 @@ class DivSugar.Node
       throw 'DivSugar: invalid number of arguments'
 
     @_transform.scale scaleX, scaleY, scaleZ
-    @div.style[DivSugar.cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
     return @
 
   playAnimation: (animation) ->

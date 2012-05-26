@@ -1,7 +1,7 @@
 DivSugar =
   _initialize: ->
     # initialize constants
-    @VERSION = '0.8.0'
+    @VERSION = '0.9.0'
     @EPSILON = 0.0001
     @NUM_OF_DIGITS = 4
     @DEG_TO_RAD = Math.PI / 180
@@ -14,55 +14,54 @@ DivSugar =
     @rootTask = null
 
     # cross-browser support
-    do =>
-      userAgent = navigator.userAgent.toLowerCase()
-      if userAgent.indexOf('safari') > -1 or userAgent.indexOf('chrome') > -1
-        @_prefix = 'webkit'
-      else if userAgent.indexOf('firefox') > -1
-        @_prefix = 'moz'
-      else if userAgent.indexOf('opera') > -1
-        @_prefix = 'o'
-      else if userAgent.indexOf('msie') > -1
-        @_prefix = 'ms'
-      else
-        @_prefix = null
-      console.log "DivSugar: use '#{@_prefix}' as prefix"
+    userAgent = navigator.userAgent.toLowerCase()
+    if userAgent.indexOf('safari') > -1 or userAgent.indexOf('chrome') > -1
+      @browserPrefix = '-webkit-'
+    else if userAgent.indexOf('firefox') > -1
+      @browserPrefix = '-moz-'
+    else if userAgent.indexOf('opera') > -1
+      @browserPrefix = '-o-'
+    else if userAgent.indexOf('msie') > -1
+      @browserPrefix = '-ms-'
+    else
+      @browserPrefix = ''
+    console.log "DivSugar: use '#{@browserPrefix}' as the prefix"
 
-      div = document.createElement 'div'
+    div = document.createElement 'div'
 
-      @cssTransform = "-#{@_prefix}-transform"
-      @cssTransform = 'transform' unless @cssTransform of div.style
-      console.log "DivSugar: use '#{@cssTransform}'"
+    @_cssTransform = @browserPrefix + 'transform'
+    @_cssTransform = 'transform' unless @_cssTransform of div.style
+    console.log "DivSugar: use '#{@_cssTransform}'"
 
-      @cssTransformStyle = "-#{@_prefix}-transform-style"
-      @cssTransformStyle = 'transform-style' unless @cssTransformStyle of div.style
-      console.log "DivSugar: use '#{@cssTransformStyle}'"
+    @_cssTransformStyle = @browserPrefix + 'transform-style'
+    @_cssTransformStyle = 'transform-style' unless @_cssTransformStyle of div.style
+    console.log "DivSugar: use '#{@_cssTransformStyle}'"
 
-      @cssTransformOrigin = "-#{@_prefix}-transform-origin"
-      @cssTransformOrigin = 'transform-origin' unless @cssTransformOrigin of div.style
-      console.log "DivSugar: use '#{@cssTransformOrigin}'"
+    @_cssTransformOrigin = @browserPrefix + 'transform-origin'
+    @_cssTransformOrigin = 'transform-origin' unless @_cssTransformOrigin of div.style
+    console.log "DivSugar: use '#{@_cssTransformOrigin}'"
 
-      @cssPerspective = "-#{@_prefix}-perspective"
-      @cssPerspective = 'perspective' unless @cssPerspective of div.style
-      console.log "DivSugar: use '#{@cssPerspective}'"
+    @_cssPerspective = @browserPrefix + 'perspective'
+    @_cssPerspective = 'perspective' unless @_cssPerspective of div.style
+    console.log "DivSugar: use '#{@_cssPerspective}'"
 
-      @cssPerspectiveOrigin = "-#{@_prefix}-perspective-origin"
-      @cssPerspectiveOrigin = 'perspective-origin' unless @cssPerspectiveOrigin of div.style
-      console.log "DivSugar: use '#{@cssPerspectiveOrigin}'"
+    @_cssPerspectiveOrigin = @browserPrefix + 'perspective-origin'
+    @_cssPerspectiveOrigin = 'perspective-origin' unless @_cssPerspectiveOrigin of div.style
+    console.log "DivSugar: use '#{@_cssPerspectiveOrigin}'"
 
-      @cssBackfaceVisibility = "-#{@_prefix}-backface-visibility"
-      @cssBackfaceVisibility = 'backface-visibility' unless @cssBackfaceVisibility of div.style
-      console.log "DivSugar: use '#{@cssBackfaceVisibility}'"
+    @_cssBackfaceVisibility = @browserPrefix + 'backface-visibility'
+    @_cssBackfaceVisibility = 'backface-visibility' unless @_cssBackfaceVisibility of div.style
+    console.log "DivSugar: use '#{@_cssBackfaceVisibility}'"
 
-      requestAnimationFrame = @_prefix + 'RequestAnimationFrame'
-      requestAnimationFrame = 'requestAnimationFrame' unless requestAnimationFrame of window
+    requestAnimationFrame = @browserPrefix.substring(1, @browserPrefix.length - 1) + 'RequestAnimationFrame'
+    requestAnimationFrame = 'requestAnimationFrame' unless requestAnimationFrame of window
 
-      if window[requestAnimationFrame]?
-        @requestAnimationFrame = (callback) => window[requestAnimationFrame] callback
-        console.log "DivSugar: use '#{requestAnimationFrame}'"
-      else
-        @requestAnimationFrame = (callback) -> window.setTimeout callback, 1000 / 60 # TBD
-        console.log "DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'"
+    if window[requestAnimationFrame]?
+      @_requestAnimationFrame = (callback) => window[requestAnimationFrame] callback
+      console.log "DivSugar: use '#{requestAnimationFrame}'"
+    else
+      @_requestAnimationFrame = (callback) -> window.setTimeout callback, 1000 / 60 # TBD
+      console.log "DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'"
 
     # start tasks
     updateTasks = =>
@@ -70,10 +69,10 @@ DivSugar =
       deltaTime = curTime - @_lastUpdatedTime
       @_lastUpdatedTime = curTime
       @rootTask.update deltaTime
-      @requestAnimationFrame updateTasks
+      @_requestAnimationFrame updateTasks
 
     @_lastUpdatedTime = new Date().getTime()
-    @requestAnimationFrame updateTasks
+    @_requestAnimationFrame updateTasks
 
   inherit: (C, P) ->
     F = ->
