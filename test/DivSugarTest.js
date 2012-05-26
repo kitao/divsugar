@@ -64,4 +64,12 @@
 
     ok(DivSugar.getImageSize('', function() {}).getImageSize('', function() {}));
   });
+
+  test('getCSSColor', function() {
+    strictEqual(DivSugar.getCSSColor(16, 17, 18), '#101112');
+    strictEqual(DivSugar.getCSSColor(10.1, 10.2, 10.3), '#0a0a0a');
+    strictEqual(DivSugar.getCSSColor(10.7, 10.8, 10.9), '#0b0b0b');
+    strictEqual(DivSugar.getCSSColor(-1, -2, -3), '#000000');
+    strictEqual(DivSugar.getCSSColor(301, 302, 303), '#ffffff');
+  });
 })();

@@ -105,6 +105,27 @@
         return callback(image.width, image.height);
       };
       return this;
+    },
+    getCSSColor: function(r, g, b) {
+      r = Math.floor(r + 0.5);
+      g = Math.floor(g + 0.5);
+      b = Math.floor(b + 0.5);
+      r = r < 0 ? 0 : r > 255 ? 255 : r;
+      g = g < 0 ? 0 : g > 255 ? 255 : g;
+      b = b < 0 ? 0 : b > 255 ? 255 : b;
+      r = r.toString(16);
+      g = g.toString(16);
+      b = b.toString(16);
+      if (r.length <= 1) {
+        r = '0' + r;
+      }
+      if (g.length <= 1) {
+        g = '0' + g;
+      }
+      if (b.length <= 1) {
+        b = '0' + b;
+      }
+      return '#' + r + g + b;
     }
   };
 

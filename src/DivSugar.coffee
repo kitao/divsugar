@@ -90,4 +90,23 @@ DivSugar =
     image.onload = -> callback(image.width, image.height)
     return @
 
+  getCSSColor: (r, g, b) ->
+    r = Math.floor r + 0.5
+    g = Math.floor g + 0.5
+    b = Math.floor b + 0.5
+
+    r = if r < 0 then 0 else if r > 255 then 255 else r
+    g = if g < 0 then 0 else if g > 255 then 255 else g
+    b = if b < 0 then 0 else if b > 255 then 255 else b
+
+    r = r.toString 16
+    g = g.toString 16
+    b = b.toString 16
+
+    r = '0' + r if r.length <= 1
+    g = '0' + g if g.length <= 1
+    b = '0' + b if b.length <= 1
+
+    return '#' + r + g + b
+
 (window.DivSugar = DivSugar)._initialize()
