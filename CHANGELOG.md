@@ -3,6 +3,7 @@ Change Log
 
 DivSugar 0.9.0
 --------------
+- Added the getCSSColor method to the DivSugar class
 - Added the browserPrefix property to the DivSugar class
 
 DivSugar 0.8.0
