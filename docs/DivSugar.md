@@ -37,4 +37,5 @@ Methods
 inherit( C, P )
 generateId()
 getImageSize( src, callback )
+getCSSColor( r, g, b )
 ```
