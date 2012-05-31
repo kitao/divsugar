@@ -16,47 +16,48 @@ DivSugar =
     # cross-browser support
     userAgent = navigator.userAgent.toLowerCase()
     if userAgent.indexOf('safari') > -1 or userAgent.indexOf('chrome') > -1
-      @browserPrefix = '-webkit-'
+      @browserPrefix = 'webkit'
     else if userAgent.indexOf('firefox') > -1
-      @browserPrefix = '-moz-'
+      @browserPrefix = 'Moz'
     else if userAgent.indexOf('opera') > -1
-      @browserPrefix = '-o-'
+      @browserPrefix = 'o'
     else if userAgent.indexOf('msie') > -1
-      @browserPrefix = '-ms-'
+      @browserPrefix = 'ms'
     else
       @browserPrefix = ''
-    console.log "DivSugar: use '#{@browserPrefix}' as the prefix"
+    console.log "DivSugar: use '#{@browserPrefix}' as the browser prefix"
 
+    props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility']
     div = document.createElement 'div'
+    error = false
 
-    @_cssTransform = @browserPrefix + 'transform'
-    @_cssTransform = 'transform' unless @_cssTransform of div.style
-    console.log "DivSugar: use '#{@_cssTransform}'"
+    for prop in props
+      upperProp = prop.charAt(0).toUpperCase() + prop.substring(1)
+      prefixProp = @browserPrefix + upperProp
+      propName = '_css' + upperProp
 
-    @_cssTransformStyle = @browserPrefix + 'transform-style'
-    @_cssTransformStyle = 'transform-style' unless @_cssTransformStyle of div.style
-    console.log "DivSugar: use '#{@_cssTransformStyle}'"
+      if prop of div.style
+        @[propName] = prop
+      else if prefixProp of div.style
+        @[propName] = prefixProp
 
-    @_cssTransformOrigin = @browserPrefix + 'transform-origin'
-    @_cssTransformOrigin = 'transform-origin' unless @_cssTransformOrigin of div.style
-    console.log "DivSugar: use '#{@_cssTransformOrigin}'"
+      if @[propName] of div.style
+        console.log "DivSugar: use '#{@[propName]}'"
+      else
+        error = true
 
-    @_cssPerspective = @browserPrefix + 'perspective'
-    @_cssPerspective = 'perspective' unless @_cssPerspective of div.style
-    console.log "DivSugar: use '#{@_cssPerspective}'"
+    if error
+      msg = 'DivSugar: Unsupported browser'
+      alert msg
+      throw msg
 
-    @_cssPerspectiveOrigin = @browserPrefix + 'perspective-origin'
-    @_cssPerspectiveOrigin = 'perspective-origin' unless @_cssPerspectiveOrigin of div.style
-    console.log "DivSugar: use '#{@_cssPerspectiveOrigin}'"
+    if 'requestAnimationFrame' of window
+      requestAnimationFrame = 'requestAnimationFrame'
+    else
+      raf = @browserPrefix.charAt(0).toLowerCase() + @browserPrefix.substring(1) + 'RequestAnimationFrame'
+      requestAnimationFrame = raf if raf of window
 
-    @_cssBackfaceVisibility = @browserPrefix + 'backface-visibility'
-    @_cssBackfaceVisibility = 'backface-visibility' unless @_cssBackfaceVisibility of div.style
-    console.log "DivSugar: use '#{@_cssBackfaceVisibility}'"
-
-    requestAnimationFrame = @browserPrefix.substring(1, @browserPrefix.length - 1) + 'RequestAnimationFrame'
-    requestAnimationFrame = 'requestAnimationFrame' unless requestAnimationFrame of window
-
-    if window[requestAnimationFrame]?
+    if requestAnimationFrame?
       @_requestAnimationFrame = (callback) => window[requestAnimationFrame] callback
       console.log "DivSugar: use '#{requestAnimationFrame}'"
     else
