@@ -22,7 +22,7 @@ window.onload = function() {
   var lightDir = new DivSugar.Vector(1, 1, -2).normalize();
 
   //
-  function Box(x, y, z, width, height, depth) {
+  function Box(x, y, z, sx, sy, sz) {
     this.constructor.uber.constructor();
 
     this.faces = [];
@@ -34,17 +34,17 @@ window.onload = function() {
       this.faces[i] = new DivSugar.Node().setImage('#00ff00').appendTo(this.center);
     }
 
-    this.faces[0].setSize(width, depth).setPosition(-width / 2, -height / 2, -depth / 2).rotate(90, 0, 0);
-    this.faces[1].setSize(width, height).setPosition(-width / 2, -height / 2, depth / 2);
-    this.faces[2].setSize(depth, height).setPosition(-width / 2, -height / 2, -depth / 2).rotate(0, -90, 0);
-    this.faces[3].setSize(width, height).setPosition(width / 2, -height / 2, -depth / 2).rotate(0, 180, 0);
-    this.faces[4].setSize(depth, height).setPosition(width / 2, -height / 2, depth / 2).rotate(0, 90, 0);
-    this.faces[5].setSize(width, depth).setPosition(-width / 2, height / 2, -depth / 2).rotate(90, 0, 0);
+    this.faces[0].setSize(sx, sy).setPosition(-sx / 2, -sy / 2, sz / 2);
+    this.faces[1].setSize(sz, sy).setPosition(sx / 2, -sy / 2, sz / 2).rotate(0, 90, 0);
+    this.faces[2].setSize(sx, sy).setPosition(sx / 2, -sy / 2, -sz / 2).rotate(0, 180, 0);
+    this.faces[3].setSize(sz, sy).setPosition(-sx / 2, -sy / 2, -sz / 2).rotate(0, 270, 0);
+    this.faces[4].setSize(sx, sz).setPosition(-sx / 2, -sy / 2, -sz / 2).rotate(90, 0, 0);
+    this.faces[5].setSize(sx, sz).setPosition(-sx / 2, sy / 2, sz / 2).rotate(-90, 0, 0);
 
     this.label = new DivSugar.Node().setSize(100, 40).appendTo(scn);
     this.label.div.innerHTML = '<h3 style="text-align:center; color:white">AAAA</h3>';
 
-    this.center.rotate(90, 0, 90);
+    //this.center.rotate(180, 0, 0);
   }
 
   DivSugar.inherit(Box, DivSugar.Task);
@@ -52,11 +52,11 @@ window.onload = function() {
   Box.prototype.onUpdate = function() {
     this.center.getWorldTransform(mat);
 
-    this.colors[0] = Math.max(mat.yAxis.dot(lightDir), 0) * 191 + 64;
-    this.colors[1] = Math.max(-mat.zAxis.dot(lightDir), 0) * 191 + 64;
-    this.colors[2] = Math.max(mat.xAxis.dot(lightDir), 0) * 191 + 64;
-    this.colors[3] = Math.max(mat.zAxis.dot(lightDir), 0) * 191 + 64;
-    this.colors[4] = Math.max(-mat.xAxis.dot(lightDir), 0) * 191 + 64;
+    this.colors[0] = Math.max(-mat.zAxis.dot(lightDir), 0) * 191 + 64;
+    this.colors[1] = Math.max(-mat.xAxis.dot(lightDir), 0) * 191 + 64;
+    this.colors[2] = Math.max(mat.zAxis.dot(lightDir), 0) * 191 + 64;
+    this.colors[3] = Math.max(mat.xAxis.dot(lightDir), 0) * 191 + 64;
+    this.colors[4] = Math.max(mat.yAxis.dot(lightDir), 0) * 191 + 64;
     this.colors[5] = Math.max(-mat.yAxis.dot(lightDir), 0) * 191 + 64;
 
     for (var i = 0; i < 6; i++) {
