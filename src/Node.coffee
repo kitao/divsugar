@@ -69,7 +69,7 @@ class DivSugar.Node
         @_transform.trans.y = y
         @_transform.trans.z = z
       else
-        throw 'DivSugar: invalid number of arguments'
+        throw 'DivSugar: Invalid number of arguments'
 
     @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
     return @
@@ -110,7 +110,7 @@ class DivSugar.Node
 
   translate: (offsetX, offsetY, offsetZ) ->
     if arguments.length isnt 3
-      throw 'DivSugar: invalid number of arguments'
+      throw 'DivSugar: Invalid number of arguments'
 
     @_transform.translate offsetX, offsetY, offsetZ
     @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
@@ -118,7 +118,7 @@ class DivSugar.Node
 
   rotate: (rotateX, rotateY, rotateZ) ->
     if arguments.length isnt 3
-      throw 'DivSugar: invalid number of arguments'
+      throw 'DivSugar: Invalid number of arguments'
 
     @_transform.rotate rotateX, rotateY, rotateZ
     @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
@@ -126,7 +126,7 @@ class DivSugar.Node
 
   scale: (scaleX, scaleY, scaleZ) ->
     if arguments.length isnt 3
-      throw 'DivSugar: invalid number of arguments'
+      throw 'DivSugar: Invalid number of arguments'
 
     @_transform.scale scaleX, scaleY, scaleZ
     @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
@@ -174,7 +174,7 @@ class DivSugar.Node
                 when 'translate'  then animTask._fromTransform ?= new DivSugar.Matrix @_transform
                 when 'rotate'     then animTask._fromTransform ?= new DivSugar.Matrix @_transform
                 when 'scale'      then animTask._fromTransform ?= new DivSugar.Matrix @_transform
-                else throw "DivSugar: unknown animation parameter '#{param}'"
+                else throw "DivSugar: Unknown animation parameter '#{param}'"
 
           @_transform.set animTask._fromTransform if animTask._fromTransform?
 
@@ -254,7 +254,7 @@ class DivSugar.Node
             animTask._firstFrame = true
 
         else
-          throw "DivSugar: unknown animation command '#{command[0]}'"
+          throw "DivSugar: Unknown animation command '#{command[0]}'"
 
   _destroyAnimation: (animTask) ->
     index = @_animTasks.indexOf animTask

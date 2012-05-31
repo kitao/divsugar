@@ -13,7 +13,7 @@ class DivSugar.Vector
         @y = y
         @z = z
       else
-        throw 'DivSugar: invalid number of arguments'
+        throw 'DivSugar: Invalid number of arguments'
 
   set: (x, y, z) ->
     switch arguments.length
@@ -27,7 +27,7 @@ class DivSugar.Vector
         @y = y
         @z = z
       else
-        throw 'DivSugar: invalid number of arguments'
+        throw 'DivSugar: Invalid number of arguments'
 
     return @
 
@@ -80,7 +80,7 @@ class DivSugar.Vector
 
   rotate: (rotateX, rotateY, rotateZ) ->
     if arguments.length isnt 3
-      throw 'DivSugar: invalid number of arguments'
+      throw 'DivSugar: Invalid number of arguments'
 
     if rotateX isnt 0
       sin = Math.sin rotateX * DivSugar.DEG_TO_RAD

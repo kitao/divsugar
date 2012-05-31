@@ -69,7 +69,7 @@ class DivSugar.Scene
 
   setPosition: (x, y) ->
     if arguments.length isnt 2
-      throw 'DivSugar: invalid number of arguments'
+      throw 'DivSugar: Invalid number of arguments'
 
     @_positionX = x
     @_positionY = y
