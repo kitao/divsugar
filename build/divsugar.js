@@ -5,7 +5,7 @@
 
   DivSugar = {
     _initialize: function() {
-      var div, requestAnimationFrame, updateTasks, userAgent,
+      var div, error, msg, prefixProp, prop, props, raf, requestAnimationFrame, updateTasks, upperProp, userAgent, varName, _i, _len,
         _this = this;
       this.VERSION = '0.9.0';
       this.EPSILON = 0.0001;
@@ -17,53 +17,50 @@
       this.rootTask = null;
       userAgent = navigator.userAgent.toLowerCase();
       if (userAgent.indexOf('safari') > -1 || userAgent.indexOf('chrome') > -1) {
-        this.browserPrefix = '-webkit-';
+        this.browserPrefix = 'webkit';
       } else if (userAgent.indexOf('firefox') > -1) {
-        this.browserPrefix = '-moz-';
+        this.browserPrefix = 'Moz';
       } else if (userAgent.indexOf('opera') > -1) {
-        this.browserPrefix = '-o-';
+        this.browserPrefix = 'o';
       } else if (userAgent.indexOf('msie') > -1) {
-        this.browserPrefix = '-ms-';
+        this.browserPrefix = 'ms';
       } else {
         this.browserPrefix = '';
       }
-      console.log("DivSugar: use '" + this.browserPrefix + "' as the prefix");
+      console.log("DivSugar: use '" + this.browserPrefix + "' as the browser prefix");
+      props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility'];
       div = document.createElement('div');
-      this._cssTransform = this.browserPrefix + 'transform';
-      if (!(this._cssTransform in div.style)) {
-        this._cssTransform = 'transform';
+      error = false;
+      for (_i = 0, _len = props.length; _i < _len; _i++) {
+        prop = props[_i];
+        upperProp = prop.charAt(0).toUpperCase() + prop.substring(1);
+        prefixProp = this.browserPrefix + upperProp;
+        varName = '_css' + upperProp;
+        if (prop in div.style) {
+          this[varName] = prop;
+        } else if (prefixProp in div.style) {
+          this[varName] = prefixProp;
+        }
+        if (this[varName] in div.style) {
+          console.log("DivSugar: use '" + this[varName] + "'");
+        } else {
+          error = true;
+        }
       }
-      console.log("DivSugar: use '" + this._cssTransform + "'");
-      this._cssTransformStyle = this.browserPrefix + 'transform-style';
-      if (!(this._cssTransformStyle in div.style)) {
-        this._cssTransformStyle = 'transform-style';
+      if (error) {
+        msg = 'DivSugar: Unsupported browser';
+        alert(msg);
+        throw msg;
       }
-      console.log("DivSugar: use '" + this._cssTransformStyle + "'");
-      this._cssTransformOrigin = this.browserPrefix + 'transform-origin';
-      if (!(this._cssTransformOrigin in div.style)) {
-        this._cssTransformOrigin = 'transform-origin';
-      }
-      console.log("DivSugar: use '" + this._cssTransformOrigin + "'");
-      this._cssPerspective = this.browserPrefix + 'perspective';
-      if (!(this._cssPerspective in div.style)) {
-        this._cssPerspective = 'perspective';
-      }
-      console.log("DivSugar: use '" + this._cssPerspective + "'");
-      this._cssPerspectiveOrigin = this.browserPrefix + 'perspective-origin';
-      if (!(this._cssPerspectiveOrigin in div.style)) {
-        this._cssPerspectiveOrigin = 'perspective-origin';
-      }
-      console.log("DivSugar: use '" + this._cssPerspectiveOrigin + "'");
-      this._cssBackfaceVisibility = this.browserPrefix + 'backface-visibility';
-      if (!(this._cssBackfaceVisibility in div.style)) {
-        this._cssBackfaceVisibility = 'backface-visibility';
-      }
-      console.log("DivSugar: use '" + this._cssBackfaceVisibility + "'");
-      requestAnimationFrame = this.browserPrefix.substring(1, this.browserPrefix.length - 1) + 'RequestAnimationFrame';
-      if (!(requestAnimationFrame in window)) {
+      if ('requestAnimationFrame' in window) {
         requestAnimationFrame = 'requestAnimationFrame';
+      } else {
+        raf = this.browserPrefix.charAt(0).toLowerCase() + this.browserPrefix.substring(1) + 'RequestAnimationFrame';
+        if (raf in window) {
+          requestAnimationFrame = raf;
+        }
       }
-      if (window[requestAnimationFrame] != null) {
+      if (requestAnimationFrame != null) {
         this._requestAnimationFrame = function(callback) {
           return window[requestAnimationFrame](callback);
         };
@@ -151,7 +148,7 @@
           this.z = z;
           break;
         default:
-          throw 'DivSugar: invalid number of arguments';
+          throw 'DivSugar: Invalid number of arguments';
       }
     }
 
@@ -170,7 +167,7 @@
           this.z = z;
           break;
         default:
-          throw 'DivSugar: invalid number of arguments';
+          throw 'DivSugar: Invalid number of arguments';
       }
       return this;
     };
@@ -249,7 +246,7 @@
     Vector.prototype.rotate = function(rotateX, rotateY, rotateZ) {
       var cos, sin;
       if (arguments.length !== 3) {
-        throw 'DivSugar: invalid number of arguments';
+        throw 'DivSugar: Invalid number of arguments';
       }
       if (rotateX !== 0) {
         sin = Math.sin(rotateX * DivSugar.DEG_TO_RAD);
@@ -363,7 +360,7 @@
           this.trans = new DivSugar.Vector(arguments[9], arguments[10], arguments[11]);
           break;
         default:
-          throw 'DivSugar: invalid number of arguments';
+          throw 'DivSugar: Invalid number of arguments';
       }
     }
 
@@ -382,7 +379,7 @@
           this.trans.set(arguments[9], arguments[10], arguments[11]);
           break;
         default:
-          throw 'DivSugar: invalid number of arguments';
+          throw 'DivSugar: Invalid number of arguments';
       }
       return this;
     };
@@ -426,7 +423,7 @@
     Matrix.prototype.translate = function(offsetX, offsetY, offsetZ) {
       var vec1, vec2, vec3;
       if (arguments.length !== 3) {
-        throw 'DivSugar: invalid number of arguments';
+        throw 'DivSugar: Invalid number of arguments';
       }
       vec1 = DivSugar.Matrix._tmpVec1;
       vec2 = DivSugar.Matrix._tmpVec2;
@@ -441,7 +438,7 @@
     Matrix.prototype.rotate = function(rotateX, rotateY, rotateZ) {
       var cos, mat, sin;
       if (arguments.length !== 3) {
-        throw 'DivSugar: invalid number of arguments';
+        throw 'DivSugar: Invalid number of arguments';
       }
       if (rotateX !== 0) {
         sin = Math.sin(rotateX * DivSugar.DEG_TO_RAD);
@@ -469,7 +466,7 @@
 
     Matrix.prototype.scale = function(scaleX, scaleY, scaleZ) {
       if (arguments.length !== 3) {
-        throw 'DivSugar: invalid number of arguments';
+        throw 'DivSugar: Invalid number of arguments';
       }
       this.xAxis.mul(scaleX);
       this.yAxis.mul(scaleY);
@@ -605,7 +602,7 @@
           this.w = w;
           break;
         default:
-          throw 'DivSugar: invalid number of arguments';
+          throw 'DivSugar: Invalid number of arguments';
       }
     }
 
@@ -626,7 +623,7 @@
           this.w = w;
           break;
         default:
-          throw 'DivSugar: invalid number of arguments';
+          throw 'DivSugar: Invalid number of arguments';
       }
       return this;
     };
@@ -817,7 +814,7 @@
 
     Scene.prototype.setPosition = function(x, y) {
       if (arguments.length !== 2) {
-        throw 'DivSugar: invalid number of arguments';
+        throw 'DivSugar: Invalid number of arguments';
       }
       this._positionX = x;
       this._positionY = y;
@@ -1054,7 +1051,7 @@
           this._transform.trans.z = z;
           break;
         default:
-          throw 'DivSugar: invalid number of arguments';
+          throw 'DivSugar: Invalid number of arguments';
       }
       this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
       return this;
@@ -1109,7 +1106,7 @@
 
     Node.prototype.translate = function(offsetX, offsetY, offsetZ) {
       if (arguments.length !== 3) {
-        throw 'DivSugar: invalid number of arguments';
+        throw 'DivSugar: Invalid number of arguments';
       }
       this._transform.translate(offsetX, offsetY, offsetZ);
       this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
@@ -1118,7 +1115,7 @@
 
     Node.prototype.rotate = function(rotateX, rotateY, rotateZ) {
       if (arguments.length !== 3) {
-        throw 'DivSugar: invalid number of arguments';
+        throw 'DivSugar: Invalid number of arguments';
       }
       this._transform.rotate(rotateX, rotateY, rotateZ);
       this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
@@ -1127,7 +1124,7 @@
 
     Node.prototype.scale = function(scaleX, scaleY, scaleZ) {
       if (arguments.length !== 3) {
-        throw 'DivSugar: invalid number of arguments';
+        throw 'DivSugar: Invalid number of arguments';
       }
       this._transform.scale(scaleX, scaleY, scaleZ);
       this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
@@ -1217,7 +1214,7 @@
                     }
                     break;
                   default:
-                    throw "DivSugar: unknown animation parameter '" + param + "'";
+                    throw "DivSugar: Unknown animation parameter '" + param + "'";
                 }
               }
             }
@@ -1324,7 +1321,7 @@
             }
             break;
           default:
-            throw "DivSugar: unknown animation command '" + command[0] + "'";
+            throw "DivSugar: Unknown animation command '" + command[0] + "'";
         }
       }
     };
