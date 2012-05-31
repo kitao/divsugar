@@ -5,7 +5,7 @@
 
   DivSugar = {
     _initialize: function() {
-      var div, error, msg, prefixProp, prop, props, raf, requestAnimationFrame, updateTasks, upperProp, userAgent, varName, _i, _len,
+      var div, error, msg, prefixProp, prop, propName, props, raf, requestAnimationFrame, updateTasks, upperProp, userAgent, _i, _len,
         _this = this;
       this.VERSION = '0.9.0';
       this.EPSILON = 0.0001;
@@ -35,14 +35,14 @@
         prop = props[_i];
         upperProp = prop.charAt(0).toUpperCase() + prop.substring(1);
         prefixProp = this.browserPrefix + upperProp;
-        varName = '_css' + upperProp;
+        propName = '_css' + upperProp;
         if (prop in div.style) {
-          this[varName] = prop;
+          this[propName] = prop;
         } else if (prefixProp in div.style) {
-          this[varName] = prefixProp;
+          this[propName] = prefixProp;
         }
-        if (this[varName] in div.style) {
-          console.log("DivSugar: use '" + this[varName] + "'");
+        if (this[propName] in div.style) {
+          console.log("DivSugar: use '" + this[propName] + "'");
         } else {
           error = true;
         }
