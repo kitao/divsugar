@@ -3,6 +3,7 @@ Change Log
 
 DivSugar 0.9.0
 --------------
+- Added the example of lighting and billboard
 - Modified the way of cross-browser CSS handling for FireFox
 - Modified the message for the exceptions
 - Added the getCSSColor method to the DivSugar class
