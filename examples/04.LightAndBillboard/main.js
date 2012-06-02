@@ -8,31 +8,27 @@ window.onload = function() {
   window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
   window.onresize();
 
-  //
-  var root = new DivSugar.Node().appendTo(scn);
-  root.setPosition(400, 400, 0).rotate(-40, 40, 0);
+  // create the root node to rotate the whole scene
+  var root = new DivSugar.Node().setPosition(400, 300, 0).rotate(-50, 0, 0).appendTo(scn);
+  root.playAnimation([['to', { rotate: [0, 30, 30] }, 1000], ['repeat']]);
 
-  root.playAnimation([
-    ['to', { position: [400, 400, 0], rotate: [0, 30, 5] }, 1000],
-    ['repeat']
-  ]);
-
-  var vec = new DivSugar.Vector();
+  // Define a 3D object class which refrects light and has a text billboard
   var mat = new DivSugar.Matrix();
   var lightDir = new DivSugar.Vector(1, 1, -2).normalize();
 
-  //
-  function Box(x, y, z, sx, sy, sz) {
+  function Monolith(name, x, z) {
     this.constructor.uber.constructor();
 
     this.faces = [];
     this.colors = [];
 
-    this.center = new DivSugar.Node().setPosition(x, y, z).setOpacity(0.6).appendTo(root);
+    this.center = new DivSugar.Node().setPosition(x, 0, z).setOpacity(0.6).rotate(0, Math.random() * 360, 0).appendTo(root);
 
-    for (var i = 0; i < 6; i++) {
-      this.faces[i] = new DivSugar.Node().setImage('#00ff00').appendTo(this.center);
-    }
+    for (var i = 0; i < 6; i++) { this.faces[i] = new DivSugar.Node().setImage('#00ff00').appendTo(this.center); }
+
+    var sx = Math.random() * 30 + 30;
+    var sy = Math.random() * 100 + 50;
+    var sz = Math.random() * 30 + 30;
 
     this.faces[0].setSize(sx, sy).setPosition(-sx / 2, -sy / 2, sz / 2);
     this.faces[1].setSize(sz, sy).setPosition(sx / 2, -sy / 2, sz / 2).rotate(0, 90, 0);
@@ -41,17 +37,16 @@ window.onload = function() {
     this.faces[4].setSize(sx, sz).setPosition(-sx / 2, -sy / 2, -sz / 2).rotate(90, 0, 0);
     this.faces[5].setSize(sx, sz).setPosition(-sx / 2, sy / 2, sz / 2).rotate(-90, 0, 0);
 
-    this.label = new DivSugar.Node().setSize(100, 40).appendTo(scn);
-    this.label.div.innerHTML = '<h3 style="text-align:center; color:white">AAAA</h3>';
-
-    //this.center.rotate(180, 0, 0);
+    this.label = new DivSugar.Node().setSize(100, 0).appendTo(scn);
+    this.label.div.innerHTML = '<h3 style="text-align:center; color:white">' + name + '</h3>';
   }
 
-  DivSugar.inherit(Box, DivSugar.Task);
+  DivSugar.inherit(Monolith, DivSugar.Task);
 
-  Box.prototype.onUpdate = function() {
+  Monolith.prototype.onUpdate = function() {
     this.center.getWorldTransform(mat);
 
+    // calculate the color of the faces
     this.colors[0] = Math.max(-mat.zAxis.dot(lightDir), 0) * 191 + 64;
     this.colors[1] = Math.max(-mat.xAxis.dot(lightDir), 0) * 191 + 64;
     this.colors[2] = Math.max(mat.zAxis.dot(lightDir), 0) * 191 + 64;
@@ -63,13 +58,17 @@ window.onload = function() {
       this.faces[i].setImage(DivSugar.getCSSColor(0, this.colors[i], 0));
     }
 
+    // update the position of the text billboard
     this.label.setPosition(mat.trans);
-    this.label.setPosition(mat.trans.x - this.label.getWidth() / 2, mat.trans.y - this.label.getHeight() / 2, mat.trans.z + 100);
+    this.label.setPosition(mat.trans.x - 50, mat.trans.y - 30, mat.trans.z + 70);
   };
 
-  Box.prototype.onDestroy = function() { scn.remove(this.center); };
+  Monolith.prototype.onDestroy = function() { scn.remove(this.center); };
 
-  // create and register instances of the animation class
-  new Box(0, -150, 0, 100, 80, 100).appendTo(DivSugar.rootTask);
-  new Box(150, -200, 0, 40, 60, 50).appendTo(DivSugar.rootTask);
+  // create and register the instances
+  var rad;
+  for (var i = 0; i < 10; i++) {
+    rad = DivSugar.DEG_TO_RAD * 36 * i;
+    new Monolith('000' + i, Math.cos(rad) * 200, Math.sin(rad) * 200).appendTo(DivSugar.rootTask);
+  }
 };
