@@ -8,7 +8,7 @@ window.onload = function() {
   window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
   window.onresize();
 
-  // create the root node to rotate the whole scene
+  // create the root node and an animation task to rotate the whole scene
   var root = new DivSugar.Node().setPosition(400, 300, 0).rotate(-50, 0, 0).appendTo(scn);
   var task = new DivSugar.Task().appendTo(DivSugar.rootTask);
   task.onUpdate = function() { root.rotate(0, this.deltaTime * 0.02, this.deltaTime * 0.015); };
@@ -24,7 +24,6 @@ window.onload = function() {
     this.colors = [];
 
     this.center = new DivSugar.Node().setPosition(x, 0, z).setOpacity(0.6).rotate(0, Math.random() * 360, 0).appendTo(root);
-
     for (var i = 0; i < 6; i++) { this.faces[i] = new DivSugar.Node().setImage('#00ff00').appendTo(this.center); }
 
     var sx = Math.random() * 30 + 30;
@@ -55,12 +54,9 @@ window.onload = function() {
     this.colors[4] = Math.max(mat.yAxis.dot(lightDir), 0) * 191 + 64;
     this.colors[5] = Math.max(-mat.yAxis.dot(lightDir), 0) * 191 + 64;
 
-    for (var i = 0; i < 6; i++) {
-      this.faces[i].setImage(DivSugar.getCSSColor(0, this.colors[i], 0));
-    }
+    for (var i = 0; i < 6; i++) { this.faces[i].setImage(DivSugar.getCSSColor(0, this.colors[i], 0)); }
 
     // update the position of the text billboard
-    this.label.setPosition(mat.trans);
     this.label.setPosition(mat.trans.x - 50, mat.trans.y - 30, mat.trans.z + 80);
   };
 
