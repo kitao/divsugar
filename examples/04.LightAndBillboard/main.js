@@ -10,7 +10,8 @@ window.onload = function() {
 
   // create the root node to rotate the whole scene
   var root = new DivSugar.Node().setPosition(400, 300, 0).rotate(-50, 0, 0).appendTo(scn);
-  root.playAnimation([['to', { rotate: [0, 30, 30] }, 1000], ['repeat']]);
+  var task = new DivSugar.Task().appendTo(DivSugar.rootTask);
+  task.onUpdate = function() { root.rotate(0, this.deltaTime * 0.02, this.deltaTime * 0.015); };
 
   // Define a 3D object class which refrects light and has a text billboard
   var mat = new DivSugar.Matrix();
@@ -60,7 +61,7 @@ window.onload = function() {
 
     // update the position of the text billboard
     this.label.setPosition(mat.trans);
-    this.label.setPosition(mat.trans.x - 50, mat.trans.y - 30, mat.trans.z + 70);
+    this.label.setPosition(mat.trans.x - 50, mat.trans.y - 30, mat.trans.z + 80);
   };
 
   Monolith.prototype.onDestroy = function() { scn.remove(this.center); };
