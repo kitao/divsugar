@@ -6,15 +6,19 @@ class DivSugar.Scene
     @div.style.padding = '0px'
     @div.style.position = 'relative'
     @div.style.overflow = 'hidden'
-    @div.style[DivSugar._cssTransformStyle] = 'preserve-3d'
-    @div.style[DivSugar._cssTransformOrigin] = '0% 0%'
-    @div.style[DivSugar._cssPerspectiveOrigin] = '50% 50%'
     @div.sugar = @
 
     @_isScene = true
+
+    @_centerNode = new DivSugar.Node()
+    @_centerNode.div.style[DivSugar._cssTransformOrigin] = '0 0'
+    @_centerNode.div.style[DivSugar._cssPerspectiveOrigin] = '0 0'
+    @_centerNode.div.sugar = @
+    @div.appendChild @_centerNode.div
+
     @_rootNode = new DivSugar.Node()
     @_rootNode.div.sugar = @
-    @div.appendChild @_rootNode.div
+    @_centerNode.div.appendChild @_rootNode.div
 
     @setViewAngle 45
     @setSize 400, 300
@@ -45,7 +49,7 @@ class DivSugar.Scene
   setViewAngle: (viewAngle) ->
     @_viewAngle = viewAngle
     @_perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * @_viewWidth / 2
-    @div.style[DivSugar._cssPerspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
+    @_centerNode.div.style[DivSugar._cssPerspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getWidth: -> @_width
@@ -60,7 +64,8 @@ class DivSugar.Scene
     @_viewHeight = viewHeight
     @div.style.width = "#{width.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     @div.style.height = "#{height.toFixed(DivSugar.NUM_OF_DIGITS)}px"
-    @_rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1)
+    @_centerNode.setPosition(width / 2, height / 2, 0)
+    @_rootNode.setTransform(DivSugar.Matrix.UNIT).setPosition(-width / 2, -height / 2, 0).scale(width / viewWidth, height / viewHeight, 1)
     @setViewAngle @_viewAngle
     return @
 
