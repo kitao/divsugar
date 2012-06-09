@@ -50,7 +50,7 @@ class DivSugar.Scene
   setViewAngle: (viewAngle) ->
     @_viewAngle = viewAngle
     @_perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * @_viewWidth / 2
-    @_centerNode.div.style[DivSugar._cssPerspective] = "#{Math.floor(@_perspective.toFixed(DivSugar.NUM_OF_DIGITS))}px"
+    @_centerNode.div.style[DivSugar._cssPerspective] = "#{@_perspective.toFixed(DivSugar.NUM_OF_DIGITS)}px"
     return @
 
   getWidth: -> @_width

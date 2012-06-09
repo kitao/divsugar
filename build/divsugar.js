@@ -767,7 +767,7 @@
     Scene.prototype.setViewAngle = function(viewAngle) {
       this._viewAngle = viewAngle;
       this._perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * this._viewWidth / 2;
-      this._centerNode.div.style[DivSugar._cssPerspective] = "" + (Math.floor(this._perspective.toFixed(DivSugar.NUM_OF_DIGITS))) + "px";
+      this._centerNode.div.style[DivSugar._cssPerspective] = "" + (this._perspective.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       return this;
     };
 
