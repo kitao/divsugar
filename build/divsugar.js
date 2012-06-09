@@ -5,7 +5,7 @@
 
   DivSugar = {
     _initialize: function() {
-      var div, error, msg, prefixProp, prop, propName, props, raf, requestAnimationFrame, updateTasks, upperProp, userAgent, _i, _len,
+      var div, error, msg, prefix, prefixFuncName, prefixProp, prefixes, prop, propName, props, requestAnimationFrame, updateTasks, upperProp, _i, _j, _k, _len, _len1, _len2,
         _this = this;
       this.VERSION = '0.9.0';
       this.EPSILON = 0.0001;
@@ -15,33 +15,27 @@
       console.log("DivSugar: version " + this.VERSION);
       this._curId = 0;
       this.rootTask = null;
-      userAgent = navigator.userAgent.toLowerCase();
-      if (userAgent.indexOf('safari') > -1 || userAgent.indexOf('chrome') > -1) {
-        this.browserPrefix = 'webkit';
-      } else if (userAgent.indexOf('firefox') > -1) {
-        this.browserPrefix = 'Moz';
-      } else if (userAgent.indexOf('opera') > -1) {
-        this.browserPrefix = 'o';
-      } else if (userAgent.indexOf('msie') > -1) {
-        this.browserPrefix = 'ms';
-      } else {
-        this.browserPrefix = '';
-      }
-      console.log("DivSugar: use '" + this.browserPrefix + "' as the browser prefix");
+      prefixes = ['webkit', 'Moz', 'o', 'ms'];
       props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility'];
       div = document.createElement('div');
       error = false;
       for (_i = 0, _len = props.length; _i < _len; _i++) {
         prop = props[_i];
         upperProp = prop.charAt(0).toUpperCase() + prop.substring(1);
-        prefixProp = this.browserPrefix + upperProp;
         propName = '_css' + upperProp;
         if (prop in div.style) {
           this[propName] = prop;
-        } else if (prefixProp in div.style) {
-          this[propName] = prefixProp;
+        } else {
+          for (_j = 0, _len1 = prefixes.length; _j < _len1; _j++) {
+            prefix = prefixes[_j];
+            prefixProp = prefix + upperProp;
+            if (prefixProp in div.style) {
+              this[propName] = prefixProp;
+              break;
+            }
+          }
         }
-        if (this[propName] in div.style) {
+        if (this[propName] != null) {
           console.log("DivSugar: use '" + this[propName] + "'");
         } else {
           error = true;
@@ -55,9 +49,13 @@
       if ('requestAnimationFrame' in window) {
         requestAnimationFrame = 'requestAnimationFrame';
       } else {
-        raf = this.browserPrefix.charAt(0).toLowerCase() + this.browserPrefix.substring(1) + 'RequestAnimationFrame';
-        if (raf in window) {
-          requestAnimationFrame = raf;
+        for (_k = 0, _len2 = prefixes.length; _k < _len2; _k++) {
+          prefix = prefixes[_k];
+          prefixFuncName = prefix.charAt(0).toLowerCase() + prefix.substring(1) + 'RequestAnimationFrame';
+          if (prefixFuncName in window) {
+            requestAnimationFrame = prefixFuncName;
+            break;
+          }
         }
       }
       if (requestAnimationFrame != null) {

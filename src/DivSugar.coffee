@@ -14,34 +14,27 @@ DivSugar =
     @rootTask = null
 
     # cross-browser support
-    userAgent = navigator.userAgent.toLowerCase()
-    if userAgent.indexOf('safari') > -1 or userAgent.indexOf('chrome') > -1
-      @browserPrefix = 'webkit'
-    else if userAgent.indexOf('firefox') > -1
-      @browserPrefix = 'Moz'
-    else if userAgent.indexOf('opera') > -1
-      @browserPrefix = 'o'
-    else if userAgent.indexOf('msie') > -1
-      @browserPrefix = 'ms'
-    else
-      @browserPrefix = ''
-    console.log "DivSugar: use '#{@browserPrefix}' as the browser prefix"
-
+    prefixes = ['webkit', 'Moz', 'o', 'ms']
     props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility']
+
     div = document.createElement 'div'
     error = false
 
     for prop in props
       upperProp = prop.charAt(0).toUpperCase() + prop.substring(1)
-      prefixProp = @browserPrefix + upperProp
       propName = '_css' + upperProp
 
       if prop of div.style
         @[propName] = prop
-      else if prefixProp of div.style
-        @[propName] = prefixProp
+      else
+        for prefix in prefixes
+          prefixProp = prefix + upperProp
 
-      if @[propName] of div.style
+          if prefixProp of div.style
+            @[propName] = prefixProp
+            break
+
+      if @[propName]?
         console.log "DivSugar: use '#{@[propName]}'"
       else
         error = true
@@ -54,8 +47,12 @@ DivSugar =
     if 'requestAnimationFrame' of window
       requestAnimationFrame = 'requestAnimationFrame'
     else
-      raf = @browserPrefix.charAt(0).toLowerCase() + @browserPrefix.substring(1) + 'RequestAnimationFrame'
-      requestAnimationFrame = raf if raf of window
+      for prefix in prefixes
+        prefixFuncName = prefix.charAt(0).toLowerCase() + prefix.substring(1) + 'RequestAnimationFrame'
+
+        if prefixFuncName of window
+          requestAnimationFrame = prefixFuncName
+          break
 
     if requestAnimationFrame?
       @_requestAnimationFrame = (callback) => window[requestAnimationFrame] callback

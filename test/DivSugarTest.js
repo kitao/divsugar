@@ -13,7 +13,6 @@
 
   test('properties', function() {
     strictEqual(DivSugar.rootTask instanceof DivSugar.Task, true);
-    strictEqual(typeof DivSugar.browserPrefix, 'string');
   });
 
   test('inherit', function() {
