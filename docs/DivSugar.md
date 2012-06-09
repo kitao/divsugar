@@ -17,7 +17,6 @@ Properties
 
 ```javascript
 rootTask
-browserPrefix
 ```
 
 ```javascript
