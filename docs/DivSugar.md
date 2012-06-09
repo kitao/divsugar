@@ -19,16 +19,6 @@ Properties
 rootTask
 ```
 
-```javascript
-cssTransform
-cssTransformStyle
-cssTransformOrigin
-cssPerspective
-cssPerspectiveOrigin
-cssBackfaceVisibility
-requestAnimationFrame
-```
-
 Methods
 -------
 
