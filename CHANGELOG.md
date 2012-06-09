@@ -3,14 +3,14 @@ Change Log
 
 DivSugar 0.9.5
 --------------
-- Fixed the perspective origin error on FireFox
+- Fixed the perspective origin error on Firefox
 - Changed the way of cross-browser support
 - Removed the browserPrefix property of the DivSugar class
 
 DivSugar 0.9.0
 --------------
 - Added the example of lighting and billboard
-- Modified the way of cross-browser CSS handling for FireFox
+- Modified the way of cross-browser CSS handling for Firefox
 - Modified the message for the exceptions
 - Added the getCSSColor method to the DivSugar class
 - Added the browserPrefix property to the DivSugar class
