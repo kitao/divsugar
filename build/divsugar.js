@@ -7,7 +7,7 @@
     _initialize: function() {
       var div, error, msg, prefix, prefixFuncName, prefixProp, prefixes, prop, propName, props, requestAnimationFrame, updateTasks, upperProp, _i, _j, _k, _len, _len1, _len2,
         _this = this;
-      this.VERSION = '1.0.0';
+      this.VERSION = '0.9.5';
       this.EPSILON = 0.0001;
       this.NUM_OF_DIGITS = 4;
       this.DEG_TO_RAD = Math.PI / 180;
@@ -713,14 +713,17 @@
       this.div.style.padding = '0px';
       this.div.style.position = 'relative';
       this.div.style.overflow = 'hidden';
-      this.div.style[DivSugar._cssTransformStyle] = 'preserve-3d';
-      this.div.style[DivSugar._cssTransformOrigin] = '0% 0%';
-      this.div.style[DivSugar._cssPerspectiveOrigin] = '50% 50%';
       this.div.sugar = this;
       this._isScene = true;
+      this._viewWidth = 1;
+      this._centerNode = new DivSugar.Node();
+      this._centerNode.div.style[DivSugar._cssTransformOrigin] = '0 0';
+      this._centerNode.div.style[DivSugar._cssPerspectiveOrigin] = '0 0';
+      this._centerNode.div.sugar = this;
+      this.div.appendChild(this._centerNode.div);
       this._rootNode = new DivSugar.Node();
       this._rootNode.div.sugar = this;
-      this.div.appendChild(this._rootNode.div);
+      this._centerNode.div.appendChild(this._rootNode.div);
       this.setViewAngle(45);
       this.setSize(400, 300);
       this.setPosition(0, 0);
@@ -764,7 +767,7 @@
     Scene.prototype.setViewAngle = function(viewAngle) {
       this._viewAngle = viewAngle;
       this._perspective = Math.tan((90 - viewAngle / 2) * DivSugar.DEG_TO_RAD) * this._viewWidth / 2;
-      this.div.style[DivSugar._cssPerspective] = "" + (this._perspective.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
+      this._centerNode.div.style[DivSugar._cssPerspective] = "" + (Math.floor(this._perspective.toFixed(DivSugar.NUM_OF_DIGITS))) + "px";
       return this;
     };
 
@@ -797,7 +800,8 @@
       this._viewHeight = viewHeight;
       this.div.style.width = "" + (width.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
       this.div.style.height = "" + (height.toFixed(DivSugar.NUM_OF_DIGITS)) + "px";
-      this._rootNode.setTransform(DivSugar.Matrix.UNIT).scale(width / viewWidth, height / viewHeight, 1);
+      this._centerNode.setPosition(width / 2, height / 2, 0);
+      this._rootNode.setTransform(DivSugar.Matrix.UNIT).setPosition(-width / 2, -height / 2, 0).scale(width / viewWidth, height / viewHeight, 1);
       this.setViewAngle(this._viewAngle);
       return this;
     };

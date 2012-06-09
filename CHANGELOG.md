@@ -1,8 +1,10 @@
 Change Log
 ==========
 
-DivSugar 1.0.0
+DivSugar 0.9.5
 --------------
+- Fixed the perspective origin error on FireFox
+- Changed the way of cross-browser support
 - Removed the browserPrefix property of the DivSugar class
 
 DivSugar 0.9.0
