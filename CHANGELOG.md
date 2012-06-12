@@ -3,6 +3,7 @@ Change Log
 
 DivSugar 1.0.0
 --------------
+- Added the animation commands and properties to the API docs
 - Added the type of the return values to the API docs
 - Added the support for Opera partly (only use 2D Transforms)
 - Added the toCSSTransform2D method to the Matrix class
