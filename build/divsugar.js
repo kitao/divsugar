@@ -5,20 +5,20 @@
 
   DivSugar = {
     _initialize: function() {
-      var div, error, msg, prefix, prefixFuncName, prefixProp, prefixes, prop, propName, props, requestAnimationFrame, updateTasks, upperProp, _i, _j, _k, _len, _len1, _len2,
+      var div, prefix, prefixFuncName, prefixProp, prefixes, prop, propName, props, requestAnimationFrame, updateTasks, upperProp, _i, _j, _k, _len, _len1, _len2,
         _this = this;
-      this.VERSION = '0.9.5';
+      this.VERSION = '1.0.0';
       this.EPSILON = 0.0001;
       this.NUM_OF_DIGITS = 4;
       this.DEG_TO_RAD = Math.PI / 180;
       this.RAD_TO_DEG = 180 / Math.PI;
-      console.log("DivSugar: version " + this.VERSION);
-      this._curId = 0;
+      console.log("DivSugar: Version " + this.VERSION);
       this.rootTask = null;
+      this._currentId = 0;
+      this._css3DTransforms = true;
       prefixes = ['webkit', 'Moz', 'O', 'ms'];
       props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility'];
       div = document.createElement('div');
-      error = false;
       for (_i = 0, _len = props.length; _i < _len; _i++) {
         prop = props[_i];
         upperProp = prop.charAt(0).toUpperCase() + prop.substring(1);
@@ -36,15 +36,14 @@
           }
         }
         if (this[propName] != null) {
-          console.log("DivSugar: use '" + this[propName] + "'");
+          console.log("DivSugar: Use '" + this[propName] + "'");
         } else {
-          error = true;
+          console.log("DivSugar: Can't find '" + prop + "'");
+          this._css3DTransforms = false;
         }
       }
-      if (error) {
-        msg = 'DivSugar: Unsupported browser';
-        alert(msg);
-        throw msg;
+      if (!this._css3DTransforms) {
+        alert("DivSugar: This browser doen't support 'CSS 3D Transforms'");
       }
       if ('requestAnimationFrame' in window) {
         requestAnimationFrame = 'requestAnimationFrame';
@@ -62,12 +61,12 @@
         this._requestAnimationFrame = function(callback) {
           return window[requestAnimationFrame](callback);
         };
-        console.log("DivSugar: use '" + requestAnimationFrame + "'");
+        console.log("DivSugar: Use '" + requestAnimationFrame + "'");
       } else {
         this._requestAnimationFrame = function(callback) {
           return window.setTimeout(callback, 1000 / 60);
         };
-        console.log("DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'");
+        console.log("DivSugar: Can't find 'requestAnimationFrame'");
       }
       updateTasks = function() {
         var curTime, deltaTime;
@@ -90,7 +89,7 @@
       return this;
     },
     generateId: function() {
-      return "_divsugar_id_" + (++this._curId);
+      return "_divsugar_id_" + (++this._currentId);
     },
     getImageSize: function(src, callback) {
       var image;
@@ -558,7 +557,13 @@
       return "(" + (this.xAxis.toString()) + ", " + (this.yAxis.toString()) + ", " + (this.zAxis.toString()) + ", " + (this.trans.toString()) + ")";
     };
 
-    Matrix.prototype.toCSSTransform = function() {
+    Matrix.prototype.toCSSTransform2D = function() {
+      var nod;
+      nod = DivSugar.NUM_OF_DIGITS;
+      return 'matrix(' + ("" + (this.xAxis.x.toFixed(nod)) + ", " + (this.xAxis.y.toFixed(nod)) + ", ") + ("" + (this.yAxis.x.toFixed(nod)) + ", " + (this.yAxis.y.toFixed(nod)) + ", ") + ("" + (this.trans.x.toFixed(nod)) + ", " + (this.trans.y.toFixed(nod)) + ")");
+    };
+
+    Matrix.prototype.toCSSTransform3D = function() {
       var nod;
       nod = DivSugar.NUM_OF_DIGITS;
       return 'matrix3d(' + ("" + (this.xAxis.x.toFixed(nod)) + ", " + (this.xAxis.y.toFixed(nod)) + ", " + (this.xAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.yAxis.x.toFixed(nod)) + ", " + (this.yAxis.y.toFixed(nod)) + ", " + (this.yAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.zAxis.x.toFixed(nod)) + ", " + (this.zAxis.y.toFixed(nod)) + ", " + (this.zAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.trans.x.toFixed(nod)) + ", " + (this.trans.y.toFixed(nod)) + ", " + (this.trans.z.toFixed(nod)) + ", 1)");
@@ -567,6 +572,12 @@
     return Matrix;
 
   })();
+
+  if (DivSugar._css3DTransforms) {
+    DivSugar.Matrix.prototype._toCSSTransform = DivSugar.Matrix.prototype.toCSSTransform3D;
+  } else {
+    DivSugar.Matrix.prototype._toCSSTransform = DivSugar.Matrix.prototype.toCSSTransform2D;
+  }
 
   DivSugar.Matrix.UNIT = new DivSugar.Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0);
 
@@ -1055,7 +1066,7 @@
         default:
           throw 'DivSugar: Invalid number of arguments';
       }
-      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform._toCSSTransform();
       return this;
     };
 
@@ -1066,7 +1077,7 @@
 
     Node.prototype.setTransform = function(mat) {
       this._transform.set(mat);
-      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform._toCSSTransform();
       return this;
     };
 
@@ -1111,7 +1122,7 @@
         throw 'DivSugar: Invalid number of arguments';
       }
       this._transform.translate(offsetX, offsetY, offsetZ);
-      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform._toCSSTransform();
       return this;
     };
 
@@ -1120,7 +1131,7 @@
         throw 'DivSugar: Invalid number of arguments';
       }
       this._transform.rotate(rotateX, rotateY, rotateZ);
-      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform._toCSSTransform();
       return this;
     };
 
@@ -1129,7 +1140,7 @@
         throw 'DivSugar: Invalid number of arguments';
       }
       this._transform.scale(scaleX, scaleY, scaleZ);
-      this.div.style[DivSugar._cssTransform] = this._transform.toCSSTransform();
+      this.div.style[DivSugar._cssTransform] = this._transform._toCSSTransform();
       return this;
     };
 
