@@ -1,24 +1,23 @@
 DivSugar =
   _initialize: ->
     # initialize constants
-    @VERSION = '0.9.5'
+    @VERSION = '1.0.0'
     @EPSILON = 0.0001
     @NUM_OF_DIGITS = 4
     @DEG_TO_RAD = Math.PI / 180
     @RAD_TO_DEG = 180 / Math.PI
 
-    console.log "DivSugar: version #{@VERSION}"
+    console.log "DivSugar: Version #{@VERSION}"
 
     # initialize properties
-    @_curId = 0
     @rootTask = null
+    @_currentId = 0
+    @_css3DTransforms = true
 
     # cross-browser support
     prefixes = ['webkit', 'Moz', 'O', 'ms']
     props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility']
-
     div = document.createElement 'div'
-    error = false
 
     for prop in props
       upperProp = prop.charAt(0).toUpperCase() + prop.substring(1)
@@ -35,14 +34,12 @@ DivSugar =
             break
 
       if @[propName]?
-        console.log "DivSugar: use '#{@[propName]}'"
+        console.log "DivSugar: Use '#{@[propName]}'"
       else
-        error = true
+        console.log "DivSugar: Can't find '#{prop}'"
+        @_css3DTransforms = false
 
-    if error
-      msg = 'DivSugar: Unsupported browser'
-      alert msg
-      throw msg
+    alert "DivSugar: This browser doen't support 'CSS 3D Transforms'" unless @_css3DTransforms
 
     if 'requestAnimationFrame' of window
       requestAnimationFrame = 'requestAnimationFrame'
@@ -56,10 +53,10 @@ DivSugar =
 
     if requestAnimationFrame?
       @_requestAnimationFrame = (callback) => window[requestAnimationFrame] callback
-      console.log "DivSugar: use '#{requestAnimationFrame}'"
+      console.log "DivSugar: Use '#{requestAnimationFrame}'"
     else
       @_requestAnimationFrame = (callback) -> window.setTimeout callback, 1000 / 60 # TBD
-      console.log "DivSugar: use 'setTimeout' instead of 'requestAnimationFrame'"
+      console.log "DivSugar: Can't find 'requestAnimationFrame'"
 
     # start tasks
     updateTasks = =>
@@ -80,7 +77,7 @@ DivSugar =
     C.prototype.constructor = C
     return @
 
-  generateId: -> "_divsugar_id_#{++@_curId}"
+  generateId: -> "_divsugar_id_#{++@_currentId}"
 
   getImageSize: (src, callback) ->
     image = new Image()
