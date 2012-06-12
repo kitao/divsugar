@@ -5,7 +5,7 @@
 
   DivSugar = {
     _initialize: function() {
-      var div, prefix, prefixFuncName, prefixProp, prefixes, prop, propName, props, requestAnimationFrame, updateTasks, upperProp, _i, _j, _k, _len, _len1, _len2,
+      var div, msg, prefix, prefixFuncName, prefixProp, prefixes, prop, propName, props, requestAnimationFrame, updateTasks, upperProp, _i, _j, _k, _len, _len1, _len2,
         _this = this;
       this.VERSION = '1.0.0';
       this.EPSILON = 0.0001;
@@ -43,7 +43,9 @@
         }
       }
       if (!this._css3DTransforms) {
-        alert("DivSugar: This browser doen't support 'CSS 3D Transforms'");
+        msg = "DivSugar: This browser doesn't support 'CSS 3D Transforms'";
+        console.log(msg);
+        alert(msg);
       }
       if ('requestAnimationFrame' in window) {
         requestAnimationFrame = 'requestAnimationFrame';

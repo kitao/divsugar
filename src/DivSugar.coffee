@@ -39,7 +39,10 @@ DivSugar =
         console.log "DivSugar: Can't find '#{prop}'"
         @_css3DTransforms = false
 
-    alert "DivSugar: This browser doen't support 'CSS 3D Transforms'" unless @_css3DTransforms
+    unless @_css3DTransforms
+      msg = "DivSugar: This browser doesn't support 'CSS 3D Transforms'"
+      console.log msg
+      alert msg
 
     if 'requestAnimationFrame' of window
       requestAnimationFrame = 'requestAnimationFrame'
