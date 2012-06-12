@@ -31,6 +31,13 @@ Methods
 -------
 
 ```javascript
+{Boolean} equal( mat )
+{String} toString()
+{String} toCSSTransform2D()
+{String} toCSSTransform3D()
+```
+
+```javascript
 {DivSugar.Matrix} set( mat )
 {DivSugar.Matrix} set( m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42m, m43 )
 {DivSugar.Matrix} fromQuaternion( quat )
@@ -45,11 +52,4 @@ Methods
 {DivSugar.Matrix} toLocal_noTrans( mat )
 {DivSugar.Matrix} toGlobal_noTrans( mat )
 {DivSugar.Matrix} lookAt( from, to, up )
-```
-
-```javascript
-{Boolean} equal( mat )
-{String} toString()
-{String} toCSSTransform2D()
-{String} toCSSTransform3D()
 ```

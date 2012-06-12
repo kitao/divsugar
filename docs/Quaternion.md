@@ -24,13 +24,13 @@ Methods
 -------
 
 ```javascript
+{Boolean} equal( quat )
+{String} toString()
+```
+
+```javascript
 {DivSugar.Quaternion} set( quat )
 {DivSugar.Quaternion} set( x, y, z, w )
 {DivSugar.Quaternion} fromMatrix( mat )
 {DivSugar.Quaternion} slerp( to, ratio )
-```
-
-```javascript
-{Boolean} equal( quat )
-{String} toString()
 ```
