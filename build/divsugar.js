@@ -15,7 +15,7 @@
       console.log("DivSugar: version " + this.VERSION);
       this._curId = 0;
       this.rootTask = null;
-      prefixes = ['webkit', 'Moz', 'o', 'ms'];
+      prefixes = ['webkit', 'Moz', 'O', 'ms'];
       props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility'];
       div = document.createElement('div');
       error = false;

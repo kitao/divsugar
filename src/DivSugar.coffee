@@ -14,7 +14,7 @@ DivSugar =
     @rootTask = null
 
     # cross-browser support
-    prefixes = ['webkit', 'Moz', 'o', 'ms']
+    prefixes = ['webkit', 'Moz', 'O', 'ms']
     props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility']
 
     div = document.createElement 'div'
