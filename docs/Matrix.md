@@ -50,5 +50,6 @@ lookAt( from, to, up )
 ```javascript
 equal( mat )
 toString()
-toCSSTransform()
+toCSSTransform2D()
+toCSSTransform3D()
 ```
