@@ -5,32 +5,32 @@ Constructors
 ------------
 
 ```javascript
-Task()
-Task( id )
+{DivSugar.Task} Task()
+{DivSugar.Task} Task( id )
 ```
 
 Properties
 ----------
 
 ```javascript
-active
-deltaTime
-onUpdate
-onDestroy
+{Boolean} active
+{Number} deltaTime
+{Function} onUpdate
+{Function} onDestroy
 ```
 
 Methods
 -------
 
 ```javascript
-getParent()
-getTaskById( id )
+{DivSugar.Task} getParent()
+{DivSugar.Task} getTaskById( id )
 ```
 
 ```javascript
-append( child )
-appendTo( parent )
-remove( child )
-update( deltaTime )
-destroy()
+{DivSugar.Task} append( child )
+{DivSugar.Task} appendTo( parent )
+{DivSugar.Task} remove( child )
+{DivSugar.Task} update( deltaTime )
+{DivSugar.Task} destroy()
 ```

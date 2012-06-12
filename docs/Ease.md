@@ -5,26 +5,26 @@ Methods
 -------
 
 ```javascript
-linear( t )
+{Number} linear( t )
 ```
 
 ```javascript
-quadIn( t )
-cubicIn( t )
-quartIn( t )
-quintIn( t )
+{Number} quadIn( t )
+{Number} cubicIn( t )
+{Number} quartIn( t )
+{Number} quintIn( t )
 ```
 
 ```javascript
-quadOut( t )
-cubicOut( t )
-quartOut( t )
-quintOut( t )
+{Number} quadOut( t )
+{Number} cubicOut( t )
+{Number} quartOut( t )
+{Number} quintOut( t )
 ```
 
 ```javascript
-quadInOut( t )
-cubicInOut( t )
-quartInOut( t )
-quintInOut( t )
+{Number} quadInOut( t )
+{Number} cubicInOut( t )
+{Number} quartInOut( t )
+{Number} quintInOut( t )
 ```

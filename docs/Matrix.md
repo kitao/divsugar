@@ -5,51 +5,51 @@ Constants
 ---------
 
 ```javascript
-UNIT
+{DivSugar.Matrix} UNIT
 ```
 
 Constructors
 ------------
 
 ```javascript
-Matrix()
-Matrix( mat )
-Matrix( m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42m, m43 )
+{DivSugar.Matrix} Matrix()
+{DivSugar.Matrix} Matrix( mat )
+{DivSugar.Matrix} Matrix( m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42m, m43 )
 ```
 
 Properties
 ----------
 
 ```javascript
-xAxis
-yAxis
-zAxis
-trans
+{DivSugar.Vector} xAxis
+{DivSugar.Vector} yAxis
+{DivSugar.Vector} zAxis
+{DivSugar.Vector} trans
 ```
 
 Methods
 -------
 
 ```javascript
-set( mat )
-set( m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42m, m43 )
-fromQuaternion( quat )
-orthonormalize()
-translate( offsetX, offsetY, offsetZ )
-rotate( rotateX, rotateY, rotateZ )
-scale( scaleX, scaleY, scaleZ )
-slerp( to, ratio )
-slerp_noTrans( to, ratio )
-toLocal( mat )
-toGlobal( mat )
-toLocal_noTrans( mat )
-toGlobal_noTrans( mat )
-lookAt( from, to, up )
+{DivSugar.Matrix} set( mat )
+{DivSugar.Matrix} set( m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42m, m43 )
+{DivSugar.Matrix} fromQuaternion( quat )
+{DivSugar.Matrix} orthonormalize()
+{DivSugar.Matrix} translate( offsetX, offsetY, offsetZ )
+{DivSugar.Matrix} rotate( rotateX, rotateY, rotateZ )
+{DivSugar.Matrix} scale( scaleX, scaleY, scaleZ )
+{DivSugar.Matrix} slerp( to, ratio )
+{DivSugar.Matrix} slerp_noTrans( to, ratio )
+{DivSugar.Matrix} toLocal( mat )
+{DivSugar.Matrix} toGlobal( mat )
+{DivSugar.Matrix} toLocal_noTrans( mat )
+{DivSugar.Matrix} toGlobal_noTrans( mat )
+{DivSugar.Matrix} lookAt( from, to, up )
 ```
 
 ```javascript
-equal( mat )
-toString()
-toCSSTransform2D()
-toCSSTransform3D()
+{Boolean} equal( mat )
+{String} toString()
+{String} toCSSTransform2D()
+{String} toCSSTransform3D()
 ```

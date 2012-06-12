@@ -5,32 +5,32 @@ Constructors
 ------------
 
 ```javascript
-Quaternion()
-Quaternion( quat )
-Quaternion( x, y, z, w )
+{DivSugar.Quaternion} Quaternion()
+{DivSugar.Quaternion} Quaternion( quat )
+{DivSugar.Quaternion} Quaternion( x, y, z, w )
 ```
 
 Properties
 ----------
 
 ```javascript
-x
-y
-z
-w
+{Number} x
+{Number} y
+{Number} z
+{Number} w
 ```
 
 Methods
 -------
 
 ```javascript
-set( quat )
-set( x, y, z, w )
-fromMatrix( mat )
-slerp( to, ratio )
+{DivSugar.Quaternion} set( quat )
+{DivSugar.Quaternion} set( x, y, z, w )
+{DivSugar.Quaternion} fromMatrix( mat )
+{DivSugar.Quaternion} slerp( to, ratio )
 ```
 
 ```javascript
-equal( quat )
-toString()
+{Boolean} equal( quat )
+{String} toString()
 ```

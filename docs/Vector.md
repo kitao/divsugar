@@ -5,57 +5,57 @@ Constants
 ---------
 
 ```javascript
-ZERO
-X_UNIT
-Y_UNIT
-Z_UNIT
+{DivSugar.Vector} ZERO
+{DivSugar.Vector} X_UNIT
+{DivSugar.Vector} Y_UNIT
+{DivSugar.Vector} Z_UNIT
 ```
 
 Constructors
 ------------
 
 ```javascript
-Vector()
-Vector( vec )
-Vector( x, y, z )
+{DivSugar.Vector} Vector()
+{DivSugar.Vector} Vector( vec )
+{DivSugar.Vector} Vector( x, y, z )
 ```
 
 Properties
 ----------
 
 ```javascript
-x
-y
-z
+{Number} x
+{Number} y
+{Number} z
 ```
 
 Methods
 -------
 
 ```javascript
-norm()
-sqNorm()
-dist( vec )
-sqDist( vec )
-dot( vec )
-equal( vec )
-toString()
+{Number} norm()
+{Number} sqNorm()
+{Number} dist( vec )
+{Number} sqDist( vec )
+{Number} dot( vec )
+{Boolean} equal( vec )
+{String} toString()
 ```
 
 ```javascript
-set( vec )
-set( x, y, z )
-neg()
-add( vec )
-sub( vec )
-mul( s )
-div( s )
-cross( vec )
-normalize()
-rotate( rotateX, rotateY, rotateZ )
-lerp( to, ratio )
-toLocal( mat )
-toGlobal( mat )
-toLocal_noTrans( mat )
-toGlobal_noTrans( mat )
+{DivSugar.Vector} set( vec )
+{DivSugar.Vector} set( x, y, z )
+{DivSugar.Vector} neg()
+{DivSugar.Vector} add( vec )
+{DivSugar.Vector} sub( vec )
+{DivSugar.Vector} mul( s )
+{DivSugar.Vector} div( s )
+{DivSugar.Vector} cross( vec )
+{DivSugar.Vector} normalize()
+{DivSugar.Vector} rotate( rotateX, rotateY, rotateZ )
+{DivSugar.Vector} lerp( to, ratio )
+{DivSugar.Vector} toLocal( mat )
+{DivSugar.Vector} toGlobal( mat )
+{DivSugar.Vector} toLocal_noTrans( mat )
+{DivSugar.Vector} toGlobal_noTrans( mat )
 ```
