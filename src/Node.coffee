@@ -71,7 +71,7 @@ class DivSugar.Node
       else
         throw 'DivSugar: Invalid number of arguments'
 
-    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
   getTransform: (mat) ->
@@ -80,7 +80,7 @@ class DivSugar.Node
 
   setTransform: (mat) ->
     @_transform.set mat
-    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
   getVisible: DivSugar.Scene.prototype.getVisible
@@ -113,7 +113,7 @@ class DivSugar.Node
       throw 'DivSugar: Invalid number of arguments'
 
     @_transform.translate offsetX, offsetY, offsetZ
-    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
   rotate: (rotateX, rotateY, rotateZ) ->
@@ -121,7 +121,7 @@ class DivSugar.Node
       throw 'DivSugar: Invalid number of arguments'
 
     @_transform.rotate rotateX, rotateY, rotateZ
-    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
   scale: (scaleX, scaleY, scaleZ) ->
@@ -129,7 +129,7 @@ class DivSugar.Node
       throw 'DivSugar: Invalid number of arguments'
 
     @_transform.scale scaleX, scaleY, scaleZ
-    @div.style[DivSugar._cssTransform] = @_transform.toCSSTransform()
+    @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
   playAnimation: (animation) ->
