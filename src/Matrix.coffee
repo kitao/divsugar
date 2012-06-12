@@ -215,13 +215,25 @@ class DivSugar.Matrix
 
   toString: -> "(#{@xAxis.toString()}, #{@yAxis.toString()}, #{@zAxis.toString()}, #{@trans.toString()})"
 
-  toCSSTransform: ->
+  toCSSTransform2D: ->
+    nod = DivSugar.NUM_OF_DIGITS
+    'matrix(' +
+      "#{@xAxis.x.toFixed(nod)}, #{@xAxis.y.toFixed(nod)}, " +
+      "#{@yAxis.x.toFixed(nod)}, #{@yAxis.y.toFixed(nod)}, " +
+      "#{@trans.x.toFixed(nod)}, #{@trans.y.toFixed(nod)})"
+
+  toCSSTransform3D: ->
     nod = DivSugar.NUM_OF_DIGITS
     'matrix3d(' +
       "#{@xAxis.x.toFixed(nod)}, #{@xAxis.y.toFixed(nod)}, #{@xAxis.z.toFixed(nod)}, 0, " +
       "#{@yAxis.x.toFixed(nod)}, #{@yAxis.y.toFixed(nod)}, #{@yAxis.z.toFixed(nod)}, 0, " +
       "#{@zAxis.x.toFixed(nod)}, #{@zAxis.y.toFixed(nod)}, #{@zAxis.z.toFixed(nod)}, 0, " +
       "#{@trans.x.toFixed(nod)}, #{@trans.y.toFixed(nod)}, #{@trans.z.toFixed(nod)}, 1)"
+
+if DivSugar._css3DTransforms
+  DivSugar.Matrix.prototype._toCSSTransform = DivSugar.Matrix.prototype.toCSSTransform3D
+else
+  DivSugar.Matrix.prototype._toCSSTransform = DivSugar.Matrix.prototype.toCSSTransform2D
 
 DivSugar.Matrix.UNIT = new DivSugar.Matrix 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0
 

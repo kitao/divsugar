@@ -221,9 +221,15 @@
     strictEqual(mat.toString(), '((1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12))');
   });
 
-  test('toCSSTransform', function() {
+  test('toCSSTransform2D', function() {
     var mat = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-    strictEqual(mat.toCSSTransform(),
+    strictEqual(mat.toCSSTransform2D(),
+      'matrix(1.0000, 2.0000, 4.0000, 5.0000, 10.0000, 11.0000)');
+  });
+
+  test('toCSSTransform3D', function() {
+    var mat = new DivSugar.Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    strictEqual(mat.toCSSTransform3D(),
       'matrix3d(1.0000, 2.0000, 3.0000, 0, 4.0000, 5.0000, 6.0000, 0, 7.0000, 8.0000, 9.0000, 0, 10.0000, 11.0000, 12.0000, 1)');
   });
 })();
