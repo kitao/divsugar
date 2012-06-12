@@ -13,6 +13,7 @@ Properties
 ----------
 
 ```javascript
+{String} id
 {Boolean} active
 {Number} deltaTime
 {Function} onUpdate
