@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+DivSugar 1.0.0
+--------------
+- Added the support for Opera partly (only use 2D Transforms)
+- Added the toCSSTransform2D method to the Matrix class
+- Renamed the toCSSTransform method to toCSSTransform3D in the Matrix class
+
 DivSugar 0.9.5
 --------------
 - Fixed the perspective origin error on Firefox
