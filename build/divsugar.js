@@ -43,7 +43,7 @@
         }
       }
       if (!this._css3DTransforms) {
-        msg = "DivSugar: This browser doesn't support 'CSS 3D Transforms'";
+        msg = "DivSugar: CSS 3D Transforms is not supported";
         console.log(msg);
         alert(msg);
       }
