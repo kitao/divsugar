@@ -44,7 +44,7 @@ Methods
 ```javascript
 {DivSugar} inherit( C, P )
   'Makes the child class C inherit the parent class P.'
-  'This methods is chainable.'
+  'This method is chainable.'
 ```
 
 ```javascript
@@ -55,10 +55,10 @@ Methods
 ```javascript
 {DivSugar} getImageSize( src, callback )
   'Calls the callback function with the width and height of the image as two arguments.'
-  'This methods is chainable.'
+  'This method is chainable.'
 ```
 
 ```javascript
 {String} getCSSColor( r, g, b )
-  'Returns the CSS color string like #rrggbb.'
+  'Returns the CSS color string representation of the specified color.'
 ```
