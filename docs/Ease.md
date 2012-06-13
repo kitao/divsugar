@@ -6,7 +6,7 @@ Methods
 
 ```javascript
 {Number} linear( t )
-  'A linear transition whose speed is constant'
+  'A linear transition'
 ```
 
 ```javascript

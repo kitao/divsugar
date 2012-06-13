@@ -6,13 +6,12 @@ Constants
 
 ```javascript
 {String} VERSION
-  'The string of the version number'
+  'The version number string'
 ```
 
 ```javascript
 {Number} EPSILON
-  'An extremely small positive quantity'
-  'If the difference of two numbers is less than this value, two numbers are considered equal.'
+  'The threshold of the equivalence'
 ```
 
 ```javascript
@@ -43,8 +42,7 @@ Methods
 
 ```javascript
 {DivSugar} inherit( C, P )
-  'Makes the child class C inherit the parent class P.'
-  'This method is chainable.'
+  'Makes the child class C inherit the parent class P. This method is chainable.'
 ```
 
 ```javascript
@@ -54,8 +52,7 @@ Methods
 
 ```javascript
 {DivSugar} getImageSize( src, callback )
-  'Calls the callback function with the width and height of the image as two arguments.'
-  'This method is chainable.'
+  'Calls the callback function with the width and height of the specified image. This method is chainable.'
 ```
 
 ```javascript
