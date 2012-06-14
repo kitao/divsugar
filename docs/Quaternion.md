@@ -1,6 +1,8 @@
 DivSugar.Quaternion
 ===================
 
+A quaternion which is represented by xyzw coordinates.
+
 Constructors
 ------------
 
