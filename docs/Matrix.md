@@ -16,7 +16,7 @@ Constructors
 Constructs a matrix.
 
 ### `(DivSugar.Matrix) Matrix(mat)`
-Constructs a matrix and sets the elements of the matrix `mat` to this matrix.
+Constructs a matrix and sets the matrix `mat` to this matrix.
 
 ### `(DivSugar.Matrix) Matrix(m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42, m43)`
 Constructs a matrix and sets the specified elements to this matrix.
@@ -40,7 +40,7 @@ Methods
 -------
 
 ### `(DivSugar.Matrix) set(mat)`
-Sets the elements of the matrix `mat` to this matrix.  
+Sets the matrix `mat` to this matrix.  
 This method is chainable.
 
 ### `(DivSugar.Matrix) set(m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42, m43)`
