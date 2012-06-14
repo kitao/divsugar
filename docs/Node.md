@@ -195,7 +195,7 @@ Animation
 ['repeat', count = infinite]
 ```
 
-### Properties for the 'to' command
+### Properties of the 'to' command
 
 ```javascript
 size: [width, height]
