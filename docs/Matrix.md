@@ -1,6 +1,8 @@
 DivSugar.Matrix
 ===============
 
+A 3x4 matrix which is represented by four vectors.
+
 Constants
 ---------
 
@@ -14,10 +16,10 @@ Constructors
 Constructs a matrix.
 
 ### `(DivSugar.Matrix) Matrix(mat)`
-Constructs a matrix and sets the elements of the specified matrix.
+Constructs a matrix and sets the elements of the matrix `mat` to this matrix.
 
 ### `(DivSugar.Matrix) Matrix(m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42, m43)`
-Constructs a matrix and sets the specified elements.
+Constructs a matrix and sets the specified elements to this matrix.
 
 Properties
 ----------
@@ -38,11 +40,11 @@ Methods
 -------
 
 ### `(DivSugar.Matrix) set(mat)`
-Sets the elements of the specified matrix.
+Sets the elements of the matrix `mat` to this matrix.
 This method is chainable.
 
 ### `(DivSugar.Matrix) set(m11, m12, m13, m21, m22, m23, m31, m32, m33, m41, m42, m43)`
-Sets the specified elements.
+Sets the specified elements to this matrix.
 This method is chainable.
 
 ### `(DivSugar.Matrix) fromQuaternion(quat)`
@@ -66,36 +68,37 @@ Scales this matrix.
 This method is chainable.
 
 ### `(DivSugar.Matrix) slerp(to, ratio)`
-Interpolates this matrix to the specified matrix.
+Interpolates this matrix to the matrix `to` by the ratio `ratio`, using spherical linear interpolation.
 This method is chainable.
 
 ### `(DivSugar.Matrix) slerp_noTrans(to, ratio)`
-Interpolates this matrix to the specified matrix but the translation.
+Interpolates this matrix to the matrix `to` by the ratio `ratio`, using spherical linear interpolation.
+However, unlike the `slerp` method, the translation of this matrix is regarded as the zero vector.
 This method is chainable.
 
 ### `(DivSugar.Matrix) toLocal(mat)`
-Converts this matrix to the local matrix of the specified matrix.
+Converts this matrix from in the world coordinate system to in the local coordinate system of the matrix `mat`.
 This method is chainable.
 
 ### `(DivSugar.Matrix) toGlobal(mat)`
-Converts this matrix to the world matrix as the local matrix of the specified matrix.
+Converts this matrix from in the local coordinate system of the matrix `mat` to in the world coordinate system.
 This method is chainable.
 
 ### `(DivSugar.Matrix) toLocal_noTrans(mat)`
-Converts this matrix to the local matrix of the specified matrix.
-However, the translation of the specified matrix is regarded as the zero vector.
+Converts this matrix from in the world coordinate system to in the local coordinate system of the matrix `mat`.
+However, unlike the `toLocal` method, the translation of the matrix is regarded as the zero vector.
 This method is chainable.
 
 ### `(DivSugar.Matrix) toGlobal_noTrans(mat)`
-Converts this matrix to the world matrix as the local matrix of the specified matrix.
-However, the translation of the specified matrix is regarded as the zero vector.
+Converts this matrix from in the local coordinate system of the matrix `mat` to in the world coordinate system.
+However, unlike the `toGlobal` method, the translation of the matrix is regarded as the zero vector.
 
 ### `(DivSugar.Matrix) lookAt(from, to, up)`
 Builds the look-at matrix and sets to this matrix.
 This method is chainable.
 
 ### `(Boolean) equal(mat)`
-Returns whether this matrix equals the specified matrix.
+Returns whether this matrix equals the matrix `mat`.
 
 ### `(String) toString()`
 Returns the string representation of this matrix.

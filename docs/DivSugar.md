@@ -36,7 +36,7 @@ This method is chainable.
 Returns a unique ID string.
 
 ### `(DivSugar) getImageSize(src, callback)`
-Calls the callback function with the width and height of `src` image as two arguments.
+Calls the function `callback` with the width and height of the image `src` as two arguments.
 This method is chainable.
 
 ### `(String) getCSSColor(r, g, b)`
