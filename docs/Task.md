@@ -4,64 +4,36 @@ DivSugar.Task
 Constructors
 ------------
 
-```javascript
-{DivSugar.Task} Task()
-```
+### `(DivSugar.Task) Task()`
 
-```javascript
-{DivSugar.Task} Task( id )
-```
+### `(DivSugar.Task) Task(id)`
 
 Properties
 ----------
 
-```javascript
-{String} id
-```
+### `(String) id`
 
-```javascript
-{Boolean} active
-```
+### `(Boolean) active`
 
-```javascript
-{Number} deltaTime
-```
+### `(Number) deltaTime`
 
-```javascript
-{Function} onUpdate
-```
+### `(Function) onUpdate`
 
-```javascript
-{Function} onDestroy
-```
+### `(Function) onDestroy`
 
 Methods
 -------
 
-```javascript
-{DivSugar.Task} getParent()
-```
+### `(DivSugar.Task) getParent()`
 
-```javascript
-{DivSugar.Task} append( child )
-```
+### `(DivSugar.Task) append(child)`
 
-```javascript
-{DivSugar.Task} appendTo( parent )
-```
+### `(DivSugar.Task) appendTo(parent)`
 
-```javascript
-{DivSugar.Task} remove( child )
-```
+### `(DivSugar.Task) remove(child)`
 
-```javascript
-{DivSugar.Task} update( deltaTime )
-```
+### `(DivSugar.Task) update(deltaTime)`
 
-```javascript
-{DivSugar.Task} destroy()
-```
+### `(DivSugar.Task) destroy()`
 
-```javascript
-{DivSugar.Task} getTaskById( id )
-```
+### `(DivSugar.Task) getTaskById(id)`

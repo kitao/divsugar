@@ -4,243 +4,128 @@ DivSugar.Node
 Constructors
 ------------
 
-```javascript
-{DivSugar.Node} Node()
-```
+### `(DivSugar.Node) Node()`
 
-```javascript
-{DivSugar.Node} Node( id )
-```
+### `(DivSugar.Node) Node(id)`
 
 Properties
 ----------
 
-```javascript
-{HTMLDivElement} div
-```
+### `(HTMLDivElement) div`
 
 Methods
 -------
 
-```javascript
-{DivSugar.Scene|DivSugar.Node} getParent()
-```
+### `(DivSugar.Scene|DivSugar.Node) getParent()`
 
-```javascript
-{DivSugar.Node} append( child )
-```
+### `(DivSugar.Node) append(child)`
 
-```javascript
-{DivSugar.Node} appendTo( parent )
-```
+### `(DivSugar.Node) appendTo(parent)`
 
-```javascript
-{DivSugar.Node} remove( child )
-```
+### `(DivSugar.Node) remove(child)`
 
-```javascript
-{Number} getWidth()
-```
+### `(Number) getWidth()`
 
-```javascript
-{Number} getHeight()
-```
+### `(Number) getHeight()`
 
-```javascript
-{DivSugar.Node} setSize( width, height )
-```
+### `(DivSugar.Node) setSize(width, height)`
 
-```javascript
-{Number} getPositionX()
-```
+### `(Number) getPositionX()`
 
-```javascript
-{Number} getPositionY()
-```
+### `(Number) getPositionY()`
 
-```javascript
-{Number} getPositionZ()
-```
+### `(Number) getPositionZ()`
 
-```javascript
-{DivSugar.Node} getPosition( vec )
-```
+### `(DivSugar.Node) getPosition(vec)`
 
-```javascript
-{DivSugar.Node} setPosition( vec )
-```
+### `(DivSugar.Node) setPosition(vec)`
 
-```javascript
-{DivSugar.Node} setPosition( x, y, z )
-```
+### `(DivSugar.Node) setPosition(x, y, z)`
 
-```javascript
-{DivSugar.Node} getTransform( mat )
-```
+### `(DivSugar.Node) getTransform(mat)`
 
-```javascript
-{DivSugar.Node} setTransform( mat ) ->
-```
+### `(DivSugar.Node) setTransform(mat) ->`
 
-```javascript
-{Boolean} getVisible()
-```
+### `(Boolean) getVisible()`
 
-```javascript
-{DivSugar.Node} setVisible( visible )
-```
+### `(DivSugar.Node) setVisible(visible)`
 
-```javascript
-{Boolean} getBackface()
-```
+### `(Boolean) getBackface()`
 
-```javascript
-{DivSugar.Node} setBackface( backface )
-```
+### `(DivSugar.Node) setBackface(backface)`
 
-```javascript
-{Boolean} getClip()
-```
+### `(Boolean) getClip()`
 
-```javascript
-{DivSugar.Node} setClip( clip )
-```
+### `(DivSugar.Node) setClip(clip)`
 
-```javascript
-{Number} getOpacity()
-```
+### `(Number) getOpacity()`
 
-```javascript
-{DivSugar.Node} setOpacity( opacity )
-```
+### `(DivSugar.Node) setOpacity(opacity)`
 
-```javascript
-{String} getImage()
-```
+### `(String) getImage()`
 
-```javascript
-{DivSugar.Node} setImage( src, callback )
-```
+### `(DivSugar.Node) setImage(src, callback)`
 
-```javascript
-{Number} getImageClipU1()
-```
+### `(Number) getImageClipU1()`
 
-```javascript
-{Number} getImageClipV1()
-```
+### `(Number) getImageClipV1()`
 
-```javascript
-{Number} getImageClipU2()
-```
+### `(Number) getImageClipU2()`
 
-```javascript
-{Number} getImageClipV2()
-```
+### `(Number) getImageClipV2()`
 
-```javascript
-{DivSugar.Node} setImageClip( u1, v1, u2, v2 )
-```
+### `(DivSugar.Node) setImageClip(u1, v1, u2, v2)`
 
-```javascript
-{DivSugar.Node} translate( offsetX, offsetY, offsetZ )
-```
+### `(DivSugar.Node) translate(offsetX, offsetY, offsetZ)`
 
-```javascript
-{DivSugar.Node} rotate( rotateX, rotateY, rotateZ )
-```
+### `(DivSugar.Node) rotate(rotateX, rotateY, rotateZ)`
 
-```javascript
-{DivSugar.Node} scale( scaleX, scaleY, scaleZ )
-```
+### `(DivSugar.Node) scale(scaleX, scaleY, scaleZ)`
 
-```javascript
-{DivSugar.Task} playAnimation( animation )
-```
+### `(DivSugar.Task) playAnimation(animation)`
 
-```javascript
-{DivSugar.Node} clearAnimation()
-```
+### `(DivSugar.Node) clearAnimation()`
 
-```javascript
-{DivSugar.Node} getWorldPosition( vec )
-```
+### `(DivSugar.Node) getWorldPosition(vec)`
 
-```javascript
-{DivSugar.Node} getWorldTransform( mat )
-```
+### `(DivSugar.Node) getWorldTransform(mat)`
 
-Animation
+Animation Commands
 ------------------
 
-### Commands
+### `['to', ( prop1: value1, prop2: value2, ... ), time, easeFunc = DivSugar.Ease.linear]`
 
-```javascript
-['to', { prop1: value1, prop2: value2, ... }, time, easeFunc = DivSugar.Ease.linear]
-```
+### `['wait', time]`
 
-```javascript
-['wait', time]
-```
+### `['play', animation]`
 
-```javascript
-['play', animation]
-```
+### `['call', func]`
 
-```javascript
-['call', func]
-```
+### `['repeat', count = infinite]`
 
-```javascript
-['repeat', count = infinite]
-```
+Animation Properties
+--------------------
 
-### Properties of the 'to' command
+### `size: [width, height]`
 
-```javascript
-size: [width, height]
-```
+### `position: [x, y, z]`
 
-```javascript
-position: [x, y, z]
-```
+### `transform: mat`
 
-```javascript
-transform: mat
-```
+### `visible: visible`
 
-```javascript
-visible: visible
-```
+### `backface: backface`
 
-```javascript
-backface: backface
-```
+### `clip: clip`
 
-```javascript
-clip: clip
-```
+### `opacity: opacity`
 
-```javascript
-opacity: opacity
-```
+### `image: src`
 
-```javascript
-image: src
-```
+### `imageClip: [u1, v1, u2, v2]`
 
-```javascript
-imageClip: [u1, v1, u2, v2]
-```
+### `translate: [offsetX, offsetY, offsetZ]`
 
-```javascript
-translate: [offsetX, offsetY, offsetZ]
-```
+### `rotate: [rotateX, rotateY, rotateZ]`
 
-```javascript
-rotate: [rotateX, rotateY, rotateZ]
-```
-
-```javascript
-scale: [scaleX, scaleY, scaleZ]
-```
+### `scale: [scaleX, scaleY, scaleZ]`

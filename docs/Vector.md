@@ -4,139 +4,75 @@ DivSugar.Vector
 Constants
 ---------
 
-```javascript
-{DivSugar.Vector} ZERO
-```
+### `(DivSugar.Vector) ZERO`
 
-```javascript
-{DivSugar.Vector} X_UNIT
-```
+### `(DivSugar.Vector) X_UNIT`
 
-```javascript
-{DivSugar.Vector} Y_UNIT
-```
+### `(DivSugar.Vector) Y_UNIT`
 
-```javascript
-{DivSugar.Vector} Z_UNIT
-```
+### `(DivSugar.Vector) Z_UNIT`
 
 Constructors
 ------------
 
-```javascript
-{DivSugar.Vector} Vector()
-```
+### `(DivSugar.Vector) Vector()`
 
-```javascript
-{DivSugar.Vector} Vector( vec )
-```
+### `(DivSugar.Vector) Vector(vec)`
 
-```javascript
-{DivSugar.Vector} Vector( x, y, z )
-```
+### `(DivSugar.Vector) Vector(x, y, z)`
 
 Properties
 ----------
 
-```javascript
-{Number} x
-```
+### `(Number) x`
 
-```javascript
-{Number} y
-```
+### `(Number) y`
 
-```javascript
-{Number} z
-```
+### `(Number) z`
 
 Methods
 -------
 
-```javascript
-{DivSugar.Vector} set( vec )
-```
+### `(DivSugar.Vector) set(vec)`
 
-```javascript
-{DivSugar.Vector} set( x, y, z )
-```
+### `(DivSugar.Vector) set(x, y, z)`
 
-```javascript
-{DivSugar.Vector} neg()
-```
+### `(DivSugar.Vector) neg()`
 
-```javascript
-{DivSugar.Vector} add( vec )
-```
+### `(DivSugar.Vector) add(vec)`
 
-```javascript
-{DivSugar.Vector} sub( vec )
-```
+### `(DivSugar.Vector) sub(vec)`
 
-```javascript
-{DivSugar.Vector} mul( s )
-```
+### `(DivSugar.Vector) mul(s)`
 
-```javascript
-{DivSugar.Vector} div( s )
-```
+### `(DivSugar.Vector) div(s)`
 
-```javascript
-{Number} norm()
-```
+### `(Number) norm()`
 
-```javascript
-{Number} sqNorm()
-```
+### `(Number) sqNorm()`
 
-```javascript
-{Number} dist( vec )
-```
+### `(Number) dist(vec)`
 
-```javascript
-{Number} sqDist( vec )
-```
+### `(Number) sqDist(vec)`
 
-```javascript
-{Number} dot( vec )
-```
+### `(Number) dot(vec)`
 
-```javascript
-{DivSugar.Vector} cross( vec )
-```
+### `(DivSugar.Vector) cross(vec)`
 
-```javascript
-{DivSugar.Vector} normalize()
-```
+### `(DivSugar.Vector) normalize()`
 
-```javascript
-{DivSugar.Vector} rotate( rotateX, rotateY, rotateZ )
-```
+### `(DivSugar.Vector) rotate(rotateX, rotateY, rotateZ)`
 
-```javascript
-{DivSugar.Vector} lerp( to, ratio )
-```
+### `(DivSugar.Vector) lerp(to, ratio)`
 
-```javascript
-{DivSugar.Vector} toLocal( mat )
-```
+### `(DivSugar.Vector) toLocal(mat)`
 
-```javascript
-{DivSugar.Vector} toGlobal( mat )
-```
+### `(DivSugar.Vector) toGlobal(mat)`
 
-```javascript
-{DivSugar.Vector} toLocal_noTrans( mat )
-```
+### `(DivSugar.Vector) toLocal_noTrans(mat)`
 
-```javascript
-{DivSugar.Vector} toGlobal_noTrans( mat )
-```
+### `(DivSugar.Vector) toGlobal_noTrans(mat)`
 
-```javascript
-{Boolean} equal( vec )
-```
+### `(Boolean) equal(vec)`
 
-```javascript
-{String} toString()
-```
+### `(String) toString()`

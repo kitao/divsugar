@@ -4,140 +4,74 @@ DivSugar.Scene
 Constructors
 ------------
 
-```javascript
-{DivSugar.Scene} Scene()
-```
+### `(DivSugar.Scene) Scene()`
 
-```javascript
-{DivSugar.Scene} Scene( id )
-```
+### `(DivSugar.Scene) Scene(id)`
 
 Properties
 ----------
 
-```javascript
-{HTMLDivElement} div
-```
+### `(HTMLDivElement) div`
 
 Methods
 -------
 
-```javascript
-{HTMLElement} getParent()
-```
+### `(HTMLElement) getParent()`
 
-```javascript
-{DivSugar.Scene} append( child )
-```
+### `(DivSugar.Scene) append(child)`
 
-```javascript
-{DivSugar.Scene} appendTo( parent )
-```
+### `(DivSugar.Scene) appendTo(parent)`
 
-```javascript
-{DivSugar.Scene} remove( child )
-```
+### `(DivSugar.Scene) remove(child)`
 
-```javascript
-{Number} getViewAngle()
-```
+### `(Number) getViewAngle()`
 
-```javascript
-{Number} getPerspective()
-```
+### `(Number) getPerspective()`
 
-```javascript
-{DivSugar.Scene} setViewAngle( viewAngle )
-```
+### `(DivSugar.Scene) setViewAngle(viewAngle)`
 
-```javascript
-{Number} getWidth()
-```
+### `(Number) getWidth()`
 
-```javascript
-{Number} getHeight()
-```
+### `(Number) getHeight()`
 
-```javascript
-{Number} getViewWidth()
-```
+### `(Number) getViewWidth()`
 
-```javascript
-{Number} getViewHeight()
-```
+### `(Number) getViewHeight()`
 
-```javascript
-{DivSugar.Scene} setSize( width, height, viewWidth = width, viewHeight = height )
-```
+### `(DivSugar.Scene) setSize(width, height, viewWidth = width, viewHeight = height)`
 
-```javascript
-{Number} getPositionX()
-```
+### `(Number) getPositionX()`
 
-```javascript
-{Number} getPositionY()
-```
+### `(Number) getPositionY()`
 
-```javascript
-{DivSugar.Scene} setPosition( x, y )
-```
+### `(DivSugar.Scene) setPosition(x, y)`
 
-```javascript
-{Boolean} getVisible()
-```
+### `(Boolean) getVisible()`
 
-```javascript
-{DivSugar.Scene} setVisible( visible )
-```
+### `(DivSugar.Scene) setVisible(visible)`
 
-```javascript
-{Boolean} getClip()
-```
+### `(Boolean) getClip()`
 
-```javascript
-{DivSugar.Scene} setClip( clip )
-```
+### `(DivSugar.Scene) setClip(clip)`
 
-```javascript
-{Number} getOpacity()
-```
+### `(Number) getOpacity()`
 
-```javascript
-{DivSugar.Scene} setOpacity( opacity )
-```
+### `(DivSugar.Scene) setOpacity(opacity)`
 
-```javascript
-{String} getImage()
-```
+### `(String) getImage()`
 
-```javascript
-{DivSugar.Scene} setImage( src, callback )
-```
+### `(DivSugar.Scene) setImage(src, callback)`
 
-```javascript
-{Number} getImageClipU1()
-```
+### `(Number) getImageClipU1()`
 
-```javascript
-{Number} getImageClipV1()
-```
+### `(Number) getImageClipV1()`
 
-```javascript
-{Number} getImageClipU2()
-```
+### `(Number) getImageClipU2()`
 
-```javascript
-{Number} getImageClipV2()
-```
+### `(Number) getImageClipV2()`
 
-```javascript
-{DivSugar.Scene} setImageClip( u1, v1, u2, v2 )
-```
+### `(DivSugar.Scene) setImageClip(u1, v1, u2, v2)`
 
-```javascript
-{DivSugar.Scene} adjustLayout( parentWidth, parentHeight, style )
-```
+### `(DivSugar.Scene) adjustLayout(parentWidth, parentHeight, style)`
 
-```javascript
-{DivSugar.Scene} getLocalPosition( clientX, clientY, vec )
-```
+### `(DivSugar.Scene) getLocalPosition(clientX, clientY, vec)`
