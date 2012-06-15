@@ -13,7 +13,7 @@ The string of the version of DivSugar.
 An extremely small positive quantity.
 
 ### `(Number) NUM_OF_DIGITS`
-The number of digits after decimal point for a fixed-point number.
+The number of digits after decimal point for a fixed-point number used in CSS.
 
 ### `(Number) DEG_TO_RAD`
 Pi/180.

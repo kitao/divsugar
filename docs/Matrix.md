@@ -16,10 +16,10 @@ Constructors
 Constructs a matrix.
 
 ### `(DivSugar.Matrix) Matrix(mat)`
-Constructs a matrix and sets the matrix `mat` to this matrix.
+Constructs a matrix and sets the matrix `mat` to it.
 
 ### `(DivSugar.Matrix) Matrix(m11, m12, m13, m21, m22, ... m43)`
-Constructs a matrix and sets the specified elements to this matrix.
+Constructs a matrix and sets the specified elements to it.
 
 Properties
 ----------
@@ -60,7 +60,7 @@ Translates this matrix along its axes.
 This method is chainable.
 
 ### `(DivSugar.Matrix) rotate(rotateX, rotateY, rotateZ)`
-Rotates this matrix the specified degrees.  
+Rotates this matrix the specified angles in degrees.  
 This method is chainable.
 
 ### `(DivSugar.Matrix) scale(scaleX, scaleY, scaleZ)`
@@ -86,12 +86,12 @@ This method is chainable.
 
 ### `(DivSugar.Matrix) toLocal_noTrans(mat)`
 Converts this matrix from in the world coordinate system to in the local coordinate system of the matrix `mat`.  
-However, unlike the `toLocal` method, the translation of the matrix is regarded as the zero vector.  
+However, unlike the `toLocal` method, the translation of the matrices is regarded as the zero vector.  
 This method is chainable.
 
 ### `(DivSugar.Matrix) toGlobal_noTrans(mat)`
 Converts this matrix from in the local coordinate system of the matrix `mat` to in the world coordinate system.  
-However, unlike the `toGlobal` method, the translation of the matrix is regarded as the zero vector.  
+However, unlike the `toGlobal` method, the translation of the matrices is regarded as the zero vector.  
 This method is chainable.
 
 ### `(DivSugar.Matrix) lookAt(from, to, up)`

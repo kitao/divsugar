@@ -10,10 +10,10 @@ Constructors
 Constructs a quaternion.
 
 ### `(DivSugar.Quaternion) Quaternion(quat)`
-Constructs a quaternion and sets the quaternion `quat` to this quaternion.
+Constructs a quaternion and sets the quaternion `quat` to it.
 
 ### `(DivSugar.Quaternion) Quaternion(x, y, z, w)`
-Constructs a quaternion and sets the specified components to this quaternion.
+Constructs a quaternion and sets the specified components to it.
 
 Properties
 ----------
@@ -34,16 +34,21 @@ Methods
 -------
 
 ### `(DivSugar.Quaternion) set(quat)`
-Sets the quaternion `quat` to this quaternion.
+Sets the quaternion `quat` to this quaternion.  
+This method is chainable.
 
 ### `(DivSugar.Quaternion) set(x, y, z, w)`
-Sets the specified components to this quaternion.
+Sets the specified components to this quaternion.  
+This method is chainable.
 
 ### `(DivSugar.Quaternion) fromMatrix(mat)`
-Builds the quaternion from the matrix `mat` sets to this quaternion.
+Builds the quaternion from the matrix `mat` and sets to this quaternion.  
+This method is chainable.
 
 ### `(DivSugar.Quaternion) slerp(to, ratio)`
-Interpolates this quaternion to the quaternion `to` by the `ratio`, using spherical linear interpolation.
+Interpolates this quaternion to the quaternion `to` by the `ratio`, using spherical linear interpolation.  
+The range of the `ratio` is from 0 to 1.  
+This method is chainable.
 
 ### `(Boolean) equal(quat)`
 Returns whether this quaternion equals the quaternion `quat`.
