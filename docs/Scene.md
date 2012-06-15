@@ -1,6 +1,8 @@
 DivSugar.Scene
 ==============
 
+A scene graph which has the root node.
+
 Constructors
 ------------
 
