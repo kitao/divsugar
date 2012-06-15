@@ -13,7 +13,7 @@ Constructs a quaternion.
 Constructs a quaternion and sets the quaternion `quat` to it.
 
 ### `(DivSugar.Quaternion) Quaternion(x, y, z, w)`
-Constructs a quaternion and sets the specified components to it.
+Constructs a quaternion and sets the specified coordinates to it.
 
 Properties
 ----------
@@ -38,7 +38,7 @@ Sets the quaternion `quat` to this quaternion.
 This method is chainable.
 
 ### `(DivSugar.Quaternion) set(x, y, z, w)`
-Sets the specified components to this quaternion.  
+Sets the specified coordinates to this quaternion.  
 This method is chainable.
 
 ### `(DivSugar.Quaternion) fromMatrix(mat)`
