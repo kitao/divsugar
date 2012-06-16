@@ -83,10 +83,10 @@ Sets whether this node is visible.
 This method is chainable.
 
 ### `(Boolean) getBackface()`
-Returns whether the backface culling of this node is enabled.
+Returns whether to draw the backface of this node.
 
 ### `(DivSugar.Node) setBackface(backface)`
-Sets whether to enable the backface culling of this node.  
+Sets whether to draw the backface of this node.  
 This method is chainable.
 
 ### `(Boolean) getClip()`
