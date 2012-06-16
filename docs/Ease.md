@@ -1,7 +1,7 @@
 DivSugar.Ease
 =============
 
-Provides standard interpolation equations for the `playAnimation` method of the Node class.  
+Provides standard interpolation equations for the `playAnimation` method of the DivSugar.Node class.  
 The both ranges of the input and output values of each equation are from 0 to 1.
 
 Methods

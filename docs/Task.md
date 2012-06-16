@@ -19,7 +19,7 @@ Properties
 The ID string.
 
 ### `(Boolean) active`
-The flag whether to get updated automatically.
+The flag whether to get updated.
 
 ### `(Number) deltaTime`
 The time which elapsed after the last update in milliseconds.
@@ -49,7 +49,7 @@ Removes the `child` task from this task.
 This method is chainable.
 
 ### `(DivSugar.Task) update(deltaTime)`
-Sets this task and the child tasks forward `deltaTime` millseconds.  
+Advances this task and the child tasks `deltaTime` millseconds.  
 Specifically, sets the `deltaTime` property and calls the `onUpdate` method of this task and the child tasks.  
 This method is chainable.
 

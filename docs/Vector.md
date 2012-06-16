@@ -89,7 +89,7 @@ Returns the squared distance between this vector and the vector `vec`.
 Returns the inner product of this vector and the vector `vec`.
 
 ### `(DivSugar.Vector) cross(vec)`
-Computes the outer product of this vector and the vector `vec`, and sets to this vector.  
+Sets the outer product of this vector and the vector `vec` to this vector.  
 This method is chainable.
 
 ### `(DivSugar.Vector) normalize()`

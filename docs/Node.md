@@ -106,7 +106,12 @@ This method is chainable.
 ### `(String) getImage()`
 Returns the image source of this node.
 
-### `(DivSugar.Node) setImage(src, callback = null)`
+### `(DivSugar.Node) setImage(src)`
+Sets the image source of this node.  
+It is also possible to specify a color in the representation of '#rrggbb' instead of an image.  
+This method is chainable.
+
+### `(DivSugar.Node) setImage(src, callback)`
 Sets the image source of this node.  
 When the `src` image is loaded, the `callback` function is called with the width and height of the image as two arguments.  
 It is also possible to specify a color in the representation of '#rrggbb' instead of an image.  
@@ -142,7 +147,8 @@ Scales this node.
 This method is chainable.
 
 ### `(DivSugar.Task) playAnimation(animation)`
-Plays the `animation` and returns the animation task.
+Plays the `animation` and returns the animation task.  
+The `animation` is an array of the animation commands.
 
 ### `(DivSugar.Node) clearAnimation()`
 Destroys all of the animation tasks of this node.  
@@ -161,8 +167,9 @@ Animation Commands
 
 The following commands can be used for the `playAnimation` method.
 
-### `['to', ( prop1: value1, prop2: value2, ... ), time, easeFunc = DivSugar.Ease.linear]`
-Animates to the specified properties with the interpolation equation `easeFunc` for `time` millisecond.
+### `['to', ( p1: v1, p2: v2, ... ), time, easeFunc = DivSugar.Ease.linear]`
+Interpolates the specified properties to the specified values with the interpolation equation `easeFunc` for `time` millisecond.  
+When the `easeFunc` is omitted, `DivSugar.Ease.linear` is used as the interpolation equation.
 
 ### `['wait', time]`
 Wait for `time` millisecond.
@@ -180,7 +187,7 @@ When the `count` is omitted, repeats unlimitedly.
 Animation Properties
 --------------------
 
-The following properties can be used for the `to` command.
+The following properties can be used for the `'to'` command.
 
 ### `size: [width, height]`
 
