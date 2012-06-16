@@ -83,17 +83,17 @@ Sets whether this node is visible.
 This method is chainable.
 
 ### `(Boolean) getBackface()`
-Returns whether the backface culling is enabled.
+Returns whether the backface culling of this node is enabled.
 
 ### `(DivSugar.Node) setBackface(backface)`
 Sets whether to enable the backface culling of this node.  
 This method is chainable.
 
 ### `(Boolean) getClip()`
-Returns whether the clipping child nodes is enabled.
+Returns whether the child node clipping of this node is enabled.
 
 ### `(DivSugar.Node) setClip(clip)`
-Sets whether to enable the child nodes clipping of this node.  
+Sets whether to enable the child node clipping of this node.  
 This method is chainable.
 
 ### `(Number) getOpacity()`
@@ -108,8 +108,8 @@ Returns the image source of this node.
 
 ### `(DivSugar.Node) setImage(src, callback)`
 Sets the image source of this node.  
-When the image is loaded, the `callback` function is called with the width and height of the `src` image as two arguments.  
-It is also possible that specifying a color in the representation of '#rrggbb' instead of an image.  
+When the `src` image is loaded, the `callback` function is called with the width and height of the image as two arguments.  
+It is also possible to specify a color in the representation of '#rrggbb' instead of an image.  
 This method is chainable.
 
 ### `(Number) getImageClipU1()`
@@ -168,7 +168,7 @@ Animates to the specified properties with the interpolation equation `easeFunc` 
 Wait for `time` millisecond.
 
 ### `['play', animation]`
-Starts playing another `animation`.
+Starts playing the another `animation`.
 
 ### `['call', func]`
 Calls the function `func`.
