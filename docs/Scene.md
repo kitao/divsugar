@@ -102,13 +102,13 @@ Returns the image source of this scene.
 
 ### `(DivSugar.Scene) setImage(src)`
 Sets the image source of this scene.  
-It is also possible to specify a color in the representation of '#rrggbb' instead of an image.  
+It is also possible to specify a color in the representation of `'#rrggbb'` instead of an image.  
 This method is chainable.
 
 ### `(DivSugar.Scene) setImage(src, callback)`
 Sets the image source of this scene.  
 When the `src` image is loaded, the `callback` function is called with the width and height of the image as two arguments.  
-It is also possible to specify a color in the representation of '#rrggbb' instead of an image.  
+It is also possible to specify a color in the representation of `'#rrggbb'` instead of an image.  
 This method is chainable.
 
 ### `(Number) getImageClipU1()`
