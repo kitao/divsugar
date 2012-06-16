@@ -28,7 +28,7 @@ Constructs a vector.
 Constructs a vector and sets the vector `vec` to it.
 
 ### `(DivSugar.Vector) Vector(x, y, z)`
-Constructs a vector and sets the specified elements to it.
+Constructs a vector and sets the specified coordinates to it.
 
 Properties
 ----------
@@ -102,14 +102,15 @@ This method is chainable.
 
 ### `(DivSugar.Vector) lerp(to, ratio)`
 Interpolates this vector to the vector `to` by the `ratio`.  
+The range of the `ratio` is from 0 to 1.  
 This method is chainable.
 
 ### `(DivSugar.Vector) toLocal(mat)`
- * Converts this vector from in the world coordinate system to in the local coordinate system of a matrix.
+Converts this vector from in the world coordinate system to in the local coordinate system of the matrix `mat`.  
 This method is chainable.
 
 ### `(DivSugar.Vector) toGlobal(mat)`
- * Converts this vector from in the local coordinate system of a matrix to in the world coordinate system.
+Converts this vector from in the local coordinate system of the matrix `mat` to in the world coordinate system.  
 This method is chainable.
 
 ### `(DivSugar.Vector) toLocal_noTrans(mat)`

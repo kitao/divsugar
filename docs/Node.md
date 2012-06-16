@@ -56,7 +56,7 @@ Returns the y-coordinate of this node.
 Returns the z-coodrinate of this node.
 
 ### `(DivSugar.Node) getPosition(vec)`
-Gets the position of this node by copying into the vector `vec`.  
+Sets the position of this node to the vector `vec`.  
 This method is chainable.
 
 ### `(DivSugar.Node) setPosition(vec)`
@@ -68,7 +68,7 @@ Sets the specified coordinates to the position of this node.
 This method is chainable.
 
 ### `(DivSugar.Node) getTransform(mat)`
-Gets the transform of this node by copying into the matrix `mat`.  
+Sets the transform of this node to the matrix `mat`.  
 This method is chainable.
 
 ### `(DivSugar.Node) setTransform(mat) ->`
@@ -106,7 +106,7 @@ This method is chainable.
 ### `(String) getImage()`
 Returns the image source of this node.
 
-### `(DivSugar.Node) setImage(src, callback)`
+### `(DivSugar.Node) setImage(src, callback = null)`
 Sets the image source of this node.  
 When the `src` image is loaded, the `callback` function is called with the width and height of the image as two arguments.  
 It is also possible to specify a color in the representation of '#rrggbb' instead of an image.  
@@ -149,11 +149,11 @@ Destroys all of the animation tasks of this node.
 This method is chainable.
 
 ### `(DivSugar.Node) getWorldPosition(vec)`
-Gets the world position of this node by copying into the vector `vec`.  
+Sets the world position of this node to the vector `vec`.  
 This method is chainable.
 
 ### `(DivSugar.Node) getWorldTransform(mat)`
-Gets the world transform of this node by copying into the vector `mat`.  
+Sets the world transform of this node to the vector `mat`.  
 This method is chainable.
 
 Animation Commands

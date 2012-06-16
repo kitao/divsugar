@@ -10,7 +10,7 @@ Constructors
 Constructs a task.
 
 ### `(DivSugar.Task) Task(id)`
-Constructs a task and sets the ID to it.
+Constructs a task and sets the `id` to it.
 
 Properties
 ----------
@@ -22,13 +22,13 @@ The ID string.
 The flag whether to get updated automatically.
 
 ### `(Number) deltaTime`
-The time in milliseconds which elapsed after the last update.
+The time which elapsed after the last update in milliseconds.
 
 ### `(Function) onUpdate`
-The function which is called when updated.
+The function which is called when this task is updated.
 
 ### `(Function) onDestroy`
-The function which is called when destroyed.
+The function which is called when this task is destroyed.
 
 Methods
 -------
