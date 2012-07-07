@@ -560,15 +560,22 @@
     };
 
     Matrix.prototype.toCSSTransform2D = function() {
-      var nod;
+      var nod, tr, xa, ya;
       nod = DivSugar.NUM_OF_DIGITS;
-      return 'matrix(' + ("" + (this.xAxis.x.toFixed(nod)) + ", " + (this.xAxis.y.toFixed(nod)) + ", ") + ("" + (this.yAxis.x.toFixed(nod)) + ", " + (this.yAxis.y.toFixed(nod)) + ", ") + ("" + (this.trans.x.toFixed(nod)) + ", " + (this.trans.y.toFixed(nod)) + ")");
+      xa = this.xAxis;
+      ya = this.yAxis;
+      tr = this.trans;
+      return "matrix(" + (xa.x.toFixed(nod)) + ", " + (xa.y.toFixed(nod)) + ", " + (ya.x.toFixed(nod)) + ", " + (ya.y.toFixed(nod)) + ", " + (tr.x.toFixed(nod)) + ", " + (tr.y.toFixed(nod)) + ")";
     };
 
     Matrix.prototype.toCSSTransform3D = function() {
-      var nod;
+      var nod, tr, xa, ya, za;
       nod = DivSugar.NUM_OF_DIGITS;
-      return 'matrix3d(' + ("" + (this.xAxis.x.toFixed(nod)) + ", " + (this.xAxis.y.toFixed(nod)) + ", " + (this.xAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.yAxis.x.toFixed(nod)) + ", " + (this.yAxis.y.toFixed(nod)) + ", " + (this.yAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.zAxis.x.toFixed(nod)) + ", " + (this.zAxis.y.toFixed(nod)) + ", " + (this.zAxis.z.toFixed(nod)) + ", 0, ") + ("" + (this.trans.x.toFixed(nod)) + ", " + (this.trans.y.toFixed(nod)) + ", " + (this.trans.z.toFixed(nod)) + ", 1)");
+      xa = this.xAxis;
+      ya = this.yAxis;
+      za = this.zAxis;
+      tr = this.trans;
+      return 'matrix3d(' + ("" + (xa.x.toFixed(nod)) + ", " + (xa.y.toFixed(nod)) + ", " + (xa.z.toFixed(nod)) + ", 0, ") + ("" + (ya.x.toFixed(nod)) + ", " + (ya.y.toFixed(nod)) + ", " + (ya.z.toFixed(nod)) + ", 0, ") + ("" + (za.x.toFixed(nod)) + ", " + (za.y.toFixed(nod)) + ", " + (za.z.toFixed(nod)) + ", 0, ") + ("" + (tr.x.toFixed(nod)) + ", " + (tr.y.toFixed(nod)) + ", " + (tr.z.toFixed(nod)) + ", 1)");
     };
 
     return Matrix;

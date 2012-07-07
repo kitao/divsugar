@@ -217,18 +217,24 @@ class DivSugar.Matrix
 
   toCSSTransform2D: ->
     nod = DivSugar.NUM_OF_DIGITS
-    'matrix(' +
-      "#{@xAxis.x.toFixed(nod)}, #{@xAxis.y.toFixed(nod)}, " +
-      "#{@yAxis.x.toFixed(nod)}, #{@yAxis.y.toFixed(nod)}, " +
-      "#{@trans.x.toFixed(nod)}, #{@trans.y.toFixed(nod)})"
+    xa = @xAxis
+    ya = @yAxis
+    tr = @trans
+
+    "matrix(#{xa.x.toFixed(nod)}, #{xa.y.toFixed(nod)}, #{ya.x.toFixed(nod)}, #{ya.y.toFixed(nod)}, #{tr.x.toFixed(nod)}, #{tr.y.toFixed(nod)})"
 
   toCSSTransform3D: ->
     nod = DivSugar.NUM_OF_DIGITS
+    xa = @xAxis
+    ya = @yAxis
+    za = @zAxis
+    tr = @trans
+
     'matrix3d(' +
-      "#{@xAxis.x.toFixed(nod)}, #{@xAxis.y.toFixed(nod)}, #{@xAxis.z.toFixed(nod)}, 0, " +
-      "#{@yAxis.x.toFixed(nod)}, #{@yAxis.y.toFixed(nod)}, #{@yAxis.z.toFixed(nod)}, 0, " +
-      "#{@zAxis.x.toFixed(nod)}, #{@zAxis.y.toFixed(nod)}, #{@zAxis.z.toFixed(nod)}, 0, " +
-      "#{@trans.x.toFixed(nod)}, #{@trans.y.toFixed(nod)}, #{@trans.z.toFixed(nod)}, 1)"
+      "#{xa.x.toFixed(nod)}, #{xa.y.toFixed(nod)}, #{xa.z.toFixed(nod)}, 0, " +
+      "#{ya.x.toFixed(nod)}, #{ya.y.toFixed(nod)}, #{ya.z.toFixed(nod)}, 0, " +
+      "#{za.x.toFixed(nod)}, #{za.y.toFixed(nod)}, #{za.z.toFixed(nod)}, 0, " +
+      "#{tr.x.toFixed(nod)}, #{tr.y.toFixed(nod)}, #{tr.z.toFixed(nod)}, 1)"
 
 if DivSugar._css3DTransforms
   DivSugar.Matrix.prototype._toCSSTransform = DivSugar.Matrix.prototype.toCSSTransform3D
