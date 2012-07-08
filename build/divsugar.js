@@ -7,7 +7,7 @@
     _initialize: function() {
       var div, msg, prefix, prefixFuncName, prefixProp, prefixes, prop, propName, props, requestAnimationFrame, updateTasks, upperProp, _i, _j, _k, _len, _len1, _len2,
         _this = this;
-      this.VERSION = '1.1.0';
+      this.VERSION = '1.0.5';
       this.EPSILON = 0.0001;
       this.NUM_OF_DIGITS = 4;
       this.DEG_TO_RAD = Math.PI / 180;

@@ -1,10 +1,10 @@
 Change Log
 ==========
 
-DivSugar 1.1.0
+DivSugar 1.0.5
 --------------
 - Optimized the toCSSTransform2D/3D method of the Matrix class a little
--
+- Added the screenshots of the examples to README.md
 
 DivSugar 1.0.0
 --------------
