@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+DivSugar 1.1.0
+--------------
+- Added the getFrameCount method to the DivSugar class
+- Added the getKeyState method to the DivSugar class
+- Added the getMouseX and getMouseY methods to the DivSugar class
+- Added the getMouseState method to the DivSugar class
+
 DivSugar 1.0.5
 --------------
 - Optimized the toCSSTransform2D/3D method of the Matrix class a little
