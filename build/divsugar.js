@@ -14,7 +14,12 @@
       this.RAD_TO_DEG = 180 / Math.PI;
       console.log("DivSugar: Version " + this.VERSION);
       this.rootTask = null;
+      this._frameCount = 0;
       this._currentId = 0;
+      this._keyStates = {};
+      this._mouseX = 0;
+      this._mouseY = 0;
+      this._mouseState = -Number.MAX_VALUE;
       this._css3DTransforms = true;
       prefixes = ['webkit', 'Moz', 'O', 'ms'];
       props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility'];
@@ -70,8 +75,43 @@
         };
         console.log("DivSugar: Can't find 'requestAnimationFrame'");
       }
+      document.addEventListener('keydown', function(e) {
+        var keyCode, keyState;
+        keyCode = e.keyCode;
+        keyState = _this._keyStates[keyCode];
+        if (!(keyState != null) || keyState < 0) {
+          return _this._keyStates[keyCode] = _this._frameCount;
+        }
+      }, true);
+      document.addEventListener('keyup', function(e) {
+        var keyCode, keyState;
+        keyCode = e.keyCode;
+        keyState = _this._keyStates[keyCode];
+        if (!(keyState != null) || keyState > 0) {
+          return _this._keyStates[keyCode] = -_this._frameCount;
+        }
+      }, true);
+      document.addEventListener('mousemove', function(e) {
+        _this._mouseX = e.clientX;
+        return _this._mouseY = e.clientY;
+      }, true);
+      document.addEventListener('mousedown', function(e) {
+        var mouseState;
+        mouseState = _this._mouseState;
+        if (mouseState < 0) {
+          return _this._mouseState = _this._frameCount;
+        }
+      }, true);
+      document.addEventListener('mouseup', function(e) {
+        var mouseState;
+        mouseState = _this._mouseState;
+        if (mouseState > 0) {
+          return _this._mouseState = -_this._frameCount;
+        }
+      }, true);
       updateTasks = function() {
         var curTime, deltaTime;
+        _this._frameCount++;
         curTime = new Date().getTime();
         deltaTime = curTime - _this._lastUpdatedTime;
         _this._lastUpdatedTime = curTime;
@@ -80,6 +120,43 @@
       };
       this._lastUpdatedTime = new Date().getTime();
       return this._requestAnimationFrame(updateTasks);
+    },
+    getFrameCount: function() {
+      return this._frameCount;
+    },
+    getKeyState: function(keyCode, state) {
+      var keyState;
+      keyState = this._keyStates[keyCode];
+      switch (state) {
+        case 'on':
+          return (keyState != null) && keyState > 0;
+        case 'off':
+          return !(keyState != null) || keyState < 0;
+        case 'pressed':
+          return keyState === this._frameCount - 1;
+        case 'released':
+          return keyState === 1 - this._frameCount;
+      }
+    },
+    getMouseX: function() {
+      return this._mouseX;
+    },
+    getMouseY: function() {
+      return this._mouseY;
+    },
+    getMouseState: function(state) {
+      var mouseState;
+      mouseState = this._mouseState;
+      switch (state) {
+        case 'on':
+          return mouseState > 0;
+        case 'off':
+          return mouseState < 0;
+        case 'pressed':
+          return mouseState === this._frameCount - 1;
+        case 'released':
+          return mouseState === 1 - this._frameCount;
+      }
     },
     inherit: function(C, P) {
       var F;
