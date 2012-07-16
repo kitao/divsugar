@@ -136,6 +136,8 @@
           return keyState === this._frameCount - 1;
         case 'released':
           return keyState === 1 - this._frameCount;
+        default:
+          throw 'DivSugar: Unknown key state';
       }
     },
     getMouseX: function() {
@@ -156,6 +158,8 @@
           return mouseState === this._frameCount - 1;
         case 'released':
           return mouseState === 1 - this._frameCount;
+        default:
+          throw 'DivSugar: Unknown mouse state';
       }
     },
     inherit: function(C, P) {
@@ -1027,6 +1031,9 @@
           } else {
             this.setSize(parentHeight * this._viewWidth / this._viewHeight, parentHeight, this._viewWidth, this._viewHeight);
           }
+          break;
+        default:
+          throw 'DivSugar: Unknown layout style';
       }
       this.setPosition((parentWidth - this._width) / 2, (parentHeight - this._height) / 2);
       return this;

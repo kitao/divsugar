@@ -163,6 +163,7 @@ class DivSugar.Scene
           @setSize parentWidth, parentWidth * @_viewHeight / @_viewWidth, @_viewWidth, @_viewHeight
         else
           @setSize parentHeight * @_viewWidth / @_viewHeight, parentHeight, @_viewWidth, @_viewHeight
+      else throw 'DivSugar: Unknown layout style'
 
     @setPosition (parentWidth - @_width) / 2, (parentHeight - @_height) / 2
     return @
