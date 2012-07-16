@@ -30,6 +30,23 @@ The root task.
 Methods
 -------
 
+### `(Number) getFrameCount()`
+Returns the number of the elapsed frames from the time when the application started.
+
+### `(Boolean) getKeyState(keyCode, state)`
+Returns whether the current state of the key specified by the `keyCode` equals the `state`.  
+'on', 'off', 'pressed', and 'released' can be used as a `state`.
+
+### `(Number) getMouseX()`
+Returns the x-coordinate of the mouse cursor.
+
+### `(Number) getMouseY()`
+Returns the y-coordinate of the mouse cursor.
+
+### `(Boolean) getMouseState(state)`
+Returns whether the current state of the mouse button equals the `state`.  
+'on', 'off', 'pressed', and 'released' can be used as a `state`.
+
 ### `(DivSugar) inherit(C, P)`
 Makes the child class `C` inherit the parent class `P`.  
 This method is chainable.
