@@ -11,7 +11,12 @@ DivSugar =
 
     # initialize properties
     @rootTask = null
+    @_frameCount = 0
     @_currentId = 0
+    @_keyStates = {}
+    @_mouseX = 0
+    @_mouseY = 0
+    @_mouseState = -Number.MAX_VALUE
     @_css3DTransforms = true
 
     # cross-browser support
@@ -61,8 +66,37 @@ DivSugar =
       @_requestAnimationFrame = (callback) -> window.setTimeout callback, 1000 / 60 # TBD
       console.log "DivSugar: Can't find 'requestAnimationFrame'"
 
+    # add event listeners
+    document.addEventListener 'keydown', (e) =>
+      keyCode = e.keyCode
+      keyState = @_keyStates[keyCode]
+      @_keyStates[keyCode] = @_frameCount if not keyState? or keyState < 0
+    , true
+
+    document.addEventListener 'keyup', (e) =>
+      keyCode = e.keyCode
+      keyState = @_keyStates[keyCode]
+      @_keyStates[keyCode] = -@_frameCount if not keyState? or keyState > 0
+    , true
+
+    document.addEventListener 'mousemove', (e) =>
+      @_mouseX = e.clientX
+      @_mouseY = e.clientY
+    , true
+
+    document.addEventListener 'mousedown', (e) =>
+      mouseState = @_mouseState
+      @_mouseState = @_frameCount if mouseState < 0
+    , true
+
+    document.addEventListener 'mouseup', (e) =>
+      mouseState = @_mouseState
+      @_mouseState = -@_frameCount if mouseState > 0
+    , true
+
     # start tasks
     updateTasks = =>
+      @_frameCount++
       curTime = new Date().getTime()
       deltaTime = curTime - @_lastUpdatedTime
       @_lastUpdatedTime = curTime
@@ -71,6 +105,27 @@ DivSugar =
 
     @_lastUpdatedTime = new Date().getTime()
     @_requestAnimationFrame updateTasks
+
+  getFrameCount: -> @_frameCount
+
+  getKeyState: (keyCode, state) ->
+    keyState = @_keyStates[keyCode]
+    switch state
+      when 'on' then (keyState? and keyState > 0)
+      when 'off' then (not keyState? or keyState < 0)
+      when 'pressed' then (keyState is @_frameCount - 1)
+      when 'released' then (keyState is 1 - @_frameCount)
+
+  getMouseX: -> @_mouseX
+  getMouseY: -> @_mouseY
+
+  getMouseState: (state) ->
+    mouseState = @_mouseState
+    switch state
+      when 'on' then (mouseState > 0)
+      when 'off' then (mouseState < 0)
+      when 'pressed' then (mouseState is @_frameCount - 1)
+      when 'released' then (mouseState is 1 - @_frameCount)
 
   inherit: (C, P) ->
     F = ->

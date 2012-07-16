@@ -15,6 +15,37 @@
     strictEqual(DivSugar.rootTask instanceof DivSugar.Task, true);
   });
 
+  test('getFrameCount', function() {
+    var frameCount1 = DivSugar.getFrameCount();
+    ok(frameCount1 >= 0);
+
+    setTimeout(function() {
+      var frameCount2 = DivSugar.getFrameCount();
+      start();
+      ok(frameCount2 > frameCount1);
+    }, 100);
+    stop();
+  });
+
+  test('getKeyState', function() {
+    strictEqual(typeof DivSugar.getKeyState(64, 'on'), 'boolean');
+    strictEqual(typeof DivSugar.getKeyState(64, 'off'), 'boolean');
+    strictEqual(typeof DivSugar.getKeyState(64, 'pressed'), 'boolean');
+    strictEqual(typeof DivSugar.getKeyState(64, 'released'), 'boolean');
+  });
+
+  test('getMouseX and getMouseY', function() {
+    strictEqual(typeof DivSugar.getMouseX(), 'number');
+    strictEqual(typeof DivSugar.getMouseY(), 'number');
+  });
+
+  test('getMouseState', function() {
+    strictEqual(typeof DivSugar.getMouseState('on'), 'boolean');
+    strictEqual(typeof DivSugar.getMouseState('off'), 'boolean');
+    strictEqual(typeof DivSugar.getMouseState('pressed'), 'boolean');
+    strictEqual(typeof DivSugar.getMouseState('released'), 'boolean');
+  });
+
   test('inherit', function() {
     function Class1(a, b) {
       this.a = a;
