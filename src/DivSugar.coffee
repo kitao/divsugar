@@ -115,7 +115,7 @@ DivSugar =
       when 'off' then (not keyState? or keyState < 0)
       when 'pressed' then (keyState is @_frameCount - 1)
       when 'released' then (keyState is 1 - @_frameCount)
-      else throw 'DivSugar: Unknown key state'
+      else throw "DivSugar: Unknown key state '#{state}'"
 
   getMouseX: -> @_mouseX
   getMouseY: -> @_mouseY
@@ -127,7 +127,7 @@ DivSugar =
       when 'off' then (mouseState < 0)
       when 'pressed' then (mouseState is @_frameCount - 1)
       when 'released' then (mouseState is 1 - @_frameCount)
-      else throw 'DivSugar: Unknown mouse state'
+      else throw "DivSugar: Unknown mouse state '#{state}'"
 
   inherit: (C, P) ->
     F = ->

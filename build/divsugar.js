@@ -137,7 +137,7 @@
         case 'released':
           return keyState === 1 - this._frameCount;
         default:
-          throw 'DivSugar: Unknown key state';
+          throw "DivSugar: Unknown key state '" + state + "'";
       }
     },
     getMouseX: function() {
@@ -159,7 +159,7 @@
         case 'released':
           return mouseState === 1 - this._frameCount;
         default:
-          throw 'DivSugar: Unknown mouse state';
+          throw "DivSugar: Unknown mouse state '" + state + "'";
       }
     },
     inherit: function(C, P) {
@@ -1033,7 +1033,7 @@
           }
           break;
         default:
-          throw 'DivSugar: Unknown layout style';
+          throw "DivSugar: Unknown layout style '" + style + "'";
       }
       this.setPosition((parentWidth - this._width) / 2, (parentHeight - this._height) / 2);
       return this;
