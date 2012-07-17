@@ -111,11 +111,11 @@
       }, true);
       updateTasks = function() {
         var curTime, deltaTime;
-        _this._frameCount++;
         curTime = new Date().getTime();
         deltaTime = curTime - _this._lastUpdatedTime;
         _this._lastUpdatedTime = curTime;
         _this.rootTask.update(deltaTime);
+        _this._frameCount++;
         return _this._requestAnimationFrame(updateTasks);
       };
       this._lastUpdatedTime = new Date().getTime();
