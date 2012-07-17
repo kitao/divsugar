@@ -97,6 +97,13 @@
     strictEqual(node.getPositionY(), 50);
     strictEqual(node.getPositionZ(), 60);
 
+    raises(function() {
+      node.setPosition(1, 2);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
+
     ok(node.setPosition(0, 0, 0).setPosition(vec).setPosition(1, 1, 1));
   });
 
@@ -193,6 +200,13 @@
     node.getTransform(mat2);
     deepEqual(mat2, mat1);
 
+    raises(function() {
+      node.translate(1, 2);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
+
     ok(node.translate(0, 0, 0).translate(0, 0, 0));
   });
 
@@ -219,6 +233,13 @@
     node.getTransform(mat2);
     nearlyEqual(mat2, mat1);
 
+    raises(function() {
+      node.rotate(90, 90);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
+
     ok(node.rotate(0, 0, 0).rotate(0, 0, 0));
   });
 
@@ -231,6 +252,13 @@
     mat1.scale(10, 20, 30);
     node.getTransform(mat2);
     deepEqual(mat2, mat1);
+
+    raises(function() {
+      node.scale(2, 3);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
 
     ok(node.scale(1, 1, 1).scale(1, 1, 1));
   });
@@ -260,6 +288,8 @@
       ['repeat', 2],
       ['wait', 5]
     ];
+    var anim3 = [['to', { dummy: 0 }, 10]];
+    var anim4 = [['dummy']];
     var node = new DivSugar.Node();
     var task = node.playAnimation(anim2);
 
@@ -312,6 +342,24 @@
     DivSugar.rootTask.update(1);
     strictEqual(callCount, 12);
     strictEqual(task.getParent(), null);
+
+    raises(function() {
+      task = node.playAnimation(anim3);
+      DivSugar.rootTask.update(1);
+    }, function(e) {
+      strictEqual(e, "DivSugar: Unknown animation parameter 'dummy'");
+      return true;
+    });
+    task.destroy();
+
+    raises(function() {
+      task = node.playAnimation(anim4);
+      DivSugar.rootTask.update(1);
+    }, function(e) {
+      strictEqual(e, "DivSugar: Unknown animation command 'dummy'");
+      return true;
+    });
+    task.destroy();
   });
 
   test('clearAnimation', function() {
