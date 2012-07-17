@@ -21,6 +21,13 @@
     strictEqual(quat3.y, 2);
     strictEqual(quat3.z, 3);
     strictEqual(quat3.w, 4);
+
+    raises(function() {
+      var quat4 = new DivSugar.Quaternion(1, 2, 3);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
   });
 
   test('set', function() {
@@ -31,6 +38,14 @@
     var quat2 = new DivSugar.Quaternion();
     quat2.set(quat1);
     deepEqual(quat2, quat1);
+
+    raises(function() {
+      var quat3 = new DivSugar.Quaternion();
+      quat3.set(1, 2, 3);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
 
     ok(quat1.set(0, 0, 0, 0).set(quat2).set(1, 1, 1, 1));
   });

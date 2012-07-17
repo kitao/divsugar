@@ -25,6 +25,13 @@
     strictEqual(vec3.x, 1);
     strictEqual(vec3.y, 2);
     strictEqual(vec3.z, 3);
+
+    raises(function() {
+      var vec4 = new DivSugar.Vector(1, 2);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
   });
 
   test('set', function() {
@@ -35,6 +42,14 @@
     var vec2 = new DivSugar.Vector();
     vec2.set(vec1);
     deepEqual(vec2, vec1);
+
+    raises(function() {
+      var vec3 = new DivSugar.Vector();
+      vec3.set(1,2);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
 
     ok(vec1.set(0, 0, 0).set(vec2).set(1, 1, 1));
   });
@@ -146,6 +161,13 @@
     vec.set(1, 2, 3);
     vec.rotate(0, 0, 90);
     nearlyEqual(vec, new DivSugar.Vector(-2, 1, 3));
+
+    raises(function() {
+      vec.rotate(90, 90);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
 
     ok(vec.rotate(0, 0, 0).rotate(0, 0, 0));
   });
