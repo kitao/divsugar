@@ -32,6 +32,13 @@
     strictEqual(typeof DivSugar.getKeyState(64, 'off'), 'boolean');
     strictEqual(typeof DivSugar.getKeyState(64, 'pressed'), 'boolean');
     strictEqual(typeof DivSugar.getKeyState(64, 'released'), 'boolean');
+
+    raises(function() {
+      DivSugar.getKeyState(64, 'dummy');
+    }, function(e) {
+      strictEqual(e, "DivSugar: Unknown key state 'dummy'");
+      return true;
+    });
   });
 
   test('getMouseX and getMouseY', function() {
@@ -44,6 +51,13 @@
     strictEqual(typeof DivSugar.getMouseState('off'), 'boolean');
     strictEqual(typeof DivSugar.getMouseState('pressed'), 'boolean');
     strictEqual(typeof DivSugar.getMouseState('released'), 'boolean');
+
+    raises(function() {
+      DivSugar.getMouseState('dummy');
+    }, function(e) {
+      strictEqual(e, "DivSugar: Unknown mouse state 'dummy'");
+      return true;
+    });
   });
 
   test('inherit', function() {
