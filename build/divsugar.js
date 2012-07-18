@@ -129,9 +129,9 @@
       keyState = this._keyStates[keyCode];
       switch (state) {
         case 'on':
-          return (keyState != null) && keyState > 0;
+          return (keyState != null) && (0 < keyState && keyState < this._frameCount);
         case 'off':
-          return !(keyState != null) || keyState < 0;
+          return !(keyState != null) || (-this._frameCount < keyState && keyState < 0);
         case 'pressed':
           return keyState === this._frameCount - 1;
         case 'released':
@@ -151,9 +151,9 @@
       mouseState = this._mouseState;
       switch (state) {
         case 'on':
-          return mouseState > 0;
+          return (0 < mouseState && mouseState < this._frameCount);
         case 'off':
-          return mouseState < 0;
+          return (-this._frameCount < mouseState && mouseState < 0);
         case 'pressed':
           return mouseState === this._frameCount - 1;
         case 'released':

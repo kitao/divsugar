@@ -111,8 +111,8 @@ DivSugar =
   getKeyState: (keyCode, state) ->
     keyState = @_keyStates[keyCode]
     switch state
-      when 'on' then (keyState? and keyState > 0)
-      when 'off' then (not keyState? or keyState < 0)
+      when 'on' then (keyState? and 0 < keyState < @_frameCount)
+      when 'off' then (not keyState? or -@_frameCount < keyState < 0)
       when 'pressed' then (keyState is @_frameCount - 1)
       when 'released' then (keyState is 1 - @_frameCount)
       else throw "DivSugar: Unknown key state '#{state}'"
@@ -123,8 +123,8 @@ DivSugar =
   getMouseState: (state) ->
     mouseState = @_mouseState
     switch state
-      when 'on' then (mouseState > 0)
-      when 'off' then (mouseState < 0)
+      when 'on' then (0 < mouseState < @_frameCount)
+      when 'off' then (-@_frameCount < mouseState < 0)
       when 'pressed' then (mouseState is @_frameCount - 1)
       when 'released' then (mouseState is 1 - @_frameCount)
       else throw "DivSugar: Unknown mouse state '#{state}'"
