@@ -37,16 +37,8 @@ window.onload = function() {
       rotX = -(curY - lastY) * this.deltaTime * 0.04;
       rotY = (curX - lastX) * this.deltaTime * 0.04;
 
-      node1.getPosition(pos);
-      node1.getTransform(mat);
-
-      origin.set(DivSugar.Matrix.UNIT);
-      origin.rotate(rotX, rotY, 0);
-      mat.toGlobal_noTrans(origin);
-
-      mat.trans.set(pos);
-
-      node1.setTransform(mat);
+      node1.rotateAround(DivSugar.Vector.X_UNIT, rotX);
+      node1.rotateAround(DivSugar.Vector.Y_UNIT, rotY);
 
       lastX = curX;
       lastY = curY;
