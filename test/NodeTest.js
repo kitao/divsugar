@@ -214,22 +214,9 @@
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
     var node = new DivSugar.Node();
-
     node.setTransform(mat1);
-    node.rotate(90, 0, 0);
-    mat1.rotate(90, 0, 0);
-    node.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
-
-    node.setTransform(mat1);
-    node.rotate(0, 90, 0);
-    mat1.rotate(0, 90, 0);
-    node.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
-
-    node.setTransform(mat1);
-    node.rotate(0, 0, 90);
-    mat1.rotate(0, 0, 90);
+    node.rotate(10, 20, 30);
+    mat1.rotate(10, 20, 30);
     node.getTransform(mat2);
     nearlyEqual(mat2, mat1);
 
@@ -250,21 +237,8 @@
     var mat2 = new DivSugar.Matrix();
     var node = new DivSugar.Node();
 
-    vec1.set(1, 0, 0);
-    node.setTransform(mat1);
-    node.rotateAround(vec1, 90);
-    mat1.rotateAround(vec1, 90);
-    node.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
-
-    vec1.set(0, 1, 0);
-    node.setTransform(mat1);
-    node.rotateAround(vec1, 90);
-    mat1.rotateAround(vec1, 90);
-    node.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
-
-    vec1.set(0, 0, 1);
+    vec1.set(1, 1, 1).normalize();
+    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
     node.setTransform(mat1);
     node.rotateAround(vec1, 90);
     mat1.rotateAround(vec1, 90);
@@ -272,23 +246,8 @@
     nearlyEqual(mat2, mat1);
 
     vec1.set(10, 20, 30);
-    vec2.set(1, 0, 0);
-    node.setTransform(mat1);
-    node.rotateAround(vec1, vec2, 90);
-    mat1.rotateAround(vec1, vec2, 90);
-    node.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
-
-    vec1.set(10, 20, 30);
-    vec2.set(0, 1, 0);
-    node.setTransform(mat1);
-    node.rotateAround(vec1, vec2, 90);
-    mat1.rotateAround(vec1, vec2, 90);
-    node.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
-
-    vec1.set(10, 20, 30);
-    vec2.set(0, 0, 1);
+    vec2.set(1, 1, 1).normalize();
+    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
     node.setTransform(mat1);
     node.rotateAround(vec1, vec2, 90);
     mat1.rotateAround(vec1, vec2, 90);
