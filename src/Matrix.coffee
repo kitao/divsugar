@@ -94,25 +94,93 @@ class DivSugar.Matrix
       throw 'DivSugar: Invalid number of arguments'
 
     if rotateX isnt 0
-      sin = Math.sin rotateX * DivSugar.DEG_TO_RAD
-      cos = Math.cos rotateX * DivSugar.DEG_TO_RAD
+      rad = rotateX * DivSugar.DEG_TO_RAD
+      sin = Math.sin rad
+      cos = Math.cos rad
       mat = DivSugar.Matrix._tmpMat1
       mat.set(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0).toGlobal(@)
       @set mat
 
     if rotateY isnt 0
-      sin = Math.sin rotateY * DivSugar.DEG_TO_RAD
-      cos = Math.cos rotateY * DivSugar.DEG_TO_RAD
+      rad = rotateY * DivSugar.DEG_TO_RAD
+      sin = Math.sin rad
+      cos = Math.cos rad
       mat = DivSugar.Matrix._tmpMat1
       mat.set(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0).toGlobal(@)
       @set mat
 
     if rotateZ isnt 0
-      sin = Math.sin rotateZ * DivSugar.DEG_TO_RAD
-      cos = Math.cos rotateZ * DivSugar.DEG_TO_RAD
+      rad = rotateZ * DivSugar.DEG_TO_RAD
+      sin = Math.sin rad
+      cos = Math.cos rad
       mat = DivSugar.Matrix._tmpMat1
       mat.set(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0).toGlobal(@)
       @set mat
+
+    return @
+
+  rotateAround: ->
+    switch arguments.length
+      when 2
+        axis = arguments[0]
+        a = axis.x
+        b = axis.y
+        c = axis.z
+        a2 = a * a
+        b2 = b * b
+        c2 = c * c
+        ab = a * b
+        ac = a * c
+        bc = b * c
+
+        rad = arguments[1] * DivSugar.DEG_TO_RAD
+        sin = Math.sin rad
+        cos = Math.cos rad
+
+        mat = DivSugar.Matrix._tmpMat1
+        mat.set(
+          a2 + (1 - a2) * cos, ab * (1 - cos) + c * sin, ac * (1 - cos) - b * sin,
+          ab * (1 - cos) - c * sin, b2 + (1 - b2) * cos, bc * (1- cos) + a * sin,
+          ac * (1 - cos) + b * sin, bc * (1 - cos) - a * sin, c2 + (1 - c2) * cos,
+          0, 0, 0
+        ).toGlobal(@)
+
+        @set mat
+
+      when 3
+        point = arguments[0]
+        vec = DivSugar.Matrix._tmpVec1
+        vec.set(point).toLocal(@)
+
+        axis = arguments[1]
+        a = axis.x
+        b = axis.y
+        c = axis.z
+        a2 = a * a
+        b2 = b * b
+        c2 = c * c
+        ab = a * b
+        ac = a * c
+        bc = b * c
+
+        rad = arguments[2] * DivSugar.DEG_TO_RAD
+        sin = Math.sin rad
+        cos = Math.cos rad
+
+        mat = DivSugar.Matrix._tmpMat1
+        mat.set(
+          a2 + (1 - a2) * cos, ab * (1 - cos) + c * sin, ac * (1 - cos) - b * sin,
+          ab * (1 - cos) - c * sin, b2 + (1 - b2) * cos, bc * (1- cos) + a * sin,
+          ac * (1 - cos) + b * sin, bc * (1 - cos) - a * sin, c2 + (1 - c2) * cos,
+          0, 0, 0
+        ).toGlobal(@)
+
+        @set mat
+        vec.toGlobal_noTrans @
+        @trans.set(point).sub(vec)
+
+      else
+        throw 'DivSugar: Invalid number of arguments'
 
     return @
 

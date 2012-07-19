@@ -124,6 +124,14 @@ class DivSugar.Node
     @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
+  rotateAround: (args...) ->
+    if arguments.length isnt 2 and arguments.length isnt 3
+      throw 'DivSugar: Invalid number of arguments'
+
+    @_transform.rotateAround args...
+    @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
+    return @
+
   scale: (scaleX, scaleY, scaleZ) ->
     if arguments.length isnt 3
       throw 'DivSugar: Invalid number of arguments'
