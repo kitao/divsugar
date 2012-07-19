@@ -116,19 +116,16 @@ class DivSugar.Node
     @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
-  rotate: (rotateX, rotateY, rotateZ) ->
+  rotate: (angleX, angleY, angleZ) ->
     if arguments.length isnt 3
       throw 'DivSugar: Invalid number of arguments'
 
-    @_transform.rotate rotateX, rotateY, rotateZ
+    @_transform.rotate angleX, angleY, angleZ
     @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
-  rotateAround: (args...) ->
-    if arguments.length isnt 2 and arguments.length isnt 3
-      throw 'DivSugar: Invalid number of arguments'
-
-    @_transform.rotateAround args...
+  rotateAround: (axis, angle) ->
+    @_transform.rotateAround axis, angle
     @div.style[DivSugar._cssTransform] = @_transform._toCSSTransform()
     return @
 
