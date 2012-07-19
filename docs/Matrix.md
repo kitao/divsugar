@@ -60,7 +60,7 @@ Translates this matrix along its axes.
 This method is chainable.
 
 ### `(DivSugar.Matrix) rotate(angleX, angleY, angleZ)`
-Rotates this matrix by the specified angles in degrees.  
+Rotates this matrix by the specified `angle`s in degrees.  
 This method is chainable.
 
 ### `(DivSugar.Matrix) rotateAround(axis, angle)`

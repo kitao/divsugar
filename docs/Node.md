@@ -139,7 +139,7 @@ Translates this node along its axes.
 This method is chainable.
 
 ### `(DivSugar.Node) rotate(angleX, angleY, angleZ)`
-Rotates this node by the specified angles in degrees.  
+Rotates this node by the specified `angle`s in degrees.  
 This method is chainable.
 
 ### `(DivSugar.Node) rotateAround(axis, angle)`
