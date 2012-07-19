@@ -63,6 +63,16 @@ This method is chainable.
 Rotates this matrix the specified angles in degrees.  
 This method is chainable.
 
+### `(DivSugar.Matrix) rotateAround(axis, angle)`
+Rotates this matrix around the vector `axis` by the `angle` in degrees.  
+The length of the `axis` must be 1.  
+This method is chainable.
+
+### `(DivSugar.Matrix) rotateAround(point, axis, angle)`
+Rotates this matrix around the pivot specified by the vector `point` and vector `axis` by the `angle` in degrees.  
+The length of the `axis` must be 1.  
+This method is chainable.
+
 ### `(DivSugar.Matrix) scale(scaleX, scaleY, scaleZ)`
 Scales this matrix.  
 This method is chainable.

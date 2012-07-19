@@ -142,6 +142,16 @@ This method is chainable.
 Rotates this node the specified angles in degrees.  
 This method is chainable.
 
+### `(DivSugar.Node) rotateAround(axis, angle)`
+Rotates this node around the vector `axis` by the `angle` in degrees.  
+The length of the `axis` must be 1.  
+This method is chainable.
+
+### `(DivSugar.Node) rotateAround(point, axis, angle)`
+Rotates this node around the pivot specified by the vector `point` and vector `axis` by the `angle` in degrees.  
+The length of the `axis` must be 1.  
+This method is chainable.
+
 ### `(DivSugar.Node) scale(scaleX, scaleY, scaleZ)`
 Scales this node.  
 This method is chainable.
