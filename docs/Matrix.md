@@ -59,17 +59,12 @@ This method is chainable.
 Translates this matrix along its axes.  
 This method is chainable.
 
-### `(DivSugar.Matrix) rotate(rotateX, rotateY, rotateZ)`
-Rotates this matrix the specified angles in degrees.  
+### `(DivSugar.Matrix) rotate(angleX, angleY, angleZ)`
+Rotates this matrix by the specified angles in degrees.  
 This method is chainable.
 
 ### `(DivSugar.Matrix) rotateAround(axis, angle)`
 Rotates this matrix around the vector `axis` by the `angle` in degrees.  
-The length of the `axis` must be 1.  
-This method is chainable.
-
-### `(DivSugar.Matrix) rotateAround(point, axis, angle)`
-Rotates this matrix around the pivot specified by the vector `point` and vector `axis` by the `angle` in degrees.  
 The length of the `axis` must be 1.  
 This method is chainable.
 

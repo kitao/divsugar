@@ -138,8 +138,8 @@ This method is chainable.
 Translates this node along its axes.  
 This method is chainable.
 
-### `(DivSugar.Node) rotate(rotateX, rotateY, rotateZ)`
-Rotates this node the specified angles in degrees.  
+### `(DivSugar.Node) rotate(angleX, angleY, angleZ)`
+Rotates this node by the specified angles in degrees.  
 This method is chainable.
 
 ### `(DivSugar.Node) rotateAround(axis, angle)`
@@ -219,6 +219,6 @@ The following properties can be used for the `'to'` command.
 
 ### `translate: [offsetX, offsetY, offsetZ]`
 
-### `rotate: [rotateX, rotateY, rotateZ]`
+### `rotate: [angleX, angleY, angleZ]`
 
 ### `scale: [scaleX, scaleY, scaleZ]`
