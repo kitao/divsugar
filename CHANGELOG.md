@@ -4,6 +4,7 @@ Change Log
 DivSugar 1.1.0
 --------------
 - Added the example of key and mouse input
+- Added the rotateAround method to the Matrix and Node classes
 - Changed to throw exceptions for unknown states and styles
 - Added the getMouseState method to the DivSugar class
 - Added the getMouseX and getMouseY methods to the DivSugar class
