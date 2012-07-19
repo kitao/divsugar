@@ -7,16 +7,16 @@ Each node of the scene graph is an extended div element, so it is very easy to i
 DivSugar depends on CSS 3D transform and runs on Safari, Chrome, and Firefox for now.
 
 <a href="http://kitao.github.com/divsugar/examples/01.SimpleApplication/">
-  <img src="http://kitao.github.com/divsugar/examples/screenshots/01.SimpleApplication.png" width="24.7%">
+  <img src="http://kitao.github.com/divsugar/examples/screenshots/01.SimpleApplication.png" width="24%">
 </a>
 <a href="http://kitao.github.com/divsugar/examples/02.TaskAnimation/">
-  <img src="http://kitao.github.com/divsugar/examples/screenshots/02.TaskAnimation.png" width="24.7%">
+  <img src="http://kitao.github.com/divsugar/examples/screenshots/02.TaskAnimation.png" width="24%">
 </a>
 <a href="http://kitao.github.com/divsugar/examples/03.TweenAnimation/">
-  <img src="http://kitao.github.com/divsugar/examples/screenshots/03.TweenAnimation.png" width="24.7%">
+  <img src="http://kitao.github.com/divsugar/examples/screenshots/03.TweenAnimation.png" width="24%">
 </a>
 <a href="http://kitao.github.com/divsugar/examples/04.LightAndBillboard/">
-  <img src="http://kitao.github.com/divsugar/examples/screenshots/04.LightAndBillboard.png" width="24.7%">
+  <img src="http://kitao.github.com/divsugar/examples/screenshots/04.LightAndBillboard.png" width="24%">
 </a>
 
 Getting Started
