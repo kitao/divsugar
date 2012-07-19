@@ -22,6 +22,8 @@ window.onload = function() {
   var mat = new DivSugar.Matrix();
   var origin = new DivSugar.Matrix();
 
+  var vec = new DivSugar.Vector();
+
   task.onUpdate = function() {
     if (DivSugar.getMouseState('pressed')) {
       lastX = DivSugar.getMouseX();
@@ -48,6 +50,8 @@ window.onload = function() {
 
       lastX = curX;
       lastY = curY;
+
+      scn.getLocalPosition(curX, curY, vec);
     }
 
     if (DivSugar.getMouseState('released')) {
