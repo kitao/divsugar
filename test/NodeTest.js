@@ -231,44 +231,19 @@
   });
 
   test('rotateAround', function() {
-    var vec1 = new DivSugar.Vector();
-    var vec2 = new DivSugar.Vector();
+    var vec = new DivSugar.Vector();
     var mat1 = new DivSugar.Matrix();
     var mat2 = new DivSugar.Matrix();
     var node = new DivSugar.Node();
-
-    vec1.set(1, 1, 1).normalize();
+    vec.set(1, 1, 1).normalize();
     mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
     node.setTransform(mat1);
-    node.rotateAround(vec1, 90);
-    mat1.rotateAround(vec1, 90);
+    node.rotateAround(vec, 90);
+    mat1.rotateAround(vec, 90);
     node.getTransform(mat2);
     nearlyEqual(mat2, mat1);
 
-    vec1.set(10, 20, 30);
-    vec2.set(1, 1, 1).normalize();
-    mat1.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
-    node.setTransform(mat1);
-    node.rotateAround(vec1, vec2, 90);
-    mat1.rotateAround(vec1, vec2, 90);
-    node.getTransform(mat2);
-    nearlyEqual(mat2, mat1);
-
-    raises(function() {
-      node.rotateAround(vec1);
-    }, function(e) {
-      strictEqual(e, 'DivSugar: Invalid number of arguments');
-      return true;
-    });
-
-    raises(function() {
-      node.rotateAround(vec1, vec2, 0, 0);
-    }, function(e) {
-      strictEqual(e, 'DivSugar: Invalid number of arguments');
-      return true;
-    });
-
-    ok(node.rotateAround(vec2, 0).rotateAround(vec1, vec2, 0).rotateAround(vec2, 0));
+    ok(node.rotateAround(vec, 0).rotateAround(vec, 0));
   });
 
   test('scale', function() {
