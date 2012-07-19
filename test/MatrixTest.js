@@ -111,6 +111,61 @@
     ok(mat.rotate(0, 0, 0).rotate(0, 0, 0));
   });
 
+  test('rotateAround', function() {
+    var vec1 = new DivSugar.Vector();
+    var vec2 = new DivSugar.Vector();
+    var mat = new DivSugar.Matrix();
+
+    vec1.set(1, 0, 0);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotateAround(vec1, 90);
+    nearlyEqual(mat, new DivSugar.Matrix(0, 0, -1, 0, 1, 0, 1, 0, 0, 100, 200, 300));
+
+    vec1.set(0, 1, 0);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotateAround(vec1, 90);
+    nearlyEqual(mat, new DivSugar.Matrix(0, -1, 0, -1, 0, 0, 0, 0, -1, 100, 200, 300));
+
+    vec1.set(0, 0, 1);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotateAround(vec1, 90);
+    nearlyEqual(mat, new DivSugar.Matrix(-1, 0, 0, 0, 0, 1, 0, 1, 0, 100, 200, 300));
+
+    vec1.set(10, 20, 30);
+    vec2.set(1, 0, 0);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotateAround(vec1, vec2, 90);
+    nearlyEqual(mat, new DivSugar.Matrix(0, 0, -1, 0, 1, 0, 1, 0, 0, 190, -70, 300));
+
+    vec1.set(10, 20, 30);
+    vec2.set(0, 1, 0);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotateAround(vec1, vec2, 90);
+    nearlyEqual(mat, new DivSugar.Matrix(0, -1, 0, -1, 0, 0, 0, 0, -1, 100, 290, -150));
+
+    vec1.set(10, 20, 30);
+    vec2.set(0, 0, 1);
+    mat.set(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
+    mat.rotateAround(vec1, vec2, 90);
+    nearlyEqual(mat, new DivSugar.Matrix(-1, 0, 0, 0, 0, 1, 0, 1, 0, 280, 200, -60));
+
+    raises(function() {
+      mat.rotateAround(vec1);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
+
+    raises(function() {
+      mat.rotateAround(vec1, vec2, 0, 0);
+    }, function(e) {
+      strictEqual(e, 'DivSugar: Invalid number of arguments');
+      return true;
+    });
+
+    ok(mat.rotateAround(vec2, 0).rotateAround(vec1, vec2, 0).rotateAround(vec2, 0));
+  });
+
   test('scale', function() {
     var mat = new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 100, 200, 300);
     mat.scale(2, 3, -1);
