@@ -25,12 +25,12 @@ window.onload = function() {
   var vec = new DivSugar.Vector();
 
   task.onUpdate = function() {
-    if (DivSugar.getMouseState('pressed')) {
+    if (DivSugar.getMouseState(0, 'pressed')) {
       lastX = DivSugar.getMouseX();
       lastY = DivSugar.getMouseY();
     }
 
-    if (DivSugar.getMouseState('on')) {
+    if (DivSugar.getMouseState(0, 'on')) {
       curX = DivSugar.getMouseX();
       curY = DivSugar.getMouseY();
 
@@ -46,7 +46,7 @@ window.onload = function() {
       scn.getLocalPosition(curX, curY, vec);
     }
 
-    if (DivSugar.getMouseState('released')) {
+    if (DivSugar.getMouseState(0, 'released')) {
     }
   };
 };
