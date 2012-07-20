@@ -43,8 +43,8 @@ Returns the x-coordinate of the mouse cursor.
 ### `(Number) getMouseY()`
 Returns the y-coordinate of the mouse cursor.
 
-### `(Boolean) getMouseState(state)`
-Returns whether the current state of the mouse button equals the `state`.  
+### `(Boolean) getMouseState(button, state)`
+Returns whether the current state of the mouse `button` equals the `state`.  
 'on', 'off', 'pressed', and 'released' can be used as a `state`.
 
 ### `(DivSugar) inherit(C, P)`
