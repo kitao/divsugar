@@ -16,7 +16,7 @@ DivSugar =
     @_keyStates = {}
     @_mouseX = 0
     @_mouseY = 0
-    @_mouseState = -Number.MAX_VALUE
+    @_mouseStates = {}
     @_css3DTransforms = true
 
     # cross-browser support
@@ -85,13 +85,15 @@ DivSugar =
     , true
 
     document.addEventListener 'mousedown', (e) =>
-      mouseState = @_mouseState
-      @_mouseState = @_frameCount if mouseState < 0
+      button = e.button
+      mouseState = @_mouseStates[button]
+      @_mouseStates[button] = @_frameCount if not mouseState? or mouseState < 0
     , true
 
     document.addEventListener 'mouseup', (e) =>
-      mouseState = @_mouseState
-      @_mouseState = -@_frameCount if mouseState > 0
+      button = e.button
+      mouseState = @_mouseStates[button]
+      @_mouseStates[button] = -@_frameCount if not mouseState? or mouseState > 0
     , true
 
     # start tasks
@@ -120,11 +122,11 @@ DivSugar =
   getMouseX: -> @_mouseX
   getMouseY: -> @_mouseY
 
-  getMouseState: (state) ->
-    mouseState = @_mouseState
+  getMouseState: (button, state) ->
+    mouseState = @_mouseStates[button]
     switch state
-      when 'on' then (0 < mouseState < @_frameCount)
-      when 'off' then (-@_frameCount < mouseState < 0)
+      when 'on' then (mouseState? and 0 < mouseState < @_frameCount)
+      when 'off' then (not mouseState? or -@_frameCount < mouseState < 0)
       when 'pressed' then (mouseState is @_frameCount - 1)
       when 'released' then (mouseState is 1 - @_frameCount)
       else throw "DivSugar: Unknown mouse state '#{state}'"

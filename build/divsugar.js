@@ -19,7 +19,7 @@
       this._keyStates = {};
       this._mouseX = 0;
       this._mouseY = 0;
-      this._mouseState = -Number.MAX_VALUE;
+      this._mouseStates = {};
       this._css3DTransforms = true;
       prefixes = ['webkit', 'Moz', 'O', 'ms'];
       props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility'];
@@ -96,17 +96,19 @@
         return _this._mouseY = e.clientY;
       }, true);
       document.addEventListener('mousedown', function(e) {
-        var mouseState;
-        mouseState = _this._mouseState;
-        if (mouseState < 0) {
-          return _this._mouseState = _this._frameCount;
+        var button, mouseState;
+        button = e.button;
+        mouseState = _this._mouseStates[button];
+        if (!(mouseState != null) || mouseState < 0) {
+          return _this._mouseStates[button] = _this._frameCount;
         }
       }, true);
       document.addEventListener('mouseup', function(e) {
-        var mouseState;
-        mouseState = _this._mouseState;
-        if (mouseState > 0) {
-          return _this._mouseState = -_this._frameCount;
+        var button, mouseState;
+        button = e.button;
+        mouseState = _this._mouseStates[button];
+        if (!(mouseState != null) || mouseState > 0) {
+          return _this._mouseStates[button] = -_this._frameCount;
         }
       }, true);
       updateTasks = function() {
@@ -146,14 +148,14 @@
     getMouseY: function() {
       return this._mouseY;
     },
-    getMouseState: function(state) {
+    getMouseState: function(button, state) {
       var mouseState;
-      mouseState = this._mouseState;
+      mouseState = this._mouseStates[button];
       switch (state) {
         case 'on':
-          return (0 < mouseState && mouseState < this._frameCount);
+          return (mouseState != null) && (0 < mouseState && mouseState < this._frameCount);
         case 'off':
-          return (-this._frameCount < mouseState && mouseState < 0);
+          return !(mouseState != null) || (-this._frameCount < mouseState && mouseState < 0);
         case 'pressed':
           return mouseState === this._frameCount - 1;
         case 'released':

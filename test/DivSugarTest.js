@@ -47,13 +47,13 @@
   });
 
   test('getMouseState', function() {
-    strictEqual(typeof DivSugar.getMouseState('on'), 'boolean');
-    strictEqual(typeof DivSugar.getMouseState('off'), 'boolean');
-    strictEqual(typeof DivSugar.getMouseState('pressed'), 'boolean');
-    strictEqual(typeof DivSugar.getMouseState('released'), 'boolean');
+    strictEqual(typeof DivSugar.getMouseState(0, 'on'), 'boolean');
+    strictEqual(typeof DivSugar.getMouseState(0, 'off'), 'boolean');
+    strictEqual(typeof DivSugar.getMouseState(0, 'pressed'), 'boolean');
+    strictEqual(typeof DivSugar.getMouseState(0, 'released'), 'boolean');
 
     raises(function() {
-      DivSugar.getMouseState('dummy');
+      DivSugar.getMouseState(0, 'dummy');
     }, function(e) {
       strictEqual(e, "DivSugar: Unknown mouse state 'dummy'");
       return true;
