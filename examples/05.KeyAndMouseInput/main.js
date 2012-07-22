@@ -22,10 +22,10 @@ window.onload = function() {
     }, true);
   }
 
-  addPicture(245, 150, '../assets/picture1.jpg');
-  addPicture(555, 150, '../assets/picture2.jpg');
-  addPicture(245, 450, '../assets/picture3.jpg');
-  addPicture(555, 450, '../assets/picture4.jpg');
+  addPicture(250, 155, '../assets/picture1.jpg');
+  addPicture(550, 155, '../assets/picture2.jpg');
+  addPicture(250, 445, '../assets/picture3.jpg');
+  addPicture(550, 445, '../assets/picture4.jpg');
 
   // control pictures
   var hitNode = null;
