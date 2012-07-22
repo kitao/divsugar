@@ -27,7 +27,7 @@ window.onload = function() {
   addPicture(250, 445, '../assets/picture3.jpg');
   addPicture(550, 445, '../assets/picture4.jpg');
 
-  // control pictures
+  // manipulate pictures
   var hitNode = null;
   var mousePos = new DivSugar.Vector();
   var dragOffset = new DivSugar.Vector();
