@@ -2,51 +2,53 @@ window.onload = function() {
   'use strict';
 
   // create a scene
-  var scn = new DivSugar.Scene().setSize(800, 600).setImage('#004000').appendTo(document.body);
+  var scn = new DivSugar.Scene().setSize(800, 600).setImage('../assets/corkboard.jpg').appendTo(document.body);
 
   // maximize the scene size
   window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
   window.onresize();
 
-  //
-  // create a parent node used as the center of rotation
-  var node1 = new DivSugar.Node().setPosition(400, 300, 0).appendTo(scn);
+  // put pictures
+  function addPicture(x, y, src) {
+    var node1 = new DivSugar.Node().setPosition(x, y, 0).appendTo(scn);
+    var node2 = new DivSugar.Node().setSize(250, 250).setPosition(-130, -130, 0).setImage(src).appendTo(node1);
 
-  // create a child node which renders an image and a text
-  var node2 = new DivSugar.Node().setSize(300, 300).setPosition(-150, -150, 0).setImage('../assets/kitten.jpg').appendTo(node1);
+    node2.div.className = 'picture';
+    node2.div.addEventListener('mousedown', function(e) {
+      if (e.button === 0) {
+        hitNode = node1;
+        node1.appendTo(scn); // move this node to the front of the screen
+      }
+    }, true);
+  }
 
-  // TBD
+  addPicture(245, 150, '../assets/kitten.jpg');
+  addPicture(555, 150, '../assets/kitten.jpg');
+  addPicture(245, 450, '../assets/kitten.jpg');
+  addPicture(555, 450, '../assets/kitten.jpg');
+
+  // control pictures
+  var hitNode = null;
+  var mousePos = new DivSugar.Vector();
+  var dragOffset = new DivSugar.Vector();
   var task = new DivSugar.Task().appendTo(DivSugar.rootTask);
-  var curX, curY, lastX, lastY, rotX, rotY;
-  var pos = new DivSugar.Vector();
-  var mat = new DivSugar.Matrix();
-  var origin = new DivSugar.Matrix();
-
-  var vec = new DivSugar.Vector();
 
   task.onUpdate = function() {
-    if (DivSugar.getMouseState(0, 'pressed')) {
-      lastX = DivSugar.getMouseX();
-      lastY = DivSugar.getMouseY();
-    }
+    if (hitNode) {
+      scn.getLocalPosition(DivSugar.getMouseX(), DivSugar.getMouseY(), mousePos);
 
-    if (DivSugar.getMouseState(0, 'on')) {
-      curX = DivSugar.getMouseX();
-      curY = DivSugar.getMouseY();
+      if (DivSugar.getMouseState(0, 'pressed')) {
+        hitNode.getPosition(dragOffset);
+        dragOffset.sub(mousePos);
+      }
 
-      rotX = -(curY - lastY) * this.deltaTime * 0.04;
-      rotY = (curX - lastX) * this.deltaTime * 0.04;
+      if (DivSugar.getMouseState(0, 'on')) { hitNode.setPosition(mousePos.x + dragOffset.x, mousePos.y + dragOffset.y, 0); }
+      if (DivSugar.getMouseState(0, 'released')) { hitNode = null; }
 
-      node1.rotateAround(DivSugar.Vector.X_UNIT, rotX);
-      node1.rotateAround(DivSugar.Vector.Y_UNIT, rotY);
-
-      lastX = curX;
-      lastY = curY;
-
-      scn.getLocalPosition(curX, curY, vec);
-    }
-
-    if (DivSugar.getMouseState(0, 'released')) {
+      if (DivSugar.getKeyState(37, 'on')) { hitNode.rotate(0, 0, this.deltaTime * -0.1); }
+      if (DivSugar.getKeyState(39, 'on')) { hitNode.rotate(0, 0, this.deltaTime * 0.1); }
+      if (DivSugar.getKeyState(38, 'on')) { hitNode.scale(1 + this.deltaTime * 0.002, 1 + this.deltaTime * 0.002, 1); }
+      if (DivSugar.getKeyState(40, 'on')) { hitNode.scale(1 - this.deltaTime * 0.002, 1 - this.deltaTime * 0.002, 1); }
     }
   };
 };
