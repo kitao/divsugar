@@ -7,9 +7,29 @@
     <script src="main.js"></script>
     <style>
       body { margin: 0px; }
-      div.picture { border: solid 5px #ffffff; }
+
+      div.picture { border: solid 5px white; }
+
+      div.usage {
+        position: absolute;
+        z-index: 10;
+        margin: 16px;
+        padding: 8px;
+      }
+
+      p.message {
+        color: green;
+        text-shadow: 1px 1px white;
+        margin: 0px 0px 8px 0px;
+        padding: 0px;
+      }
     </style>
   </head>
   <body>
+    <div class="usage">
+      <p class="message">Drag: Move picture</p>
+      <p class="message">Up/Down: Scale picture</p>
+      <p class="message">Left/Right: Rotate picture</p>
+    </div>
   </body>
 </html>
