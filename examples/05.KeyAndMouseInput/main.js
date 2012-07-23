@@ -45,10 +45,11 @@ window.onload = function() {
       if (DivSugar.getMouseState(0, 'on')) { hitNode.setPosition(mousePos.x + dragOffset.x, mousePos.y + dragOffset.y, 0); }
       if (DivSugar.getMouseState(0, 'released')) { hitNode = null; }
 
-      if (DivSugar.getKeyState(37, 'on')) { hitNode.rotate(0, 0, this.deltaTime * -0.1); }
-      if (DivSugar.getKeyState(39, 'on')) { hitNode.rotate(0, 0, this.deltaTime * 0.1); }
       if (DivSugar.getKeyState(38, 'on')) { hitNode.scale(1 + this.deltaTime * 0.002, 1 + this.deltaTime * 0.002, 1); }
       if (DivSugar.getKeyState(40, 'on')) { hitNode.scale(1 - this.deltaTime * 0.002, 1 - this.deltaTime * 0.002, 1); }
+
+      if (DivSugar.getKeyState(37, 'on')) { hitNode.rotate(0, 0, this.deltaTime * -0.1); }
+      if (DivSugar.getKeyState(39, 'on')) { hitNode.rotate(0, 0, this.deltaTime * 0.1); }
     }
   };
 };
