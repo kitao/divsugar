@@ -20,6 +20,15 @@ window.onload = function() {
         node1.appendTo(scn); // move this node to the front of the screen
       }
     }, true);
+
+    // for touch events
+    node2.div.addEventListener('touchstart', function(e) {
+      if (!hitNode) {
+        hitNode = node1;
+        node1.appendTo(scn); // move this node to the front of the screen
+        e.preventDefault();
+      }
+    }, true);
   }
 
   addPicture(250, 155, '../assets/picture1.jpg');
