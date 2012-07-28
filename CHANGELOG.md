@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+DivSugar 1.1.5
+--------------
+- Modified the example #5 for touch events
+- Added support for touch events
+
 DivSugar 1.1.0
 --------------
 - Added the example of key and mouse input
@@ -21,7 +26,7 @@ DivSugar 1.0.0
 - Added the description of all of the APIs
 - Added the animation commands and properties to the API docs
 - Added the type of the return values to the API docs
-- Added the support for Opera partly (only use 2D Transforms)
+- Added support for Opera partly (only use 2D Transforms)
 - Added the toCSSTransform2D method to the Matrix class
 - Renamed the toCSSTransform method to toCSSTransform3D in the Matrix class
 
