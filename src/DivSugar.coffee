@@ -17,6 +17,7 @@ DivSugar =
     @_mouseX = 0
     @_mouseY = 0
     @_mouseStates = {}
+    @_touchFinger = -1
     @_css3DTransforms = true
 
     # cross-browser support
@@ -94,6 +95,33 @@ DivSugar =
       button = e.button
       mouseState = @_mouseStates[button]
       @_mouseStates[button] = -@_frameCount if not mouseState? or mouseState > 0
+    , true
+
+    document.addEventListener 'touchmove', (e) =>
+      for touch in e.targetTouches
+        if touch.identifier is @_touchFinger
+          @_mouseX = touch.clientX
+          @_mouseY = touch.clientY
+    , true
+
+    document.addEventListener 'touchstart', (e) =>
+      if @_touchFinger is -1
+        touch = e.changedTouches[0]
+        @_mouseX = touch.clientX
+        @_mouseY = touch.clientY
+        @_touchFinger = touch.identifier
+
+        mouseState = @_mouseStates[0]
+        @_mouseStates[0] = @_frameCount if not mouseState? or mouseState < 0
+    , true
+
+    document.addEventListener 'touchend', (e) =>
+      for touch in e.changedTouches
+        if touch.identifier is @_touchFinger
+          @_touchFinger = -1
+
+          mouseState = @_mouseStates[0]
+          @_mouseStates[0] = -@_frameCount if not mouseState? or mouseState > 0
     , true
 
     # start tasks

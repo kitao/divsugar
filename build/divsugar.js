@@ -20,6 +20,7 @@
       this._mouseX = 0;
       this._mouseY = 0;
       this._mouseStates = {};
+      this._touchFinger = -1;
       this._css3DTransforms = true;
       prefixes = ['webkit', 'Moz', 'O', 'ms'];
       props = ['transform', 'transformStyle', 'transformOrigin', 'perspective', 'perspectiveOrigin', 'backfaceVisibility'];
@@ -110,6 +111,54 @@
         if (!(mouseState != null) || mouseState > 0) {
           return _this._mouseStates[button] = -_this._frameCount;
         }
+      }, true);
+      document.addEventListener('touchmove', function(e) {
+        var touch, _l, _len3, _ref, _results;
+        _ref = e.targetTouches;
+        _results = [];
+        for (_l = 0, _len3 = _ref.length; _l < _len3; _l++) {
+          touch = _ref[_l];
+          if (touch.identifier === _this._touchFinger) {
+            _this._mouseX = touch.clientX;
+            _results.push(_this._mouseY = touch.clientY);
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
+      }, true);
+      document.addEventListener('touchstart', function(e) {
+        var mouseState, touch;
+        if (_this._touchFinger === -1) {
+          touch = e.changedTouches[0];
+          _this._mouseX = touch.clientX;
+          _this._mouseY = touch.clientY;
+          _this._touchFinger = touch.identifier;
+          mouseState = _this._mouseStates[0];
+          if (!(mouseState != null) || mouseState < 0) {
+            return _this._mouseStates[0] = _this._frameCount;
+          }
+        }
+      }, true);
+      document.addEventListener('touchend', function(e) {
+        var mouseState, touch, _l, _len3, _ref, _results;
+        _ref = e.changedTouches;
+        _results = [];
+        for (_l = 0, _len3 = _ref.length; _l < _len3; _l++) {
+          touch = _ref[_l];
+          if (touch.identifier === _this._touchFinger) {
+            _this._touchFinger = -1;
+            mouseState = _this._mouseStates[0];
+            if (!(mouseState != null) || mouseState > 0) {
+              _results.push(_this._mouseStates[0] = -_this._frameCount);
+            } else {
+              _results.push(void 0);
+            }
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
       }, true);
       updateTasks = function() {
         var curTime, deltaTime;
