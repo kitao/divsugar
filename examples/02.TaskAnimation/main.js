@@ -5,8 +5,9 @@ window.onload = function() {
   var scn = new DivSugar.Scene().setSize(800, 600).setImage('../assets/sunset.jpg').appendTo(document.body);
 
   // maximize the scene size
-  window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
-  window.onresize();
+  function resize() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); }
+  window.addEventListener('resize', resize, true);
+  resize();
 
   // define an animation class which inherits the task class
   function Coin() {

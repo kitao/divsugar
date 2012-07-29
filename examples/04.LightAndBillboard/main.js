@@ -5,8 +5,9 @@ window.onload = function() {
   var scn = new DivSugar.Scene().setSize(800, 600).setImage('#d0d0d0').appendTo(document.body);
 
   // maximize the scene size
-  window.onresize = function() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); };
-  window.onresize();
+  function resize() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); }
+  window.addEventListener('resize', resize, true);
+  resize();
 
   // create the root node and an animation task to rotate the whole scene
   var root = new DivSugar.Node().setPosition(400, 300, 0).rotate(-50, 0, 0).appendTo(scn);
