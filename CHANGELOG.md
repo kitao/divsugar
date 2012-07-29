@@ -3,6 +3,7 @@ Change Log
 
 DivSugar 1.1.5
 --------------
+- Changed to use an event listener instead of an event handler
 - Modified the example #5 for touch events
 - Added support for touch events
 
