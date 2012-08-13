@@ -4,21 +4,21 @@ DivSugar
 **DivSugar is a CSS-based 3D graphics library,** which provides a 3D scene graph, an animation system, and geometry classes.
 Each node of the scene graph is an extended div element, so it is very easy to integrate 3D animations into existing web pages.
 
-DivSugar depends on CSS 3D transform and runs on Safari, Chrome, and Firefox for now.
+DivSugar depends on CSS 3D transforms and runs on Safari, Chrome, and Firefox for now.
 
-<a href="http://kitao.github.com/divsugar/examples/01.SimpleApplication/">
+<a href="http://kitao.github.com/divsugar/examples/01.SimpleApplication/" target="_blank">
   <img src="http://kitao.github.com/divsugar/examples/screenshots/01.SimpleApplication.png" width="19.5%">
 </a>
-<a href="http://kitao.github.com/divsugar/examples/02.TaskAnimation/">
+<a href="http://kitao.github.com/divsugar/examples/02.TaskAnimation/" target="_blank">
   <img src="http://kitao.github.com/divsugar/examples/screenshots/02.TaskAnimation.png" width="19.5%">
 </a>
-<a href="http://kitao.github.com/divsugar/examples/03.TweenAnimation/">
+<a href="http://kitao.github.com/divsugar/examples/03.TweenAnimation/" target="_blank">
   <img src="http://kitao.github.com/divsugar/examples/screenshots/03.TweenAnimation.png" width="19.5%">
 </a>
-<a href="http://kitao.github.com/divsugar/examples/04.LightAndBillboard/">
+<a href="http://kitao.github.com/divsugar/examples/04.LightAndBillboard/" target="_blank">
   <img src="http://kitao.github.com/divsugar/examples/screenshots/04.LightAndBillboard.png" width="19.5%">
 </a>
-<a href="http://kitao.github.com/divsugar/examples/05.KeyAndMouseInput/">
+<a href="http://kitao.github.com/divsugar/examples/05.KeyAndMouseInput/" target="_blank">
   <img src="http://kitao.github.com/divsugar/examples/screenshots/05.KeyAndMouseInput.png" width="19.5%">
 </a>
 
