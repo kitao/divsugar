@@ -30,8 +30,8 @@ Include `divsugar.js`, then all of the functions get available via the `DivSugar
 <script src="divsugar.js"></script>
 ```
 
-A `Scene` is the root of a scene graph and specifies the rendering area.
-A `Node` is an element of a scene graph and draws an image.
+A Scene is the root of a scene graph and specifies the rendering area.
+A Node is an element of a scene graph and draws an image.
 Both of them contain div elements as their properties.
 
 ```javascript
@@ -47,7 +47,7 @@ var node = new DivSugar.Node()
   .appendTo(scn);
 ```
 
-DivSugar provides the `Task`, which calls the `onUpdate` method of the registered tasks in every frame.
+DivSugar provides a Task, which calls the `onUpdate` method of the registered tasks in every frame.
 It also calls the `onDestroy` method when the task is destroyed.
 
 ```javascript
