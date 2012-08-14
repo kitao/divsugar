@@ -86,6 +86,7 @@ Examples
 Documentaion
 ------------
 - [API Reference](https://github.com/kitao/divsugar/blob/master/docs)
+- Tuotrial (English | [Japanese](https://github.com/kitao/divsugar/wiki/DivSugar-チュートリアル))
 
 License
 -------
