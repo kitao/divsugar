@@ -35,12 +35,12 @@ A `Node` is an element of a scene graph and draws an image.
 Both of them contain div elements as their properties.
 
 ```javascript
-var scn = new DivSugar.Scene('someScene')
+var scn = new DivSugar.Scene()
   .setSize(800, 600)
   .setImage('#000080')
   .appendTo(document.body);
 
-var node = new DivSugar.Node('someNode')
+var node = new DivSugar.Node()
   .setSize(300, 300)
   .setPosition(10, 20, 30)
   .setImage('image.jpg')
@@ -51,7 +51,7 @@ DivSugar provides the `Task`, which calls the `onUpdate` method of the registere
 It also calls the `onDestroy` method when the task is destroyed.
 
 ```javascript
-var task = new DivSugar.Task('someTask').appendTo(DivSugar.rootTask);
+var task = new DivSugar.Task().appendTo(DivSugar.rootTask);
 
 task.onUpdate = function() {
   node.rotate(this.deltaTime * 0.1, this.deltaTime * 0.2, this.deltaTime * 0.3);
