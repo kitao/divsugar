@@ -24,6 +24,7 @@ DivSugar depends on CSS 3D transforms and runs on Safari, Chrome, and Firefox fo
 
 Getting Started
 ---------------
+
 Include `divsugar.js`, then all of the functions get available via the `DivSugar` global variable.
 
 ```html
@@ -77,6 +78,7 @@ node.playAnimation([
 
 Examples
 --------
+
 - 01.SimpleApplication ([demo](http://kitao.github.com/divsugar/examples/01.SimpleApplication/) | [code](https://github.com/kitao/divsugar/blob/master/examples/01.SimpleApplication))
 - 02.TaskAnimation ([demo](http://kitao.github.com/divsugar/examples/02.TaskAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/02.TaskAnimation))
 - 03.TweenAnimation ([demo](http://kitao.github.com/divsugar/examples/03.TweenAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/03.TweenAnimation))
@@ -85,9 +87,11 @@ Examples
 
 Documentaion
 ------------
+
 - [API Reference](https://github.com/kitao/divsugar/blob/master/docs)
-- Tutorial ([English](https://github.com/kitao/divsugar/wiki/DivSugar-Tutorial) | [Japanese](http://goo.gl/yhBoQ))
+- Tutorial ([English](https://github.com/kitao/divsugar/wiki/DivSugar-Tutorial) | [Japanese](https://github.com/kitao/divsugar/wiki/DivSugar-Tutorial-in-Japanese))
 
 License
 -------
+
 - MIT license
