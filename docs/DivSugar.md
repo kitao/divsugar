@@ -25,7 +25,7 @@ Properties
 ----------
 
 ### `(DivSugar.Task) rootTask`
-The root task.
+The root Task.
 
 Methods
 -------

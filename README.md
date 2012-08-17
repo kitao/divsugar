@@ -48,8 +48,8 @@ var node = new DivSugar.Node()
   .appendTo(scn);
 ```
 
-DivSugar provides a Task, which calls the `onUpdate` method of the registered tasks in every frame.
-It also calls the `onDestroy` method when the task is destroyed.
+DivSugar provides a Task, which calls the `onUpdate` method of the registered Tasks in every frame.
+It also calls the `onDestroy` method when the Task is destroyed.
 
 ```javascript
 var task = new DivSugar.Task().appendTo(DivSugar.rootTask);
@@ -63,7 +63,7 @@ task.onDestroy = function() {
 };
 ```
 
-With the `playAnimation` method of nodes, it is possible to make the task which plays a sequence of animations automatically.
+With the `playAnimation` method of Nodes, it is possible to make the Task which plays a sequence of animations automatically.
 
 ```javascript
 node.playAnimation([

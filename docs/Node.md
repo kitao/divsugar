@@ -7,10 +7,10 @@ Constructors
 ------------
 
 ### `(DivSugar.Node) Node()`
-Constructs a node.
+Constructs a Node.
 
 ### `(DivSugar.Node) Node(id)`
-Constructs a node and sets the `id` to it.
+Constructs a Node and sets the `id` to it.
 
 Properties
 ----------
@@ -22,154 +22,154 @@ Methods
 -------
 
 ### `(DivSugar.Scene|DivSugar.Node) getParent()`
-Returns the parent scene or node of this node.
+Returns the parent Scene or Node of this Node.
 
 ### `(DivSugar.Node) append(child)`
-Appends the `child` node to this node.  
+Appends the `child` Node to this Node.  
 This method is chainable.
 
 ### `(DivSugar.Node) appendTo(parent)`
-Appends this node to the `parent` node.  
+Appends this Node to the `parent` Node.  
 This method is chainable.
 
 ### `(DivSugar.Node) remove(child)`
-Removes the `child` node from this node.  
+Removes the `child` Node from this Node.  
 This method is chainable.
 
 ### `(Number) getWidth()`
-Returns the width of this node.
+Returns the width of this Node.
 
 ### `(Number) getHeight()`
-Returns the height of this node.
+Returns the height of this Node.
 
 ### `(DivSugar.Node) setSize(width, height)`
-Sets the size of this node.  
+Sets the size of this Node.  
 This method is chainable.
 
 ### `(Number) getPositionX()`
-Returns the x-coordinate of this node.
+Returns the x-coordinate of this Node.
 
 ### `(Number) getPositionY()`
-Returns the y-coordinate of this node.
+Returns the y-coordinate of this Node.
 
 ### `(Number) getPositionZ()`
-Returns the z-coodrinate of this node.
+Returns the z-coodrinate of this Node.
 
 ### `(DivSugar.Node) getPosition(vec)`
-Sets the position of this node to the vector `vec`.  
+Sets the position of this Node to the vector `vec`.  
 This method is chainable.
 
 ### `(DivSugar.Node) setPosition(vec)`
-Sets the vector `vec` to the position of this node.  
+Sets the vector `vec` to the position of this Node.  
 This method is chainable.
 
 ### `(DivSugar.Node) setPosition(x, y, z)`
-Sets the specified coordinates to the position of this node.  
+Sets the specified coordinates to the position of this Node.  
 This method is chainable.
 
 ### `(DivSugar.Node) getTransform(mat)`
-Sets the transform of this node to the matrix `mat`.  
+Sets the transform of this Node to the matrix `mat`.  
 This method is chainable.
 
 ### `(DivSugar.Node) setTransform(mat) ->`
-Sets the matrix `mat` to the transform of this node.  
+Sets the matrix `mat` to the transform of this Node.  
 This method is chainable.
 
 ### `(Boolean) getVisible()`
-Returns whether this node is visible.
+Returns whether this Node is visible.
 
 ### `(DivSugar.Node) setVisible(visible)`
-Sets whether this node is visible.  
+Sets whether this Node is visible.  
 This method is chainable.
 
 ### `(Boolean) getBackface()`
-Returns whether to draw the backface of this node.
+Returns whether to draw the backface of this Node.
 
 ### `(DivSugar.Node) setBackface(backface)`
-Sets whether to draw the backface of this node.  
+Sets whether to draw the backface of this Node.  
 This method is chainable.
 
 ### `(Boolean) getClip()`
-Returns whether the child node clipping of this node is enabled.
+Returns whether the child Node clipping of this Node is enabled.
 
 ### `(DivSugar.Node) setClip(clip)`
-Sets whether to enable the child node clipping of this node.  
+Sets whether to enable the child Node clipping of this Node.  
 This method is chainable.
 
 ### `(Number) getOpacity()`
-Returns the opacity of this node.
+Returns the opacity of this Node.
 
 ### `(DivSugar.Node) setOpacity(opacity)`
-Sets the opacity of this node.  
+Sets the opacity of this Node.  
 This method is chainable.
 
 ### `(String) getImage()`
-Returns the image source of this node.
+Returns the image source of this Node.
 
 ### `(DivSugar.Node) setImage(src)`
-Sets the image source of this node.  
+Sets the image source of this Node.  
 It is also possible to specify a color in the representation of `'#rrggbb'` instead of an image.  
 This method is chainable.
 
 ### `(DivSugar.Node) setImage(src, callback)`
-Sets the image source of this node.  
+Sets the image source of this Node.  
 When the `src` image is loaded, the `callback` function is called with the width and height of the image as two arguments.  
 It is also possible to specify a color in the representation of `'#rrggbb'` instead of an image.  
 This method is chainable.
 
 ### `(Number) getImageClipU1()`
-Returns the left position of the image clip area of this node.
+Returns the left position of the image clip area of this Node.
 
 ### `(Number) getImageClipV1()`
-Returns the top position of the image clip area of this node.
+Returns the top position of the image clip area of this Node.
 
 ### `(Number) getImageClipU2()`
-Returns the right position of the image clip area of this node.
+Returns the right position of the image clip area of this Node.
 
 ### `(Number) getImageClipV2()`
-Returns the bottom position of the image clip area of this node.
+Returns the bottom position of the image clip area of this Node.
 
 ### `(DivSugar.Node) setImageClip(u1, v1, u2, v2)`
-Sets the image clip area of this node.  
+Sets the image clip area of this Node.  
 The range of each coordinate is from 0 to 1.  
 This method is chainable.
 
 ### `(DivSugar.Node) translate(offsetX, offsetY, offsetZ)`
-Translates this node along its axes.  
+Translates this Node along its axes.  
 This method is chainable.
 
 ### `(DivSugar.Node) rotate(angleX, angleY, angleZ)`
-Rotates this node by the specified angles in degrees.  
+Rotates this Node by the specified angles in degrees.  
 This method is chainable.
 
 ### `(DivSugar.Node) rotateAround(axis, angle)`
-Rotates this node around the vector `axis` by the `angle` in degrees.  
+Rotates this Node around the vector `axis` by the `angle` in degrees.  
 The length of the `axis` must be 1.  
 This method is chainable.
 
 ### `(DivSugar.Node) rotateAround(point, axis, angle)`
-Rotates this node around the pivot specified by the vector `point` and vector `axis` by the `angle` in degrees.  
+Rotates this Node around the pivot specified by the vector `point` and vector `axis` by the `angle` in degrees.  
 The length of the `axis` must be 1.  
 This method is chainable.
 
 ### `(DivSugar.Node) scale(scaleX, scaleY, scaleZ)`
-Scales this node.  
+Scales this Node.  
 This method is chainable.
 
 ### `(DivSugar.Task) playAnimation(animation)`
-Plays the `animation` and returns the animation task.  
+Plays the `animation` and returns the animation Task.  
 The `animation` is an array of the animation commands.
 
 ### `(DivSugar.Node) clearAnimation()`
-Destroys all of the animation tasks of this node.  
+Destroys all of the animation Tasks of this Node.  
 This method is chainable.
 
 ### `(DivSugar.Node) getWorldPosition(vec)`
-Sets the world position of this node to the vector `vec`.  
+Sets the world position of this Node to the vector `vec`.  
 This method is chainable.
 
 ### `(DivSugar.Node) getWorldTransform(mat)`
-Sets the world transform of this node to the vector `mat`.  
+Sets the world transform of this Node to the vector `mat`.  
 This method is chainable.
 
 Animation Commands
