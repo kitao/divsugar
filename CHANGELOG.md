@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+DivSugar 1.2.0
+--------------
+- Added an example of a full-scale application
+- Added a tutorial
+
 DivSugar 1.1.5
 --------------
 - Changed to use an event listener instead of an event handler
@@ -9,7 +14,7 @@ DivSugar 1.1.5
 
 DivSugar 1.1.0
 --------------
-- Added the example of key and mouse input
+- Added an example of key and mouse input
 - Added the rotateAround method to the Matrix and Node classes
 - Changed to throw exceptions for unknown states and styles
 - Added the getMouseState method to the DivSugar class
@@ -39,7 +44,7 @@ DivSugar 0.9.5
 
 DivSugar 0.9.0
 --------------
-- Added the example of lighting and billboard
+- Added an example of lighting and billboard
 - Modified the way of cross-browser CSS handling for Firefox
 - Modified the message for the exceptions
 - Added the getCSSColor method to the DivSugar class
