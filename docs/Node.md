@@ -56,11 +56,11 @@ Returns the y-coordinate of this Node.
 Returns the z-coodrinate of this Node.
 
 ### `(DivSugar.Node) getPosition(vec)`
-Sets the position of this Node to the vector `vec`.  
+Sets the position of this Node to the Vector `vec`.  
 This method is chainable.
 
 ### `(DivSugar.Node) setPosition(vec)`
-Sets the vector `vec` to the position of this Node.  
+Sets the Vector `vec` to the position of this Node.  
 This method is chainable.
 
 ### `(DivSugar.Node) setPosition(x, y, z)`
@@ -68,11 +68,11 @@ Sets the specified coordinates to the position of this Node.
 This method is chainable.
 
 ### `(DivSugar.Node) getTransform(mat)`
-Sets the transform of this Node to the matrix `mat`.  
+Sets the transform of this Node to the Matrix `mat`.  
 This method is chainable.
 
 ### `(DivSugar.Node) setTransform(mat) ->`
-Sets the matrix `mat` to the transform of this Node.  
+Sets the Matrix `mat` to the transform of this Node.  
 This method is chainable.
 
 ### `(Boolean) getVisible()`
@@ -143,12 +143,12 @@ Rotates this Node by the specified angles in degrees.
 This method is chainable.
 
 ### `(DivSugar.Node) rotateAround(axis, angle)`
-Rotates this Node around the vector `axis` by the `angle` in degrees.  
+Rotates this Node around the Vector `axis` by the `angle` in degrees.  
 The length of the `axis` must be 1.  
 This method is chainable.
 
 ### `(DivSugar.Node) rotateAround(point, axis, angle)`
-Rotates this Node around the pivot specified by the vector `point` and vector `axis` by the `angle` in degrees.  
+Rotates this Node around the pivot specified by the Vector `point` and Vector `axis` by the `angle` in degrees.  
 The length of the `axis` must be 1.  
 This method is chainable.
 
@@ -165,11 +165,11 @@ Destroys all of the animation Tasks of this Node.
 This method is chainable.
 
 ### `(DivSugar.Node) getWorldPosition(vec)`
-Sets the world position of this Node to the vector `vec`.  
+Sets the world position of this Node to the Vector `vec`.  
 This method is chainable.
 
 ### `(DivSugar.Node) getWorldTransform(mat)`
-Sets the world transform of this Node to the vector `mat`.  
+Sets the world transform of this Node to the Matrix `mat`.  
 This method is chainable.
 
 Animation Commands

@@ -136,5 +136,5 @@ The styles can be used are as follows:
 - `'cover'` scales this Scene to the smallest size which covers the parent HTML element.
 
 ### `(DivSugar.Scene) getLocalPosition(clientX, clientY, vec)`
-Converts the client position in the window into the local position of this Scene and sets to the vector `vec`.  
+Converts the client position in the window into the local position of this Scene and sets to the Vector `vec`.  
 This method is chainable.
