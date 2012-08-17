@@ -1,15 +1,15 @@
 window.onload = function() {
   'use strict';
 
-  // create a scene
+  // create a Scene
   var scn = new DivSugar.Scene().setSize(800, 600).setImage('../assets/sunset.jpg').appendTo(document.body);
 
-  // maximize the scene size
+  // maximize the Scene size
   function resize() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); }
   window.addEventListener('resize', resize, true);
   resize();
 
-  // define an animation class which inherits the task class
+  // define an animation class which inherits the Task class
   function Coin() {
     // call the base class's constructor
     this.constructor.uber.constructor();
@@ -36,7 +36,7 @@ window.onload = function() {
     this.pos.add(this.vec.set(this.vel).mul(this.deltaTime * 0.06));
     this.center.setPosition(this.pos).rotate(this.deltaTime * this.rot.x, this.deltaTime * this.rot.y, this.deltaTime * this.rot.z);
 
-    // when fall enough, destroy this task and create an another task
+    // when fall enough, destroy this Task and create an another Task
     if (this.pos.y > 1000) {
       this.destroy();
       new Coin().appendTo(DivSugar.rootTask);

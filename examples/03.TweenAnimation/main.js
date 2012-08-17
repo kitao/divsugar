@@ -1,19 +1,19 @@
 window.onload = function() {
   'use strict';
 
-  // create a scene
+  // create a Scene
   var scn = new DivSugar.Scene().setSize(800, 600).setImage('#000030').appendTo(document.body);
 
-  // maximize the scene size
+  // maximize the Scene size
   function resize() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); }
   window.addEventListener('resize', resize, true);
   resize();
 
-  // create the center node
+  // create the center Node
   var center = new DivSugar.Node().setPosition(400, 300, 0).appendTo(scn);
   center.playAnimation([['to', { rotate: [120, 0, -10] }, 5000, DivSugar.Ease.cubicInOut], ['wait', 2000], ['repeat']]);
 
-  // create the banner nodes
+  // create the banner Nodes
   var x, y, z, color, waitTime, moveTime, anim, banner;
   var colors = ['#ffff80', '#ff80ff', '#80ffff', '#ff8080', '#80ff80', '#8080ff'];
 

@@ -1,10 +1,10 @@
 window.onload = function() {
   'use strict';
 
-  // create a scene
+  // create a Scene
   var scn = new DivSugar.Scene().setSize(800, 600).setImage('../assets/corkboard.jpg').appendTo(document.body);
 
-  // maximize the scene size
+  // maximize the Scene size
   function resize() { scn.adjustLayout(window.innerWidth, window.innerHeight, 'contain'); }
   window.addEventListener('resize', resize, true);
   resize();
@@ -18,7 +18,7 @@ window.onload = function() {
     node2.div.addEventListener('mousedown', function(e) {
       if (e.button === 0) {
         hitNode = node1;
-        node1.appendTo(scn); // move this node to the front of the screen
+        node1.appendTo(scn); // move this Node to the front of the screen
       }
     }, true);
 
@@ -26,7 +26,7 @@ window.onload = function() {
     node2.div.addEventListener('touchstart', function(e) {
       if (!hitNode) {
         hitNode = node1;
-        node1.appendTo(scn); // move this node to the front of the screen
+        node1.appendTo(scn); // move this Node to the front of the screen
         e.preventDefault();
       }
     }, true);
