@@ -3,8 +3,9 @@ Change Log
 
 DivSugar 1.2.0
 --------------
-- Added an example of a full-scale application
-- Added a tutorial
+- Modifed the README.md a little
+- Added an example of a 3D video player
+- Added a tutorial to wiki
 
 DivSugar 1.1.5
 --------------
@@ -24,7 +25,7 @@ DivSugar 1.1.0
 
 DivSugar 1.0.5
 --------------
-- Added the screenshots of the examples to README.md
+- Added the screenshots of the examples to the README.md
 - Optimized the toCSSTransform2D/3D method of the Matrix class a little
 
 DivSugar 1.0.0
