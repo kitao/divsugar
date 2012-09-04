@@ -4,8 +4,8 @@
 targetDir = 'build'
 targetName = 'divsugar'
 
-srcDir = 'src'
-srcFiles = [
+sourceDir = 'src'
+sourceFiles = [
   'DivSugar.coffee'
   'Vector.coffee'
   'Matrix.coffee'
@@ -17,12 +17,17 @@ srcFiles = [
 ]
 
 target = "#{targetDir}/#{targetName}.js"
-srcs = ("#{srcDir}/#{s}" for s in srcFiles)
+minTarget = "#{targetDir}/#{targetName}.min.js"
+sources = ("#{sourceDir}/#{s}" for s in sourceFiles)
 
 task 'watch', 'Watch the source files and build the changes', ->
-  coffee = spawn 'coffee', ['-c', '-w', '-j', target].concat srcs
-  coffee.stdout.on 'data', (data) -> print data.toString()
+  coffee = spawn 'coffee', ['-c', '-w', '-j', target].concat sources
+
+  coffee.stdout.on 'data', (data) ->
+    print data.toString()
+    exec "uglifyjs #{target} > #{minTarget}", (err) -> throw err if err
+
   coffee.stderr.on 'data', (data) -> process.stderr.write data.toString()
 
 task 'clean', 'Delete the target files', ->
-  exec "rm -f #{target}"
+  exec "rm -f #{target} #{minTarget}"
