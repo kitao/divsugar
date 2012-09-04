@@ -3,7 +3,6 @@ Change Log
 
 DivSugar 1.2.0
 --------------
-- Added an example of a 3D video player
 - Minified the library
 - Modifed the README.md a little
 - Added a tutorial to wiki
