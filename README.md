@@ -63,7 +63,7 @@ task.onDestroy = function() {
 };
 ```
 
-With the `playAnimation` method of Nodes, it is possible to make the Task which plays a sequence of animations automatically.
+With the `playAnimation` method of a Node, it is possible to make the Task which plays a sequence of animations automatically.
 
 ```javascript
 node.playAnimation([
