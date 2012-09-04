@@ -17,7 +17,6 @@ sourceFiles = [
 ]
 
 target = "#{targetDir}/#{targetName}.js"
-minTarget = "#{targetDir}/#{targetName}.min.js"
 sources = ("#{sourceDir}/#{s}" for s in sourceFiles)
 
 task 'watch', 'Watch the source files and build the changes', ->
@@ -25,9 +24,8 @@ task 'watch', 'Watch the source files and build the changes', ->
 
   coffee.stdout.on 'data', (data) ->
     print data.toString()
-    exec "uglifyjs #{target} > #{minTarget}", (err) -> throw err if err
+    exec "uglifyjs -nc --overwrite #{target}"
 
   coffee.stderr.on 'data', (data) -> process.stderr.write data.toString()
 
-task 'clean', 'Delete the target files', ->
-  exec "rm -f #{target} #{minTarget}"
+task 'clean', 'Delete the target files', -> exec "rm -f #{target}"
