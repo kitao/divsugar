@@ -265,7 +265,7 @@ class DivSugar.Node
     index = @_animTasks.indexOf animTask
     @_animTasks.splice index, 1 if index > -1
 
-  clearAnimation: ->
+  clearAnimations: ->
     @_animTasks.shift().destroy() while @_animTasks.length > 0
     return @
 

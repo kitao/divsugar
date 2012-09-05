@@ -160,7 +160,7 @@ This method is chainable.
 Plays the `animation` and returns the animation Task.  
 The `animation` is an array of the animation commands.
 
-### `(DivSugar.Node) clearAnimation()`
+### `(DivSugar.Node) clearAnimations()`
 Destroys all of the animation Tasks of this Node.  
 This method is chainable.
 

@@ -365,7 +365,7 @@
     task.destroy();
   });
 
-  test('clearAnimation', function() {
+  test('clearAnimations', function() {
     var anim = [['wait', 1], ['repeat']];
     var node = new DivSugar.Node();
     var task1 = node.playAnimation(anim);
@@ -377,12 +377,12 @@
     strictEqual(task2.getParent(), DivSugar.rootTask);
     strictEqual(task3.getParent(), DivSugar.rootTask);
 
-    node.clearAnimation();
+    node.clearAnimations();
     strictEqual(task1.getParent(), null);
     strictEqual(task2.getParent(), null);
     strictEqual(task3.getParent(), null);
 
-    ok(node.clearAnimation().clearAnimation());
+    ok(node.clearAnimations().clearAnimations());
   });
 
   test('getWorldPosition', function() {

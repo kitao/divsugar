@@ -3,6 +3,7 @@ Change Log
 
 DivSugar 1.2.0
 --------------
+- Renamed the clearAnimation method of the Node class to clearAnimations
 - Minified the library
 - Modifed the README.md a little
 - Added a tutorial to wiki
@@ -35,7 +36,7 @@ DivSugar 1.0.0
 - Added the type of the return values to the API docs
 - Added support for Opera partly (only use 2D Transforms)
 - Added the toCSSTransform2D method to the Matrix class
-- Renamed the toCSSTransform method to toCSSTransform3D in the Matrix class
+- Renamed the toCSSTransform method of the Matrix class to toCSSTransform3D
 
 DivSugar 0.9.5
 --------------
