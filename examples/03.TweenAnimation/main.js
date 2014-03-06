@@ -36,7 +36,7 @@ window.onload = function() {
     ];
 
     banner = new DivSugar.Node().setSize(1200, 100).setOpacity(0).rotate(0, 0, Math.random() * 180 - 90).appendTo(center);
-    banner.div.innerHTML = '<h1 style="color:' + color + '; font-size:50px">DivSuar, a CSS-based 3D graphics library</h1>';
+    banner.div.innerHTML = '<h1 style="color:' + color + '; font-size:50px">DivSugar, a CSS-based 3D graphics library</h1>';
     banner.playAnimation([['wait', waitTime], ['play', anim]]);
   }
 };
