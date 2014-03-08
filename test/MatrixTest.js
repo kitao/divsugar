@@ -26,7 +26,7 @@
     deepEqual(mat3.zAxis, new DivSugar.Vector(7, 8, 9));
     deepEqual(mat3.trans, new DivSugar.Vector(10, 11, 12));
 
-    raises(function() {
+    throws(function() {
       var mat4 = new DivSugar.Matrix(1, 2);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -43,7 +43,7 @@
     mat2.set(mat1);
     deepEqual(mat2, mat1);
 
-    raises(function() {
+    throws(function() {
       var mat3 = new DivSugar.Matrix();
       mat3.set(1,2);
     }, function(e) {
@@ -76,7 +76,7 @@
     mat.translate(10, -20, 30);
     deepEqual(mat, new DivSugar.Matrix(0, 0, -1, -1, 0, 0, 0, 1, 0, 120, 230, 290));
 
-    raises(function() {
+    throws(function() {
       mat.translate(1, 2);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -101,7 +101,7 @@
     mat.rotate(0, 0, 90);
     nearlyEqual(mat, new DivSugar.Matrix(-1, 0, 0, 0, 0, 1, 0, 1, 0, 100, 200, 300));
 
-    raises(function() {
+    throws(function() {
       mat.rotate(90, 90);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -138,7 +138,7 @@
     mat.scale(2, 3, -1);
     deepEqual(mat, new DivSugar.Matrix(0, 0, -2, -3, 0, 0, 0, -1, 0, 100, 200, 300));
 
-    raises(function() {
+    throws(function() {
       mat.scale(2, 3);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');

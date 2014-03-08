@@ -22,7 +22,7 @@
     strictEqual(quat3.z, 3);
     strictEqual(quat3.w, 4);
 
-    raises(function() {
+    throws(function() {
       var quat4 = new DivSugar.Quaternion(1, 2, 3);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -39,7 +39,7 @@
     quat2.set(quat1);
     deepEqual(quat2, quat1);
 
-    raises(function() {
+    throws(function() {
       var quat3 = new DivSugar.Quaternion();
       quat3.set(1, 2, 3);
     }, function(e) {

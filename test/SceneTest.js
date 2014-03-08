@@ -94,7 +94,7 @@
     strictEqual(scn.getPositionX(), 10);
     strictEqual(scn.getPositionY(), 20);
 
-    raises(function() {
+    throws(function() {
       scn.setPosition(1, 2, 3);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -202,7 +202,7 @@
     nearlyEqual(scn.getPositionX(), 0);
     nearlyEqual(scn.getPositionY(), -833.3333);
 
-    raises(function() {
+    throws(function() {
       scn.adjustLayout(1000, 2000, 'dummy');
     }, function(e) {
       strictEqual(e, "DivSugar: Unknown layout style 'dummy'");

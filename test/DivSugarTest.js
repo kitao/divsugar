@@ -4,7 +4,7 @@
   module('DivSugar');
 
   test('constants', function() {
-    strictEqual(DivSugar.VERSION, '1.2.0');
+    strictEqual(DivSugar.VERSION, '1.2.1');
     strictEqual(DivSugar.EPSILON, 0.0001);
     strictEqual(DivSugar.NUM_OF_DIGITS, 4);
     strictEqual(DivSugar.DEG_TO_RAD * 180, Math.PI);
@@ -33,7 +33,7 @@
     strictEqual(typeof DivSugar.getKeyState(64, 'pressed'), 'boolean');
     strictEqual(typeof DivSugar.getKeyState(64, 'released'), 'boolean');
 
-    raises(function() {
+    throws(function() {
       DivSugar.getKeyState(64, 'dummy');
     }, function(e) {
       strictEqual(e, "DivSugar: Unknown key state 'dummy'");
@@ -52,7 +52,7 @@
     strictEqual(typeof DivSugar.getMouseState(0, 'pressed'), 'boolean');
     strictEqual(typeof DivSugar.getMouseState(0, 'released'), 'boolean');
 
-    raises(function() {
+    throws(function() {
       DivSugar.getMouseState(0, 'dummy');
     }, function(e) {
       strictEqual(e, "DivSugar: Unknown mouse state 'dummy'");

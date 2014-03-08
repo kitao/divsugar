@@ -97,7 +97,7 @@
     strictEqual(node.getPositionY(), 50);
     strictEqual(node.getPositionZ(), 60);
 
-    raises(function() {
+    throws(function() {
       node.setPosition(1, 2);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -200,7 +200,7 @@
     node.getTransform(mat2);
     deepEqual(mat2, mat1);
 
-    raises(function() {
+    throws(function() {
       node.translate(1, 2);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -220,7 +220,7 @@
     node.getTransform(mat2);
     nearlyEqual(mat2, mat1);
 
-    raises(function() {
+    throws(function() {
       node.rotate(90, 90);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -256,7 +256,7 @@
     node.getTransform(mat2);
     deepEqual(mat2, mat1);
 
-    raises(function() {
+    throws(function() {
       node.scale(2, 3);
     }, function(e) {
       strictEqual(e, 'DivSugar: Invalid number of arguments');
@@ -346,7 +346,7 @@
     strictEqual(callCount, 12);
     strictEqual(task.getParent(), null);
 
-    raises(function() {
+    throws(function() {
       task = node.playAnimation(anim3);
       DivSugar.rootTask.update(1);
     }, function(e) {
@@ -355,7 +355,7 @@
     });
     task.destroy();
 
-    raises(function() {
+    throws(function() {
       task = node.playAnimation(anim4);
       DivSugar.rootTask.update(1);
     }, function(e) {
