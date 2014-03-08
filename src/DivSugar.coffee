@@ -1,7 +1,7 @@
 DivSugar =
   _initialize: ->
     # initialize constants
-    @VERSION = '1.2.0'
+    @VERSION = '1.2.1'
     @EPSILON = 0.0001
     @NUM_OF_DIGITS = 4
     @DEG_TO_RAD = Math.PI / 180

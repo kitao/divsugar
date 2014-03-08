@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+DivSugar 1.2.1
+--------------
+- Replaced the deprecated APIs of qunit
+- Updated the URL of qunit
+- Fixed a typo of the example #3
+
 DivSugar 1.2.0
 --------------
 - Renamed the clearAnimation method of the Node class to clearAnimations
