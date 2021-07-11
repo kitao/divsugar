@@ -79,11 +79,11 @@ node.playAnimation([
 Examples
 --------
 
-- 01.SimpleApplication ([demo](http://kitao.github.com/divsugar/examples/01.SimpleApplication/) | [code](https://github.com/kitao/divsugar/blob/master/examples/01.SimpleApplication))
-- 02.TaskAnimation ([demo](http://kitao.github.com/divsugar/examples/02.TaskAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/02.TaskAnimation))
-- 03.TweenAnimation ([demo](http://kitao.github.com/divsugar/examples/03.TweenAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/03.TweenAnimation))
-- 04.LightAndBillboard ([demo](http://kitao.github.com/divsugar/examples/04.LightAndBillboard/) | [code](https://github.com/kitao/divsugar/blob/master/examples/04.LightAndBillboard))
-- 05.KeyAndMouseInput ([demo](http://kitao.github.com/divsugar/examples/05.KeyAndMouseInput/) | [code](https://github.com/kitao/divsugar/blob/master/examples/05.KeyAndMouseInput))
+- 01.SimpleApplication ([demo](http://kitao.github.io/divsugar/examples/01.SimpleApplication/) | [code](https://github.com/kitao/divsugar/blob/master/examples/01.SimpleApplication))
+- 02.TaskAnimation ([demo](http://kitao.github.io/divsugar/examples/02.TaskAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/02.TaskAnimation))
+- 03.TweenAnimation ([demo](http://kitao.github.io/divsugar/examples/03.TweenAnimation/) | [code](https://github.com/kitao/divsugar/blob/master/examples/03.TweenAnimation))
+- 04.LightAndBillboard ([demo](http://kitao.github.io/divsugar/examples/04.LightAndBillboard/) | [code](https://github.com/kitao/divsugar/blob/master/examples/04.LightAndBillboard))
+- 05.KeyAndMouseInput ([demo](http://kitao.github.io/divsugar/examples/05.KeyAndMouseInput/) | [code](https://github.com/kitao/divsugar/blob/master/examples/05.KeyAndMouseInput))
 
 Documentaion
 ------------
